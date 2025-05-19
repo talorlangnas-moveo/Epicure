@@ -1,0 +1,11 @@
+.inputSearch {
+  height: 30px; // optional, assuming square input
+  border: 0.5px solid #ccc; // you can adjust the color
+  border-radius: 4px;
+  padding: 4px; // optional, for some spacing inside
+  outline: none;
+
+  &:focus {
+    border-color: #999; // optional hover/focus effect
+  }
+}
