@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import heroImageUrl from '../../../../public/hero-picture1.png'
+import heroImageUrl from '@public/hero-picture1.png'
 
  
 export default function Background() {

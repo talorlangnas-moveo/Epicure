@@ -1,8 +1,6 @@
-@use '../../assets/styles/variabels' as *; // assuming it's in the same folder
-
 .header {
   display: flex;
-  // justify-content: space-between;
+  justify-content: space-between;
   align-items: center;
   height: 46px;
 
@@ -10,7 +8,7 @@
     background-color: green;
   }
 
-  @media (min-width: $breakpoint-large) { // just for debugging
+  @media (min-width: 1440px) { // just for debugging
     background-color: pink;
   }
 }
