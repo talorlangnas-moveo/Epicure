@@ -1,15 +1,11 @@
 import Image from "next/image";
 import styles from "./icons.module.scss";
+import SearchIcon from "./SearchIcon";
 
 export default function RightGroupIcons() {
     return (
         <div className={styles.rightGroupIcons}>
-            <Image
-                src="/icons/Group.svg"
-                width={20}
-                height={20}
-                alt="Search Icon"
-            />
+            <SearchIcon />
             <Image
                 src="/icons/General.svg"
                 width={20}

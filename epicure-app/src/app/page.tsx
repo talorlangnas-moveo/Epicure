@@ -1,12 +1,21 @@
-import Header from "./components/header/Header";
+import Header from "@components/header/Header";
+import Hero from "@components/hero/Hero";
+import Card from "@/components/card/Card";
+import claroImge from "@public/restaurants/claro.png";
 
+                                
 export default function Home() {
   return (
     <>
-    <Header />
-      <div>
-        <h1>Hello World</h1>
-      </div>
+      <Header />
+      <Hero />
+      <Card
+        card={{
+          title: "Claro",
+          description: "Ran Shmueli",
+          imgUrl: claroImge,
+        }}
+      />
     </>
   );
 }
