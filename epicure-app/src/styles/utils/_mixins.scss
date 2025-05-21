@@ -1,0 +1,9 @@
+
+@mixin image-style($type) {
+  @if $type == 'responsive' {
+    width: 100%;
+    height: auto;
+  } @else if $type == 'background' {
+    object-fit: cover;
+  }
+}
