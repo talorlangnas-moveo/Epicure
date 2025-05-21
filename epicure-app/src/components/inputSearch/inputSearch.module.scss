@@ -1,0 +1,30 @@
+@use '@styles/utils/variables' as v;
+
+.inputSearch {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 315px;
+  height: 30px; 
+  border: 0.5px solid v.$color-primary-gray;
+  border-radius: 4px;
+  outline: none;
+
+  input {
+    border-style: none;
+    outline: none;
+    margin-right: 30px;
+    width: 253px;
+    background-color: inherit;
+    font-family: v.$font-primary;
+    font-weight: 200; 
+    font-size: 12px;
+    color: v.$color-primary-black;
+    text-align: center;
+  }
+
+  .searchIcon {
+    margin: 5px 5px 0 12px;
+  }
+}
