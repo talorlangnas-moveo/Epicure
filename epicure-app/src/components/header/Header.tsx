@@ -1,6 +1,6 @@
 import styles from "./header.module.scss";
 
-import { ForknifeIcon, NavbarIcon, RightGroupIcons } from '@/components/icons';
+import { ForknifeIcon, NavbarIcon, RightGroupIcons } from '../../../icons';
 
 export default function Header() {
   return (

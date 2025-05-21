@@ -1,13 +1,22 @@
+@use '@styles/utils/mixins' as *;
 @use '@styles/utils/variables' as *;
 
-.card-container{
+
+.cardContainer{
     display: flex;
     flex-direction: column;
     background-color: $color-secondary-beige;
+    width: 245px;
+    height: 233px;
+    
+    .cardImage {
+        @include image-style('responsive');
+    }
 
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: 232px;
-    padding: 20px;
+    .cardContent {
+        display: flex;
+        flex-direction: column;
+        padding: 16px 0 16px 16px;
+        gap: 8px;
+    }
 }
