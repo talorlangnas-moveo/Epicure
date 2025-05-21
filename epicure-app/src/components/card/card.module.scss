@@ -1,0 +1,13 @@
+@use '@styles/utils/variables' as *;
+
+.card-container{
+    display: flex;
+    flex-direction: column;
+    background-color: $color-secondary-beige;
+
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 232px;
+    padding: 20px;
+}
