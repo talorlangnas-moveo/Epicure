@@ -1,14 +1,15 @@
 import { IconContainerData } from "@/types/interfaces/IconContainerData"
-import styles from "./iconLegend.module.scss";
+// import styles from "./iconLegend.module.scss";
 
 
 interface IconContainerProps {
   iconContainer: IconContainerData;
+  className?: string;
 }
 
-export default function IconContainer({iconContainer}: IconContainerProps) {
+export default function IconContainer({iconContainer, className}: IconContainerProps) {
   return (
-    <div className={styles.iconContainer}>
+    <div className={className}>
         <div>
             {iconContainer.icon}
         </div>
@@ -16,6 +17,5 @@ export default function IconContainer({iconContainer}: IconContainerProps) {
             {iconContainer.description}
         </h4>
     </div>
-    
   );
 }
