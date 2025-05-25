@@ -3,7 +3,7 @@ import Hero from "@components/hero/Hero";
 import Card from "@/components/card/Card";
 import claroImge from "@public/restaurants/claro.png";
 import IconLegend from "@/components/iconLegend/IconLegend";
-
+import AppDownloadButtons from "@/components/aboutUs/AppDownloadButtons";
 export default function Home() {
   return (
     <div>
@@ -17,6 +17,7 @@ export default function Home() {
         }}
       />
       <IconLegend />
+      <AppDownloadButtons />
     </div>
   );
 }

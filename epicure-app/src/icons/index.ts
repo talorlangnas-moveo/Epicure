@@ -7,3 +7,4 @@ export { default as VeganIcon } from './VeganIcon';
 export { default as VegitarianIcon } from './VegitarianIcon';
 export { default as AboutusIcon } from './AboutUsIcon';
 export {default as AppStoreIcon} from './AppStoreIcone';
+export {default as GooglePlayIcon} from './GooglePlayIcon';
