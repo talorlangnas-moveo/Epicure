@@ -3,7 +3,7 @@ import Hero from "@components/hero/Hero";
 import Card from "@/components/card/Card";
 import claroImge from "@public/restaurants/claro.png";
 import IconLegend from "@/components/iconLegend/IconLegend";
-import AboutUs from "@/components/aboutUs/AboutUs";
+import Footer from '@/components/Footer/Footer';
 
 export default function Home() {
   return (
@@ -18,7 +18,7 @@ export default function Home() {
         }}
       />
       <IconLegend />
-      <AboutUs />
+      <Footer />
     </div>
   );
 }
