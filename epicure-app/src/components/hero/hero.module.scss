@@ -1,0 +1,33 @@
+.hero {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;  
+  align-items: center; 
+  position: relative;
+  width: 100%;
+  height: 273px;
+  overflow: hidden;
+}
+
+.heroContainer {
+  position: absolute;
+  width: 335px;
+  height: 144px;
+  gap: 18px;
+  background-color:#ffffffE0;;
+  z-index: 1; // to show above the background image
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.heroTitle {
+  font-family: 'Helvetica Neue', sans-serif;
+  font-weight: 200;
+  font-size: 24px;
+  line-height: 32px;
+  letter-spacing: 1.97px;
+  color: #000000;
+  text-align: center;
+}

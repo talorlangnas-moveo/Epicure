@@ -1,0 +1,31 @@
+@use '../utils/variables' as v;
+
+h1 {
+  font-family: v.$font-primary;
+  font-weight: 200; // Thin
+  font-size: 24px;
+  color: v.$color-primary-black;
+}
+
+h2 {
+  font-family: v.$font-primary;
+  font-weight: 200; // Thin
+  font-size: 16px;
+  color: v.$color-primary-black;
+}
+
+h3 {
+  font-family: v.$font-primary;
+  font-weight: 400; // Regular
+  font-size: 18px;
+  color: v.$color-primary-black;
+}
+
+
+
+label {
+  font-family: v.$font-primary;
+  font-weight: 200; // Thin
+  font-size: 14px;
+  color: v.$color-primary-gray;
+}
