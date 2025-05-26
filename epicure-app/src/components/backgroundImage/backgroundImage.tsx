@@ -1,13 +1,12 @@
 import Image from "next/image";
-// import { StaticImageData } from "next/image";
 import { CardImage } from "@/types/interfaces/CardImage";
-import ImageFooter from "./ImageFooter";
+import ImageFooter from './imageFooter';
 
 interface CardImageProps {
     cardImg: CardImage;
 }
 
-export default function GenImage({ cardImg }: CardImageProps) {
+export default function BackgroundImage({ cardImg }: CardImageProps) {
   return (
     <div className={cardImg.cardClassName}>
       <Image

@@ -1,4 +1,4 @@
-import IconContainer from "./IconContainer";
+import IconContainer from "./iconContainer";
 import { SpicyIcon, VeganIcon, VegitarianIcon } from "@/icons/index";
 import styles from "./iconLegend.module.scss";
 

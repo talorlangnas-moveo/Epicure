@@ -1,5 +1,5 @@
 import { AboutusIcon } from "@/icons/index";
-import AppDownloadButtons from "./AppDownloadButtons";
+import AppDownloadButtons from "./appDownloadButtons"
 import styles from "./aboutUs.module.scss";
 
 export default function AboutUs() {
