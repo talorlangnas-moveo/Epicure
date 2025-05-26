@@ -3,11 +3,7 @@
 
 
 .cardContainer{
-    display: flex;
-    flex-direction: column;
-    background-color: $color-secondary-beige;
-    width: 245px;
-    height: 233px;
+    @include card-style('restaurant');
     
     .cardImage {
         @include image-style('responsive');

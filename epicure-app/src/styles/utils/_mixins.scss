@@ -1,3 +1,5 @@
+@use '@styles/utils/variables' as *;
+
 @mixin image-style($type) {
   @if $type =='responsive' {
     width: 100%;
@@ -20,5 +22,20 @@
 
   @else {
     letter-spacing: 1.25px;
+  }
+}
+
+@mixin card-style($type) {
+  display: flex;
+  flex-direction: column;
+  background-color: $color-secondary-beige;
+  width: 245px;
+
+  @if $type =='restaurant' {
+    height: 233px;
+  }
+
+  @else if $type =='dish' {
+    height: 388px;
   }
 }
