@@ -1,4 +1,4 @@
-import AboutUs from "@/components/aboutUs/AboutUs";
+import AboutUs from "@/components/aboutUs/aboutUs";
 import styles from "./footer.module.scss";
 
 export default function Footer() {
