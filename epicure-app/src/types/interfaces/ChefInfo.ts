@@ -1,5 +1,6 @@
+import { CardImage } from "./CardImage";
 
 export interface ChefInfo {
-    img: React.ReactElement;
+    cardImg: CardImage;
     description: string;
 }

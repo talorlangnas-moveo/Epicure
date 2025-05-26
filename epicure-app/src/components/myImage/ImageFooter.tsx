@@ -1,14 +1,13 @@
-
+import { FooterInfo } from "@/types/interfaces/FooterInfo";
 
 interface ImageFooterProps {
-    content: string;
-    className?: string;
+    props: FooterInfo;
 }
 
-export default function ImageFooter({content}: ImageFooterProps) {
+export default function ImageFooter({props}: ImageFooterProps) {
     return (
-        <div className="absolute bottom-0 left-0 right-0 bg-black bg-opacity-50 text-white p-2 text-sm">
-            {content}
+        <div className={props.className}>
+           <h3>{props.content}</h3> 
         </div>
     );
 
