@@ -16,6 +16,7 @@ export default function Home() {
       <Hero />
       <Card
         card={{
+          id: "10",
           title: "Claro",
           description: "Ran Shmueli",
           imgUrl: claroImge,
@@ -24,7 +25,11 @@ export default function Home() {
       <IconLegend />
       <Chef chef={chefInfo} />
       <Footer />
-      <Carousel cards={restaurantsCards}/>
+      <Carousel>
+      {restaurantsCards.map((c) => (
+        <Card key={c.id} card={c} />
+      ))}
+    </Carousel>
     </div>
   );
 }

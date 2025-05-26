@@ -1,38 +1,32 @@
 'use client'
 
-import React from 'react'
+import React, { ReactNode } from 'react'
 import { EmblaOptionsType } from 'embla-carousel'
 import useEmblaCarousel from 'embla-carousel-react'
-import { CardInfo } from "@/types/interfaces/CardInfo";
 import styles from './carousel.module.scss'
-import Card from '@components/card/card';
-
 
 interface CarouselProps {
-  cards: CardInfo[];
-  options?: EmblaOptionsType;
+  children: ReactNode
+  options?: EmblaOptionsType
 }
 
-export default function Carousel({ cards, options = { loop: false } }: CarouselProps) {
-  const [emblaRef, emblaApi] = useEmblaCarousel(options);
+export default function Carousel({
+  children,
+  options = { loop: false, dragFree: true },
+}: CarouselProps) {
+  const [emblaRef] = useEmblaCarousel(options)
 
   return (
     <div className={styles.embla}>
       <div className={styles.viewport} ref={emblaRef}>
         <div className={styles.container}>
-          {cards.map((card, idx) => (
+          {React.Children.map(children, (child, idx) => (
             <div className={styles.slide} key={idx}>
-              <Card card={card} />
+              {child}
             </div>
           ))}
         </div>
       </div>
-      <button onClick={() => emblaApi?.scrollPrev()} className={styles.prev}>
-        ‹
-      </button>
-      <button onClick={() => emblaApi?.scrollNext()} className={styles.next}>
-        ›
-      </button>
     </div>
-  );
+  )
 }
