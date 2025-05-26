@@ -8,4 +8,3 @@ export interface CardInfo {
     price?: number;
     logoUrl?: StaticImageData;
 }
-

@@ -23,7 +23,8 @@
       "@components/*": ["./src/components/*"],
       "@public/*": ["./public/*"],
       "@styles/*": ["./src/styles/*"],
-      "@interfaces/*": ["./src/types/interfaces/*"]
+      "@interfaces/*": ["./src/types/interfaces/*"],
+      "@icons/*": ["./src/icons/*"],
     }
     
   },

@@ -1,5 +1,5 @@
 import styles from './inputSearch.module.scss';
-import { SearchIcon } from '../../../icons';
+import { SearchIcon } from '../../icons';
 
 export default function InputSearch() {
   return (

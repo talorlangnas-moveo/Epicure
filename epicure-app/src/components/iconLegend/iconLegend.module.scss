@@ -1,0 +1,48 @@
+@use '@styles/utils/variables' as *;
+
+
+.iconLegendContainer {
+    background-color: $color-secondary-white;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 24px 0;
+    gap: 32px;
+
+    .heading {
+        line-height: 35px;
+        letter-spacing: 1.25px;
+    }
+}
+
+.iconsGroup {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    gap: 56px;
+}
+
+.iconContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 127px;
+    align-items: center;
+    width: 136px;
+    gap: 32px;
+    &.iconContainer--spicy {
+        height: 103px;
+    }
+}
+
+.spicyIconContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 103px;
+    align-items: center;
+    width: 136px;
+    gap: 32px;
+}

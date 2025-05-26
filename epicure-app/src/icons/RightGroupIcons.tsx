@@ -1,6 +1,6 @@
 import Image from "next/image";
 import styles from "./icons.module.scss";
-import { SearchIcon } from "@components/icons/index";
+import { SearchIcon } from './index';
 
 export default function RightGroupIcons() {
   return (
