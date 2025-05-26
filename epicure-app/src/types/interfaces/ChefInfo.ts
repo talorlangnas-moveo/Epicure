@@ -1,7 +1,5 @@
-import { StaticImageData } from "next/image";
 
 export interface ChefInfo {
-    title: string;
+    img: React.ReactElement;
     description: string;
-    imgUrl: StaticImageData;
 }
