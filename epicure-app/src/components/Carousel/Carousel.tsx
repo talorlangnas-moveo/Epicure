@@ -1,10 +1,12 @@
-'use client';
+'use client'
 
-import React, { useEffect } from 'react';
-import useEmblaCarousel, { EmblaOptionsType } from 'embla-carousel-react';
-import { CardInfo } from '@/types/interfaces/CardInfo';
-import Card from '@components/card/Card';
-import styles from './Carousel.module.scss';
+import React from 'react'
+import { EmblaOptionsType } from 'embla-carousel'
+import useEmblaCarousel from 'embla-carousel-react'
+import { CardInfo } from "@/types/interfaces/CardInfo";
+import styles from './carousel.module.scss'
+import Card from '@components/card/card';
+
 
 interface CarouselProps {
   cards: CardInfo[];
@@ -13,12 +15,6 @@ interface CarouselProps {
 
 export default function Carousel({ cards, options = { loop: false } }: CarouselProps) {
   const [emblaRef, emblaApi] = useEmblaCarousel(options);
-
-  // Example: you can listen to events once emblaApi is ready
-  useEffect(() => {
-    if (!emblaApi) return;
-    console.log('Current slide index:', emblaApi.selectedScrollSnap());
-  }, [emblaApi]);
 
   return (
     <div className={styles.embla}>

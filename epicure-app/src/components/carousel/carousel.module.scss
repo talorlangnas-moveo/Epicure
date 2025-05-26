@@ -1,0 +1,34 @@
+.embla {
+  position: relative;
+  overflow: hidden;
+
+  border: 1px solid black;
+}
+
+.viewport {
+  overflow: hidden; // Clip overflowing slides
+}
+
+.container {
+  display: flex;     // Arrange slides in a row
+}
+
+.slide {
+  flex: 0 0 75%;     // Each slide takes 80% of the viewport (adjust as needed)
+  min-width: 0;      // Prevent automatic shrinking
+  padding: 0 24px;   // Spacing between slides
+}
+
+.prev,
+.next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255, 255, 255, 0.75);
+  border: none;
+  padding: 0.5rem;
+  cursor: pointer;
+}
+
+.prev { left: 10px; }
+.next { right: 10px; }
