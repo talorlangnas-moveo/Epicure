@@ -8,6 +8,7 @@ import YapanImage from "@public/restaurants/yapan.png";
 export const restaurantsCards: CardInfo[] = [
   {
     id: '1',
+    type: 'restaurant',
     title: 'Claro',
     description: 'Ran Shmueli',
     imgUrl: ClaroImage,
@@ -15,6 +16,7 @@ export const restaurantsCards: CardInfo[] = [
   },
   {
     id: '2',
+    type: 'restaurant',
     title: 'Lumina',
     description: 'Meir Adoni',
     imgUrl: LuminaImage,
@@ -22,6 +24,7 @@ export const restaurantsCards: CardInfo[] = [
   },
   {
     id: '3',
+    type: 'restaurant',
     title: 'KabKem',
     description: 'Kfir Ben Shabat',
     imgUrl: KabKemImage,
@@ -29,6 +32,7 @@ export const restaurantsCards: CardInfo[] = [
   },
   {
     id: '4',
+    type: 'restaurant',
     title: 'Messa',
     description: 'Aviv Moshe',
     imgUrl: MessaImage,
@@ -36,6 +40,7 @@ export const restaurantsCards: CardInfo[] = [
   },
   {
     id: '5',
+    type: 'restaurant',
     title: 'Yapan',
     description: 'Omer Miller',
     imgUrl: YapanImage,

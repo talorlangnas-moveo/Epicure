@@ -8,3 +8,4 @@ export { default as VegitarianIcon } from './VegitarianIcon';
 export { default as AboutusIcon } from './AboutUsIcon';
 export {default as AppStoreIcon} from './AppStoreIcone';
 export {default as GooglePlayIcon} from './GooglePlayIcon';
+export {default as ArrowsIcon} from './arrows.svg';

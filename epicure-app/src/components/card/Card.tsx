@@ -8,7 +8,7 @@ interface CardProps {
 
 export default function Card({ card }: CardProps) {
   return (
-    <div className={styles.cardContainer}>
+    <div className={`${styles.cardContainer} ${styles[card.type]}`}>
       <Image
         className={styles.cardImage}
         src={card.imgUrl}
