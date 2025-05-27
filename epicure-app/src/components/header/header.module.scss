@@ -8,3 +8,19 @@
     background-color: pink;
   }
 }
+
+.hamburgerIcon {
+    margin: 11px 0px 11px 20px;
+}
+
+.forknifeIcon {
+    margin: 7px 51px 7px 127px;
+}
+
+.rightGroupIcons {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    justify-content: space-between;
+    margin: 13px 20px 13px 0;
+}
