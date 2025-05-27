@@ -7,8 +7,8 @@ export interface CardImage {
     imgUrl: StaticImageData;
     height?: number | string;
     width?: number | string;
-    cardClassName?: string; // defines the class for image wrapper container
-    imageClassName?: string; // defines if the image is background or responsive
+    cardClassName?: string; 
+    imageClassName?: string; 
     children?: React.ReactNode;
     footer?: FooterInfo; 
 }

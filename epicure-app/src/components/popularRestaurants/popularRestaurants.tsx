@@ -1,6 +1,6 @@
 import Image from "next/image";
 import styles from "./popular.module.scss";
-import Carousel from '@components/carousel/carousel';
+import Carousel from '@/components/carousel/carousel';
 import Card from "@/components/card/card";
 import { ArrowsIcon } from "@icons/index";
 import { CardType, getTitle } from "@/types/cardType";
@@ -17,7 +17,7 @@ export default function PopularRestaurants({ cards, type, title }: PopularRestau
     <div className={styles.popularRestaurants}>
       <h4>
         {title !== undefined
-          ? title
+          ? `${title}'S  RESTAURANTS`
           : getTitle(type) || ""}
       </h4>
       <Carousel>
