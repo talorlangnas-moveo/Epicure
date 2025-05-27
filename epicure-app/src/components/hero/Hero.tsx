@@ -1,6 +1,6 @@
 import styles from './hero.module.scss';
-import HeroContainer from './HeroContainer';
-import Background from './Background';
+import HeroContainer from './heroContainer';
+import Background from './background';
 
 export default function Hero() {
   return (
