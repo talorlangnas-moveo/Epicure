@@ -1,9 +1,23 @@
-
 @mixin image-style($type) {
-  @if $type == 'responsive' {
+  @if $type =='responsive' {
     width: 100%;
     height: auto;
-  } @else if $type == 'background' {
+  }
+
+  @else if $type =='background' {
     object-fit: cover;
+  }
+}
+
+@mixin heading-style($type) {
+  text-transform: uppercase;
+  line-height: 35px;
+
+  @if $type =='desktop' {
+    letter-spacing: 2.14px;
+  }
+
+  @else {
+    letter-spacing: 1.25px;
   }
 }

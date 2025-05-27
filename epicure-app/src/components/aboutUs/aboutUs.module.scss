@@ -1,0 +1,58 @@
+@use '@styles/utils/variables' as *;
+@use '@styles/utils/mixins' as *;
+
+.aboutUsContainer {
+    background-color: $color-secondary-white;
+    display: flex;
+    flex-direction: column;
+    padding-top: 24px;
+
+    @media (min-width: $breakpoint-tablet) {
+        padding-left: 132px;
+    }
+}
+
+.aboutUsIcon {
+    margin-bottom: 32px;
+    padding-left: 20px;
+}
+
+.appDownload {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 48px;
+    padding-left: 20px;
+}
+
+.aboutUsContent {
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 48px;
+    padding-left: 20px;
+
+    .heading {
+        @include heading-style('mobile');
+        padding-bottom: 16px;
+        padding-left: 1px;
+    }
+
+    .firstParagraph {
+        line-height: 28px;
+        letter-spacing: 2.14px;
+        margin-right: 27px;
+        white-space: normal;
+        // white-space: pre-wrap;
+        font-size: 18px;
+    }
+
+    .secondParagraph {
+        line-height: 28px;
+        letter-spacing: 2.14px;
+         margin-right: 52px;
+         white-space: normal;
+        // white-space: pre-wrap;
+        font-size: 18px;
+    }
+}

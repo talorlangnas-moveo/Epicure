@@ -1,5 +1,5 @@
 @use '@styles/utils/variables' as *;
-
+@use '@styles/utils/mixins' as *;
 
 .iconLegendContainer {
     background-color: $color-secondary-white;
@@ -11,8 +11,7 @@
     gap: 32px;
 
     .heading {
-        line-height: 35px;
-        letter-spacing: 1.25px;
+        @include heading-style('mobile');
     }
 }
 
@@ -22,6 +21,11 @@
     justify-content: space-between;
     align-items: center;
     gap: 56px;
+
+    @media (min-width: $breakpoint-tablet) {
+        flex-direction: row;
+        gap: 40px;
+    }
 }
 
 .iconContainer {
