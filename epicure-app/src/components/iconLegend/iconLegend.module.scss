@@ -23,7 +23,7 @@
     align-items: center;
     gap: 56px;
 
-    @media (min-width: $breakpoint-tablet) {
+    @media (min-width: $br-mobile-large) {
         flex-direction: row;
         gap: 40px;
     }

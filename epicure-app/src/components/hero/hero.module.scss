@@ -1,3 +1,7 @@
+@use '@styles/utils/mixins' as *;
+@use '@styles/utils/variables' as *;
+
+
 .hero {
   display: flex;
   flex-direction: column;
@@ -8,6 +12,11 @@
   height: 273px;
   overflow: hidden;
   margin-bottom: 48px;
+
+  @include define-height($breakpoint-mobile, $breakpoint-mobile-lg);
+  @include define-height($breakpoint-tablet, $breakpoint-laptop);
+  @include define-height($breakpoint-desktop, $breakpoint-desktop-lg);
+
 }
 
 .heroContainer {

@@ -1,4 +1,23 @@
 @use '@styles/utils/variables' as *;
+@use '@styles/utils/functions' as *;
+
+// @mixin define-height($lowerbound, $upperbound, $width){
+//   @media (min-width: $lowerbound) and (max-width: $upperbound) {
+//     height: interpolate-height($width);
+//   }
+//   @media (min-width: $breakpoint-desktop-lg) {
+//     height: $max-height;
+//   }
+// }
+
+@mixin define-height($lowerbound, $upperbound){
+  @media (min-width: $lowerbound) and (max-width: $upperbound) {
+    height: interpolate-height($lowerbound, $upperbound);
+  }
+  @media (min-width: $breakpoint-desktop-lg) {
+    height: $max-height;
+  }
+}
 
 @mixin image-style($type) {
   @if $type =='responsive' {

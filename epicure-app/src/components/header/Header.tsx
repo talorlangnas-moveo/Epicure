@@ -1,20 +1,14 @@
 import Image from "next/image";
 import styles from "./header.module.scss";
-import { HamburgerIcon } from "@/icons/index";
 import { ForkKnifeIcon } from "@/icons/index";
 import { RightGroupIcons } from "@/icons/index";
+import Navbar from "./navbar";
+// import MediaQuery from '@components/responsive/responsive';
 
 export default function Header() {
   return (
     <header className={styles.header}>
-      <div className={styles.hamburgerIcon}>
-        <Image
-          src={HamburgerIcon}
-          width={24}
-          height={24}
-          alt="Icon for Dropdown Menu"
-        />
-      </div>
+      <Navbar />
       <div className={styles.forknifeIcon}>
         <Image
           src={ForkKnifeIcon}
