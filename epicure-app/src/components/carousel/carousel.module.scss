@@ -1,0 +1,19 @@
+.embla {
+  position: relative;
+  overflow: hidden;
+}
+
+.viewport {
+  overflow: hidden; 
+}
+
+.container {
+  display: flex;    
+}
+
+.slide {
+  flex: 0 0 75%;    
+  min-width: 0;      
+  gap: 24px;   
+}
+

@@ -1,22 +1,62 @@
 @use '@styles/utils/mixins' as *;
 @use '@styles/utils/variables' as *;
 
-
-.cardContainer{
+.cardContainer {
+    position: relative; 
     display: flex;
     flex-direction: column;
     background-color: $color-secondary-beige;
     width: 245px;
-    height: 233px;
-    
-    .cardImage {
-        @include image-style('responsive');
-    }
+}
 
-    .cardContent {
-        display: flex;
-        flex-direction: column;
-        padding: 16px 0 16px 16px;
-        gap: 8px;
+.restaurant {
+    height: 233px;
+}
+
+.dish {
+    height: 388px;
+}
+
+.bottomGroup {
+  position: absolute;
+  bottom: 16px;            
+  left: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;               
+  padding-left: 16px;
+}
+
+.cardImage {
+    @include image-style('responsive');
+}
+
+.cardContent {
+    display: flex;
+    flex-direction: column;
+    padding: 16px 0 16px 16px;
+    gap: 8px;
+}
+
+.spicyIcon {
+//     padding-left: 16px;
+//     padding-bottom: 16px;
+}
+
+.ils {
+    padding-top: 0px;
+} 
+
+.cardPrice {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+
+    p {
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 19px;
+        letter-spacing: 1.97px;
     }
 }
