@@ -1,8 +1,8 @@
 @use '@styles/utils/mixins' as *;
 @use '@styles/utils/variables' as *;
 
-// @include card-style('restaurant');
 .cardContainer {
+    position: relative; 
     display: flex;
     flex-direction: column;
     background-color: $color-secondary-beige;
@@ -17,6 +17,17 @@
     height: 388px;
 }
 
+.bottomGroup {
+  position: absolute;
+  bottom: 16px;            
+  left: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;               
+  padding-left: 16px;
+}
+
 .cardImage {
     @include image-style('responsive');
 }
@@ -28,3 +39,24 @@
     gap: 8px;
 }
 
+.spicyIcon {
+//     padding-left: 16px;
+//     padding-bottom: 16px;
+}
+
+.ils {
+    padding-top: 0px;
+} 
+
+.cardPrice {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+
+    p {
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 19px;
+        letter-spacing: 1.97px;
+    }
+}

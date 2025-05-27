@@ -1,27 +1,27 @@
 import Image from "next/image";
 import styles from "./popular.module.scss";
-import Carousel from "@/components/carousel/carousel";
+import Carousel from '@components/carousel/carousel';
 import Card from "@/components/card/card";
-import { restaurantsCards } from "@/data/restaurantsCards";
 import { ArrowsIcon } from "@icons/index";
 import { CardType, getTitle } from "@/types/cardType";
+import { CardInfo } from '@interfaces/CardInfo';
 
 interface PopularRestaurantsProps {
+  cards: CardInfo[];
   title?: string;
   type?: CardType;
 }
 
-export default function PopularRestaurants({ type, title }: PopularRestaurantsProps) {
+export default function PopularRestaurants({ cards, type, title }: PopularRestaurantsProps) {
   return (
     <div className={styles.popularRestaurants}>
-      {/* <h4>popular restaurant in epicure:</h4> */}
       <h4>
         {title !== undefined
           ? title
           : getTitle(type) || ""}
       </h4>
       <Carousel>
-        {restaurantsCards.map((c) => (
+        {cards.map((c) => (
           <Card key={c.id} card={c} />
         ))}
       </Carousel>
