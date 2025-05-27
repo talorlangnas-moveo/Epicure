@@ -10,12 +10,21 @@
 //   }
 // }
 
-@mixin define-height($lowerbound, $upperbound){
+// @mixin define-height($lowerbound, $upperbound){
+//   @media (min-width: $lowerbound) and (max-width: $upperbound) {
+//     height: interpolate-height($lowerbound, $upperbound);
+//   }
+//   @media (min-width: $breakpoint-desktop-lg) {
+//     height: $max-height;
+//   }
+// }
+
+@mixin define-height($lowerbound, $upperbound, $min-w, $max-w, $min-h, $max-h){
   @media (min-width: $lowerbound) and (max-width: $upperbound) {
-    height: interpolate-height($lowerbound, $upperbound);
+    height: interpolate-height($lowerbound, $upperbound, $min-w, $max-w, $min-h, $max-h);
   }
   @media (min-width: $breakpoint-desktop-lg) {
-    height: $max-height;
+    height: $max-h;
   }
 }
 

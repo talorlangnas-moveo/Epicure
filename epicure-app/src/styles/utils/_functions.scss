@@ -5,7 +5,12 @@
 //   @return $min-height + (($width - $min-width) * ($max-height - $min-height)) / ($max-width - $min-width);
 // }
 
-@function interpolate-height($l, $u) {
+// @function interpolate-height($l, $u) {
+//     $width: ($l + $u) / 2;
+//   @return $min-height + (($width - $min-width) * ($max-height - $min-height)) / ($max-width - $min-width);
+// }
+
+@function interpolate-height($l, $u, $min-w, $max-w, $min-h, $max-h) {
     $width: ($l + $u) / 2;
-  @return $min-height + (($width - $min-width) * ($max-height - $min-height)) / ($max-width - $min-width);
+  @return $min-h + (($width - $min-w) * ($max-h - $min-h)) / ($max-w - $min-w);
 }
