@@ -1,7 +1,7 @@
 import Image from "next/image";
 import styles from "./header.module.scss";
 import { ForkKnifeIcon } from "@/icons/index";
-import { RightGroupIcons } from "@/icons/index";
+import { RightGroupIcons } from "@/icons";
 import Navbar from "./navbar";
 // import MediaQuery from '@components/responsive/responsive';
 

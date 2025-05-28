@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { HamburgerIcon } from "@/icons/index";
+import { HamburgerIcon } from "@/icons";
 import styles from "./header.module.scss";
 
 export default function Navbar() {

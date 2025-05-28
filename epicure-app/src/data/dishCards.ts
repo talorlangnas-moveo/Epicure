@@ -2,7 +2,7 @@ import {CardInfo} from '@interfaces/CardInfo';
 import PadKiMaonImage from '@public/dishes/padKiMao.png';
 import GarberImage from '@public/dishes/garber.png';
 import Dish3Image from '@public/dishes/dish3.png';
-import { SpicyIconCard } from "@icons/index";
+import { SpicyIconCard } from "@icons";
 
 export const dishCards: CardInfo[] = [
   {

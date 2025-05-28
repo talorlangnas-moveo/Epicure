@@ -2,7 +2,7 @@ import Image from "next/image";
 import styles from "./popular.module.scss";
 import Carousel from '@/components/carousel/carousel';
 import Card from "@/components/card/card";
-import { ArrowsIcon } from "@icons/index";
+import { ArrowsIcon } from "@icons";
 import { CardType, getTitle } from "@/types/cardType";
 import { CardInfo } from '@interfaces/CardInfo';
 

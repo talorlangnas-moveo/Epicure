@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { SearchIcon } from "@icons/index"; 
+import { SearchIcon } from "@icons"; 
 
 export default function SearchButton() {
   return (

@@ -11,8 +11,20 @@
     gap: 32px;
     margin-bottom: 48px;
 
+    @media (min-width: $breakpoint-tablet) {
+        padding: 35.5px 0;
+
+    }
+
     .heading {
-        @include heading-style('mobile');
+        text-transform: uppercase;
+        line-height: 35px;
+        letter-spacing: 1.25px;
+
+        @media (min-width: $breakpoint-tablet) {
+            font-size: 30px;
+            letter-spacing: 2.14px;
+        }
     }
 }
 
@@ -23,7 +35,7 @@
     align-items: center;
     gap: 56px;
 
-    @media (min-width: $br-mobile-large) {
+    @media (min-width: $breakpoint-tablet) {
         flex-direction: row;
         gap: 40px;
     }
@@ -37,9 +49,6 @@
     align-items: center;
     width: 136px;
     gap: 32px;
-    &.iconContainer--spicy {
-        height: 103px;
-    }
 }
 
 .spicyIconContainer {
@@ -50,4 +59,21 @@
     align-items: center;
     width: 136px;
     gap: 32px;
+}
+
+.imageContainer {
+    position: relative;
+    width: 56px;
+    height: 56px;
+}
+
+.iconContainerDescription {
+    font-weight: 200;
+    font-size: 18px;
+    line-height: 30px;
+    letter-spacing: 1.97px;
+
+    @media (min-width: $breakpoint-laptop) {
+        font-size: 24px;
+    }
 }
