@@ -2,7 +2,7 @@ import { CardImage } from '@/types/interfaces/CardImage';
 import YossiShitritImage from '@public/chefs/Yossi_Shitrit.png'
 import ShahafShabtayImage from '@public/chefs/Shahaf_Shabtay.jpg'
 import OmerMillerImage from '@public/chefs/Omer_Miller.jpg'
-import styles from '@components/Chef/chef.module.scss';
+import styles from '@components/chefCard/chefCard.module.scss';
 
 export const chefImages: CardImage[] = [
   {

@@ -1,13 +1,14 @@
-import styles from "./chef.module.scss";
+import styles from "./chefCard.module.scss";
 import { ChefInfo } from "@/types/interfaces/ChefInfo";
 import BackgroundImage from "@/components/backgroundImage/backgroundImage";
-import PopularRestaurants from "@components/popularRestaurants/popularRestaurants";
+// import InfoPanel from "@/components/infoPanel/infoPanel";
 
 interface ChefProps {
+  children?: React.ReactNode;
   chef: ChefInfo;
 }
 
-export default function Chef({ chef }: ChefProps) {
+export default function ChefCard({ chef, children }: ChefProps) {
   return (
     <div>
       <div className={styles.chefContainer}>
@@ -17,11 +18,11 @@ export default function Chef({ chef }: ChefProps) {
           <p>{chef.description}</p>
         </div>
       </div>
-      <PopularRestaurants
+      {/* <InfoPanel
         cards={chef.chefsRestaurants}
-        type="restaurant"
-        title={chef.firstName}
-      />
+        title="Yossi’s restaurants"
+      /> */}
+      {  children }
     </div>
   );
 }
