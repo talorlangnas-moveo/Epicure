@@ -1,4 +1,4 @@
-import {CardInfo} from '@interfaces/CardInfo';
+import {CardInfo} from '@/types/interfaces/cardInfo';
 import PadKiMaonImage from '@public/dishes/padKiMao.png';
 import GarberImage from '@public/dishes/garber.png';
 import Dish3Image from '@public/dishes/dish3.png';

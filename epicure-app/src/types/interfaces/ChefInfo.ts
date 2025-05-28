@@ -1,10 +1,10 @@
-import { CardImage } from "./CardImage";
-import { CardInfo } from "./CardInfo";
+import { StaticImageData } from "next/image";
+import { CardInfo } from "./cardInfo";
 
 export interface ChefInfo {
     firstName: string;
     lastName: string;
-    cardImg: CardImage;
+    imgUrl: StaticImageData;
     description: string;
     chefsRestaurants: CardInfo[]
 }

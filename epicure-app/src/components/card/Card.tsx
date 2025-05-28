@@ -1,6 +1,6 @@
 import Image from "next/image";
 import styles from "@components/card/card.module.scss";
-import { CardInfo } from "@/types/interfaces/CardInfo";
+import { CardInfo } from "@/types/interfaces/cardInfo";
 import { ILSIcon } from "@icons";
 
 interface CardProps {

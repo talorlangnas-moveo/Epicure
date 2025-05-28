@@ -1,4 +1,4 @@
-import {CardInfo} from '@interfaces/CardInfo';
+import {CardInfo} from '@/types/interfaces/cardInfo';
 import ClaroImage from '@public/restaurants/claro.png';
 import LuminaImage from '@public/restaurants/lumina.png';
 import KabKemImage from '@public/restaurants/KabKem.png';
