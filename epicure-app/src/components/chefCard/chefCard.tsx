@@ -1,7 +1,6 @@
 import styles from "./chefCard.module.scss";
 import { ChefInfo } from "@/types/interfaces/ChefInfo";
 import BackgroundImage from "@/components/backgroundImage/backgroundImage";
-// import InfoPanel from "@/components/infoPanel/infoPanel";
 
 interface ChefProps {
   children?: React.ReactNode;
@@ -18,10 +17,6 @@ export default function ChefCard({ chef, children }: ChefProps) {
           <p>{chef.description}</p>
         </div>
       </div>
-      {/* <InfoPanel
-        cards={chef.chefsRestaurants}
-        title="Yossi’s restaurants"
-      /> */}
       {  children }
     </div>
   );
