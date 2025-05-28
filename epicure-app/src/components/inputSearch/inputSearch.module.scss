@@ -11,7 +11,7 @@
   outline: none;
   gap: 18px;
 
-  @media (min-width: $breakpoint-tablet) {
+  @media (min-width: $breakpoint-laptop) {
     width: 505px;
     height: 48px;
     gap: 26px;
@@ -29,7 +29,7 @@
     line-height: 100%;
     letter-spacing: 1.29px;
 
-    @media (min-width: $breakpoint-tablet) {
+    @media (min-width: $breakpoint-laptop) {
       font-size: 24px;
       width: 433px;
       // height: ;
@@ -42,7 +42,7 @@
     height: 20px;
     margin: 5px 0 5px 12px;
 
-    @media (min-width: $breakpoint-tablet) {
+    @media (min-width: $breakpoint-laptop) {
       width: 32px;
       height: 32px;
       margin: 8px 0 8px 12px;

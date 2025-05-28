@@ -18,10 +18,6 @@
   overflow: hidden;
   margin-bottom: 48px;
 
-  // @include define-height($breakpoint-mobile, $breakpoint-mobile-lg;
-  // @include define-height($breakpoint-tablet, $breakpoint-laptop);
-  // @include define-height($breakpoint-desktop, $breakpoint-desktop-lg);
-
   @include define-height($breakpoint-mobile, $breakpoint-mobile-lg, $min-width, $max-width, $min-height, $max-height);
   @include define-height($breakpoint-tablet, $breakpoint-laptop, $min-width, $max-width, $min-height, $max-height);
   @include define-height($breakpoint-desktop, $breakpoint-desktop-lg, $min-width, $max-width, $min-height, $max-height);
@@ -30,8 +26,7 @@
 
 .heroContainer {
   position: absolute;
-  // width: 335px;
-  // height: 144px;
+  height: 144px;
   gap: 18px;
   background-color: #ffffffE0;
   ;
@@ -42,11 +37,19 @@
   align-items: center;
 
   width: 90%;
-  height: 53%;
   min-width: 335px;
-  // padding: 0 10px;
   flex-grow: 1;
   flex-shrink: 1;
+
+  @media (min-width: 480px) and (max-width: $breakpoint-laptop) {
+    width: 80%; 
+    height: 221px;
+  }
+
+  @media (min-width: $breakpoint-laptop) {
+    width: 776px;
+    height: 221px;
+  }
 
 }
 
@@ -59,7 +62,7 @@
   color: #000000;
   text-align: center;
 
-  @media (min-width: $breakpoint-tablet) {
+  @media (min-width: $breakpoint-laptop) {
     font-size: 32px;
     line-height: 40px;
   }
