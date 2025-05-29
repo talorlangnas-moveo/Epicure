@@ -7,11 +7,28 @@
     padding-left: 20px;
     padding-bottom: 48px;
 
+    @media (min-width: $breakpoint-tablet) {
+        width: 75%;
+        margin: 0 auto;
+    }
+
+    @media (min-width: $breakpoint-laptop) {
+        align-items: center;
+        gap: 40px;
+        width: 82.3%;
+        margin: 0 auto;
+    }
+
     h4 {
         line-height: 24px;
         letter-spacing: 1.25px;
         text-transform: uppercase;
         padding-bottom: 17px;
+
+        @media (min-width: $breakpoint-laptop) {
+            font-size: 30px;
+            line-height: 35px;
+        }
     }
 }
 
@@ -21,10 +38,19 @@
     align-items: center;
     gap: 12px;
 
+    @media (min-width: $breakpoint-laptop) {
+        align-self: flex-end;
+    }
+
     p {
         font-weight: 400;
         font-size: 16px;
         line-height: 35px;
         letter-spacing: 2px;
+
+        @media (min-width: $breakpoint-laptop) {
+            align-self: flex-end;
+            font-size: 24px;
+        }
     }
 }

@@ -9,6 +9,7 @@ import { restaurantsCards } from "@/data/restaurantsCards";
 import { dishCards } from "@/data/dishCards";
 import Carousel from "@components/carousel/carousel";
 import Card from "@components/card/card";
+import CardsDisplay from "@components/cardsDisplay/cardsDisplay";
 
 export default function Home() {
   return (
@@ -16,7 +17,10 @@ export default function Home() {
       <Header />
       <Hero />
 
-      <InfoPanel title="Popular restaurant in Epicure:">
+      <InfoPanel
+        title="Popular restaurant in Epicure:"
+        childrenDesk={<CardsDisplay cards={restaurantsCards}/>}
+      >
         <Carousel>
           {restaurantsCards.map((c) => (
             <Card key={c.id} card={c} />
@@ -24,7 +28,9 @@ export default function Home() {
         </Carousel>
       </InfoPanel>
 
-      <InfoPanel title="Signature Dish Of:">
+      <InfoPanel title="Signature Dish Of:"
+      childrenDesk={<CardsDisplay cards={dishCards}/>}
+      >
         <Carousel>
           {dishCards.map((c) => (
             <Card key={c.id} card={c} />
@@ -34,7 +40,9 @@ export default function Home() {
 
       <IconLegend />
       <ChefCard chef={chefInfo}>
-        <InfoPanel title="Popular restaurant in Epicure:">
+        <InfoPanel title="yossi’s restaurants"
+        childrenDesk={<CardsDisplay cards={restaurantsCards}/>}
+        >
           <Carousel>
             {restaurantsCards.map((c) => (
               <Card key={c.id} card={c} />
@@ -42,9 +50,8 @@ export default function Home() {
           </Carousel>
         </InfoPanel>
       </ChefCard>
-      
+
       <Footer />
-    
     </div>
   );
 }

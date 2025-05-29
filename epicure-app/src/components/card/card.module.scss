@@ -2,51 +2,105 @@
 @use '@styles/utils/variables' as *;
 
 .cardContainer {
-    position: relative; 
+    position: relative;
     display: flex;
     flex-direction: column;
     background-color: $color-secondary-beige;
     width: 245px;
+
+    @media (min-width: $breakpoint-laptop) {
+        // width: 380px;
+        // justify-content: space-between;
+        width: 32%;
+    }
 }
 
 .restaurant {
     height: 233px;
+
+    @media (min-width: $breakpoint-laptop) {
+        height: auto;
+    }
+
+    .cardImage {
+        width: 245px;
+        height: 152px;
+
+        @media (min-width: $breakpoint-laptop) {
+            flex-basis: 47%;
+            width: 100%;
+            height: auto;
+        }
+    }
 }
 
 .dish {
     height: 388px;
-}
 
-.bottomGroup {
-  position: absolute;
-  bottom: 16px;            
-  left: 0;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 16px;               
-  padding-left: 16px;
-}
+    @media (min-width: $breakpoint-laptop) {
+        height: auto;
+    }
 
-.cardImage {
-    @include image-style('responsive');
+    .cardImage {
+        width: 245px;
+        height: 152px;
+
+        @media (min-width: $breakpoint-laptop) {
+            flex-basis: 48%;
+            width: 100%;
+            height: auto;
+        }
+    }
+
 }
 
 .cardContent {
     display: flex;
     flex-direction: column;
-    padding: 16px 0 16px 16px;
+    padding: 16px 20px 16px 16px;
     gap: 8px;
+
 }
 
-.spicyIcon {
-//     padding-left: 16px;
-//     padding-bottom: 16px;
+.cardTitle {
+    letter-spacing: 2.67px;
+
+    @media (min-width: $breakpoint-desktop) {
+        font-size: 40px;
+        line-height: 47px;
+        letter-spacing: 2.67px;
+        text-align: center;
+    }
 }
+
+.cardDescription {
+    font-weight: 200;
+    font-size: 16px;
+    line-height: 20px;
+    letter-spacing: 1.97px;
+
+    @media (min-width: $breakpoint-desktop) {
+        font-size: 24px;
+        line-height: 30px;
+        text-align: center;
+    }
+}
+
+.bottomGroup {
+    position: absolute;
+    bottom: 16px;
+    left: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding-left: 16px;
+}
+
 
 .ils {
     padding-top: 0px;
-} 
+}
 
 .cardPrice {
     display: flex;

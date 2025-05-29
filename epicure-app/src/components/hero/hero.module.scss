@@ -22,6 +22,9 @@
   @include define-height($breakpoint-tablet, $breakpoint-laptop, $min-width, $max-width, $min-height, $max-height);
   @include define-height($breakpoint-desktop, $breakpoint-desktop-lg, $min-width, $max-width, $min-height, $max-height);
 
+  @media (min-width: $breakpoint-laptop) {
+    margin-bottom: 80px;
+  }
 }
 
 .heroContainer {

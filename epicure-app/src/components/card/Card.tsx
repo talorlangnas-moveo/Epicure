@@ -12,11 +12,10 @@ export default function Card({ card }: CardProps) {
     <div className={`${styles.cardContainer} ${styles[card.type]}`}>
       <Image
         src={card.imgUrl}
-        width={245}
-        height={152}
         placeholder="blur"
         alt={`${card.title} image`}
         sizes="100vw"
+        className={styles.cardImage}
       />
       <div className={styles.cardContent}>
         <h3 className={styles.cardTitle}>{card.title}</h3>
