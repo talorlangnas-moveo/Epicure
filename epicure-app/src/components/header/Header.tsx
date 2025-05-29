@@ -1,22 +1,18 @@
-import Image from "next/image";
+"use client";
+
 import styles from "./header.module.scss";
-import { ForkKnifeIcon } from "@/icons/index";
 import { RightGroupIcons } from "@/icons";
-import Navbar from "./navbar";
-// import MediaQuery from '@components/responsive/responsive';
+import NavbarMobile from "./navbarMobile";
+import NavbarDesktop from "./navbarDesktop";
+import { useWindowWidth } from "@/hooks/useWindowWidth";
 
 export default function Header() {
+  const width = useWindowWidth();
+
   return (
     <header className={styles.header}>
-      <Navbar />
-      <div className={styles.forknifeIcon}>
-        <Image
-          src={ForkKnifeIcon}
-          width={32.93}
-          height={32}
-          alt="fork and knife logo"
-        />
-      </div>
+      {width !== null && (width > 1023 ? <NavbarDesktop /> : <NavbarMobile />)}
+
       <RightGroupIcons />
     </header>
   );

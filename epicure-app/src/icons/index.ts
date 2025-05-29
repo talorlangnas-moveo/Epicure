@@ -1,4 +1,4 @@
-export { default as RightGroupIcons } from '../components/header/RightGroupIcons';
+export { default as RightGroupIcons } from '../components/header/rightGroupIcons';
 export { default as AboutusIcon } from './AboutUsIcon';
 export {default as AppStoreIcon} from './AppStoreIcone';
 export {default as GooglePlayIcon} from './GooglePlayIcon';
@@ -12,3 +12,4 @@ export { default as PersonIcon } from './person.svg';
 export { default as BagIcon } from './Bag.svg';
 export { default as VegitarianIcon } from './vegitarianIcon.svg';
 export { default as VeganIcon } from './veganIcon.svg';
+export { default as EpicureLogo } from './epicureLogo.svg';
