@@ -7,6 +7,7 @@ import ChefCard from "@/components/chefCard/chefCard";
 import InfoPanel from "@/components/infoPanel/infoPanel";
 import { restaurantsCards } from "@/data/restaurantsCards";
 import { dishCards } from "@/data/dishCards";
+import {chefRestaurantsCards} from "@/data/chefInfo";
 import Carousel from "@components/carousel/carousel";
 import Card from "@components/card/card";
 import CardsDisplay from "@components/cardsDisplay/cardsDisplay";
@@ -18,8 +19,8 @@ export default function Home() {
       <Hero />
 
       <InfoPanel
-        title="Popular restaurant in Epicure:"
-        childrenDesk={<CardsDisplay cards={restaurantsCards}/>}
+        title="Popular restaurant in Epicure:" type='restaurant'
+        childrenDesk={<CardsDisplay cards={restaurantsCards} type='restaurant'/>}
       >
         <Carousel>
           {restaurantsCards.map((c) => (
@@ -28,8 +29,8 @@ export default function Home() {
         </Carousel>
       </InfoPanel>
 
-      <InfoPanel title="Signature Dish Of:"
-      childrenDesk={<CardsDisplay cards={dishCards}/>}
+      <InfoPanel title="Signature Dish Of:" type='dish'
+      childrenDesk={<CardsDisplay cards={dishCards} type='dish'/>}
       >
         <Carousel>
           {dishCards.map((c) => (
@@ -40,8 +41,8 @@ export default function Home() {
 
       <IconLegend />
       <ChefCard chef={chefInfo}>
-        <InfoPanel title="yossi’s restaurants"
-        childrenDesk={<CardsDisplay cards={restaurantsCards}/>}
+        <InfoPanel title="Yossi’s Restaurants" type='chef' displayButton={false}
+        childrenDesk={<CardsDisplay cards={chefRestaurantsCards} type='chef'/>}
         >
           <Carousel>
             {restaurantsCards.map((c) => (

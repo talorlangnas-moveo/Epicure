@@ -4,11 +4,14 @@ import Image, { StaticImageData } from "next/image";
 import styles from "./infoPanel.module.scss";
 import { ArrowsIcon } from "@icons";
 import { useWindowWidth } from "@/hooks/useWindowWidth";
+import {CardType} from '@/types/cardType';
 
 interface InfoPanelProps {
   children?: React.ReactNode;
   childrenDesk?: React.ReactNode;
   title?: string;
+  type: CardType;
+  displayButton?: boolean;
   buttonLabel?: string;
   buttonImage?: StaticImageData | string;
   buttonStyle?: string;
@@ -20,6 +23,8 @@ export default function InfoPanel({
   children,
   childrenDesk,
   title,
+  type,
+  displayButton = true,
   buttonLabel = "All restaurants",
   buttonStyle = "panelButton",
   buttonImage = ArrowsIcon,
@@ -30,12 +35,13 @@ export default function InfoPanel({
   const width = useWindowWidth();
 
   return (
-    <div className={styles.infoPanel}>
-      <h4>{title}</h4>
+    <div className={`${styles.infoPanel} ${styles[type]}`}>
+      <h4 className={`${styles[type]}`}>{title}</h4>
       {width !== null && (
         width > 1023 ? <>{childrenDesk ?? children}</> : <>{children}</>
       )}
-      <div className={`${styles[buttonStyle]}`}>
+      {displayButton && (
+        <div className={`${styles[buttonStyle]}`}>
         <p>{buttonLabel}</p>
         <Image
           src={buttonImage}
@@ -44,6 +50,7 @@ export default function InfoPanel({
           alt="Arrows Icon"
         />
       </div>
+      )}
     </div>
   );
 }

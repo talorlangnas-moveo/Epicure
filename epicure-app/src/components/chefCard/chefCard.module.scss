@@ -1,6 +1,7 @@
 @use '@styles/utils/mixins' as *;
 @use '@styles/utils/variables' as *;
 
+
 .chefContainer {
   display: flex;
   flex-wrap: wrap;
@@ -17,6 +18,15 @@
     padding-right: 20%;
   }
 
+  @media (min-width: $breakpoint-laptop) {
+    display: grid;
+    grid-template-columns: 40% 1fr;
+    grid-template-rows: repeat(3, auto);
+    padding-left: 8%;
+    padding-right: 8%;
+  }
+
+
   .heading {
     text-transform: uppercase;
     font-weight: 200;
@@ -27,10 +37,19 @@
 
     @media (min-width: $breakpoint-tablet) {
       font-size: 24px;
+      
     }
 
     @media (min-width: $breakpoint-laptop) {
       font-size: 30px;
+      grid-column: span 2;
+
+      text-align: center;
+      margin-left: auto;
+      margin-right: auto;
+      width: fit-content;
+
+      padding-bottom: 40px;
     }
   }
 
@@ -49,10 +68,6 @@
     padding-top: 24px;
     padding-bottom: 32px;
 
-    @media (min-width: $breakpoint-laptop) {
-      max-width: 478px;
-      max-height: 372px;
-    }
 
     p {
       font-size: 18px;
@@ -66,6 +81,7 @@
 
       @media (min-width: $breakpoint-laptop) {
         font-size: 24px;
+        padding-left: 63.5px;
       }
 
     }

@@ -19,7 +19,9 @@ export default function Card({ card }: CardProps) {
       />
       <div className={styles.cardContent}>
         <h3 className={styles.cardTitle}>{card.title}</h3>
-        <h2 className={styles.cardDescription}>{card.description}</h2>
+        {card.type !== "chef" && (
+          <h2 className={styles.cardDescription}>{card.description}</h2>
+        )}
       </div>
       {card.type === "dish" && (
         <div className={styles.bottomGroup}>
