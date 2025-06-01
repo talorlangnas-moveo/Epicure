@@ -9,30 +9,37 @@
     width: 245px;
 
     @media (min-width: $breakpoint-laptop) {
-        // width: 380px;
-        // justify-content: space-between;
         width: 32%;
     }
 
     &.chef {
-    @media (min-width: $breakpoint-laptop) {
-        .cardTitle {
-            font-weight: 400;
-            font-size: 30px;
-            line-height: 47px;
-            letter-spacing: 2.67px;
-            text-align: center;
-        }
+        height: 233.34px;
 
         .cardImage {
+            width: 100%;
+            // height: auto;
+            height: 152.34px;
+            // width: 245px;
+        }
+
+        @media (min-width: $breakpoint-laptop) {
+            height: auto;
+
+            .cardTitle {
+                font-weight: 400;
+                font-size: 30px;
+                line-height: 47px;
+                letter-spacing: 2.67px;
+                text-align: center;
+            }
+
+            .cardImage {
                 flex-basis: 62%;
                 width: 100%;
                 height: auto;
-            
+            }
         }
-
     }
-}
 }
 
 .restaurant {

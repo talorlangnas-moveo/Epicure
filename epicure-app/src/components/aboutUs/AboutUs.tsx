@@ -1,16 +1,34 @@
-import { AboutusIcon } from "@/icons/index";
-import AppDownloadButtons from "./appDownloadButtons"
+import Image from "next/image";
+import { AppStoreIcon, GooglePlayIcon, EpicureLogoMob } from '@icons';
 import styles from "./aboutUs.module.scss";
 
 export default function AboutUs() {
   return (
     <div className={styles.aboutUsContainer}>
-      <div className={styles.aboutUsIcon}>
-        <AboutusIcon />
+      <div className={styles.epicureIcon}>
+        <Image
+          src={EpicureLogoMob}
+          alt="Epicure Logo"
+          className={styles.epicureImage}
+        />
       </div>
-      <AppDownloadButtons />
-      <div className={styles.aboutUsContent}>
+       <div className={styles.appDownload}>
+            <Image
+                  src={GooglePlayIcon}
+                  width={180}
+                  height={52}
+                  alt="Google Play Icon"
+                />
+            <Image
+                  src={AppStoreIcon}
+                  width={180}
+                  height={52}
+                  alt="App Store Icon"
+                />
+        </div>
+      {/* <div className={styles.aboutUsContent}> */}
         <h4 className={styles.heading}>about us:</h4>
+        <div className={styles.aboutUsContent}>
         <p className={styles.firstParagraph}>
           {`Lorem ipsum dolor sit amet, 
 consectetur adipiscing elit. In a 

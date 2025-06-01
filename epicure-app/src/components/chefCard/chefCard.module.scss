@@ -6,17 +6,12 @@
   display: flex;
   flex-wrap: wrap;
   padding-left: 5%;
-  padding-right: 5%;
+  // padding-right: 5%;
 
-  @media (min-width: $breakpoint-mobile) {
-    padding-left: 10%;
-    padding-right: 10%;
-  }
-
-  @media (min-width: $breakpoint-tablet) and (max-width: $breakpoint-laptop) {
-    padding-left: 20%;
-    padding-right: 20%;
-  }
+  // @media (min-width: $breakpoint-tablet) and (max-width: $breakpoint-laptop) {
+  //   // padding-left: 20%;
+  //   // padding-right: 20%;
+  // }
 
   @media (min-width: $breakpoint-laptop) {
     display: grid;
@@ -37,8 +32,11 @@
 
     @media (min-width: $breakpoint-tablet) {
       font-size: 24px;
-      
     }
+     @media (min-width: $breakpoint-tablet) and (max-width: $breakpoint-laptop) {
+    padding-left: 20%;
+    padding-right: 20%;
+  }
 
     @media (min-width: $breakpoint-laptop) {
       font-size: 30px;
@@ -56,7 +54,11 @@
   .chefImage {
     width: 100%;
     height: auto;
-
+    padding-right: 5%;
+    @media (min-width: $breakpoint-tablet) and (max-width: $breakpoint-laptop) {
+    padding-left: 20%;
+    padding-right: 20%;
+  }
 
     @media (min-width: $breakpoint-laptop) {
       max-width: 478px;
@@ -67,7 +69,12 @@
   .chefInfo {
     padding-top: 24px;
     padding-bottom: 32px;
-
+    padding-right: 5%;
+    
+    @media (min-width: $breakpoint-tablet) and (max-width: $breakpoint-laptop) {
+    padding-left: 20%;
+    padding-right: 20%;
+  }
 
     p {
       font-size: 18px;

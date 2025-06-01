@@ -4,8 +4,6 @@ import Image from "next/image";
 import styles from "./chefCard.module.scss";
 import { ChefInfo } from "@/types/interfaces/chefInfo";
 import YossiShitritImage from "@public/chefs/Yossi_Shitrit.png";
-// import { useWindowWidth } from "@/hooks/useWindowWidth";
-// import CardsDisplay from '@components/cardsDisplay/cardsDisplay';
 
 interface ChefProps {
   children?: React.ReactNode;
@@ -14,7 +12,6 @@ interface ChefProps {
 }
 
 export default function ChefCard({ chef, children }: ChefProps) {
-  // const width = useWindowWidth();
   return (
     // <div>
       <div className={styles.chefContainer}>

@@ -45,7 +45,7 @@ export default function Home() {
         childrenDesk={<CardsDisplay cards={chefRestaurantsCards} type='chef'/>}
         >
           <Carousel>
-            {restaurantsCards.map((c) => (
+            {chefRestaurantsCards.map((c) => (
               <Card key={c.id} card={c} />
             ))}
           </Carousel>

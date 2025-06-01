@@ -4,8 +4,13 @@
 .infoPanel {
     display: flex;
     flex-direction: column;
-    padding-left: 20px;
+         padding-left: 20px;
     padding-bottom: 48px;
+
+    @media (max-width: $breakpoint-tablet) {
+        width: 100%;
+   
+    }
 
     @media (min-width: $breakpoint-tablet) {
         width: 75%;
@@ -32,11 +37,11 @@
     }
 
     &.chef {
+        padding-left: 0px;
         @media (min-width: $breakpoint-laptop) {
             margin: 0;
             padding-left: 0;
             grid-column: span 2;
-            // gap: 40px;
             justify-self: start;
             align-items: flex-start;
             padding-top: 40px;
