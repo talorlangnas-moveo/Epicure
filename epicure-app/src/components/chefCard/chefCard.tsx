@@ -11,7 +11,6 @@ interface ChefProps {
 
 export default function ChefCard({ chef, children }: ChefProps) {
   return (
-    // <div>
     <div className={styles.chefContainer}>
       <h4 className={styles.heading}>chef of the week:</h4>
       <Image

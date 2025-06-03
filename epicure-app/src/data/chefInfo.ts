@@ -3,10 +3,7 @@ import { CardInfo } from '@/types/interfaces/cardInfo';
 import YossiShitritImage from "@public/chefs/Yossi_Shitrit.png";
 import Mashya from '@public/restaurants/mashya.png';
 import Onza from '@public/restaurants/onza.png';
-// import KitchenMarket from '@public/restaurants/kitchenMarket.png';
 import KitchenMarket from '@public/restaurants/kitchenMarketYossi.png';
-
-
 
 export const chefRestaurantsCards: CardInfo[] = [
   {
@@ -33,22 +30,6 @@ export const chefRestaurantsCards: CardInfo[] = [
     imgUrl: Mashya,
     rating: 4.5,
   },
-  // {
-  //   id: '4',
-  //   type: 'restaurant',
-  //   title: 'Messa',
-  //   description: 'Aviv Moshe',
-  //   imgUrl: MessaImage,
-  //   rating: 3.5,
-  // },
-  // {
-  //   id: '5',
-  //   type: 'restaurant',
-  //   title: 'Yapan',
-  //   description: 'Omer Miller',
-  //   imgUrl: YapanImage,
-  //   rating: 4.9,
-  // },
 ];
 
 export const chefInfo: ChefInfo = {

@@ -54,16 +54,12 @@
                 font-size: 30px;
                 line-height: 35px;
                 letter-spacing: 1.25;
-                text-transform: lowercase; // make everything lowercase first
+                text-transform: lowercase; 
                 text-transform: capitalize;
-
             }
         }
     }
 }
-
-
-
 
 .panelButton {
     display: flex;

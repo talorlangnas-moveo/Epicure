@@ -7,19 +7,17 @@
     flex-direction: column;
     padding-top: 24px;
 
-    @media (min-width: $br-mobile-large) {
+    @media (min-width: $breakpoint-mobile-lg) {
         padding-left: 132px;
     }
 
     @media (min-width: $breakpoint-laptop) {
         display: grid;
         grid-template-columns: 48% 1fr;
-        // grid-template-rows: auto 73% auto;
         grid-template-rows: repeat(3, auto);
         padding-left: 132px;
         padding-right: 128.78px;
         padding-bottom: 40px;
-        // min-height: 100vh;
     }
 }
 
@@ -51,7 +49,6 @@
         order: 2;
         padding-left: 0;
         padding-bottom: 20px;
-        // justify-content: space-between;
         gap: 20px;
     }
 }
@@ -103,7 +100,6 @@
     letter-spacing: 2.14px;
     margin-right: 27px;
     white-space: normal;
-    // white-space: pre-wrap;
     font-size: 18px;
 
     @media (min-width: $breakpoint-laptop) {
@@ -121,7 +117,6 @@
     letter-spacing: 2.14px;
     margin-right: 52px;
     white-space: normal;
-    // white-space: pre-wrap;
     font-size: 18px;
 
     @media (min-width: $breakpoint-laptop) {
@@ -132,5 +127,3 @@
         margin-right: 0;
     }
 }
-
-// }

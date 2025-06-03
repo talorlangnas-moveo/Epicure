@@ -16,7 +16,6 @@ export default function InputSearch() {
         id="search-input"
         type="text"
         placeholder="Search for restaurant cuisine, chef"
-        // className={styles.inputSearch}
       />
     </div>
   );

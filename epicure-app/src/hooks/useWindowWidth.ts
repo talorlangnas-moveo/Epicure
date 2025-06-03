@@ -6,7 +6,7 @@ export function useWindowWidth(): number | null {
   useEffect(() => {
     const updateWidth = () => setWidth(window.innerWidth);
 
-    updateWidth(); // קריאה ראשונית ברגע שהקומפוננטה עולה
+    updateWidth(); 
     window.addEventListener("resize", updateWidth);
 
     return () => {

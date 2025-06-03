@@ -13,9 +13,7 @@ export default function Hero() {
         quality={100}
         fill
         sizes="100vw"
-        style={{
-          // objectFit: "cover",
-        }}
+        className={styles.heroImage}
       />
       <HeroContainer />
     </div>
