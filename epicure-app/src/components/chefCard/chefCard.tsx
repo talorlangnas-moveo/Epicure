@@ -1,5 +1,3 @@
-// "use client";
-
 import Image from "next/image";
 import styles from "./chefCard.module.scss";
 import { ChefInfo } from "@/types/interfaces/chefInfo";
@@ -14,20 +12,18 @@ interface ChefProps {
 export default function ChefCard({ chef, children }: ChefProps) {
   return (
     // <div>
-      <div className={styles.chefContainer}>
-        <h4 className={styles.heading}>chef of the week:</h4>
-        <Image
-            src={YossiShitritImage}
-            alt="Yossi Shitrit Image"
-            sizes="100vw"
-            className={styles.chefImage}
-          />
-        <div className={styles.chefInfo}>
-          <p>{chef.description}</p>
-        </div>
-      {/* {width !== null && (width > 1023 ? <CardsDisplay cards={chef.chefsRestaurants}/> : <> {children}</>)} */}
-      {children}
+    <div className={styles.chefContainer}>
+      <h4 className={styles.heading}>chef of the week:</h4>
+      <Image
+        src={YossiShitritImage}
+        alt="Yossi Shitrit Image"
+        sizes="100vw"
+        className={styles.chefImage}
+      />
+      <div className={styles.chefInfo}>
+        <p>{chef.description}</p>
       </div>
-    // </div>
+      {children}
+    </div>
   );
 }

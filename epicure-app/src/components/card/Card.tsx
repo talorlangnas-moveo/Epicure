@@ -1,13 +1,18 @@
+"use client";
+
 import Image from "next/image";
 import styles from "@components/card/card.module.scss";
 import { CardInfo } from "@/types/interfaces/cardInfo";
 import { ILSIcon } from "@icons";
+import { useWindowWidth } from "@/hooks/useWindowWidth";
 
 interface CardProps {
   card: CardInfo;
 }
 
 export default function Card({ card }: CardProps) {
+  const width = useWindowWidth();
+
   return (
     <div className={`${styles.cardContainer} ${styles[card.type]}`}>
       <Image
@@ -22,25 +27,50 @@ export default function Card({ card }: CardProps) {
         {card.type !== "chef" && (
           <h2 className={styles.cardDescription}>{card.description}</h2>
         )}
-      </div>
-      {card.type === "dish" && (
-        <div className={styles.bottomGroup}>
-          {card.logoUrl && (
-            <div className={styles.spicyIcon}>
-              <Image
-                src={card.logoUrl}
-                width={30}
-                height={24}
-                alt="Spicy Icon"
-              />
-            </div>
+        {card.type === "restaurant" &&
+          width !== null &&
+          width > 1023 &&
+          card.ratingImage && (
+            <Image
+              src={card.ratingImage}
+              alt="rating image"
+              className={styles.ratingImage}
+            />
           )}
-          <div className={styles.cardPrice}>
-            <div className={styles.ils}>
-              <Image src={ILSIcon} width={7.26} height={6.67} alt="ILS Icon" />
-            </div>
-            <p>{card.price}</p>
-          </div>
+        {card.type === "dish" && (
+          <>
+            {card.logoUrl && (
+              <div className={styles.spicyIconWrapper}>
+                <Image
+                  src={card.logoUrl}
+                  alt="Dish Icon"
+                  className={styles.spicyIcon}
+                />
+              </div>
+            )}
+            {width !== null && width < 1023 && (
+              <div className={styles.cardPriceWrapper}>
+                <div className={styles.cardPrice}>
+                  <div className={styles.ils}>
+                    <Image
+                      src={ILSIcon}
+                      alt="ILS Icon"
+                      className={styles.ilsImage}
+                    />
+                  </div>
+                  <p className={styles.priceText}>{card.price}</p>
+                </div>
+              </div>
+            )}
+          </>
+        )}
+      </div>
+      {card.type === "dish" && width !== null && width > 1023 && (
+        <div className={styles.cardFooter}>
+          <span className={styles.cardPrice}>
+            <Image src={ILSIcon} alt="ILS Icon" className={styles.ilsImage} />
+            <span className={styles.priceText}>{card.price}</span>
+          </span>
         </div>
       )}
     </div>

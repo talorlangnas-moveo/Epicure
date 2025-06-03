@@ -26,7 +26,6 @@ export default function AboutUs() {
                   alt="App Store Icon"
                 />
         </div>
-      {/* <div className={styles.aboutUsContent}> */}
         <h4 className={styles.heading}>about us:</h4>
         <div className={styles.aboutUsContent}>
         <p className={styles.firstParagraph}>

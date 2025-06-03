@@ -1,16 +1,14 @@
 import Image from "next/image";
-import { HamburgerIcon } from "@/icons";
 import { ForkKnifeIcon } from "@/icons";
 import styles from "./header.module.scss";
+import Dropdown from "@components/dropdown/dropdown";
 
 export default function navbarMobile() {
+  const dropdownOptions = ["Restaurants", "Chefs", "Contact Us", "Term of Use", "Privacy Policy"];
+
   return (
     <div className={styles.navbarMobile}>
-      <Image
-        src={HamburgerIcon}
-        alt="Icon for Dropdown Menu"
-        className={styles.hamburgerIcon}
-      />
+      <Dropdown options={dropdownOptions} />
       <Image
         src={ForkKnifeIcon}
         width={32.93}

@@ -8,6 +8,7 @@ export interface CardInfo {
     description: string;
     imgUrl: StaticImageData;
     rating?: number;
+    ratingImage?: StaticImageData;
     price?: number;
     logoUrl?: StaticImageData;
 }

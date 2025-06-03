@@ -6,12 +6,7 @@
   display: flex;
   flex-wrap: wrap;
   padding-left: 5%;
-  // padding-right: 5%;
 
-  // @media (min-width: $breakpoint-tablet) and (max-width: $breakpoint-laptop) {
-  //   // padding-left: 20%;
-  //   // padding-right: 20%;
-  // }
 
   @media (min-width: $breakpoint-laptop) {
     display: grid;

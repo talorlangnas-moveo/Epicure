@@ -2,7 +2,7 @@ import {CardInfo} from '@/types/interfaces/cardInfo';
 import PadKiMaonImage from '@public/dishes/padKiMao.png';
 import GarberImage from '@public/dishes/garber.png';
 import Dish3Image from '@public/dishes/dish3.png';
-import { SpicyIconCard } from "@icons";
+import { SpicyIconCard, VeganIcon } from "@icons";
 
 export const dishCards: CardInfo[] = [
   {
@@ -30,5 +30,6 @@ export const dishCards: CardInfo[] = [
     description: 'Basil dough, cashew "butter", demi-glace, bison & radish',
     imgUrl: Dish3Image,
     price: 65,
+    logoUrl: VeganIcon, 
   },
 ];

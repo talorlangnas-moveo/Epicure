@@ -1,5 +1,3 @@
-export { default as RightGroupIcons } from '../components/header/rightGroupIcons';
-// export {default as GooglePlayIcon} from './GooglePlayIcon';
 export {default as ArrowsIcon} from './arrows.svg';
 export { default as SpicyIconCard } from './spicyIconCard.svg';
 export { default as ILSIcon } from './ils.svg';
@@ -15,3 +13,6 @@ export { default as EpicureLogoDesk } from './epicureLogoDeskFooter.svg';
 export { default as EpicureLogoMob } from './epicureLogoMobFooter.svg';
 export { default as GooglePlayIcon } from './googlePlayIcon.svg';
 export { default as AppStoreIcon } from './appStoreIcon.svg';
+export { default as Stars4Image } from './4starts.svg';
+export { default as Stars3Image } from './3starts.svg';
+export { default as xIcon } from './xIcon.svg';
