@@ -3,7 +3,7 @@
 import Image, { StaticImageData } from "next/image";
 import styles from "@components/card/card.module.scss";
 import { ILSIcon } from "@icons";
-import { useBreakpoint } from "@/hooks/useBreakpoint";
+import { useIsDesktopView } from "@/hooks/useIsDesktopView";
 import { CardType } from "@/types/cardType";
 
 export interface CardInfo {
@@ -15,7 +15,7 @@ export interface CardInfo {
   rating?: number;
   ratingImage?: StaticImageData;
   price?: number;
-  logoUrl?: StaticImageData;
+  dishCategoryLogo?: StaticImageData;
 }
 
 export default function Card({
@@ -25,9 +25,9 @@ export default function Card({
   imgUrl,
   ratingImage,
   price,
-  logoUrl,
+  dishCategoryLogo,
 }: CardInfo) {
-  const isDesktop = useBreakpoint(1023);
+  const isDesktop = useIsDesktopView();
 
   return (
     <div className={`${styles.cardContainer} ${styles[type || "dish"]}`}>
@@ -50,9 +50,9 @@ export default function Card({
             className={styles.ratingImage}
           />
         )}
-        {logoUrl && (
+        {dishCategoryLogo && (
           <div className={styles.spicyIconWrapper}>
-            <Image src={logoUrl} alt="Dish Icon" className={styles.spicyIcon} />
+            <Image src={dishCategoryLogo} alt="Dish Icon" className={styles.spicyIcon} />
           </div>
         )}
       </div>

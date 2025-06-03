@@ -3,7 +3,7 @@
 import Image, { StaticImageData } from "next/image";
 import styles from "./infoPanel.module.scss";
 import { ArrowsIcon } from "@icons";
-import { useBreakpoint } from "@/hooks/useBreakpoint";
+import { useIsDesktopView } from "@/hooks/useIsDesktopView";
 import { CardType } from "@/types/cardType";
 
 interface InfoPanelProps {
@@ -31,7 +31,7 @@ export default function InfoPanel({
   buttonImgWidth = 24,
   buttonImgHeight = 24,
 }: InfoPanelProps) {
-  const isDesktop = useBreakpoint(1023);
+  const isDesktop = useIsDesktopView();
 
   return (
     <div className={`${styles.infoPanel} ${styles[type]}`}>

@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
 
-export function useBreakpoint(threshold: number = 1023): boolean {
+export function useIsDesktopView(): boolean {
   const [isAboveThreshold, setIsAboveThreshold] = useState<boolean>(false);
 
   useEffect(() => {
     const updateMode = () => {
-      setIsAboveThreshold(window.innerWidth > threshold);
+      setIsAboveThreshold(window.innerWidth > 1023);
     };
 
     updateMode();
@@ -13,7 +13,7 @@ export function useBreakpoint(threshold: number = 1023): boolean {
     return () => {
       window.removeEventListener("resize", updateMode);
     };
-  }, [threshold]);
+  }, []);
 
   return isAboveThreshold;
 }

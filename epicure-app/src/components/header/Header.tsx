@@ -5,10 +5,10 @@ import RightGroupIcons from "./rightGroupIcons";
 import NavbarMobile from "./navbarMobile";
 import NavbarDesktop from "./navbarDesktop";
 
-import { useBreakpoint } from "@/hooks/useBreakpoint";
+import { useIsDesktopView } from "@/hooks/useIsDesktopView";
 
 export default function Header() {
-  const isDesktop = useBreakpoint(1023);
+  const isDesktop = useIsDesktopView();
 
   return (
     <header className={styles.header}>
