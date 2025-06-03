@@ -1,10 +1,10 @@
-'use client';
+"use client";
 
 import Image, { StaticImageData } from "next/image";
 import styles from "./infoPanel.module.scss";
 import { ArrowsIcon } from "@icons";
-import { useWindowWidth } from "@/hooks/useWindowWidth";
-import {CardType} from '@/types/cardType';
+import { useBreakpoint } from "@/hooks/useBreakpoint";
+import { CardType } from "@/types/cardType";
 
 interface InfoPanelProps {
   children?: React.ReactNode;
@@ -31,25 +31,22 @@ export default function InfoPanel({
   buttonImgWidth = 24,
   buttonImgHeight = 24,
 }: InfoPanelProps) {
-
-  const width = useWindowWidth();
+  const isDesktop = useBreakpoint(1023);
 
   return (
     <div className={`${styles.infoPanel} ${styles[type]}`}>
       <h4 className={`${styles[type]}`}>{title}</h4>
-      {width !== null && (
-        width > 1023 ? <>{childrenDesk ?? children}</> : <>{children}</>
-      )}
+      {isDesktop ? <>{childrenDesk ?? children}</> : <>{children}</>}
       {displayButton && (
         <div className={`${styles[buttonStyle]}`}>
-        <p>{buttonLabel}</p>
-        <Image
-          src={buttonImage}
-          width={buttonImgWidth}
-          height={buttonImgHeight}
-          alt="Arrows Icon"
-        />
-      </div>
+          <p>{buttonLabel}</p>
+          <Image
+            src={buttonImage}
+            width={buttonImgWidth}
+            height={buttonImgHeight}
+            alt="Arrows Icon"
+          />
+        </div>
       )}
     </div>
   );

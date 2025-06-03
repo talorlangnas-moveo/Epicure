@@ -9,7 +9,7 @@ import { restaurantsCards } from "@/data/restaurantsCards";
 import { dishCards } from "@/data/dishCards";
 import { chefRestaurantsCards } from "@/data/chefInfo";
 import Carousel from "@components/carousel/carousel";
-import Card from "@components/card/card";
+import Card from "@/components/card/card";
 import CardsDisplay from "@components/cardsDisplay/cardsDisplay";
 
 export default function Home() {
@@ -27,7 +27,7 @@ export default function Home() {
       >
         <Carousel>
           {restaurantsCards.map((c) => (
-            <Card key={c.id} card={c} />
+            <Card key={c.id} {...c} />
           ))}
         </Carousel>
       </InfoPanel>
@@ -39,7 +39,7 @@ export default function Home() {
       >
         <Carousel>
           {dishCards.map((c) => (
-            <Card key={c.id} card={c} />
+            <Card key={c.id} {...c} />
           ))}
         </Carousel>
       </InfoPanel>
@@ -56,7 +56,7 @@ export default function Home() {
         >
           <Carousel>
             {chefRestaurantsCards.map((c) => (
-              <Card key={c.id} card={c} />
+              <Card key={c.id} {...c} />
             ))}
           </Carousel>
         </InfoPanel>

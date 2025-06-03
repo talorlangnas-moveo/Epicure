@@ -1,5 +1,5 @@
 import { ChefInfo } from '@/types/interfaces/chefInfo';
-import { CardInfo } from '@/types/interfaces/cardInfo';
+import { CardInfo } from '@components/card/card';
 import YossiShitritImage from "@public/chefs/Yossi_Shitrit.png";
 import Mashya from '@public/restaurants/mashya.png';
 import Onza from '@public/restaurants/onza.png';
@@ -10,25 +10,19 @@ export const chefRestaurantsCards: CardInfo[] = [
     id: '1',
     type: 'chef',
     title: 'Onza',
-    description: 'Yossi Shitrit',
     imgUrl: Onza,
-    rating: 4,
   },
   {
     id: '2',
     type: 'chef',
     title: 'Kitchen Market',
-    description: 'Yossi Shitrit',
     imgUrl: KitchenMarket,
-    rating: 3,
   },
   {
     id: '3',
     type: 'chef',
     title: 'Mashya',
-    description: 'Yossi Shitrit',
     imgUrl: Mashya,
-    rating: 4.5,
   },
 ];
 

@@ -1,7 +1,6 @@
 import Image from "next/image";
 import styles from "./chefCard.module.scss";
 import { ChefInfo } from "@/types/interfaces/chefInfo";
-import YossiShitritImage from "@public/chefs/Yossi_Shitrit.png";
 
 interface ChefProps {
   children?: React.ReactNode;
@@ -14,7 +13,7 @@ export default function ChefCard({ chef, children }: ChefProps) {
     <div className={styles.chefContainer}>
       <h4 className={styles.heading}>chef of the week:</h4>
       <Image
-        src={YossiShitritImage}
+        src={chef.imgUrl}
         alt="Yossi Shitrit Image"
         sizes="100vw"
         className={styles.chefImage}

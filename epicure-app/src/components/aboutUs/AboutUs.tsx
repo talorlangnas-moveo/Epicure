@@ -1,6 +1,7 @@
 import Image from "next/image";
-import { AppStoreIcon, GooglePlayIcon, EpicureLogoMob } from '@icons';
+import { EpicureLogoMob } from "@icons";
 import styles from "./aboutUs.module.scss";
+import AppDownloadButtons from "./appDownloadButtons";
 
 export default function AboutUs() {
   return (
@@ -12,22 +13,9 @@ export default function AboutUs() {
           className={styles.epicureImage}
         />
       </div>
-       <div className={styles.appDownload}>
-            <Image
-                  src={GooglePlayIcon}
-                  width={180}
-                  height={52}
-                  alt="Google Play Icon"
-                />
-            <Image
-                  src={AppStoreIcon}
-                  width={180}
-                  height={52}
-                  alt="App Store Icon"
-                />
-        </div>
-        <h4 className={styles.heading}>about us:</h4>
-        <div className={styles.aboutUsContent}>
+      <AppDownloadButtons />
+      <h4 className={styles.heading}>about us:</h4>
+      <div className={styles.aboutUsContent}>
         <p className={styles.firstParagraph}>
           {`Lorem ipsum dolor sit amet, 
 consectetur adipiscing elit. In a 

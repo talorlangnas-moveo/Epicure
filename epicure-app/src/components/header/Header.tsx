@@ -4,14 +4,15 @@ import styles from "./header.module.scss";
 import RightGroupIcons from "./rightGroupIcons";
 import NavbarMobile from "./navbarMobile";
 import NavbarDesktop from "./navbarDesktop";
-import { useWindowWidth } from "@/hooks/useWindowWidth";
+
+import { useBreakpoint } from "@/hooks/useBreakpoint";
 
 export default function Header() {
-  const width = useWindowWidth();
+  const isDesktop = useBreakpoint(1023);
 
   return (
     <header className={styles.header}>
-      {width !== null && (width > 1023 ? <NavbarDesktop /> : <NavbarMobile />)}
+      {isDesktop ? <NavbarDesktop /> : <NavbarMobile />}
 
       <RightGroupIcons />
     </header>
