@@ -12,7 +12,7 @@ export const dishCards: CardInfo[] = [
     description: "Shrimps, Glass Noodles, Kemiri Nuts, Shallots, Lemon Grass, Magic Chili Brown Coconut" ,
     imgUrl: PadKiMaonImage,
     price: 88,
-    logoUrl: SpicyIconCard, 
+    dishCategoryLogo: SpicyIconCard, 
   },
   {
     id: '2',
@@ -21,7 +21,7 @@ export const dishCards: CardInfo[] = [
     description: 'Polenta fingers, veal cheek, magic chili cured lemon cream, yellow laksa',
     imgUrl: GarberImage,
     price: 78,
-    logoUrl: SpicyIconCard, 
+    dishCategoryLogo: SpicyIconCard, 
   },
   {
     id: '3',
@@ -30,6 +30,6 @@ export const dishCards: CardInfo[] = [
     description: 'Basil dough, cashew "butter", demi-glace, bison & radish',
     imgUrl: Dish3Image,
     price: 65,
-    logoUrl: VeganIcon, 
+    dishCategoryLogo: VeganIcon, 
   },
 ];
