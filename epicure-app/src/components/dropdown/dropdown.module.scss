@@ -53,6 +53,11 @@
     cursor: pointer;
 }
 
+.dropdownLink {
+  color: $color-primary-black;
+  text-decoration: none; 
+}
+
 .secondSectionDropdownItem {
     padding-left: 20px;
     padding-bottom: 40px;

@@ -1,4 +1,3 @@
-import Header from "@/components/header/header";
 import Hero from "@/components/hero/hero";
 import IconLegend from "@/components/iconLegend/iconLegend";
 import Footer from "@/components/footer/footer";
@@ -15,7 +14,6 @@ import CardsDisplay from "@components/cardsDisplay/cardsDisplay";
 export default function Home() {
   return (
     <div>
-      <Header />
       <Hero />
 
       <InfoPanel

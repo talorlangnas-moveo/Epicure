@@ -1,12 +1,13 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { HamburgerIcon, xIcon } from "@icons";
 import { useState } from "react";
 import styles from "./dropdown.module.scss";
 
 interface DropdownProps {
-  options: string[]; 
+  options: string[];
 }
 
 export default function Dropdown({ options }: DropdownProps) {
@@ -14,7 +15,6 @@ export default function Dropdown({ options }: DropdownProps) {
 
   const toggleDropdown = () => setIsOpen(!isOpen);
 
-  const firstSection = options.slice(0, 2);
   const secondSection = options.slice(2);
 
   return (
@@ -37,11 +37,16 @@ export default function Dropdown({ options }: DropdownProps) {
             />
           </button>
           <ul className={styles.section}>
-            {firstSection.map((option, index) => (
-              <li key={index} className={styles.firstSectionDropdownItem}>
-                {option}
-              </li>
-            ))}
+            <li className={styles.firstSectionDropdownItem}>
+              <Link
+                href="/restaurants"
+                onClick={() => setIsOpen(false)}
+                className={styles.dropdownLink}
+              >
+                Restaurants
+              </Link>
+            </li>
+            <li className={styles.firstSectionDropdownItem}>{"Chefs"}</li>
           </ul>
           <hr className={styles.separator} />
           <ul className={styles.section}>

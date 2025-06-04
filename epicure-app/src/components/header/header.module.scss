@@ -39,13 +39,24 @@
   gap: 32px;
 
   p {
-
     font-weight: 200;
     font-size: 18px;
     line-height: 100%;
     letter-spacing: 1.92px;
     padding-top: 7px;
   }
+}
+
+.desktopLinkStyle {
+  color: $color-primary-black;
+  text-decoration: none; 
+  font-weight: 200;
+  font-size: 18px;
+  line-height: 100%;
+  letter-spacing: 1.92px;
+  padding-top: 7px;
+
+  cursor: pointer;
 }
 
 .hamburgerIcon {
@@ -57,6 +68,9 @@
 .forknifeIcon {
   width: 32.93px;
   height: 32px;
+}
+
+.linkStyle {
   margin: auto 0;
 }
 
