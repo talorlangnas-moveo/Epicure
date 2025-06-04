@@ -1,19 +1,17 @@
 import { CardInfo } from '@components/card/card';
 
-export async function fetchRestaurantCards(): Promise<CardInfo[]> {
-  const dataModule = await import('@/data/restaurantsCards');
+import restaurantsCardsData from '@/data/restaurantsCards';
+import dishCardsData from '@/data/dishCards';
+import { chefRestaurantsCards } from '@/data/chefInfo';
 
-  return dataModule.default as CardInfo[];
+export async function fetchRestaurantCards(): Promise<CardInfo[]> {
+  return restaurantsCardsData as CardInfo[];
 }
 
 export async function fetchDishCards(): Promise<CardInfo[]> {
-  const dataModule = await import('@/data/dishCards');
-
-  return dataModule.default as CardInfo[];
+  return dishCardsData as CardInfo[];
 }
 
 export async function fetchChefRestCards(): Promise<CardInfo[]> {
-  const dataModule = await import('@/data/chefInfo');
-
-  return dataModule.chefRestaurantsCards as CardInfo[];
+  return chefRestaurantsCards as CardInfo[];
 }
