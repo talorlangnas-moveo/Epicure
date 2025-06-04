@@ -1,0 +1,12 @@
+@use '@styles/utils/variables' as *;
+
+.cardDisplay {
+    display: flex;
+    justify-content: space-between;
+
+    &.chef {
+        @media (min-width: $breakpoint-laptop) {
+            width: 59%;
+        }
+    }
+}

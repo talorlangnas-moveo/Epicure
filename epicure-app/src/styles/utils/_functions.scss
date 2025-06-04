@@ -1,0 +1,6 @@
+@use '@styles/utils/variables' as *;
+
+@function interpolate-height($l, $u, $min-w, $max-w, $min-h, $max-h) {
+    $width: ($l + $u) / 2;
+  @return $min-h + (($width - $min-w) * ($max-h - $min-h)) / ($max-w - $min-w);
+}

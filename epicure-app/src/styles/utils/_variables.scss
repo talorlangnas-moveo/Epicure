@@ -1,7 +1,12 @@
-$breakpoint-mobile: 375px;
+
+
+// Breakpoints
+$breakpoint-mobile: 480px;
+$breakpoint-mobile-lg: 767px;
 $breakpoint-tablet: 768px;
-$breakpoint-desktop: 1197px;
-$breakpoint-large: 1440px;
+$breakpoint-laptop: 1024px;
+$breakpoint-desktop: 1025px;
+$breakpoint-desktop-lg: 1440px;
 
 // Font
 $font-primary: 'Helvetica Neue', Arial, sans-serif;
@@ -12,6 +17,5 @@ $color-primary-gray: #979797;
 
 // Secondary Colors
 $color-secondary-beige: #F9F4EA;
-$color-secondary-gold:  #E19D1A;
+$color-secondary-gold: #E19D1A;
 $color-secondary-white: #FAFAFA;
-

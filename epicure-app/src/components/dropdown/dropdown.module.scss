@@ -1,0 +1,80 @@
+@use '@styles/utils/variables' as *;
+@use '@styles/utils/mixins' as *;
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdownButton {
+    background-color: #fff;
+    padding: 11px 0 11px 20px;
+    border: none;
+    cursor: pointer;
+}
+
+.xButton {
+    background-color: #fff;
+    padding: 11px 0 51px 20px;
+    border: none;
+    cursor: pointer;
+}
+
+.hamburgerIcon {
+    width: 24px;
+    height: 24px;
+}
+
+.dropdownMenu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100vw;
+    background-color: white;
+    z-index: 1000;
+    box-shadow: 2px 4px 10px 0px #AFAFAF40;
+}
+
+.section {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.firstSectionDropdownItem {
+    padding-left: 20px;
+    padding-bottom: 24px;
+    font-weight: 200;
+    font-size: 18px;
+    line-height: 100%;
+    letter-spacing: 1.92px;
+
+    cursor: pointer;
+}
+
+.secondSectionDropdownItem {
+    padding-left: 20px;
+    padding-bottom: 40px;
+    font-weight: 200;
+    font-size: 18px;
+    line-height: 100%;
+    letter-spacing: 1.92px;
+
+    cursor: pointer;
+}
+
+
+.separator {
+    border: none;
+    border-top: 1px solid #F2F2F2;
+    margin-top: 16px;
+    margin-bottom: 32px;
+    width: 100vw;
+    position: relative;
+}
+
+.hamburgerIcon {
+    width: 24px;
+    height: 24px;
+}

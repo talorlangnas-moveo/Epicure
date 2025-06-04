@@ -1,3 +1,16 @@
+@use '@styles/utils/variables' as *;
+@use '@styles/utils/functions' as *;
+
+
+@mixin define-height($lowerbound, $upperbound, $min-w, $max-w, $min-h, $max-h){
+  @media (min-width: $lowerbound) and (max-width: $upperbound) {
+    height: interpolate-height($lowerbound, $upperbound, $min-w, $max-w, $min-h, $max-h);
+  }
+  @media (min-width: $breakpoint-desktop-lg) {
+    height: $max-h;
+  }
+}
+
 @mixin image-style($type) {
   @if $type =='responsive' {
     width: 100%;
@@ -6,6 +19,7 @@
 
   @else if $type =='background' {
     object-fit: cover;
+    z-index: 0;
   }
 }
 
@@ -19,5 +33,20 @@
 
   @else {
     letter-spacing: 1.25px;
+  }
+}
+
+@mixin card-style($type) {
+  display: flex;
+  flex-direction: column;
+  background-color: $color-secondary-beige;
+  width: 245px;
+
+  @if $type =='restaurant' {
+    height: 233px;
+  }
+
+  @else if $type =='dish' {
+    height: 388px;
   }
 }

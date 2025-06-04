@@ -1,5 +1,5 @@
-import IconContainer from "./IconContainer";
-import { SpicyIcon, VeganIcon, VegitarianIcon } from "@/icons/index";
+import IconContainer from "./iconContainer";
+import { VeganIcon, VegitarianIcon, SpicyIconCard } from '@icons';
 import styles from "./iconLegend.module.scss";
 
 export default function iconLegend() {
@@ -7,28 +7,9 @@ export default function iconLegend() {
     <div className={styles.iconLegendContainer}>
       <h4 className={styles.heading}>THE MEANING OF OUR ICONS:</h4>
       <div className={styles.iconsGroup}>
-        <IconContainer
-          iconContainer={{
-            icon: <SpicyIcon />,
-            description: "Spicy",
-          }}
-          className={styles.spicyIconContainer}
-        />
-        <IconContainer
-          iconContainer={{
-            icon: <VegitarianIcon />,
-            description: "Vegetarian",
-          }}
-          className={styles.iconContainer}
-        />
-
-        <IconContainer
-          iconContainer={{
-            icon: <VeganIcon />,
-            description: "Vegan",
-          }}
-          className={styles.iconContainer}
-        />
+        <IconContainer icon={SpicyIconCard} description={"Spicy"} />
+        <IconContainer icon={VegitarianIcon} description={"Vegitarian"} />
+        <IconContainer icon={VeganIcon} description={"Vegan"} />
       </div>
     </div>
   );

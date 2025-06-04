@@ -1,0 +1,85 @@
+@use '@styles/utils/mixins' as *;
+@use '@styles/utils/variables' as *;
+
+.infoPanel {
+    display: flex;
+    flex-direction: column;
+         padding-left: 20px;
+    padding-bottom: 48px;
+
+    @media (max-width: $breakpoint-tablet) {
+        width: 100%;
+   
+    }
+
+    @media (min-width: $breakpoint-tablet) {
+        width: 75%;
+        margin: 0 auto;
+    }
+
+    @media (min-width: $breakpoint-laptop) {
+        align-items: center;
+        gap: 40px;
+        width: 82.3%;
+    }
+
+
+    h4 {
+        line-height: 24px;
+        letter-spacing: 1.25px;
+        text-transform: uppercase;
+        padding-bottom: 17px;
+
+        @media (min-width: $breakpoint-laptop) {
+            font-size: 30px;
+            line-height: 35px;
+        }
+    }
+
+    &.chef {
+        padding-left: 0px;
+        @media (min-width: $breakpoint-laptop) {
+            width: 100%;
+            margin: 0;
+            padding-left: 0;
+            grid-column: span 2;
+            justify-self: start;
+            align-items: flex-start;
+            padding-top: 40px;
+            padding-bottom: 80px;
+
+
+            h4 {
+                font-weight: 200;
+                font-size: 30px;
+                line-height: 35px;
+                letter-spacing: 1.25;
+                text-transform: lowercase; 
+                text-transform: capitalize;
+            }
+        }
+    }
+}
+
+.panelButton {
+    display: flex;
+    padding-top: 18.2px;
+    align-items: center;
+    gap: 12px;
+
+    @media (min-width: $breakpoint-laptop) {
+        align-self: flex-end;
+    }
+
+    p {
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 35px;
+        letter-spacing: 2px;
+
+        @media (min-width: $breakpoint-laptop) {
+            align-self: flex-end;
+            font-size: 24px;
+        }
+    }
+}

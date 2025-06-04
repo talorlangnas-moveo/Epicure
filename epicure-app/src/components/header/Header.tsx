@@ -1,12 +1,19 @@
-import styles from "./header.module.scss";
+"use client";
 
-import { ForknifeIcon, NavbarIcon, RightGroupIcons } from '@/icons/index';
+import styles from "./header.module.scss";
+import RightGroupIcons from "./rightGroupIcons";
+import NavbarMobile from "./navbarMobile";
+import NavbarDesktop from "./navbarDesktop";
+
+import { useIsDesktopView } from "@/hooks/useIsDesktopView";
 
 export default function Header() {
+  const isDesktop = useIsDesktopView();
+
   return (
     <header className={styles.header}>
-      <NavbarIcon />
-      <ForknifeIcon />
+      {isDesktop ? <NavbarDesktop /> : <NavbarMobile />}
+
       <RightGroupIcons />
     </header>
   );
