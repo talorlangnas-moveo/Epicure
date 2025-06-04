@@ -16,13 +16,15 @@
   width: 100%;
   height: 273px;
   overflow: hidden;
+  margin-top: 46px;
   margin-bottom: 48px;
-
+  
   @include define-height($breakpoint-mobile, $breakpoint-mobile-lg, $min-width, $max-width, $min-height, $max-height);
   @include define-height($breakpoint-tablet, $breakpoint-laptop, $min-width, $max-width, $min-height, $max-height);
   @include define-height($breakpoint-desktop, $breakpoint-desktop-lg, $min-width, $max-width, $min-height, $max-height);
 
   @media (min-width: $breakpoint-laptop) {
+    margin-top: 64px;
     margin-bottom: 80px;
   }
 }
