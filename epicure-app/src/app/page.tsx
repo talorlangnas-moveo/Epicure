@@ -1,6 +1,5 @@
 import Hero from "@/components/hero/hero";
 import IconLegend from "@/components/iconLegend/iconLegend";
-import Footer from "@/components/footer/footer";
 import { chefInfo } from "@/data/chefInfo";
 import ChefCard from "@/components/chefCard/chefCard";
 import InfoPanel from "@/components/infoPanel/infoPanel";
@@ -10,6 +9,7 @@ import { chefRestaurantsCards } from "@/data/chefInfo";
 import Carousel from "@components/carousel/carousel";
 import Card from "@/components/card/card";
 import CardsDisplay from "@components/cardsDisplay/cardsDisplay";
+import AboutUs from "@components/aboutUs/aboutUs";
 
 export default function Home() {
   return (
@@ -59,8 +59,7 @@ export default function Home() {
           </Carousel>
         </InfoPanel>
       </ChefCard>
-
-      <Footer />
+      <AboutUs />
     </div>
   );
 }
