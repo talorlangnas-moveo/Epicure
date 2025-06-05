@@ -1,7 +1,7 @@
-import Header from "@/components/header/header_tmp";
+import Header from "@/components/header/header";
 import Hero from "@/components/hero/hero";
 import IconLegend from "@/components/iconLegend/iconLegend";
-import Footer from "@/components/footer/footer_tmp";
+import Footer from "@/components/footer/footer";
 import { chefInfo } from "@/data/chefInfo";
 import ChefCard from "@/components/chefCard/chefCard";
 import InfoPanel from "@/components/infoPanel/infoPanel";
