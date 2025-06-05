@@ -30,7 +30,7 @@ export default function Card({
   const isDesktop = useIsDesktopView();
 
   return (
-    <div className={`${styles.cardContainer} ${styles[type || "dish"]}`}>
+    <div className={`${styles.cardContainer} ${styles[type || "restaurant"]}`}>
       <Image
         src={imgUrl}
         placeholder="blur"
