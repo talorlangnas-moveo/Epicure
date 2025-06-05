@@ -33,3 +33,5 @@ export const dishCards: CardInfo[] = [
     dishCategoryLogo: VeganIcon, 
   },
 ];
+
+export default dishCards;

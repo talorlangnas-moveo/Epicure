@@ -4,18 +4,20 @@ import Footer from "@/components/footer/footer";
 import { chefInfo } from "@/data/chefInfo";
 import ChefCard from "@/components/chefCard/chefCard";
 import InfoPanel from "@/components/infoPanel/infoPanel";
-import { restaurantsCards } from "@/data/restaurantsCards";
-import { dishCards } from "@/data/dishCards";
-import { chefRestaurantsCards } from "@/data/chefInfo";
 import Carousel from "@components/carousel/carousel";
 import Card from "@/components/card/card";
 import CardsDisplay from "@components/cardsDisplay/cardsDisplay";
+import { fetchRestaurantCards, fetchDishCards, fetchChefRestCards } from "@/utils/fetchCards";
 
-export default function Home() {
+export default async function Home() {
+
+  const restaurantsCards = await fetchRestaurantCards();
+  const dishCards = await fetchDishCards();
+  const chefRestaurantsCards = await fetchChefRestCards();
+
   return (
     <div>
       <Hero />
-
       <InfoPanel
         title="Popular restaurant in Epicure:"
         type="restaurant"
@@ -29,7 +31,6 @@ export default function Home() {
           ))}
         </Carousel>
       </InfoPanel>
-
       <InfoPanel
         title="Signature Dish Of:"
         type="dish"

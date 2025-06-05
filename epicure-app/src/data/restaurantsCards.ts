@@ -33,3 +33,5 @@ export const restaurantsCards: CardInfo[] = [
     ratingImage: Stars4Image,
   },
 ];
+
+export default restaurantsCards;
