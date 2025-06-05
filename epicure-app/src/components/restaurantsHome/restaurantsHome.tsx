@@ -15,7 +15,7 @@ interface RestaurantsHomeProps {
 export default function RestaurantsHome({
   restaurantsAsCards,
 }: RestaurantsHomeProps) {
-  console.log(restaurantsAsCards);
+  
   const isDesktopView = useIsDesktopView();
 
   return (
