@@ -10,7 +10,6 @@ interface RestaurantsHomeProps {
 export default function RestaurantsHome({
   restaurantsAsCards,
 }: RestaurantsHomeProps) {
-  // console.log(restaurants);
   console.log(restaurantsAsCards);
   return (
     <div className={styles.restaurantsHomeContainer}>

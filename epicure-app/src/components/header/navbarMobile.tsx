@@ -16,7 +16,7 @@ export default function navbarMobile() {
   return (
     <div className={styles.navbarMobile}>
       <Dropdown options={dropdownOptions} />
-      <Link href="/" onClick={() => {}} className={styles.linkStyle}>
+      <Link href="/" className={styles.linkStyle}>
         <Image
           src={ForkKnifeIcon}
           width={32.93}

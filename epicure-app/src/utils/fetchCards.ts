@@ -1,4 +1,4 @@
-import { CardInfo } from '@components/card/card';
+import { CardInfo } from '@/components/card/card';
 import { Restaurant } from '@/types/interfaces/Restaurant';
 import { CardType } from '@/types/cardType';
 import { StaticImageData } from 'next/image';
