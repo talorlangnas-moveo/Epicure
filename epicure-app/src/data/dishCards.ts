@@ -1,4 +1,4 @@
-import { CardInfo } from '@components/card/card';
+import { CardInfo } from '@/components/card/card_tmp';
 import PadKiMaonImage from '@public/dishes/padKiMao.png';
 import GarberImage from '@public/dishes/garber.png';
 import Dish3Image from '@public/dishes/dish3.png';
