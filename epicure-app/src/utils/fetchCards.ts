@@ -18,6 +18,7 @@ export function convertRestaurantToCard(restaurant: Restaurant): CardInfo {
   };
 }
 
+
 export async function fetchDishCards(): Promise<CardInfo[]> {
   return dishCardsData as CardInfo[];
 }

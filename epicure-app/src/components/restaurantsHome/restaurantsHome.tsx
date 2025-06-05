@@ -1,11 +1,13 @@
 "use client";
 
 import Image from "next/image";
+import { useState } from "react";
+import styles from "./restaurantsHome.module.scss";
 import Card, { CardInfo } from "../card/card";
 import { Restaurant } from "@/types/interfaces/Restaurant";
-import styles from "./restaurantsHome.module.scss";
 import { useIsDesktopView } from "@/hooks/useIsDesktopView";
 import { DownArrow } from "@/icons";
+import { getNewestRestaurantsAsCards, getMostPopularRestaurantsAsCards, getOpenRestaurantsAsCards } from "@/utils/fillterFunctions";
 
 interface RestaurantsHomeProps {
   restaurants: Restaurant[];
@@ -13,21 +15,71 @@ interface RestaurantsHomeProps {
 }
 
 export default function RestaurantsHome({
+  restaurants,
   restaurantsAsCards,
 }: RestaurantsHomeProps) {
-  console.log(restaurantsAsCards);
   const isDesktopView = useIsDesktopView();
+  const [activeItem, setActiveItem] = useState("All");
+  const [fillteredRestaurants, setFillteredRestaurants] = useState<CardInfo[]>(restaurantsAsCards);
+
+  const handleFilter = (filterFunction?: (restaurants: Restaurant[]) => CardInfo[]) => {
+    if (!filterFunction) {
+      setFillteredRestaurants(restaurantsAsCards);
+      return;
+    }
+    const filtered = filterFunction(restaurants);
+    setFillteredRestaurants(filtered);
+  };
 
   return (
     <div className={styles.restaurantsHomeContainer}>
       <div className={styles.textContainer}>
         {!isDesktopView && <h1 className={styles.heading}>Restaurants</h1>}
         <div className={styles.barContainer}>
-          <p className={styles.text}>All</p>
-          <p className={styles.text}>New</p>
-          <p className={styles.text}>Most Popular</p>
-          <p className={styles.text}>Open Now</p>
-          {isDesktopView && <p className={styles.text}>Map View</p>}
+          <p 
+            className={`${styles.textBarItem} ${activeItem === "All" ? styles.active : ""}`}
+            onClick={() => {
+              setActiveItem("All");
+              handleFilter();
+            }}
+          >
+            All
+          </p>
+          <p 
+            className={`${styles.textBarItem} ${activeItem === "New" ? styles.active : ""}`}
+            onClick={() => {
+              setActiveItem("New");
+              handleFilter(getNewestRestaurantsAsCards);
+            }}
+          >
+            New
+          </p>
+          <p 
+            className={`${styles.textBarItem} ${activeItem === "Most Popular" ? styles.active : ""}`}
+            onClick={() => {
+              setActiveItem("Most Popular");
+              handleFilter(getMostPopularRestaurantsAsCards);
+            }}
+          >
+            Most Popular
+          </p>
+          <p 
+            className={`${styles.textBarItem} ${activeItem === "Open Now" ? styles.active : ""}`}
+            onClick={() => {
+              setActiveItem("Open Now");
+              handleFilter(getOpenRestaurantsAsCards);
+            }}
+          >
+            Open Now
+          </p>
+          {isDesktopView && (
+            <p 
+              className={`${styles.textBarItem} ${activeItem === "Map View" ? styles.active : ""}`}
+              onClick={() => setActiveItem("Map View")}
+            >
+              Map View
+            </p>
+          )}
         </div>
       </div>
       {isDesktopView && (
@@ -47,7 +99,7 @@ export default function RestaurantsHome({
         </div>
       )}
       <div className={styles.cardsContainer}>
-        {restaurantsAsCards.map((restaurant) => (
+        {fillteredRestaurants.map((restaurant) => (
           <Card key={restaurant.id} {...restaurant} />
         ))}
       </div>
