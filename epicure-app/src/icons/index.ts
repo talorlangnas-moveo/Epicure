@@ -15,4 +15,6 @@ export { default as GooglePlayIcon } from './googlePlayIcon.svg';
 export { default as AppStoreIcon } from './appStoreIcon.svg';
 export { default as Stars4Image } from './4starts.svg';
 export { default as Stars3Image } from './3starts.svg';
+export { default as Stars1Image } from './1stars.svg';
+export { default as Stars2Image } from './2stars.svg';
 export { default as xIcon } from './xIcon.svg';
