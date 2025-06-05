@@ -16,6 +16,7 @@ export interface CardInfo {
   ratingImage?: StaticImageData;
   price?: number;
   dishCategoryLogo?: StaticImageData;
+  className?: string;
 }
 
 export default function Card({
@@ -26,11 +27,16 @@ export default function Card({
   ratingImage,
   price,
   dishCategoryLogo,
+  className,
 }: CardInfo) {
   const isDesktop = useIsDesktopView();
 
   return (
-    <div className={`${styles.cardContainer} ${styles[type || "restaurant"]}`}>
+    <div
+      className={`${styles.cardContainer} ${styles[type || "restaurant"]} ${
+        className || ""
+      }`}
+    >
       <Image
         src={imgUrl}
         placeholder="blur"
@@ -52,7 +58,11 @@ export default function Card({
         )}
         {dishCategoryLogo && (
           <div className={styles.spicyIconWrapper}>
-            <Image src={dishCategoryLogo} alt="Dish Icon" className={styles.spicyIcon} />
+            <Image
+              src={dishCategoryLogo}
+              alt="Dish Icon"
+              className={styles.spicyIcon}
+            />
           </div>
         )}
       </div>

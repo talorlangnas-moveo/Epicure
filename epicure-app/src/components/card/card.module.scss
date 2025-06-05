@@ -13,9 +13,8 @@
     }
 
     &.restaurant {
-        
+
         @media (min-width: $breakpoint-laptop) {
-            width: 100%;
             height: auto;
         }
 

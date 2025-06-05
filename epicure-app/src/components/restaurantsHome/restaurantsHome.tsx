@@ -7,7 +7,11 @@ import Card, { CardInfo } from "../card/card";
 import { Restaurant } from "@/types/interfaces/Restaurant";
 import { useIsDesktopView } from "@/hooks/useIsDesktopView";
 import { DownArrow } from "@/icons";
-import { getNewestRestaurantsAsCards, getMostPopularRestaurantsAsCards, getOpenRestaurantsAsCards } from "@/utils/fillterFunctions";
+import {
+  getNewestRestaurantsAsCards,
+  getMostPopularRestaurantsAsCards,
+  getOpenRestaurantsAsCards,
+} from "@/utils/fillterFunctions";
 
 interface RestaurantsHomeProps {
   restaurants: Restaurant[];
@@ -18,12 +22,14 @@ export default function RestaurantsHome({
   restaurants,
   restaurantsAsCards,
 }: RestaurantsHomeProps) {
-  
   const isDesktopView = useIsDesktopView();
   const [activeItem, setActiveItem] = useState("All");
-  const [fillteredRestaurants, setFillteredRestaurants] = useState<CardInfo[]>(restaurantsAsCards);
+  const [fillteredRestaurants, setFillteredRestaurants] =
+    useState<CardInfo[]>(restaurantsAsCards);
 
-  const handleFilter = (filterFunction?: (restaurants: Restaurant[]) => CardInfo[]) => {
+  const handleFilter = (
+    filterFunction?: (restaurants: Restaurant[]) => CardInfo[]
+  ) => {
     if (!filterFunction) {
       setFillteredRestaurants(restaurantsAsCards);
       return;
@@ -37,8 +43,10 @@ export default function RestaurantsHome({
       <div className={styles.textContainer}>
         {!isDesktopView && <h1 className={styles.heading}>Restaurants</h1>}
         <div className={styles.barContainer}>
-          <p 
-            className={`${styles.textBarItem} ${activeItem === "All" ? styles.active : ""}`}
+          <p
+            className={`${styles.textBarItem} ${
+              activeItem === "All" ? styles.active : ""
+            }`}
             onClick={() => {
               setActiveItem("All");
               handleFilter();
@@ -46,8 +54,10 @@ export default function RestaurantsHome({
           >
             All
           </p>
-          <p 
-            className={`${styles.textBarItem} ${activeItem === "New" ? styles.active : ""}`}
+          <p
+            className={`${styles.textBarItem} ${
+              activeItem === "New" ? styles.active : ""
+            }`}
             onClick={() => {
               setActiveItem("New");
               handleFilter(getNewestRestaurantsAsCards);
@@ -55,8 +65,10 @@ export default function RestaurantsHome({
           >
             New
           </p>
-          <p 
-            className={`${styles.textBarItem} ${activeItem === "Most Popular" ? styles.active : ""}`}
+          <p
+            className={`${styles.textBarItem} ${
+              activeItem === "Most Popular" ? styles.active : ""
+            }`}
             onClick={() => {
               setActiveItem("Most Popular");
               handleFilter(getMostPopularRestaurantsAsCards);
@@ -64,8 +76,10 @@ export default function RestaurantsHome({
           >
             Most Popular
           </p>
-          <p 
-            className={`${styles.textBarItem} ${activeItem === "Open Now" ? styles.active : ""}`}
+          <p
+            className={`${styles.textBarItem} ${
+              activeItem === "Open Now" ? styles.active : ""
+            }`}
             onClick={() => {
               setActiveItem("Open Now");
               handleFilter(getOpenRestaurantsAsCards);
@@ -74,8 +88,10 @@ export default function RestaurantsHome({
             Open Now
           </p>
           {isDesktopView && (
-            <p 
-              className={`${styles.textBarItem} ${activeItem === "Map View" ? styles.active : ""}`}
+            <p
+              className={`${styles.textBarItem} ${
+                activeItem === "Map View" ? styles.active : ""
+              }`}
               onClick={() => setActiveItem("Map View")}
             >
               Map View
@@ -101,7 +117,11 @@ export default function RestaurantsHome({
       )}
       <div className={styles.cardsContainer}>
         {fillteredRestaurants.map((restaurant) => (
-          <Card key={restaurant.id} {...restaurant} />
+          <Card
+            key={restaurant.id}
+            {...restaurant}
+            className={styles.restaurantCard}
+          />
         ))}
       </div>
     </div>
