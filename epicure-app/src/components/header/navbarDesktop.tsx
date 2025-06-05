@@ -6,7 +6,7 @@ import styles from "./header.module.scss";
 export default function NavbarDesktop() {
   return (
     <div className={styles.desktopContainer}>
-      <Link href="/" onClick={() => {}}>
+      <Link href="/">
         <Image
           src={EpicureLogo}
           width={162}
