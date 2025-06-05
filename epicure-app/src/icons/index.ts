@@ -18,3 +18,4 @@ export { default as Stars3Image } from './3starts.svg';
 export { default as Stars1Image } from './1stars.svg';
 export { default as Stars2Image } from './2stars.svg';
 export { default as xIcon } from './xIcon.svg';
+export { default as DownArrow } from './downArrow.svg';

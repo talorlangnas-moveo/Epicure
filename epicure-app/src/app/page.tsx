@@ -1,19 +1,19 @@
 import Hero from "@/components/hero/hero";
 import IconLegend from "@/components/iconLegend/iconLegend";
-import Footer from "@/components/footer/footer";
 import { chefInfo } from "@/data/chefInfo";
 import ChefCard from "@/components/chefCard/chefCard";
 import InfoPanel from "@/components/infoPanel/infoPanel";
 import Carousel from "@components/carousel/carousel";
 import Card from "@/components/card/card";
 import CardsDisplay from "@components/cardsDisplay/cardsDisplay";
-import { fetchRestaurantCards, fetchDishCards, fetchChefRestCards } from "@/utils/fetchCards";
+import AboutUs from "@components/aboutUs/aboutUs";
+import { fetchDishCards,  fetchChefRestCards, fetchRestaurantsAsCards  } from "@/utils/fetchCards";
 
 export default async function Home() {
 
-  const restaurantsCards = await fetchRestaurantCards();
   const dishCards = await fetchDishCards();
   const chefRestaurantsCards = await fetchChefRestCards();
+  const restaurantsCards = await fetchRestaurantsAsCards();
 
   return (
     <div>
@@ -60,8 +60,7 @@ export default async function Home() {
           </Carousel>
         </InfoPanel>
       </ChefCard>
-
-      <Footer />
+      <AboutUs />
     </div>
   );
 }
