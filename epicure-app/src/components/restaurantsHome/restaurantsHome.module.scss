@@ -2,11 +2,13 @@
 
 .restaurantsHomeContainer {
     margin-top: 46px;
+    margin-bottom: 56.03px;
     display: flex;
     flex-direction: column;
 
     @media (min-width: $breakpoint-laptop) {
         margin-top: 64px;
+        
     }
 }
 
@@ -16,6 +18,10 @@
     width: 89.3%;
     margin: 0 auto;
     padding-bottom: 32px;
+
+    @media (min-width: $breakpoint-laptop) {
+        padding-bottom: 40px;
+    }
 }
 
 .heading {
@@ -32,6 +38,10 @@
     flex-direction: row;
     justify-content: space-between;
     padding-top: 24px;
+
+    @media (min-width: $breakpoint-laptop) {
+        padding-top: 40px;
+    }
 }
 
 .text {
@@ -39,6 +49,23 @@
     font-size: 18px;
     line-height: 100%;
     letter-spacing: 1.92px;
+}
+
+.filterContainer{
+    background-color: $color-secondary-white;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 44px;
+}
+
+.filterTabContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+    padding: 18px 0;
 }
 
 .cardsContainer {
@@ -50,5 +77,12 @@
 
     >* {
         width: 100%;
+    }
+
+    @media (min-width: $breakpoint-laptop) {
+        padding-top: 40px;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: repeat(3, 1fr);
     }
 }

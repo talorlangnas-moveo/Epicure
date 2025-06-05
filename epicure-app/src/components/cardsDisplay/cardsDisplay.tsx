@@ -9,9 +9,12 @@ interface CardsDisplayProps {
 }
 
 export default function CardsDisplay({ cards, type }: CardsDisplayProps) {
+
+const top3Cards = cards.slice(0, 3);
+
   return (
     <div className={`${styles.cardDisplay} ${styles[type]}`}>
-      {cards.map((card) => (
+      {top3Cards.map((card) => (
         <Card key={card.id} {...card} />
       ))}
     </div>

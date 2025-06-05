@@ -2,7 +2,6 @@ import { CardInfo } from '@/components/card/card';
 import { Restaurant } from '@/types/interfaces/Restaurant';
 import { CardType } from '@/types/cardType';
 
-import restaurantsCardsData from '@/data/restaurantsCards';
 import dishCardsData from '@/data/dishCards';
 import { chefRestaurantsCards } from '@/data/chefInfo';
 import { restaurants } from '@/data/restaurantData';
@@ -17,10 +16,6 @@ export function convertRestaurantToCard(restaurant: Restaurant): CardInfo {
     rating: restaurant.rating,
     ratingImage: restaurant.ratingImage,
   };
-}
-
-export async function fetchRestaurantCards(): Promise<CardInfo[]> {
-  return restaurantsCardsData as CardInfo[];
 }
 
 export async function fetchDishCards(): Promise<CardInfo[]> {
