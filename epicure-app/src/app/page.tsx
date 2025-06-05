@@ -1,4 +1,3 @@
-import Header from "@/components/header/header";
 import Hero from "@/components/hero/hero";
 import IconLegend from "@/components/iconLegend/iconLegend";
 import Footer from "@/components/footer/footer";
@@ -18,7 +17,6 @@ export default async function Home() {
 
   return (
     <div>
-      <Header />
       <Hero />
       <InfoPanel
         title="Popular restaurant in Epicure:"
