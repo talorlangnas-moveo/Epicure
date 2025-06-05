@@ -1,12 +1,11 @@
 import { CardInfo } from '@/components/card/card';
 import { Restaurant } from '@/types/interfaces/Restaurant';
 import { CardType } from '@/types/cardType';
-import { StaticImageData } from 'next/image';
 
 import restaurantsCardsData from '@/data/restaurantsCards';
 import dishCardsData from '@/data/dishCards';
 import { chefRestaurantsCards } from '@/data/chefInfo';
-import restaurantsData from '@/data/restaurants.json';
+import { restaurants } from '@/data/restaurantData';
 
 export function convertRestaurantToCard(restaurant: Restaurant): CardInfo {
   return {
@@ -14,9 +13,9 @@ export function convertRestaurantToCard(restaurant: Restaurant): CardInfo {
     type: 'restaurant' as CardType,
     title: restaurant.title,
     description: restaurant.description,
-    imgUrl: restaurant.imgUrl as unknown as StaticImageData,
+    imgUrl: restaurant.imgUrl,
     rating: restaurant.rating,
-    ratingImage: restaurant.ratingImage as unknown as StaticImageData
+    ratingImage: restaurant.ratingImage,
   };
 }
 
@@ -33,7 +32,7 @@ export async function fetchChefRestCards(): Promise<CardInfo[]> {
 }
 
 export async function fetchRestaurants(): Promise<Restaurant[]> {
-  return restaurantsData as Restaurant[];
+  return restaurants;
 }
 
 export async function fetchRestaurantsAsCards(): Promise<CardInfo[]> {
