@@ -18,6 +18,7 @@ export default function RestaurantsHome({
   restaurants,
   restaurantsAsCards,
 }: RestaurantsHomeProps) {
+  
   const isDesktopView = useIsDesktopView();
   const [activeItem, setActiveItem] = useState("All");
   const [fillteredRestaurants, setFillteredRestaurants] = useState<CardInfo[]>(restaurantsAsCards);
