@@ -33,7 +33,9 @@ export default function Card({
     <div className={`${styles.cardContainer} ${styles[type || "dish"]}`}>
       <Image
         src={imgUrl}
-        placeholder="blur"
+        // width={245}
+        // height={152}
+        // placeholder="blur"
         alt={`${title} image`}
         sizes="100vw"
         className={styles.cardImage}
