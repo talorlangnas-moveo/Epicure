@@ -1,4 +1,4 @@
-import { CardInfo } from '@/components/card/card_tmp';
+import { CardInfo } from '@/components/card/card';
 import ClaroImage from '@public/restaurants/claro.png';
 import LuminaImage from '@public/restaurants/lumina.png';
 import KabKemImage from '@public/restaurants/KabKem.png';

@@ -1,5 +1,5 @@
 import { ChefInfo } from '@/types/interfaces/chefInfo';
-import { CardInfo } from '@/components/card/card_tmp';
+import { CardInfo } from '@/components/card/card';
 import YossiShitritImage from "@public/chefs/Yossi_Shitrit.png";
 import Mashya from '@public/restaurants/mashya.png';
 import Onza from '@public/restaurants/onza.png';

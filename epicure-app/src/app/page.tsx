@@ -1,6 +1,6 @@
 import Hero from "@/components/hero/hero";
 import IconLegend from "@/components/iconLegend/iconLegend";
-import Footer from "@/components/footer/footer_tmp";
+import Footer from "@/components/footer/footer";
 import { chefInfo } from "@/data/chefInfo";
 import ChefCard from "@/components/chefCard/chefCard";
 import InfoPanel from "@/components/infoPanel/infoPanel";
@@ -8,7 +8,7 @@ import { restaurantsCards } from "@/data/restaurantsCards";
 import { dishCards } from "@/data/dishCards";
 import { chefRestaurantsCards } from "@/data/chefInfo";
 import Carousel from "@components/carousel/carousel";
-import Card from "@/components/card/card_tmp";
+import Card from "@/components/card/card";
 import CardsDisplay from "@components/cardsDisplay/cardsDisplay";
 
 export default function Home() {
