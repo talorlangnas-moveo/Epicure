@@ -2,16 +2,13 @@
 
 import Image from "next/image";
 import { useState } from "react";
+import clsx from 'clsx';
 import styles from "./restaurantsHome.module.scss";
 import Card, { CardInfo } from "../card/card";
-import { Restaurant } from "@/types/interfaces/Restaurant";
+import { Restaurant } from "@interfaces/restaurant";
 import { useIsDesktopView } from "@/hooks/useIsDesktopView";
 import { DownArrow } from "@/icons";
-import {
-  getNewestRestaurantsAsCards,
-  getMostPopularRestaurantsAsCards,
-  getOpenRestaurantsAsCards,
-} from "@/utils/fillterFunctions";
+import { filterOptions } from "@/utils/fillterFunctions";
 
 interface RestaurantsHomeProps {
   restaurants: Restaurant[];
@@ -24,7 +21,7 @@ export default function RestaurantsHome({
 }: RestaurantsHomeProps) {
   const isDesktopView = useIsDesktopView();
   const [activeItem, setActiveItem] = useState("All");
-  const [fillteredRestaurants, setFillteredRestaurants] =
+  const [filteredRestaurants, setFillteredRestaurants] =
     useState<CardInfo[]>(restaurantsAsCards);
 
   const handleFilter = (
@@ -43,80 +40,35 @@ export default function RestaurantsHome({
       <div className={styles.textContainer}>
         {!isDesktopView && <h1 className={styles.heading}>Restaurants</h1>}
         <div className={styles.barContainer}>
-          <p
-            className={`${styles.textBarItem} ${
-              activeItem === "All" ? styles.active : ""
-            }`}
-            onClick={() => {
-              setActiveItem("All");
-              handleFilter();
-            }}
-          >
-            All
-          </p>
-          <p
-            className={`${styles.textBarItem} ${
-              activeItem === "New" ? styles.active : ""
-            }`}
-            onClick={() => {
-              setActiveItem("New");
-              handleFilter(getNewestRestaurantsAsCards);
-            }}
-          >
-            New
-          </p>
-          <p
-            className={`${styles.textBarItem} ${
-              activeItem === "Most Popular" ? styles.active : ""
-            }`}
-            onClick={() => {
-              setActiveItem("Most Popular");
-              handleFilter(getMostPopularRestaurantsAsCards);
-            }}
-          >
-            Most Popular
-          </p>
-          <p
-            className={`${styles.textBarItem} ${
-              activeItem === "Open Now" ? styles.active : ""
-            }`}
-            onClick={() => {
-              setActiveItem("Open Now");
-              handleFilter(getOpenRestaurantsAsCards);
-            }}
-          >
-            Open Now
-          </p>
-          {isDesktopView && (
-            <p
-              className={`${styles.textBarItem} ${
-                activeItem === "Map View" ? styles.active : ""
-              }`}
-              onClick={() => setActiveItem("Map View")}
-            >
-              Map View
-            </p>
-          )}
+          {filterOptions.map((option) => {
+            if (option.desktopOnly && !isDesktopView) return null;
+            return (
+              <p
+                key={option.id}
+                className={clsx(styles.textBarItem, activeItem === option.id && styles.active)}
+                onClick={() => {
+                  setActiveItem(option.id);
+                  handleFilter(option.filterFn);
+                }}
+              >
+                {option.label}
+              </p>
+            );
+          })}
         </div>
       </div>
       {isDesktopView && (
         <div className={styles.filterContainer}>
-          <div className={styles.filterTabContainer}>
-            <p className={styles.text}>Price Range</p>
-            <Image src={DownArrow} alt="Down Arrow" width={24} height={24} />
-          </div>
-          <div className={styles.filterTabContainer}>
-            <p className={styles.text}>Distance</p>
-            <Image src={DownArrow} alt="Down Arrow" width={24} height={24} />
-          </div>
-          <div className={styles.filterContainer}>
-            <p className={styles.text}>Rating</p>
-            <Image src={DownArrow} alt="Down Arrow" width={24} height={24} />
-          </div>
+          {filterOptions.slice(5, 8).map((option) => (
+            <div key={option.id} className={styles.filterTabContainer}>
+              <p className={styles.text}>{option.label}</p>
+              <Image src={DownArrow} alt="Down Arrow" width={24} height={24} />
+            </div>
+          ))}
         </div>
       )}
       <div className={styles.cardsContainer}>
-        {fillteredRestaurants.map((restaurant) => (
+        {filteredRestaurants.map((restaurant) => (
           <Card
             key={restaurant.id}
             {...restaurant}
