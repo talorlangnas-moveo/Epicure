@@ -13,20 +13,17 @@
     }
 
     &.restaurant {
-        height: 233px;
 
         @media (min-width: $breakpoint-laptop) {
             height: auto;
         }
 
         .cardImage {
-            width: 245px;
-            height: 152px;
+            width: 100%;
+            height: auto;
 
             @media (min-width: $breakpoint-laptop) {
                 flex-basis: 47%;
-                width: 100%;
-                height: auto;
             }
         }
 

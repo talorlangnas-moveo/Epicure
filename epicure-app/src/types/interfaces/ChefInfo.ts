@@ -1,5 +1,5 @@
 import { StaticImageData } from "next/image";
-import { CardInfo } from "./cardInfo";
+import { CardInfo } from "@components/card/card";
 
 export interface ChefInfo {
     firstName: string;

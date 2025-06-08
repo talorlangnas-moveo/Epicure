@@ -1,5 +1,6 @@
 import '@styles/main.scss';
-import Header from "@/components/header/header";
+import Header from "@components/header/header";
+import Footer from "@components/footer/footer";
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -7,6 +8,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body >
         <Header />
         {children}
+        <Footer />
       </body>
     </html>
   );
