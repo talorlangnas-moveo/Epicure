@@ -6,13 +6,19 @@ import { FilterOption } from "@/types/interfaces/filterOption";
 export const filterOptions: FilterOption[] = [
     { id: "1", label: "All" },
     { id: "2", label: "New", filterFn: getNewestRestaurantsAsCards },
-    { id: "3 Popular", label: "Most Popular", filterFn: getMostPopularRestaurantsAsCards },
+    { id: "3", label: "Most Popular", filterFn: getMostPopularRestaurantsAsCards },
     { id: "4", label: "Open Now", filterFn: getOpenRestaurantsAsCards },
     { id: "5", label: "Map View", desktopOnly: true },
     { id: "6", label: "Price Range", desktopOnly: true },
     { id: "7", label: "Distance", desktopOnly: true },
     { id: "8", label: "Rating", desktopOnly: true },
 
+  ];
+
+  export const filterDishTypesOptions: FilterOption[] = [
+    { id: "1", label: "Breakfast"},
+    { id: "2", label: "Lanch" },
+    { id: "3", label: "Dinner"},
   ];
 
 export function getNewestRestaurantsAsCards(restaurants: Restaurant[]): CardInfo[] {

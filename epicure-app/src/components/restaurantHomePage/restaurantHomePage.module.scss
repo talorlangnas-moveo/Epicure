@@ -1,0 +1,168 @@
+@use '@styles/utils/variables' as *;
+
+.restaurantHomePage {
+    display: flex;
+    flex-direction: column;
+    margin-top: 46px;
+    // align-items: center;
+    // justify-content: center;
+    // height: 100vh;
+    // width: 100vw;
+    // background-color: #f0f0f0;
+
+    @media (min-width: $breakpoint-laptop) {
+        margin-top: 64px;
+    }
+}
+
+.restaurantImage {
+    width: 100%;
+    height: auto;
+
+}
+
+.textContainer {
+    padding-top: 24px;
+    display: flex;
+    flex-direction: column;
+    width: 89.3%;
+    margin: 0 auto;
+    gap: 16px;
+
+    @media (min-width: $breakpoint-laptop) {
+        // justify-content: center;
+        padding-top: 32px;
+        width: 100%;
+        align-items: center;
+        gap: 0;
+    }
+}
+
+.heading {
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 100%;
+    letter-spacing: 2.67px;
+
+    @media (min-width: $breakpoint-laptop) {
+        font-size: 56px;
+        line-height: 64px;
+        letter-spacing: 3.67px;
+
+        padding-bottom: 4px;
+    }
+
+}
+
+.description {
+    font-weight: 200;
+    font-size: 16px;
+    line-height: 20px;
+    letter-spacing: 1.97px;
+
+    @media (min-width: $breakpoint-laptop) {
+        font-size: 32px;
+        line-height: 36px;
+
+        padding-bottom: 32px;
+    }
+}
+
+.openingHours {
+    display: flex;
+    gap: 8px;
+
+
+    @media (min-width: $breakpoint-laptop) {
+        padding-bottom: 48px;
+    }
+}
+
+.clockIcon {
+    width: 17px;
+    height: 18px;
+}
+
+.openingHoursText {
+    font-weight: 200;
+    font-size: 18px;
+    line-height: 20px;
+    letter-spacing: 1.97px;
+}
+
+.text {
+    font-weight: 200;
+    font-size: 18px;
+    line-height: 100%;
+    letter-spacing: 1.92px;
+
+    @media (min-width: $breakpoint-laptop) {
+        font-size: 24px;
+    }
+}
+
+.barContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-top: 16px;
+    padding-bottom: 24px;
+    width: 65.6%;
+
+    @media (min-width: $breakpoint-laptop) {
+        width: 21.9%;
+    }
+}
+
+
+.textBarItem {
+    @extend .text;
+    cursor: pointer;
+    position: relative;
+    padding-bottom: 8px;
+
+    &.active {
+        font-weight: 400;
+
+        @media (max-width: $breakpoint-laptop) {
+            &::after {
+                content: '';
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                width: 100%;
+                height: 1.8px;
+                background-color: #DE9200E5;
+            }
+        }
+    }
+}
+
+.cardsContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+    width: 89.3%;
+    margin: 0 auto;
+    
+
+    .dishCard {
+        width: 100%;
+        // height: auto;
+  
+    }
+
+    .linkStyle {
+        text-decoration: none;
+    }
+
+    @media (min-width: $breakpoint-laptop) {
+        padding-top: 40px;
+        display: grid;
+        width: 82.22%;
+        margin: 0 auto;
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: repeat(4, 1fr);
+    }
+}
+

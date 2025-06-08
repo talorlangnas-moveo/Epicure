@@ -15,7 +15,7 @@ const top3Cards = cards.slice(0, 3);
   return (
     <div className={`${styles.cardDisplay} ${styles[type]}`}>
       {top3Cards.map((card) => (
-        <Card key={card.id} {...card} />
+        <Card key={card.id} {...card} className={type} />
       ))}
     </div>
   );

@@ -11,6 +11,7 @@ export function convertRestaurantToCard(restaurant: Restaurant): CardInfo {
     id: restaurant.id,
     type: 'restaurant' as CardType,
     title: restaurant.title,
+    slug: restaurant.slug,
     description: restaurant.description,
     imgUrl: restaurant.imgUrl,
     rating: restaurant.rating,

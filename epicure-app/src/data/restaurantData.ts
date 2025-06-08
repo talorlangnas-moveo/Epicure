@@ -8,26 +8,34 @@ import YaPanImage from '@public/restaurantsDesk/yapan.png';
 import Claro2Image from '@public/restaurantsDesk/claro2.png';
 import KabKem2Image from '@public/restaurantsDesk/kabkem2.png';
 import Messa2Image from '@public/restaurantsDesk/messa2.png';
+import ClaroHomePageImgMobile from '@public/restaurantsHomepage/claro_homepage_mobile.png';
+import ClaroHomePageImgDesktop from '@public/restaurantsHomepage/claro_homepage_desktop.png';
 
 import {Stars1Image, Stars2Image, Stars4Image} from '@icons';
+import { claroDishData } from './claroDishData';
 
 export const restaurants: Restaurant[] = [
     {
       id: "1",
       type: "restaurant",
       title: "Claro",
+      slug: "claro",
       description: "Ran Shmueli",
       imgUrl: ClaroImage,
+      homePageImgUrlMobile: ClaroHomePageImgMobile,
+      homePageImgUrlDesktop: ClaroHomePageImgDesktop,
       rating: 4,
       ratingImage: Stars4Image,
       openingTime: "12:00",
       closingTime: "22:00",
-      foundedDate: "1995-06-15"
+      foundedDate: "1995-06-15",
+      dishes: claroDishData
     },
     {
       id: "2",
       type: "restaurant",
       title: "Kab Kem",
+      slug: "kab-kem",
       description: "Yariv Malili",
       imgUrl: KabKemImage,
       rating: 1,
@@ -40,6 +48,7 @@ export const restaurants: Restaurant[] = [
         id: "3",
         type: "restaurant",
         title: "Messa",
+        slug: "messa",
         description: "Aviv Moshe",
         imgUrl: MessaImage,
         rating: 1,
@@ -52,6 +61,7 @@ export const restaurants: Restaurant[] = [
         id: "4",
         type: "restaurant",
         title: "Nitan Thai",
+        slug: "nitan-thai",
         description: "Shahaf Shabtay",
         imgUrl: NitanThaiImage,
         rating: 1,
@@ -64,6 +74,7 @@ export const restaurants: Restaurant[] = [
         id: "5",
         type: "restaurant",
         title: "Tiger Lilly",
+        slug: "tiger-lilly",
         description: "Yanir Green",
         imgUrl: TigerLillyImage,
         rating: 4,
@@ -76,6 +87,7 @@ export const restaurants: Restaurant[] = [
         id: "6",
         type: "restaurant",
         title: "Ya Pan",
+        slug: "ya-pan",
         description: "Yuval Ben Moshe",
         imgUrl: YaPanImage,
         rating: 2,
@@ -88,6 +100,7 @@ export const restaurants: Restaurant[] = [
         id: "7",
         type: "restaurant",
         title: "Claro",
+        slug: "claro",
         description: "Ran Shmueli",
         imgUrl: Claro2Image,
         rating: 1,
@@ -100,6 +113,7 @@ export const restaurants: Restaurant[] = [
         id: "8",
         type: "restaurant",
         title: "Kab Kem",
+        slug: "kab-kem",
         description: "Yariv Malili",
         imgUrl: KabKem2Image,
         rating: 2,
@@ -112,6 +126,7 @@ export const restaurants: Restaurant[] = [
         id: "9",
         type: "restaurant",
         title: "Messa",
+        slug: "messa",
         description: "Aviv Moshe",
         imgUrl: Messa2Image,
         rating: 1,

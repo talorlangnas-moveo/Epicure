@@ -4,11 +4,13 @@ import Image from "next/image";
 import { useState } from "react";
 import clsx from 'clsx';
 import styles from "./restaurantsHome.module.scss";
+import cardsStyles from "@components/card/card.module.scss";
 import Card, { CardInfo } from "../card/card";
 import { Restaurant } from "@interfaces/restaurant";
 import { useIsDesktopView } from "@/hooks/useIsDesktopView";
 import { DownArrow } from "@/icons";
 import { filterOptions } from "@/utils/fillterFunctions";
+import Link from "next/link";
 
 interface RestaurantsHomeProps {
   restaurants: Restaurant[];
@@ -69,11 +71,16 @@ export default function RestaurantsHome({
       )}
       <div className={styles.cardsContainer}>
         {filteredRestaurants.map((restaurant) => (
-          <Card
+          <Link
             key={restaurant.id}
-            {...restaurant}
-            className={styles.restaurantCard}
-          />
+            href={`/restaurants/${restaurant.slug}?id=${restaurant.id}`}
+            className={styles.linkStyle}
+          >
+            <Card
+              {...restaurant}
+              className={clsx(cardsStyles.restaurant, styles.restaurantCard)}
+            />
+          </Link>
         ))}
       </div>
     </div>

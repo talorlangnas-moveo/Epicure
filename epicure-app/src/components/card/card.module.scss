@@ -11,287 +11,405 @@
     @media (min-width: $breakpoint-laptop) {
         width: 32%;
     }
+}
 
-    &.restaurant {
+.restaurant {
 
-        @media (min-width: $breakpoint-laptop) {
-            height: auto;
-        }
-
-        .cardImage {
-            width: 100%;
-            height: auto;
-
-            @media (min-width: $breakpoint-laptop) {
-                flex-basis: 47%;
-            }
-        }
-
-        .cardContent {
-            display: flex;
-            flex-direction: column;
-            padding: 16px 20px 16px 16px;
-            gap: 8px;
-
-            @media (min-width: $breakpoint-laptop) {
-                padding: 18px 0;
-                align-items: center;
-            }
-        }
-
-        .cardTitle {
-            letter-spacing: 2.67px;
-
-            @media (min-width: $breakpoint-desktop) {
-                font-size: 40px;
-                line-height: 47px;
-                letter-spacing: 2.67px;
-            }
-        }
-
-        .cardDescription {
-            font-weight: 200;
-            font-size: 16px;
-            line-height: 20px;
-            letter-spacing: 1.97px;
-
-            @media (min-width: $breakpoint-desktop) {
-                font-size: 24px;
-                line-height: 30px;
-            }
-        }
-
-        .ratingImage {
-            width: 216px;
-            height: 40px;
-            align-self: center;
-            padding-bottom: 2px;
-
-        }
+    @media (min-width: $breakpoint-laptop) {
+        height: auto;
     }
 
-    &.dish {
-        height: 388px;
-        position: relative;
-
-        @media (min-width: $breakpoint-laptop) {
-            height: auto;
-            align-items: center;
-        }
-
-        .cardImage {
-            width: 245px;
-            height: 152px;
-
-            @media (min-width: $breakpoint-laptop) {
-                width: 100%;
-                height: auto;
-            }
-        }
-
-        .cardContent {
-            display: flex;
-            flex-direction: column;
-            padding: 16px 20px 16px 16px;
-            gap: 8px;
-
-            @media (min-width: $breakpoint-laptop) {
-                align-items: center;
-                padding-top: 24px;
-                padding-bottom: 18px;
-            }
-
-        }
-
-        .cardTitle {
-            letter-spacing: 2.67px;
-
-            @media (min-width: $breakpoint-laptop) {
-                order: 1;
-                text-align: center;
-                font-size: 30px;
-                line-height: 35px;
-            }
-
-            @media (min-width: $breakpoint-desktop-lg) {
-                font-size: 40px;
-                line-height: 47px;
-            }
-        }
-
-        .cardDescription {
-            font-weight: 200;
-            font-size: 16px;
-            line-height: 20px;
-            letter-spacing: 1.97px;
-
-            @media (min-width: $breakpoint-laptop) {
-                width: 77.6%;
-                text-align: center;
-                order: 3;
-                font-size: 20px;
-                line-height: 24px;
-            }
-
-            @media (min-width: $breakpoint-desktop-lg) {
-                font-size: 24px;
-                line-height: 30px;
-            }
-        }
-
-        .bottomGroup {
-            position: absolute;
-            bottom: 16px;
-            left: 0;
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-            padding-left: 16px;
-        }
-
-        .spicyIconWrapper {
-            position: absolute;
-            bottom: 51px;
-            left: 0;
-            width: 100%;
-            padding-left: 16px;
-
-            @media (min-width: $breakpoint-laptop) {
-                position: static;
-                bottom: auto;
-                left: auto;
-                width: auto;
-                padding-left: 0;
-
-                align-self: center;
-                order: 2;
-            }
-        }
-
-        .spicyIcon {
-            width: 30px;
-            height: 24px;
-            display: block;
-
-            @media (min-width: $breakpoint-laptop) {
-                width: 40px;
-                height: 31px;
-            }
-        }
-
-        .cardPriceWrapper {
-            width: 100%;
-            margin-top: auto;
-            padding-left: 16px;
-            padding-bottom: 16px;
-        }
-
-        .ils {
-            padding-top: 0px;
-
-            @media (min-width: $breakpoint-laptop) {
-                width: 12.54px;
-                height: 11.52px;
-            }
-        }
-
-        .ilsImage {
-            width: 7.26;
-            height: 6.67;
-
-            @media (min-width: $breakpoint-laptop) {
-                width: 12.54px;
-                height: 11.52px;
-            }
-        }
-
-        .cardPrice {
-            display: flex;
-            align-items: center;
-            gap: 4px;
-        }
-
-        .priceText {
-            font-weight: 400;
-            font-size: 16px;
-            line-height: 19px;
-            letter-spacing: 1.97px;
-
-            @media (min-width: $breakpoint-laptop) {
-                font-weight: 200;
-                font-size: 24px;
-                line-height: 30px;
-            }
-        }
-
-        .cardFooter {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-top: auto;
-            margin-bottom: 12px;
-            position: relative;
-            width: 75.5%;
-            order: 4;
-        }
-
-        .cardFooter::before,
-        .cardFooter::after {
-            content: "";
-            flex: 1;
-            height: 1px;
-            background-color: #ddd;
-        }
-
-        .cardFooter::before {
-            margin-right: 12px;
-        }
-
-        .cardFooter::after {
-            margin-left: 12px;
-        }
-    }
-
-    &.chef {
+    .cardImage {
+        width: 100%;
         height: auto;
 
-        .cardImage {
+        @media (min-width: $breakpoint-laptop) {
+            flex-basis: 47%;
+        }
+    }
+
+    .cardContent {
+        display: flex;
+        flex-direction: column;
+        padding: 16px 20px 16px 16px;
+        gap: 8px;
+
+        @media (min-width: $breakpoint-laptop) {
+            padding: 18px 0;
+            align-items: center;
+        }
+    }
+
+    .cardTitle {
+        letter-spacing: 2.67px;
+
+        @media (min-width: $breakpoint-desktop) {
+            font-size: 40px;
+            line-height: 47px;
+            letter-spacing: 2.67px;
+        }
+    }
+
+    .cardDescription {
+        font-weight: 200;
+        font-size: 16px;
+        line-height: 20px;
+        letter-spacing: 1.97px;
+
+        @media (min-width: $breakpoint-desktop) {
+            font-size: 24px;
+            line-height: 30px;
+        }
+    }
+
+    .ratingImage {
+        width: 216px;
+        height: 40px;
+        align-self: center;
+        padding-bottom: 2px;
+
+    }
+}
+
+.dishMenu {
+    position: relative;
+
+    @media (min-width: $breakpoint-laptop) {
+        height: auto;
+        align-items: center;
+    }
+
+    .cardImage {
+        width: 100%;
+        height: auto;
+        // flex-basis: 55.2%;
+
+        @media (min-width: $breakpoint-laptop) {
+            // flex-basis: 41.6%;
+        }
+    }
+
+    .cardContent {
+        display: flex;
+        flex-direction: column;
+        padding: 16px 20px 16px 16px;
+        gap: 8px;
+
+        @media (min-width: $breakpoint-laptop) {
+            padding: 24px 25px 8px 25px;
+            align-items: center;
+            text-align: center;
+        }
+    }
+
+    .cardTitle {
+        font-weight: 700;
+        font-size: 18px;
+        line-height: 100%;
+        letter-spacing: 2.67px;
+
+        @media (min-width: $breakpoint-desktop) {
+            font-weight: 400;
+            font-size: 24px;
+            line-height: 26px;
+            letter-spacing: 2.67px;
+            text-align: center;
+        }
+    }
+
+    .cardDescription {
+        font-weight: 200;
+        font-size: 16px;
+        line-height: 20px;
+        letter-spacing: 1.97px;
+
+        @media (min-width: $breakpoint-desktop) {
+            width:81.61%;
+            text-align: center;
+            font-size: 20px;
+            line-height: 24px;        
+        }
+    }
+
+    .cardPriceWrapper {
+        width: 100%;
+        margin-top: auto;
+        padding-left: 16px;
+        padding-bottom: 16px;
+    }
+
+    .ils {
+        padding-top: 0px;
+
+        @media (min-width: $breakpoint-laptop) {
+            width: 12.54px;
+            height: 11.52px;
+        }
+    }
+
+    .ilsImage {
+        width: 7.26;
+        height: 6.67;
+
+        @media (min-width: $breakpoint-laptop) {
+            width: 12.54px;
+            height: 11.52px;
+        }
+    }
+
+    .cardPrice {
+        display: flex;
+        align-items: center;
+        gap: 2px;
+    }
+
+    .priceText {
+        font-weight: 400;
+        font-size: 20px;
+        line-height: 30px;
+        letter-spacing: 1.97px;
+
+    }
+
+    .cardFooter {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: auto;
+        margin-bottom: 12px;
+        position: relative;
+        width: 75.5%;
+        order: 4;
+    }
+
+    .cardFooter::before,
+    .cardFooter::after {
+        content: "";
+        flex: 1;
+        height: 0.5px;
+        background-color: #979797;
+    }
+
+    .cardFooter::before {
+        margin-right: 12px;
+    }
+
+    .cardFooter::after {
+        margin-left: 12px;
+    }
+
+}
+
+.dish {
+    height: 388px;
+    position: relative;
+
+    @media (min-width: $breakpoint-laptop) {
+        height: auto;
+        align-items: center;
+    }
+
+    .cardImage {
+        width: 245px;
+        height: 152px;
+
+        @media (min-width: $breakpoint-laptop) {
             width: 100%;
             height: auto;
-            padding-bottom: 16px;
+        }
+    }
 
-            @media (min-width: $breakpoint-laptop) {
-                width: 100%;
-                height: auto;
-                padding-bottom: 20px;
-            }
+    .cardContent {
+        display: flex;
+        flex-direction: column;
+        padding: 16px 20px 16px 16px;
+        gap: 8px;
+
+        @media (min-width: $breakpoint-laptop) {
+            align-items: center;
+            padding-top: 24px;
+            padding-bottom: 18px;
         }
 
-        .cardContent {
-            display: flex;
-            flex-direction: column;
-            padding-bottom: 44px;
+    }
 
-            @media (min-width: $breakpoint-laptop) {
-                align-items: center;
-                padding-bottom: 19px;
-            }
+    .cardTitle {
+        letter-spacing: 2.67px;
+
+        @media (min-width: $breakpoint-laptop) {
+            order: 1;
+            text-align: center;
+            font-size: 30px;
+            line-height: 35px;
         }
 
-        .cardTitle {
-            font-weight: 400;
-            font-size: 18px;
-            line-height: 100%;
+        @media (min-width: $breakpoint-desktop-lg) {
+            font-size: 40px;
+            line-height: 47px;
+        }
+    }
+
+    .cardDescription {
+        font-weight: 200;
+        font-size: 16px;
+        line-height: 20px;
+        letter-spacing: 1.97px;
+
+        @media (min-width: $breakpoint-laptop) {
+            width: 77.6%;
+            text-align: center;
+            order: 3;
+            font-size: 20px;
+            line-height: 24px;
+        }
+
+        @media (min-width: $breakpoint-desktop-lg) {
+            font-size: 24px;
+            line-height: 30px;
+        }
+    }
+
+    .spicyIconWrapper {
+        position: absolute;
+        bottom: 51px;
+        left: 0;
+        width: 100%;
+        padding-left: 16px;
+
+        @media (min-width: $breakpoint-laptop) {
+            position: static;
+            bottom: auto;
+            left: auto;
+            width: auto;
+            padding-left: 0;
+
+            align-self: center;
+            order: 2;
+        }
+    }
+
+    .spicyIcon {
+        width: 30px;
+        height: 24px;
+        display: block;
+
+        @media (min-width: $breakpoint-laptop) {
+            width: 40px;
+            height: 31px;
+        }
+    }
+
+    .cardPriceWrapper {
+        width: 100%;
+        margin-top: auto;
+        padding-left: 16px;
+        padding-bottom: 16px;
+    }
+
+    .ils {
+        padding-top: 0px;
+
+        @media (min-width: $breakpoint-laptop) {
+            width: 12.54px;
+            height: 11.52px;
+        }
+    }
+
+    .ilsImage {
+        width: 7.26;
+        height: 6.67;
+
+        @media (min-width: $breakpoint-laptop) {
+            width: 12.54px;
+            height: 11.52px;
+        }
+    }
+
+    .cardPrice {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+    }
+
+    .priceText {
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 19px;
+        letter-spacing: 1.97px;
+
+        @media (min-width: $breakpoint-laptop) {
+            font-weight: 200;
+            font-size: 24px;
+            line-height: 30px;
+        }
+    }
+
+    .cardFooter {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: auto;
+        margin-bottom: 12px;
+        position: relative;
+        width: 75.5%;
+        order: 4;
+    }
+
+    .cardFooter::before,
+    .cardFooter::after {
+        content: "";
+        flex: 1;
+        height: 1px;
+        background-color: #ddd;
+    }
+
+    .cardFooter::before {
+        margin-right: 12px;
+    }
+
+    .cardFooter::after {
+        margin-left: 12px;
+    }
+}
+
+.chef {
+    height: auto;
+
+    .cardImage {
+        width: 100%;
+        height: auto;
+        padding-bottom: 16px;
+
+        @media (min-width: $breakpoint-laptop) {
+            width: 100%;
+            height: auto;
+            padding-bottom: 20px;
+        }
+    }
+
+    .cardContent {
+        display: flex;
+        flex-direction: column;
+        padding-bottom: 44px;
+
+        @media (min-width: $breakpoint-laptop) {
+            align-items: center;
+            padding-bottom: 19px;
+        }
+    }
+
+    .cardTitle {
+        font-weight: 400;
+        font-size: 18px;
+        line-height: 100%;
+        letter-spacing: 2.67px;
+        padding-left: 16px;
+
+        @media (min-width: $breakpoint-desktop) {
+            font-size: 30px;
+            line-height: 47px;
             letter-spacing: 2.67px;
-            padding-left: 16px;
-
-            @media (min-width: $breakpoint-desktop) {
-                font-size: 30px;
-                line-height: 47px;
-                letter-spacing: 2.67px;
-                text-align: center;
-            }
+            text-align: center;
         }
     }
 }
