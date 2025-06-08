@@ -1,5 +1,5 @@
 import { CardInfo } from '@/components/card/card';
-import { Restaurant } from '@/types/interfaces/Restaurant';
+import { Restaurant } from '@/types/interfaces/restaurant';
 import { CardType } from '@/types/cardType';
 
 import dishCardsData from '@/data/dishCards';

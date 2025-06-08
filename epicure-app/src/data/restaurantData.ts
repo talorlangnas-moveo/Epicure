@@ -1,5 +1,4 @@
-import { Restaurant } from '@/types/interfaces/Restaurant';
-
+import { Restaurant } from '@interfaces/restaurant';
 import ClaroImage from '@public/restaurantsDesk/claro.png';
 import KabKemImage from '@public/restaurantsDesk/kabkem.png';
 import MessaImage from '@public/restaurantsDesk/messa.png';

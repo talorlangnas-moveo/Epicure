@@ -1,6 +1,7 @@
 "use client";
 
 import Image, { StaticImageData } from "next/image";
+import clsx from 'clsx';
 import styles from "@components/card/card.module.scss";
 import { ILSIcon } from "@icons";
 import { useIsDesktopView } from "@/hooks/useIsDesktopView";
@@ -32,11 +33,7 @@ export default function Card({
   const isDesktop = useIsDesktopView();
 
   return (
-    <div
-      className={`${styles.cardContainer} ${styles[type || "restaurant"]} ${
-        className || ""
-      }`}
-    >
+    <div className={clsx(styles.cardContainer, styles[type || "restaurant"], className)} >
       <Image
         src={imgUrl}
         placeholder="blur"
