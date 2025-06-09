@@ -27,7 +27,7 @@ export default async function Home() {
       >
         <Carousel>
           {restaurantsCards.map((c) => (
-            <Card key={c.id} {...c} />
+            <Card key={c.id} {...c} className="restaurant" />
           ))}
         </Carousel>
       </InfoPanel>
@@ -38,7 +38,7 @@ export default async function Home() {
       >
         <Carousel>
           {dishCards.map((c) => (
-            <Card key={c.id} {...c} />
+            <Card key={c.id} {...c} className="dish" />
           ))}
         </Carousel>
       </InfoPanel>
@@ -55,7 +55,7 @@ export default async function Home() {
         >
           <Carousel>
             {chefRestaurantsCards.map((c) => (
-              <Card key={c.id} {...c} />
+              <Card key={c.id} {...c} className="chef" />
             ))}
           </Carousel>
         </InfoPanel>

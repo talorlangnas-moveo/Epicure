@@ -8,6 +8,8 @@ import YaPanImage from '@public/restaurantsDesk/yapan.png';
 import Claro2Image from '@public/restaurantsDesk/claro2.png';
 import KabKem2Image from '@public/restaurantsDesk/kabkem2.png';
 import Messa2Image from '@public/restaurantsDesk/messa2.png';
+import ClaroHomePageImgMobile from '@public/restaurantsHomepage/claro_homepage_mobile.png';
+import ClaroHomePageImgDesktop from '@public/restaurantsHomepage/claro_homepage_desktop.png';
 
 import {Stars1Image, Stars2Image, Stars4Image} from '@icons';
 
@@ -18,11 +20,13 @@ export const restaurants: Restaurant[] = [
       title: "Claro",
       description: "Ran Shmueli",
       imgUrl: ClaroImage,
+      homePageImgUrlMobile: ClaroHomePageImgMobile,
+      homePageImgUrlDesktop: ClaroHomePageImgDesktop,
       rating: 4,
       ratingImage: Stars4Image,
       openingTime: "12:00",
       closingTime: "22:00",
-      foundedDate: "1995-06-15"
+      foundedDate: "1995-06-15",
     },
     {
       id: "2",
