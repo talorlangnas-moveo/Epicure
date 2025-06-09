@@ -6,14 +6,12 @@ interface RestaurantPageProps {
   params: {
     id: string;
   };
-  searchParams: {
-    id: string;
-  };
 }
 
-export default async function RestaurantPage({ searchParams }: RestaurantPageProps) {
-  const restaurant = await fetchRestaurantById(searchParams.id);
-  const dishes = await fetchDishesByRestaurantId(searchParams.id);
+export default async function RestaurantPage({ params }: RestaurantPageProps) {
+  
+  const restaurant = await fetchRestaurantById(params.id);
+  const dishes = await fetchDishesByRestaurantId(params.id);
   const dishesAsCards = dishes.map(convertDishToCard);
 
   if (!restaurant) {

@@ -74,7 +74,7 @@ export default function RestaurantsDisplay({
         {filteredRestaurants.map((restaurant) => (
           <Link
             key={restaurant.id}
-            href={`/restaurants/${restaurant.id}?id=${restaurant.id}`}
+            href={`/restaurants/${restaurant.id}`}
             className={styles.linkStyle}
           >
             <Card
