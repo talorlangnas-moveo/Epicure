@@ -19,10 +19,11 @@ interface RestaurantHomePageProps {
 export default function RestaurantHomePage({
   restaurant,
 }: RestaurantHomePageProps) {
+
   const isDesktopView = useIsDesktopView();
   const isOpen = useIsOpen(restaurant.openingTime, restaurant.closingTime);
   const [activeItem, setActiveItem] = useState("All");
-  console.log(restaurant.dishes);
+
   return (
     <div className={styles.restaurantHomePage}>
       <Image

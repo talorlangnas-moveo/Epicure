@@ -84,16 +84,16 @@ export default function Card({
             </div>
           ) : (
             <div className={styles.cardPriceWrapper}>
-              <div className={styles.cardPrice}>
-                <div className={styles.ils}>
+              <span className={styles.cardPrice}>
+                <span className={styles.ils}>
                   <Image
                     src={ILSIcon}
                     alt="ILS Icon"
                     className={styles.ilsImage}
                   />
-                </div>
-                <p className={styles.priceText}>{price}</p>
-              </div>
+                </span>
+                <span className={styles.priceText}>{price}</span>
+              </span>
             </div>
           ))}
       </div>
