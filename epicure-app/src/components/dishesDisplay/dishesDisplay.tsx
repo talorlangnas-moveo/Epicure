@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { useState } from "react";
 import { Restaurant } from "@/types/interfaces/restaurant";
-import { filterDishTypesOptions } from "@/utils/fillterFunctions";
+import { filterDishTypesOptions } from "@/utils/filterFunctions";
 import styles from "./dishesDisplay.module.scss";
 import clsx from "clsx";
 import { useIsDesktopView } from "@/hooks/useIsDesktopView";

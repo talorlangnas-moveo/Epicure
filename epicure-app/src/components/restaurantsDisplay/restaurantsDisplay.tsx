@@ -9,7 +9,7 @@ import Card, { CardInfo } from "../card/card";
 import { Restaurant } from "@interfaces/restaurant";
 import { useIsDesktopView } from "@/hooks/useIsDesktopView";
 import { DownArrow } from "@/icons";
-import { filterOptions, filterByRangeOptions } from "@/utils/fillterFunctions";
+import { filterOptions, filterByRangeOptions } from "@/utils/filterFunctions";
 import Link from "next/link";
 
 interface RestaurantsHomeProps {
