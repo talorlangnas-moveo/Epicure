@@ -4,25 +4,27 @@ import Image from "next/image";
 import { useState } from "react";
 import { Restaurant } from "@/types/interfaces/restaurant";
 import { filterDishTypesOptions } from "@/utils/fillterFunctions";
-import styles from "./restaurantHomePage.module.scss";
+import styles from "./dishesDisplay.module.scss";
 import clsx from "clsx";
 import { useIsDesktopView } from "@/hooks/useIsDesktopView";
 import { useIsOpen } from "@/hooks/useIsOpen";
 import { ClockIcon } from "@/icons";
-import Card from "@components/card/card";
+import Card, { CardInfo } from "@components/card/card";
 import cardsStyles from "@components/card/card.module.scss";
 
-interface RestaurantHomePageProps {
+interface DishesDisplayProps {
   restaurant: Restaurant;
+  dishCards: CardInfo[];
 }
 
-export default function RestaurantHomePage({
+export default function DishesDisplay({
   restaurant,
-}: RestaurantHomePageProps) {
+  dishCards,
+}: DishesDisplayProps) {
 
   const isDesktopView = useIsDesktopView();
   const isOpen = useIsOpen(restaurant.openingTime, restaurant.closingTime);
-  const [activeItem, setActiveItem] = useState("All");
+  const [activeItem, setActiveItem] = useState("1");
 
   return (
     <div className={styles.restaurantHomePage}>
@@ -67,12 +69,12 @@ export default function RestaurantHomePage({
           })}
         </div>
       </div>
-      {restaurant.dishes && (
+      {dishCards && (
         <div className={styles.cardsContainer}>
-          {restaurant.dishes.map((dish) => (
+          {dishCards.map((dishCard) => (
           <Card
-            key={dish.id}
-            {...dish}
+            key={dishCard.id}
+            {...dishCard}
             className={clsx(cardsStyles.dishMenu, styles.dishCard)}
           />
         ))}

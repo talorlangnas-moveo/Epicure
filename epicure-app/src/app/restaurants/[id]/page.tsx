@@ -1,0 +1,26 @@
+import { fetchRestaurantById, fetchDishesByRestaurantId, convertDishToCard } from "@/utils/fetchCards";
+import { notFound } from "next/navigation";
+import DishesDisplay from "@/components/dishesDisplay/dishesDisplay";
+
+interface RestaurantPageProps {
+  params: {
+    id: string;
+  };
+  searchParams: {
+    id: string;
+  };
+}
+
+export default async function RestaurantPage({ searchParams }: RestaurantPageProps) {
+  const restaurant = await fetchRestaurantById(searchParams.id);
+  const dishes = await fetchDishesByRestaurantId(searchParams.id);
+  const dishesAsCards = dishes.map(convertDishToCard);
+
+  if (!restaurant) {
+    notFound();
+  }
+
+  return (
+    <DishesDisplay restaurant={restaurant} dishCards={dishesAsCards} />
+  );
+}

@@ -156,6 +156,12 @@
         text-decoration: none;
     }
 
+    @media (min-width: $breakpoint-mobile) and (max-width: $breakpoint-laptop) {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(3, 1fr);
+    }
+
     @media (min-width: $breakpoint-laptop) {
         padding-top: 40px;
         display: grid;

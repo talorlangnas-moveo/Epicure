@@ -1,13 +1,12 @@
-import { CardInfo } from "@/components/card/card";
+import { Dish } from '@interfaces/dish';
 import PadKiMaoImage from '@public/dishPage/padkimao.png';
 import TaMaLaKoImage from '@public/dishPage/ta_ma_la_ko.png';
 import RedFarmImage from '@public/dishPage/redFarm.png';
-// import PadKiMao2Image from '@public/dishPage/padkimao2.png';
 
-export const claroDishData: CardInfo[] = [
+export const dishData: Dish[] = [
     {
         id: '1',
-        type: 'dish',
+        restaurantId: '1',
         title: 'Pad Ki Mao',
         description: "Green Papaya, Mango, Chukka Chili, Mint, Kaffir lime, Cashew, Akaya Cham sauce" ,
         imgUrl: PadKiMaoImage,
@@ -15,7 +14,7 @@ export const claroDishData: CardInfo[] = [
     },
     {
         id: '2',
-        type: 'dish',
+        restaurantId: '1',
         title: 'Ta Ma La Ko',
         description: "Shrimps, Glass Noodles, Kemiri Nuts, Shallots, Lemon Grass, Magic Chili Brown Coconut" ,
         imgUrl: TaMaLaKoImage,
@@ -23,7 +22,7 @@ export const claroDishData: CardInfo[] = [
     },
     {
         id: '3',
-        type: 'dish',
+        restaurantId: '1',
         title: 'Red Farm',
         description: "Tofu, Spekkoek Peanuts, Spicy Manis, Pear Yakitori" ,
         imgUrl: RedFarmImage,
@@ -31,16 +30,15 @@ export const claroDishData: CardInfo[] = [
     },
     {
         id: '4',
-        type: 'dish',
+        restaurantId: '1',
         title: 'Pad Ki Mao',
         description: "Green Papaya, Mango, Chukka Chili, Mint, Kaffir lime, Cashew, Akaya Cham sauce" ,
-        // imgUrl: PadKiMao2Image,
         imgUrl: TaMaLaKoImage,
         price: 65,
     },
     {
         id: '5',
-        type: 'dish',
+        restaurantId: '1',
         title: 'Pad Ki Mao',
         description: "Green Papaya, Mango, Chukka Chili, Mint, Kaffir lime, Cashew, Akaya Cham sauce" ,
         imgUrl: PadKiMaoImage,
@@ -48,7 +46,7 @@ export const claroDishData: CardInfo[] = [
     },
     {
         id: '6',
-        type: 'dish',
+        restaurantId: '1',
         title: 'Ta Ma La Ko',
         description: "Green Papaya, Mango, Chukka Chili, Mint, Kaffir lime, Cashew, Akaya Cham sauce" ,
         imgUrl: TaMaLaKoImage,
@@ -56,7 +54,7 @@ export const claroDishData: CardInfo[] = [
     },
     {
         id: '7',
-        type: 'dish',
+        restaurantId: '1',
         title: 'Red Farm',
         description: "Green Papaya, Mango, Chukka Chili, Mint, Kaffir lime, Cashew, Akaya Cham sauce" ,
         imgUrl: RedFarmImage,
@@ -64,7 +62,7 @@ export const claroDishData: CardInfo[] = [
     },
     {
         id: '8',
-        type: 'dish',
+        restaurantId: '1',
         title: 'Pad Ki Mao',
         description: "Green Papaya, Mango, Chukka Chili, Mint, Kaffir lime, Cashew, Akaya Cham sauce" ,
         imgUrl: TaMaLaKoImage,
@@ -72,7 +70,7 @@ export const claroDishData: CardInfo[] = [
     },
     {
         id: '9',
-        type: 'dish',
+        restaurantId: '1',
         title: 'Pad Ki Mao',
         description: "Green Papaya, Mango, Chukka Chili, Mint, Kaffir lime, Cashew, Akaya Cham sauce" ,
         imgUrl: PadKiMaoImage,
@@ -80,7 +78,7 @@ export const claroDishData: CardInfo[] = [
     },
     {
         id: '10',
-        type: 'dish',
+        restaurantId: '1',
         title: 'Ta Ma La Ko',
         description: "Green Papaya, Mango, Chukka Chili, Mint, Kaffir lime, Cashew, Akaya Cham sauce" ,
         imgUrl: TaMaLaKoImage,
@@ -88,7 +86,7 @@ export const claroDishData: CardInfo[] = [
     },
     {
         id: '11',
-        type: 'dish',
+        restaurantId: '1',
         title: 'Red Farm',
         description: "Green Papaya, Mango, Chukka Chili, Mint, Kaffir lime, Cashew, Akaya Cham sauce" ,
         imgUrl: RedFarmImage,
@@ -96,7 +94,7 @@ export const claroDishData: CardInfo[] = [
     },
     {
         id: '12',
-        type: 'dish',
+        restaurantId: '1',
         title: 'Pad Ki Mao',
         description: "Green Papaya, Mango, Chukka Chili, Mint, Kaffir lime, Cashew, Akaya Cham sauce" ,
         imgUrl: TaMaLaKoImage,
