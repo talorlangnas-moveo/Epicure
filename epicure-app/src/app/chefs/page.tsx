@@ -1,6 +1,6 @@
 import { fetchChefs, convertChefToCard } from "@/utils/fetchCards";
 import { notFound } from "next/navigation";
-import DataDisplay from "@/components/dataDisplay_tmp/dataDisplay_tmp";
+import DataDisplay from "@/components/dataDisplay/dataDisplay";
 
 
 

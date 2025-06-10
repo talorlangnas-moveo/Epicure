@@ -1,6 +1,5 @@
 import { fetchRestaurants, fetchRestaurantsAsCards } from "@/utils/fetchCards";
-// import RestaurantsDisplay from "@/components/restaurantsDisplay/restaurantsDisplay";
-import DataDisplay from "@/components/dataDisplay_tmp/dataDisplay_tmp";
+import DataDisplay from "@components/dataDisplay/dataDisplay";
 import { Restaurant } from "@/types/interfaces/restaurant";
 import { filterOptions } from "@/utils/filterFunctions";
 

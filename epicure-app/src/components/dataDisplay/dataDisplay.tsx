@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { useState } from "react";
 import clsx from 'clsx';
-import styles from "./dataDisplay_tmp.module.scss";
+import styles from "./dataDisplay.module.scss";
 import cardsStyles from "@components/card/card.module.scss";
 import Card, { CardInfo } from "../card/card";
 import { useIsDesktopView } from "@/hooks/useIsDesktopView";
