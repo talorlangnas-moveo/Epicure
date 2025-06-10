@@ -19,6 +19,7 @@ export function convertRestaurantToCard(restaurant: Restaurant): CardInfo {
     imgUrl: restaurant.imgUrl,
     rating: restaurant.rating,
     ratingImage: restaurant.ratingImage,
+    route: restaurant.route,
   };
 }
 

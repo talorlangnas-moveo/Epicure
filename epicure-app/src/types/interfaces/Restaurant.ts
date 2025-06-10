@@ -13,4 +13,5 @@ export interface Restaurant {
   openingTime: string;
   closingTime: string;
   foundedDate: string;
+  route: string;
 } 

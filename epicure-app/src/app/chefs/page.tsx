@@ -1,6 +1,8 @@
 import { fetchChefs, convertChefToCard } from "@/utils/fetchCards";
 import { notFound } from "next/navigation";
 import DataDisplay from "@/components/dataDisplay/dataDisplay";
+import { chefsFilterOptions } from "@/utils/chefsFilterFunctions";
+import { Chef } from "@/types/interfaces/chef";
 
 
 
@@ -13,7 +15,13 @@ async function Chefs() {
   }
   
   return (
-    <h1 style={{marginTop: "100px"}}>Chefs Page</h1>
+    <DataDisplay<Chef>
+      data={chefs}
+      dataAsCards={chefsAsCards}
+      filterOptions={chefsFilterOptions}
+      title="Chefs"
+      className="chefsBarContainer"
+    />
   );
 }
 

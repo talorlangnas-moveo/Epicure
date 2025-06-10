@@ -16,6 +16,7 @@ export const chefs: Chef[] = [
         lastName: "Granit",
         imgUrl: AsafGranitImg,
         numberOfViews: 200,
+        foundedDate: "2008-06-15",
     },
     {
         id: "2",
@@ -23,6 +24,7 @@ export const chefs: Chef[] = [
         lastName: "Moshe",
         imgUrl: AvivMosheImg,
         numberOfViews: 190,
+        foundedDate: "2001-06-15",
     },
     {
         id: "3",
@@ -30,6 +32,7 @@ export const chefs: Chef[] = [
         lastName: "Shitrit",
         imgUrl: YossiShitritImg,
         numberOfViews: 180,
+        foundedDate: "2010-06-15",
     },
     {
         id: "4",
@@ -37,6 +40,7 @@ export const chefs: Chef[] = [
         lastName: "Shani",
         imgUrl: EyalShaniImg,
         numberOfViews: 50,
+        foundedDate: "2010-06-15",
     },
     {
         id: "5",
@@ -44,6 +48,7 @@ export const chefs: Chef[] = [
         lastName: "Adoni",
         imgUrl: MeirAdoniImg,
         numberOfViews: 75,
+        foundedDate: "2001-06-15",
     },
     {
         id: "6",
@@ -51,6 +56,7 @@ export const chefs: Chef[] = [
         lastName: "Miller",
         imgUrl: OmerMillerImg,
         numberOfViews: 120,
+        foundedDate: "2015-06-15",
     },
     {
         id: "7",
@@ -58,6 +64,7 @@ export const chefs: Chef[] = [
         lastName: "Shabaty",
         imgUrl: ShahafShabatyImg,
         numberOfViews: 110,
+        foundedDate: "2020-06-15",
     },
     {
         id: "8",
@@ -65,6 +72,7 @@ export const chefs: Chef[] = [
         lastName: "Raz",
         imgUrl: NitzanRazImg,
         numberOfViews: 105,
+        foundedDate: "2024-06-15",
     },
     {
         id: "9",
@@ -72,5 +80,6 @@ export const chefs: Chef[] = [
         lastName: "Ben Neriah",
         imgUrl: YuvalBenNeriahImg,
         numberOfViews: 102,
+        foundedDate: "2025-01-01",
     },
 ]

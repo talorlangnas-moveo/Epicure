@@ -5,5 +5,6 @@ export interface Chef {
     firstName: string;
     lastName: string;
     imgUrl: StaticImageData;
+    foundedDate: string;
     numberOfViews: number;
 }
