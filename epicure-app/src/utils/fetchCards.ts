@@ -7,6 +7,8 @@ import dishCardsData from '@/data/dishCards';
 import { chefRestaurantsCards } from '@/data/chefInfo';
 import { restaurants } from '@/data/restaurantData';
 import { dishData } from '@/data/dishData';
+import { chefs } from '@/data/chefsData';
+import { Chef } from '@interfaces/chef';
 
 export function convertRestaurantToCard(restaurant: Restaurant): CardInfo {
   return {
@@ -55,4 +57,12 @@ export async function fetchRestaurantById(id: string): Promise<Restaurant | unde
 
 export async function fetchDishesByRestaurantId(restaurantId: string): Promise<Dish[]> {
   return dishData.filter(dish => dish.restaurantId === restaurantId);
+}
+
+export async function fetchChefs(): Promise<Chef[]> {
+  return chefs;
+}
+
+export async function fetchChefById(id: string): Promise<Chef | undefined> {
+  return chefs.find(chef => chef.id === id);
 }

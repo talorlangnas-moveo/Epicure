@@ -4,6 +4,11 @@ import { EpicureLogo } from "@icons";
 import styles from "./header.module.scss";
 
 export default function NavbarDesktop() {
+  const navBarOptions = [
+    { href: "/restaurants", text: "Restaurants" },
+    { href: "/chefs", text: "Chefs" },
+  ];
+
   return (
     <div className={styles.desktopContainer}>
       <Link href="/">
@@ -14,10 +19,15 @@ export default function NavbarDesktop() {
           alt="Icon for Dropdown Menu"
         />
       </Link>
-      <Link href="/restaurants" className={styles.desktopLinkStyle}>
-        Restaurants
-      </Link>
-      <p>Chefs</p>
+      {navBarOptions.map((item, index) => (
+        <Link
+          key={index}
+          href={item.href}
+          className={styles.desktopLinkStyle}
+        >
+          {item.text}
+        </Link>
+      ))}
     </div>
   );
 }

@@ -1,9 +1,8 @@
 import { CardInfo } from '@components/card/card';
-import { Restaurant } from '@/types/interfaces/restaurant';
 
-export interface FilterOption {
+export interface FilterOption<T = any> {
     id: string;
     label: string;
-    filterFn?: (restaurants: Restaurant[]) => CardInfo[];
+    filterFn?: (data: T[]) => CardInfo[];
     desktopOnly?: boolean;
   }
