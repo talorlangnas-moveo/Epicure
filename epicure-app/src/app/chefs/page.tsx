@@ -1,10 +1,12 @@
-import { fetchChefs } from "@/utils/fetchCards";
+import { fetchChefs, convertChefToCard } from "@/utils/fetchCards";
 import { notFound } from "next/navigation";
+import DataDisplay from "@/components/dataDisplay_tmp/dataDisplay_tmp";
+
 
 
 async function Chefs() {
   const chefs = await fetchChefs();
-  console.log(chefs);
+  const chefsAsCards = chefs.map(convertChefToCard);
 
   if (!chefs) {
     notFound();

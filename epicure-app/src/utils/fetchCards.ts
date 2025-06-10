@@ -63,6 +63,13 @@ export async function fetchChefs(): Promise<Chef[]> {
   return chefs;
 }
 
+export function convertChefToCard(chef: Chef): CardInfo {
+  return {
+    id: chef.id,
+    imgUrl: chef.imgUrl,
+  };
+}
+
 export async function fetchChefById(id: string): Promise<Chef | undefined> {
   return chefs.find(chef => chef.id === id);
 }

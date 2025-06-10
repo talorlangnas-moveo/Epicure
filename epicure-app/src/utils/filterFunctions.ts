@@ -1,3 +1,5 @@
+"use client";
+
 import { Restaurant } from "@/types/interfaces/restaurant";
 import { CardInfo } from '@components/card/card';
 import { convertRestaurantToCard } from "./fetchCards";

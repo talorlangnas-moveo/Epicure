@@ -10,7 +10,7 @@ import { CardType } from "@/types/cardType";
 export interface CardInfo {
   id: string;
   type?: CardType;
-  title: string;
+  title?: string;
   slug?: string;
   description?: string;
   imgUrl: StaticImageData;
@@ -51,7 +51,7 @@ export default function Card({
           className={styles.cardImage}
         />
         <div className={styles.cardContent}>
-          <h3 className={styles.cardTitle}>{title}</h3>
+          {title && <h3 className={styles.cardTitle}>{title}</h3>}
           {description && (
             <h2 className={styles.cardDescription}>{description}</h2>
           )}
