@@ -12,13 +12,13 @@ export default async function RestaurantPage({ params }: RestaurantPageProps) {
   
   const restaurant = await fetchRestaurantById(params.id);
   const dishes = await fetchDishesByRestaurantId(params.id);
-  const dishesAsCards = dishes.map(convertDishToCard);
+  const dishAsCards = dishes.map(convertDishToCard);
 
   if (!restaurant) {
     notFound();
   }
 
   return (
-    <DishesDisplay restaurant={restaurant} dishCards={dishesAsCards} />
+    <DishesDisplay restaurant={restaurant} dishCards={dishAsCards} />
   );
 }

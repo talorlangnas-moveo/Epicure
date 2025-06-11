@@ -1,6 +1,6 @@
 @use '@styles/utils/variables' as *;
 
-.restaurantHomePage {
+.dishesDisplayContainer {
     display: flex;
     flex-direction: column;
     margin-top: 46px;
@@ -149,7 +149,8 @@
     
 
     .dishCard {
-        width: 100%;  
+        width: 100%;
+        height: 100%;
     }
 
     .linkStyle {
@@ -160,6 +161,7 @@
         display: grid;
         grid-template-columns: repeat(2, 1fr);
         grid-template-rows: repeat(3, 1fr);
+        grid-auto-rows: 1fr;
     }
 
     @media (min-width: $breakpoint-laptop) {
@@ -169,11 +171,19 @@
         margin: 0 auto;
         grid-template-columns: repeat(3, 1fr);
         grid-template-rows: repeat(4, 1fr);
+        grid-auto-rows: 1fr;
     }
 
     @media (min-width: $breakpoint-desktop-lg) {
         grid-template-columns: repeat(4, 1fr);
         grid-template-rows: repeat(3, 1fr);
+        grid-auto-rows: 1fr;
     }
 }
 
+.dishCardContainer {
+    cursor: pointer;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}

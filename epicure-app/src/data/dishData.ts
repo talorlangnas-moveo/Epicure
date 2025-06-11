@@ -2,6 +2,7 @@ import { Dish } from '@interfaces/dish';
 import PadKiMaoImage from '@public/dishPage/padkimao.png';
 import TaMaLaKoImage from '@public/dishPage/ta_ma_la_ko.png';
 import RedFarmImage from '@public/dishPage/redFarm.png';
+import { SpicyIconCard, VeganIcon } from "@icons";
 
 export const dishData: Dish[] = [
     {
@@ -11,6 +12,7 @@ export const dishData: Dish[] = [
         description: "Green Papaya, Mango, Chukka Chili, Mint, Kaffir lime, Cashew, Akaya Cham sauce" ,
         imgUrl: PadKiMaoImage,
         price: 88,
+        dishCategoryLogo: SpicyIconCard,
     },
     {
         id: '2',
@@ -27,6 +29,7 @@ export const dishData: Dish[] = [
         description: "Tofu, Spekkoek Peanuts, Spicy Manis, Pear Yakitori" ,
         imgUrl: RedFarmImage,
         price: 65,
+        dishCategoryLogo: VeganIcon,
     },
     {
         id: '4',

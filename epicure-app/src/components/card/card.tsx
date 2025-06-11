@@ -18,6 +18,7 @@ export interface CardInfo {
   ratingImage?: StaticImageData;
   price?: number;
   dishCategoryLogo?: StaticImageData;
+  showDishCategoryLogo?: boolean;
   className?: string;
 }
 
@@ -29,6 +30,7 @@ export default function Card({
   ratingImage,
   price,
   dishCategoryLogo,
+  showDishCategoryLogo = true,
   className,
 }: CardInfo) {
   const isDesktop = useIsDesktopView();
@@ -60,7 +62,7 @@ export default function Card({
               className={styles.ratingImage}
             />
           )}
-          {dishCategoryLogo && (
+          {dishCategoryLogo && showDishCategoryLogo && (
             <div className={styles.spicyIconWrapper}>
               <Image
                 src={dishCategoryLogo}
