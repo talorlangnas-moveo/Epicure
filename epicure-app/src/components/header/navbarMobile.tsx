@@ -5,12 +5,13 @@ import styles from "./header.module.scss";
 import Dropdown from "@components/dropdown/dropdown";
 
 export default function navbarMobile() {
+
   const dropdownOptions = [
-    "Restaurants",
-    "Chefs",
-    "Contact Us",
-    "Term of Use",
-    "Privacy Policy",
+    { href: "/restaurants", text: "Restaurants" },
+    { href: "/chefs", text: "Chefs" },
+    { href: "/", text: "Contact Us" },
+    { href: "/", text: "Term of Use" },
+    { href: "/", text: "Privacy Policy" },
   ];
 
   return (
