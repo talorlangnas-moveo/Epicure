@@ -7,7 +7,7 @@ import { useState } from "react";
 import styles from "./dropdown.module.scss";
 
 interface DropdownProps {
-  options: string[];
+  options: { href: string; text: string }[];
 }
 
 export default function Dropdown({ options }: DropdownProps) {
@@ -15,6 +15,7 @@ export default function Dropdown({ options }: DropdownProps) {
 
   const toggleDropdown = () => setIsOpen(!isOpen);
 
+  const firstSection = options.slice(0, 2);
   const secondSection = options.slice(2);
 
   return (
@@ -37,22 +38,29 @@ export default function Dropdown({ options }: DropdownProps) {
             />
           </button>
           <ul className={styles.section}>
-            <li className={styles.firstSectionDropdownItem}>
-              <Link
-                href="/restaurants"
-                onClick={() => setIsOpen(false)}
-                className={styles.dropdownLink}
-              >
-                Restaurants
-              </Link>
-            </li>
-            <li className={styles.firstSectionDropdownItem}>{"Chefs"}</li>
+            {firstSection.map((item, index) => (
+              <li key={index} className={styles.firstSectionDropdownItem}>
+                <Link
+                  href={item.href}
+                  onClick={() => setIsOpen(false)}
+                  className={styles.dropdownLink}
+                >
+                  {item.text}
+                </Link>
+              </li>
+            ))}
           </ul>
           <hr className={styles.separator} />
           <ul className={styles.section}>
-            {secondSection.map((option, index) => (
+            {secondSection.map((item, index) => (
               <li key={index} className={styles.secondSectionDropdownItem}>
-                {option}
+                <Link
+                  href={item.href}
+                  onClick={() => setIsOpen(false)}
+                  className={styles.dropdownLink}
+                >
+                  {item.text}
+                </Link>
               </li>
             ))}
           </ul>

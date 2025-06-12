@@ -3,46 +3,53 @@
 import Image from "next/image";
 import { useState } from "react";
 import clsx from 'clsx';
-import styles from "./restaurantsDisplay.module.scss";
+import styles from "./dataDisplay.module.scss";
 import cardsStyles from "@components/card/card.module.scss";
 import Card, { CardInfo } from "../card/card";
-import { Restaurant } from "@interfaces/restaurant";
 import { useIsDesktopView } from "@/hooks/useIsDesktopView";
 import { DownArrow } from "@/icons";
-import { filterOptions, filterByRangeOptions } from "@/utils/filterFunctions";
 import Link from "next/link";
+import { FilterOption } from "@/types/interfaces/filterOption";
 
-interface RestaurantsHomeProps {
-  restaurants: Restaurant[];
-  restaurantsAsCards: CardInfo[];
+interface DisplayProps<T> {
+  data: T[];
+  dataAsCards: CardInfo[];
+  filterOptions: FilterOption[];
+  filterByRangeOptions?: FilterOption[];
+  title?: string;
+  className?: string;
 }
 
-export default function RestaurantsDisplay({
-  restaurants,
-  restaurantsAsCards,
-}: RestaurantsHomeProps) {
+export default function DataDisplay<T>({
+  data,
+  dataAsCards,
+  filterOptions,
+  filterByRangeOptions,
+  title = "Items",
+  className,
+}: DisplayProps<T>) {
   
   const isDesktopView = useIsDesktopView();
   const [activeItem, setActiveItem] = useState("1");
-  const [filteredRestaurants, setFillteredRestaurants] =
-    useState<CardInfo[]>(restaurantsAsCards);
+  const [filteredData, setFilteredData] =
+    useState<CardInfo[]>(dataAsCards);
 
   const handleFilter = (
-    filterFunction?: (restaurants: Restaurant[]) => CardInfo[]
+    filterFunction?: (data: T[]) => CardInfo[]
   ) => {
     if (!filterFunction) {
-      setFillteredRestaurants(restaurantsAsCards);
+      setFilteredData(dataAsCards);
       return;
     }
-    const filtered = filterFunction(restaurants);
-    setFillteredRestaurants(filtered);
+    const filtered = filterFunction(data);
+    setFilteredData(filtered);
   };
 
   return (
-    <div className={styles.restaurantsHomeContainer}>
+    <div className={styles.dataDisplayContainer}>
       <div className={styles.textContainer}>
-        {!isDesktopView && <h1 className={styles.heading}>Restaurants</h1>}
-        <div className={styles.barContainer}>
+        {!isDesktopView && <h1 className={styles.heading}>{title}</h1>}
+        <div className={clsx(className ? styles[className] : styles.barContainer)}>
           {filterOptions.map((option) => {
             if (option.desktopOnly && !isDesktopView) return null;
             return (
@@ -60,7 +67,7 @@ export default function RestaurantsDisplay({
           })}
         </div>
       </div>
-      {isDesktopView && (
+      {isDesktopView && filterByRangeOptions && (
         <div className={styles.filterContainer}>
           {filterByRangeOptions.map((option) => (
             <div key={option.id} className={styles.filterTabContainer}>
@@ -71,17 +78,25 @@ export default function RestaurantsDisplay({
         </div>
       )}
       <div className={styles.cardsContainer}>
-        {filteredRestaurants.map((restaurant) => (
+        {filteredData.map((item) => (
+          item.route ? (
           <Link
-            key={restaurant.id}
-            href={`/restaurants/${restaurant.id}`}
+            key={item.id}
+            href={item.route}
             className={styles.linkStyle}
           >
             <Card
-              {...restaurant}
+              {...item}
               className={clsx(cardsStyles.restaurant, styles.restaurantCard)}
             />
           </Link>
+            ) : (
+            <Card
+              key={item.id}
+              {...item}
+              className={clsx(cardsStyles.restaurant, styles.restaurantCard)}
+            />
+          )
         ))}
       </div>
     </div>

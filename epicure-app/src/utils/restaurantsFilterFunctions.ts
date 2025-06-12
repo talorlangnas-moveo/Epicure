@@ -1,9 +1,11 @@
+"use client";
+
 import { Restaurant } from "@/types/interfaces/restaurant";
 import { CardInfo } from '@components/card/card';
 import { convertRestaurantToCard } from "./fetchCards";
 import { FilterOption } from "@/types/interfaces/filterOption";
 
-export const filterOptions: FilterOption[] = [
+export const restaurantsFilterOptions: FilterOption[] = [
     { id: "1", label: "All" },
     { id: "2", label: "New", filterFn: getNewestRestaurantsAsCards },
     { id: "3", label: "Most Popular", filterFn: getMostPopularRestaurantsAsCards },

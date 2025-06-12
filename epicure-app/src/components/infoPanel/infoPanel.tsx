@@ -5,6 +5,7 @@ import styles from "./infoPanel.module.scss";
 import { ArrowsIcon } from "@icons";
 import { useIsDesktopView } from "@/hooks/useIsDesktopView";
 import { CardType } from "@/types/cardType";
+import Link from "next/link";
 
 interface InfoPanelProps {
   children?: React.ReactNode;
@@ -12,6 +13,8 @@ interface InfoPanelProps {
   title?: string;
   type: CardType;
   displayButton?: boolean;
+  href?: string;
+  displayButtonDesktop?: boolean;
   buttonLabel?: string;
   buttonImage?: StaticImageData | string;
   buttonStyle?: string;
@@ -24,7 +27,8 @@ export default function InfoPanel({
   childrenDesk,
   title,
   type,
-  displayButton = true,
+  displayButtonDesktop = true,
+  href = "/restaurants",
   buttonLabel = "All restaurants",
   buttonStyle = "panelButton",
   buttonImage = ArrowsIcon,
@@ -37,7 +41,8 @@ export default function InfoPanel({
     <div className={`${styles.infoPanel} ${styles[type]}`}>
       <h4 className={`${styles[type]}`}>{title}</h4>
       {isDesktop ? <>{childrenDesk ?? children}</> : <>{children}</>}
-      {displayButton && (
+      {!isDesktop ? (
+        <Link href={href} className={styles.linkStyle}>
         <div className={`${styles[buttonStyle]}`}>
           <p>{buttonLabel}</p>
           <Image
@@ -47,6 +52,19 @@ export default function InfoPanel({
             alt="Arrows Icon"
           />
         </div>
+        </Link>
+      ) : ( displayButtonDesktop &&
+        <Link href={href} className={styles.linkStyle}>
+          <div className={`${styles[buttonStyle]}`}>
+            <p>{buttonLabel}</p>
+            <Image
+            src={buttonImage}
+            width={buttonImgWidth}
+            height={buttonImgHeight}
+            alt="Arrows Icon"
+          />
+          </div>
+        </Link>
       )}
     </div>
   );
