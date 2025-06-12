@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateRestaurantDto } from './dto/create-restaurant.dto';
 import { UpdateRestaurantDto } from './dto/update-restaurant.dto';
 import { Restaurant } from './schemas/restaurant.schema';
@@ -20,12 +20,24 @@ export class RestaurantsService {
     return restaurant;
   }
 
-  findAll() {
-    return `This action returns all restaurants`;
+  async findAll(): Promise<Restaurant[]> {
+    const restaurants = await this.restaurantModel.find();
+    return restaurants;
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} restaurant`;
+  async findById(id: string): Promise<Restaurant> {
+    try {
+      const restaurant = await this.restaurantModel.findById(id);
+      if (!restaurant) {
+        throw new NotFoundException('Restaurant not found');
+      }
+      return restaurant;
+    } catch (error) {
+      if (error instanceof Error && error.name === 'CastError') {
+        throw new NotFoundException('Restaurant not found');
+      }
+      throw error;
+    }
   }
 
   update(id: number, updateRestaurantDto: UpdateRestaurantDto) {

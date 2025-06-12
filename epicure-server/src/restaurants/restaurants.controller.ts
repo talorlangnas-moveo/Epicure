@@ -13,13 +13,13 @@ export class RestaurantsController {
   }
 
   @Get()
-  findAll() {
+  async findAll() {
     return this.restaurantsService.findAll();
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.restaurantsService.findOne(+id);
+  findById(@Param('id') id: string) {
+    return this.restaurantsService.findById(id);
   }
 
   @Patch(':id')
