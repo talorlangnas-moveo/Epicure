@@ -34,6 +34,7 @@ export default async function Home() {
       <InfoPanel
         title="Signature Dish Of:"
         type="dish"
+        displayButtonDesktop={false}
         childrenDesk={<CardsDisplay cards={dishCards} type="dish" />}
       >
         <Carousel>
@@ -48,7 +49,7 @@ export default async function Home() {
         <InfoPanel
           title="Yossi’s Restaurants"
           type="chef"
-          displayButton={false}
+          displayButtonDesktop={false}
           childrenDesk={
             <CardsDisplay cards={chefRestaurantsCards} type="chef" />
           }
