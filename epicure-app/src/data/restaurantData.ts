@@ -27,6 +27,7 @@ export const restaurants: Restaurant[] = [
       openingTime: "12:00",
       closingTime: "22:00",
       foundedDate: "1995-06-15",
+      route: "/restaurants/1"
     },
     {
       id: "2",
@@ -38,7 +39,8 @@ export const restaurants: Restaurant[] = [
       ratingImage: Stars1Image,
       openingTime: "11:00",
       closingTime: "21:30",
-      foundedDate: "2005-04-10"
+      foundedDate: "2005-04-10",
+      route: "/restaurants/2"
     },
     {
         id: "3",
@@ -50,7 +52,8 @@ export const restaurants: Restaurant[] = [
         ratingImage: Stars4Image,
         openingTime: "13:00",
         closingTime: "23:00",
-        foundedDate: "2010-09-01"
+        foundedDate: "2010-09-01",
+        route: "/restaurants/3"
       },
       {
         id: "4",
@@ -62,7 +65,8 @@ export const restaurants: Restaurant[] = [
         ratingImage: Stars1Image,
         openingTime: "10:30",
         closingTime: "22:30",
-        foundedDate: "2008-07-20"
+        foundedDate: "2008-07-20",
+        route: "/restaurants/4"
       },
       {
         id: "5",
@@ -74,7 +78,8 @@ export const restaurants: Restaurant[] = [
         ratingImage: Stars4Image,
         openingTime: "12:30",
         closingTime: "23:30",
-        foundedDate: "2012-05-05"
+        foundedDate: "2012-05-05",
+        route: "/restaurants/5"
       },
       {
         id: "6",
@@ -86,7 +91,8 @@ export const restaurants: Restaurant[] = [
         ratingImage: Stars2Image,
         openingTime: "11:30",
         closingTime: "21:00",
-        foundedDate: "2003-11-11"
+        foundedDate: "2003-11-11",
+        route: "/restaurants/6"
       },
       {
         id: "7",
@@ -98,7 +104,8 @@ export const restaurants: Restaurant[] = [
         ratingImage: Stars1Image,
         openingTime: "12:00",
         closingTime: "22:00",
-        foundedDate: "1999-03-22"
+        foundedDate: "1999-03-22",
+        route: "/restaurants/7"
       },
       {
         id: "8",
@@ -110,7 +117,8 @@ export const restaurants: Restaurant[] = [
         ratingImage: Stars2Image,
         openingTime: "11:00",
         closingTime: "21:30",
-        foundedDate: "2007-10-08"
+        foundedDate: "2007-10-08",
+        route: "/restaurants/8"
       },
       {
         id: "9",
@@ -122,6 +130,7 @@ export const restaurants: Restaurant[] = [
         ratingImage: Stars1Image,
         openingTime: "13:00",
         closingTime: "23:00",
-        foundedDate: "2011-02-14"
+        foundedDate: "2011-02-14",
+        route: "/restaurants/9"
       }
   ];
