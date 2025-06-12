@@ -1,6 +1,5 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateRestaurantDto } from './dto/create-restaurant.dto';
-import { UpdateRestaurantDto } from './dto/update-restaurant.dto';
 import { Restaurant } from './schemas/restaurant.schema';
 import { InjectModel } from '@nestjs/mongoose';
 import mongoose from 'mongoose';
@@ -38,13 +37,5 @@ export class RestaurantsService {
       }
       throw error;
     }
-  }
-
-  update(id: number, updateRestaurantDto: UpdateRestaurantDto) {
-    return `This action updates a #${id} restaurant`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} restaurant`;
   }
 }
