@@ -8,6 +8,7 @@ import {
   RestaurantSchema,
 } from '../restaurants/schemas/restaurant.schema';
 import { ValidateRestaurantPipe } from './pipes/validate-restaurant.pipe';
+import { ValidateRestaurantParamPipe } from './pipes/validate-restaurant-param.pipe';
 
 @Module({
   imports: [
@@ -17,6 +18,10 @@ import { ValidateRestaurantPipe } from './pipes/validate-restaurant.pipe';
     ]),
   ],
   controllers: [DishesController],
-  providers: [DishesService, ValidateRestaurantPipe],
+  providers: [
+    DishesService,
+    ValidateRestaurantPipe,
+    ValidateRestaurantParamPipe,
+  ],
 })
 export class DishesModule {}

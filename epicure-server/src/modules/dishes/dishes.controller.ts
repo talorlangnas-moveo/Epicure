@@ -11,6 +11,7 @@ import { DishesService } from './dishes.service';
 import { CreateDishDto } from './dto/create-dish.dto';
 import { UpdateDishDto } from './dto/update-dish.dto';
 import { ValidateRestaurantPipe } from './pipes/validate-restaurant.pipe';
+import { ValidateRestaurantParamPipe } from './pipes/validate-restaurant-param.pipe';
 
 @Controller('dishes')
 export class DishesController {
@@ -27,8 +28,8 @@ export class DishesController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.dishesService.findOne(+id);
+  findByRestaurantId(@Param('id', ValidateRestaurantParamPipe) id: string) {
+    return this.dishesService.findByRestaurantId(id);
   }
 
   @Patch(':id')

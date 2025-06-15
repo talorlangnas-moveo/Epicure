@@ -17,12 +17,14 @@ export class DishesService {
     return dish;
   }
 
-  findAll() {
-    return `This action returns all dishes`;
+  async findAll(): Promise<Dish[]> {
+    const dishes = await this.dishModel.find();
+    return dishes;
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} dish`;
+  async findByRestaurantId(restaurantId: string): Promise<Dish[]> {
+    const dishes = await this.dishModel.find({ restaurantId });
+    return dishes;
   }
 
   update(id: number, updateDishDto: UpdateDishDto) {
