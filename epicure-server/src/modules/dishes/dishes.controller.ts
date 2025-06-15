@@ -1,14 +1,23 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { DishesService } from './dishes.service';
 import { CreateDishDto } from './dto/create-dish.dto';
 import { UpdateDishDto } from './dto/update-dish.dto';
+import { ValidateRestaurantPipe } from './pipes/validate-restaurant.pipe';
 
 @Controller('dishes')
 export class DishesController {
   constructor(private readonly dishesService: DishesService) {}
 
   @Post()
-  create(@Body() createDishDto: CreateDishDto) {
+  create(@Body(ValidateRestaurantPipe) createDishDto: CreateDishDto) {
     return this.dishesService.create(createDishDto);
   }
 
