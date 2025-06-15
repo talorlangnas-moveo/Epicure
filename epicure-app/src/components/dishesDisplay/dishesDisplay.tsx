@@ -54,13 +54,8 @@ export default function DishesDisplay({
       ) : (
         <div className={styles.dishesDisplayContainer}>
           <Image
-            src={
-              isDesktopView
-                ? restaurant.homePageImgUrlDesktop || restaurant.imgUrl
-                : restaurant.homePageImgUrlMobile || restaurant.imgUrl
-            }
+            src={restaurant.imgUrl}
             alt={restaurant.title}
-            sizes="100vw"
             className={styles.restaurantImage}
           />
           <div className={styles.textContainer}>
