@@ -6,19 +6,13 @@ export type RestaurantDocument = Restaurant & Document;
 @Schema()
 export class Restaurant {
   @Prop({ required: true })
-  title: string;
+  name: string;
 
   @Prop({ required: true })
   description: string;
 
   @Prop({ required: true })
   imgUrl: string;
-
-  @Prop()
-  homePageImgUrlMobile?: string;
-
-  @Prop()
-  homePageImgUrlDesktop?: string;
 
   @Prop({ required: true })
   rating: number;

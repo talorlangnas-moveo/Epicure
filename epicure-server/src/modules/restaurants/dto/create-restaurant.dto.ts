@@ -1,9 +1,9 @@
-import { IsString, IsNotEmpty, IsNumber, IsOptional } from 'class-validator';
+import { IsString, IsNotEmpty, IsNumber } from 'class-validator';
 
 export class CreateRestaurantDto {
   @IsString()
   @IsNotEmpty()
-  title: string;
+  name: string;
 
   @IsString()
   @IsNotEmpty()
@@ -12,14 +12,6 @@ export class CreateRestaurantDto {
   @IsString()
   @IsNotEmpty()
   imgUrl: string;
-
-  @IsString()
-  @IsOptional()
-  homePageImgUrlMobile?: string;
-
-  @IsString()
-  @IsOptional()
-  homePageImgUrlDesktop?: string;
 
   @IsNumber()
   @IsNotEmpty()
