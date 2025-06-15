@@ -6,8 +6,6 @@ export interface Restaurant {
   title: string;
   description: string;
   imgUrl: StaticImageData;
-  homePageImgUrlMobile?: StaticImageData;
-  homePageImgUrlDesktop?: StaticImageData;
   rating: number;
   ratingImage: StaticImageData;
   openingTime: string;
