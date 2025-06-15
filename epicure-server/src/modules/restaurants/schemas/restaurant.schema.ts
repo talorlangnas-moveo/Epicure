@@ -23,8 +23,8 @@ export class Restaurant {
   @Prop({ required: true })
   closingTime: string;
 
-  @Prop({ required: true })
-  foundedDate: string;
+  @Prop({ required: true, default: Date.now })
+  foundedDate: Date;
 
   @Prop({ default: Date.now })
   createdAt: Date;
