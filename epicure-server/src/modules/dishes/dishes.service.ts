@@ -1,9 +1,8 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateDishDto } from './dto/create-dish.dto';
-import { UpdateDishDto } from './dto/update-dish.dto';
 import { Dish } from './schemas/dish.schema';
 import { InjectModel } from '@nestjs/mongoose';
-import mongoose from 'mongoose';
+import mongoose, { Types } from 'mongoose';
 
 @Injectable()
 export class DishesService {
@@ -27,11 +26,11 @@ export class DishesService {
     return dishes;
   }
 
-  update(id: number, updateDishDto: UpdateDishDto) {
-    return `This action updates a #${id} dish`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} dish`;
+  async findById(id: Types.ObjectId): Promise<Dish> {
+    const dish = await this.dishModel.findById(id);
+    if (!dish) {
+      throw new NotFoundException(`Dish not found`);
+    }
+    return dish;
   }
 }

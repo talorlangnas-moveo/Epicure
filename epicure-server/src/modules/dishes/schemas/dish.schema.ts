@@ -11,9 +11,13 @@ export type DishDocument = Dish & Document;
 
 @Schema()
 export class Dish {
-  @Prop({ type: Types.ObjectId, ref: 'Restaurant', required: true })
+  @Prop({
+    type: Types.ObjectId,
+    ref: 'Restaurant',
+    required: true,
+    index: true,
+  })
   restaurantId: Types.ObjectId;
-
   @Prop({ required: true })
   title: string;
 
