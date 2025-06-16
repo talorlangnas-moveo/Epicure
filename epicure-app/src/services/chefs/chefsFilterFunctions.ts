@@ -2,7 +2,7 @@
 
 import { Chef } from "@/types/interfaces/chef";
 import { CardInfo } from '@components/card/card';
-import { convertChefToCard } from "./fetchCards";
+import { convertChefToCard } from "@/services/chefs/chefs.utils";
 import { FilterOption } from "@/types/interfaces/filterOption";
 
 export const chefsFilterOptions: FilterOption[] = [
