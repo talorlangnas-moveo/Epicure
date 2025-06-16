@@ -2,10 +2,13 @@ import { fetchRestaurants, fetchRestaurantsAsCards } from "@/utils/fetchCards";
 import DataDisplay from "@components/dataDisplay/dataDisplay";
 import { Restaurant } from "@/types/interfaces/restaurant";
 import { restaurantsFilterOptions, filterByRangeOptions } from "@/utils/restaurantsFilterFunctions";
+import { getAllRestaurants } from "@/services/restaurants/restaurants.api";
 
 async function Restaurants() {
   const restaurants = await fetchRestaurants();
   const restaurantsAsCards = await fetchRestaurantsAsCards();
+  const allRestaurants = await getAllRestaurants();
+  console.log(allRestaurants);
 
   return (
     <DataDisplay<Restaurant>

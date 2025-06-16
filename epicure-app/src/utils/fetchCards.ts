@@ -10,18 +10,7 @@ import { dishData } from '@/data/dishData';
 import { chefs } from '@/data/chefsData';
 import { Chef } from '@interfaces/chef';
 
-export function convertRestaurantToCard(restaurant: Restaurant): CardInfo {
-  return {
-    id: restaurant.id,
-    type: 'restaurant' as CardType,
-    title: restaurant.title,
-    description: restaurant.description,
-    imgUrl: restaurant.imgUrl,
-    rating: restaurant.rating,
-    ratingImage: restaurant.ratingImage,
-    route: restaurant.route,
-  };
-}
+
 
 export function convertDishToCard(dish: Dish): CardInfo {
   return {

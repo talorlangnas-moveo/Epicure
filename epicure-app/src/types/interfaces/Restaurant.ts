@@ -1,15 +1,13 @@
-import { StaticImageData } from 'next/image';
-
 export interface Restaurant {
   id: string;
-  type: string;
-  title: string;
+  name: string;
   description: string;
-  imgUrl: StaticImageData;
+  imgUrl: string;
   rating: number;
-  ratingImage: StaticImageData;
+  ratingImage?: string;
   openingTime: string;
   closingTime: string;
-  foundedDate: string;
-  route: string;
+  foundedDate: Date;
+  route?: string;
+  createdAt?: Date;
 } 
