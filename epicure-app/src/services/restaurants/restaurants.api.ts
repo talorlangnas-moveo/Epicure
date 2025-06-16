@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { Restaurant } from '@/types/interfaces/restaurant_tmp';
+import { Restaurant } from '@/types/interfaces/restaurant';
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 
