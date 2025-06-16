@@ -1,20 +1,34 @@
 import { CardInfo } from "@/components/card/card";
 import { CardType } from "@/types/cardType";
 import { Restaurant } from "@/types/interfaces/restaurant";
-import { getImageFromPublic } from "@/utils/image.utils";
+import { getRestaurantImage } from "@/services/restaurants/image.utils";
 import { getRatingImage } from "@/utils/rating.utils";
 
-export async function convertRestaurantToCard(restaurant: Restaurant): Promise<CardInfo> {
-    const imageData = await getImageFromPublic(restaurant.imgUrl);
+// export async function convertRestaurantToCard(restaurant: Restaurant): Promise<CardInfo> {
+//     return {
+//       id: restaurant._id,
+//       type: 'restaurant' as CardType,
+//       title: restaurant.name,
+//       description: restaurant.description,
+//       imgUrl: getRestaurantImage(restaurant.imgUrl),
+//       rating: restaurant.rating,
+//       ratingImage: getRatingImage(restaurant.rating),
+//       route: `/restaurants/${restaurant._id}`,
+//     };
+//   }
+export function convertRestaurantToCard(restaurant: Restaurant): CardInfo {
+  return {
+    id: restaurant._id,
+    type: 'restaurant' as CardType,
+    title: restaurant.name,
+    description: restaurant.description,
+    imgUrl: getRestaurantImage(restaurant.imgUrl),
+    rating: restaurant.rating,
+    ratingImage: getRatingImage(restaurant.rating),
+    route: `/restaurants/${restaurant._id}`,
+  };
+}
 
-    return {
-      id: restaurant.id,
-      type: 'restaurant' as CardType,
-      title: restaurant.name,
-      description: restaurant.description,
-      imgUrl: imageData,
-      rating: restaurant.rating,
-      ratingImage: getRatingImage(restaurant.rating),
-      route: restaurant.route,
-    };
+  export async function getRestaurantsAsCards(restaurants: Restaurant[]): Promise<CardInfo[]> {
+    return Promise.all(restaurants.map(convertRestaurantToCard));
   }

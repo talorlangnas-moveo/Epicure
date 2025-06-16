@@ -1,5 +1,5 @@
 export interface Restaurant {
-  id: string;
+  _id: string;
   name: string;
   description: string;
   imgUrl: string;

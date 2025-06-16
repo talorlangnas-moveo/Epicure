@@ -11,7 +11,6 @@ import { chefs } from '@/data/chefsData';
 import { Chef } from '@interfaces/chef';
 
 
-
 export function convertDishToCard(dish: Dish): CardInfo {
   return {
     id: dish.id,
@@ -35,6 +34,18 @@ export async function fetchChefRestCards(): Promise<CardInfo[]> {
 export async function fetchRestaurants(): Promise<Restaurant[]> {
   return restaurants;
 }
+export function convertRestaurantToCard(restaurant: Restaurant): CardInfo {
+  return {
+    id: restaurant.id,
+    type: 'restaurant' as CardType,
+    title: restaurant.title,
+    description: restaurant.description,
+    imgUrl: restaurant.imgUrl,
+    rating: restaurant.rating,
+    ratingImage: restaurant.ratingImage,
+    route: restaurant.route,
+  };
+}
 
 export async function fetchRestaurantsAsCards(): Promise<CardInfo[]> {
   const restaurants = await fetchRestaurants();
@@ -42,7 +53,7 @@ export async function fetchRestaurantsAsCards(): Promise<CardInfo[]> {
 }
 
 export async function fetchRestaurantById(id: string): Promise<Restaurant | undefined> {
-  return restaurants.find(restaurant => restaurant.id === id);
+  return restaurants.find(restaurant => restaurant._id === id);
 }
 
 export async function fetchDishesByRestaurantId(restaurantId: string): Promise<Dish[]> {

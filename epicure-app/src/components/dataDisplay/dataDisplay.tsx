@@ -28,7 +28,7 @@ export default function DataDisplay<T>({
   title = "Items",
   className,
 }: DisplayProps<T>) {
-  
+  console.log("dataAsCards", dataAsCards);
   const isDesktopView = useIsDesktopView();
   const [activeItem, setActiveItem] = useState("1");
   const [filteredData, setFilteredData] =
