@@ -4,18 +4,6 @@ import { Restaurant } from "@/types/interfaces/restaurant";
 import { getRestaurantImage } from "@/services/restaurants/image.utils";
 import { getRatingImage } from "@/utils/rating.utils";
 
-// export async function convertRestaurantToCard(restaurant: Restaurant): Promise<CardInfo> {
-//     return {
-//       id: restaurant._id,
-//       type: 'restaurant' as CardType,
-//       title: restaurant.name,
-//       description: restaurant.description,
-//       imgUrl: getRestaurantImage(restaurant.imgUrl),
-//       rating: restaurant.rating,
-//       ratingImage: getRatingImage(restaurant.rating),
-//       route: `/restaurants/${restaurant._id}`,
-//     };
-//   }
 export function convertRestaurantToCard(restaurant: Restaurant): CardInfo {
   return {
     id: restaurant._id,

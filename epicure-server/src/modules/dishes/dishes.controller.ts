@@ -20,15 +20,15 @@ export class DishesController {
     return this.dishesService.findAll();
   }
 
-  @Get(':id')
-  findById(@Param('id', ParseMongoIdPipe) id: Types.ObjectId) {
-    return this.dishesService.findById(id);
-  }
-
   @Get('by-restaurantId')
   findByRestaurantId(
     @Query('restaurantId', ValidateRestaurantParamPipe) restaurantId: string,
   ) {
     return this.dishesService.findByRestaurantId(restaurantId);
+  }
+
+  @Get(':id')
+  findById(@Param('id', ParseMongoIdPipe) id: Types.ObjectId) {
+    return this.dishesService.findById(id);
   }
 }

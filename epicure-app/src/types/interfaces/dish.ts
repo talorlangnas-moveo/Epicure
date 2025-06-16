@@ -1,11 +1,9 @@
-import { StaticImageData } from 'next/image';
-
 export interface Dish {
-    id: string;
+    _id: string;
     restaurantId: string;
     title: string;
     description: string;
-    imgUrl: StaticImageData;
+    imgUrl: string;
     price: number;
-    dishCategoryLogo?: StaticImageData;
+    dishCategory?: string;
 }

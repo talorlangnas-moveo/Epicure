@@ -7,13 +7,18 @@ import Carousel from "@components/carousel/carousel";
 import Card from "@/components/card/card";
 import CardsDisplay from "@components/cardsDisplay/cardsDisplay";
 import AboutUs from "@components/aboutUs/aboutUs";
-import { fetchDishCards,  fetchChefRestCards, fetchRestaurantsAsCards  } from "@/utils/fetchCards";
+import { fetchChefRestCards } from "@/utils/fetchCards";
+import { fetchAll } from "@/services/dishes/dishes.api";
+import { getDishesAsCards } from "@/services/dishes/dishes.utils";
+import { fetchRestaurants } from "@/services/restaurants/restaurants.api";
+import { getRestaurantsAsCards } from "@/services/restaurants/restaurants.utils";
 
 export default async function Home() {
-
-  const dishCards = await fetchDishCards();
+  const restaurants = await fetchRestaurants();
+  const restaurantsCards = await getRestaurantsAsCards(restaurants);
+  const dishes = await fetchAll();
+  const dishCards = await getDishesAsCards(dishes);
   const chefRestaurantsCards = await fetchChefRestCards();
-  const restaurantsCards = await fetchRestaurantsAsCards();
 
   return (
     <div>

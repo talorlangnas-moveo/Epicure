@@ -21,8 +21,8 @@ export const restaurantImagesMap: { [key: string]: StaticImageData } = {
     "/restaurantsDesk/messa2.png": Messa2Image,
 }
 
-export const getRestaurantImage = (restaurantName: string): StaticImageData => {
-    return restaurantImagesMap[restaurantName] || ClaroImage;
+export const getRestaurantImage = (imgUrl: string): StaticImageData => {
+    return restaurantImagesMap[imgUrl] || ClaroImage;
 }
 
 
