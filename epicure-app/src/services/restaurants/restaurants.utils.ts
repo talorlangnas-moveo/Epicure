@@ -1,6 +1,6 @@
 import { CardInfo } from "@/components/card/card";
 import { CardType } from "@/types/cardType";
-import { Restaurant } from "@/types/interfaces/restaurant";
+import { Restaurant } from "@/types/interfaces/restaurant_tmp";
 import { getRestaurantImage } from "@/services/restaurants/image.utils";
 import { getRatingImage } from "@/utils/rating.utils";
 

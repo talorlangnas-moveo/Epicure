@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useState } from "react";
-import { Restaurant } from "@/types/interfaces/restaurant";
+import { Restaurant } from "@/types/interfaces/restaurant_tmp";
 import { filterDishTypesOptions } from "@/services/restaurants/restaurantsFilterFunctions";
 import styles from "./dishesDisplay.module.scss";
 import clsx from "clsx";

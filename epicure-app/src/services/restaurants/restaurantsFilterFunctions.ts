@@ -1,6 +1,6 @@
 "use client";
 
-import { Restaurant } from "@/types/interfaces/restaurant";
+import { Restaurant } from "@/types/interfaces/restaurant_tmp";
 import { CardInfo } from '@components/card/card';
 import { convertRestaurantToCard } from "@/services/restaurants/restaurants.utils";
 import { FilterOption } from "@/types/interfaces/filterOption";
