@@ -14,6 +14,5 @@ export async function fetchDishesByRestaurantId(restaurantId: string): Promise<D
       restaurantId: restaurantId,
     },
   });
-  console.log('res: ', res.data);
   return res.data;
 }
