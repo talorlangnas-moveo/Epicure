@@ -1,6 +1,8 @@
 import { Controller, Get, Post, Body, Param } from '@nestjs/common';
 import { RestaurantsService } from './restaurants.service';
 import { CreateRestaurantDto } from './dto/create-restaurant.dto';
+import { ParseMongoIdPipe } from './pipes/parse-mongo-id.pipe';
+import { Types } from 'mongoose';
 
 @Controller('restaurants')
 export class RestaurantsController {
@@ -17,7 +19,7 @@ export class RestaurantsController {
   }
 
   @Get(':id')
-  findById(@Param('id') id: string) {
+  findById(@Param('id', ParseMongoIdPipe) id: Types.ObjectId) {
     return this.restaurantsService.findById(id);
   }
 }
