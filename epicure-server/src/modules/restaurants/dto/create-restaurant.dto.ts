@@ -1,4 +1,11 @@
-import { IsString, IsNotEmpty, IsNumber } from 'class-validator';
+import { Type } from 'class-transformer';
+import {
+  IsString,
+  IsNotEmpty,
+  IsNumber,
+  IsDate,
+  IsOptional,
+} from 'class-validator';
 
 export class CreateRestaurantDto {
   @IsString()
@@ -25,7 +32,8 @@ export class CreateRestaurantDto {
   @IsNotEmpty()
   closingTime: string;
 
-  @IsString()
-  @IsNotEmpty()
-  foundedDate: string;
+  @Type(() => Date)
+  @IsDate()
+  @IsOptional()
+  foundedDate: Date;
 }
