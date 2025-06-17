@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Param } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Query } from '@nestjs/common';
 import { ChefsService } from './chefs.service';
 import { CreateChefDto } from './dto/create-chef.dto';
 import { ParseMongoIdPipe } from '../restaurants/pipes/parse-mongo-id.pipe';
@@ -14,7 +14,16 @@ export class ChefsController {
   }
 
   @Get()
-  findAll() {
+  findAll(
+    @Query('foundedDate') foundedDate?: string,
+    @Query('numberOfViews') numberOfViews?: string,
+  ) {
+    if (foundedDate === 'new') {
+      return this.chefsService.getTop3NewestChefs();
+    }
+    if (numberOfViews === 'mostPopular') {
+      return this.chefsService.getTop3MostPopularChefs();
+    }
     return this.chefsService.findAll();
   }
 

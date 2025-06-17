@@ -28,4 +28,12 @@ export class ChefsService {
     }
     return chef;
   }
+
+  async getTop3NewestChefs(): Promise<Chef[]> {
+    return this.chefModel.find().sort({ foundedDate: -1 }).limit(3).exec();
+  }
+
+  async getTop3MostPopularChefs(): Promise<Chef[]> {
+    return this.chefModel.find().sort({ numberOfViews: -1 }).limit(3).exec();
+  }
 }

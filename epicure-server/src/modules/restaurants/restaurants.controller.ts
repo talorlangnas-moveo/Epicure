@@ -23,7 +23,7 @@ export class RestaurantsController {
       return this.restaurantsService.getTop3NewestRestaurants();
     }
     if (rating === 'mostPopular') {
-      return this.restaurantsService.getTop3MostPopular();
+      return this.restaurantsService.getTop3MostPopularRestaurants();
     }
     if (openNow === 'true') {
       return this.restaurantsService.getOpenRestaurantsNow();

@@ -41,7 +41,7 @@ export class RestaurantsService {
       .exec();
   }
 
-  async getTop3MostPopular(): Promise<Restaurant[]> {
+  async getTop3MostPopularRestaurants(): Promise<Restaurant[]> {
     return this.restaurantModel.find().sort({ rating: -1 }).limit(3).exec();
   }
 
