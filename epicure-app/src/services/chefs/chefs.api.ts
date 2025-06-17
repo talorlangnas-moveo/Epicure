@@ -1,5 +1,7 @@
 import axios from 'axios';
 import { Chef } from '@/types/interfaces/chef';
+import { CardInfo } from '@/components/card/card';
+import { convertChefToCard } from './chefs.utils';
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 
@@ -11,4 +13,26 @@ export async function fetchChefs(): Promise<Chef[]> {
 export async function fetchChefById(id: string): Promise<Chef> {
   const res = await axios.get(`${API_BASE_URL}/chefs/${id}`);
   return res.data;
+}
+
+export async function getNewestChefsAsCards(): Promise<CardInfo[]> {
+  const res = await axios.get(`${API_BASE_URL}/chefs/`, {
+    params: {
+      foundedDate: 'new',
+    },
+  });
+
+  const chefs: Chef[] = res.data;
+  return chefs.map(convertChefToCard);
+}
+
+export async function getMostViewedChefsAsCards(): Promise<CardInfo[]> {
+  const res = await axios.get(`${API_BASE_URL}/chefs/`, {
+    params: {
+      numberOfViews: 'mostPopular',
+    },
+  });
+
+  const chefs: Chef[] = res.data;
+  return chefs.map(convertChefToCard);
 }
