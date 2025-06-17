@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { useState } from "react";
 import { Restaurant } from "@/types/interfaces/restaurant";
-import { filterDishTypesOptions } from "@/utils/restaurantsFilterFunctions";
+import { filterDishTypesOptions } from "@/services/restaurants/restaurantsFilterFunctions";
 import styles from "./dishesDisplay.module.scss";
 import clsx from "clsx";
 import { useIsDesktopView } from "@/hooks/useIsDesktopView";
@@ -14,6 +14,7 @@ import cardsStyles from "@components/card/card.module.scss";
 import DishOrderCard from "@/components/orderCard/orderCard";
 import Modal from "@components/modal/modal";
 import MobileViewWrapper from "@components/mobileViewWrapper/mobileViewWrapper";
+import { getRestaurantImage } from "@/services/restaurants/image.utils";
 
 interface DishesDisplayProps {
   restaurant: Restaurant;
@@ -54,12 +55,12 @@ export default function DishesDisplay({
       ) : (
         <div className={styles.dishesDisplayContainer}>
           <Image
-            src={restaurant.imgUrl}
-            alt={restaurant.title}
+            src={getRestaurantImage(restaurant.imgUrl)}
+            alt={restaurant.name}
             className={styles.restaurantImage}
           />
           <div className={styles.textContainer}>
-            <h1 className={styles.heading}>{restaurant.title}</h1>
+            <h1 className={styles.heading}>{restaurant.name}</h1>
             <p className={styles.description}>{restaurant.description}</p>
             <div className={styles.openingHours}>
               <Image

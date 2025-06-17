@@ -1,10 +1,9 @@
-import { StaticImageData } from "next/image";
-
 export interface Chef {
-    id: string;
+    _id: string;
     firstName: string;
     lastName: string;
-    imgUrl: StaticImageData;
-    foundedDate: string;
+    description: string;
+    imgUrl: string;
+    foundedDate: Date;
     numberOfViews: number;
 }

@@ -2,7 +2,7 @@
 
 import { Restaurant } from "@/types/interfaces/restaurant";
 import { CardInfo } from '@components/card/card';
-import { convertRestaurantToCard } from "./fetchCards";
+import { convertRestaurantToCard } from "@/services/restaurants/restaurants.utils";
 import { FilterOption } from "@/types/interfaces/filterOption";
 
 export const restaurantsFilterOptions: FilterOption[] = [

@@ -25,9 +25,6 @@ export class Restaurant {
 
   @Prop({ required: true, default: Date.now })
   foundedDate: Date;
-
-  @Prop({ default: Date.now })
-  createdAt: Date;
 }
 
 export const RestaurantSchema = SchemaFactory.createForClass(Restaurant);

@@ -1,4 +1,6 @@
-import { fetchRestaurantById, fetchDishesByRestaurantId, convertDishToCard } from "@/utils/fetchCards";
+import { convertDishToCard } from "@/services/dishes/dishes.utils";
+import { fetchDishesByRestaurantId } from "@/services/dishes/dishes.api";
+import { fetchRestaurantById } from "@/services/restaurants/restaurants.api";
 import { notFound } from "next/navigation";
 import DishesDisplay from "@/components/dishesDisplay/dishesDisplay";
 
@@ -9,11 +11,10 @@ interface RestaurantPageProps {
 }
 
 export default async function RestaurantPage({ params }: RestaurantPageProps) {
-  
   const restaurant = await fetchRestaurantById(params.id);
   const dishes = await fetchDishesByRestaurantId(params.id);
   const dishAsCards = dishes.map(convertDishToCard);
-
+  
   if (!restaurant) {
     notFound();
   }
