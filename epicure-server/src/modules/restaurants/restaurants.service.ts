@@ -4,6 +4,7 @@ import { Restaurant } from './schemas/restaurant.schema';
 import { InjectModel } from '@nestjs/mongoose';
 import mongoose, { Types } from 'mongoose';
 import { Body } from '@nestjs/common';
+import * as moment from 'moment';
 
 @Injectable()
 export class RestaurantsService {
@@ -30,5 +31,36 @@ export class RestaurantsService {
       throw new NotFoundException('Restaurant not found');
     }
     return restaurant;
+  }
+
+  async getTop3NewestRestaurants(): Promise<Restaurant[]> {
+    return this.restaurantModel
+      .find()
+      .sort({ foundedDate: -1 })
+      .limit(3)
+      .exec();
+  }
+
+  async getTop3MostPopular(): Promise<Restaurant[]> {
+    return this.restaurantModel.find().sort({ rating: -1 }).limit(3).exec();
+  }
+
+  async getOpenRestaurantsNow(): Promise<Restaurant[]> {
+    const now = moment();
+
+    const allRestaurants = await this.restaurantModel.find().exec();
+
+    const openRestaurants = allRestaurants.filter((restaurant) => {
+      const opening = moment(restaurant.openingTime, 'HH:mm');
+      const closing = moment(restaurant.closingTime, 'HH:mm');
+
+      if (closing.isBefore(opening)) {
+        return now.isAfter(opening) || now.isBefore(closing);
+      } else {
+        return now.isBetween(opening, closing);
+      }
+    });
+
+    return openRestaurants;
   }
 }

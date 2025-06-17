@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Param } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Query } from '@nestjs/common';
 import { RestaurantsService } from './restaurants.service';
 import { CreateRestaurantDto } from './dto/create-restaurant.dto';
 import { ParseMongoIdPipe } from './pipes/parse-mongo-id.pipe';
@@ -14,7 +14,20 @@ export class RestaurantsController {
   }
 
   @Get()
-  async findAll() {
+  async findAll(
+    @Query('foundedDate') foundedDate?: string,
+    @Query('rating') rating?: string,
+    @Query('openNow') openNow?: string,
+  ) {
+    if (foundedDate === 'new') {
+      return this.restaurantsService.getTop3NewestRestaurants();
+    }
+    if (rating === 'mostPopular') {
+      return this.restaurantsService.getTop3MostPopular();
+    }
+    if (openNow === 'true') {
+      return this.restaurantsService.getOpenRestaurantsNow();
+    }
     return this.restaurantsService.findAll();
   }
 
