@@ -5,7 +5,7 @@ import { ColumnDef } from "@tanstack/react-table"
 import { MoreHorizontal } from "lucide-react"
 import { ArrowUpDown, Star } from "lucide-react"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
- 
+
 import { Button } from "@/components/ui/button"
 import {
   DropdownMenu,
