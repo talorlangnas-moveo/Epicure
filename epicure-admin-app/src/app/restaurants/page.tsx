@@ -1,4 +1,6 @@
-export default function RestaurantsPage() {
+
+
+export default async function RestaurantsPage() {
     return (
       <div>
           <h1>Restaurants page</h1>
