@@ -12,6 +12,8 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
 } from "@/components/ui/dropdown-menu"
 
 export const columns: ColumnDef<RestaurantColumn>[] = [
@@ -120,12 +122,14 @@ export const columns: ColumnDef<RestaurantColumn>[] = [
         <div className="text-center">
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button variant="ghost" className="h-8 w-8 p-0">
+          <Button variant="ghost" className="h-8 w-8 p-0 focus:outline-none focus-visible:ring-0">
               <span className="sr-only">Open menu</span>
               <MoreHorizontal className="h-4 w-4" />
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
+          <DropdownMenuLabel className="font-bold">Actions</DropdownMenuLabel>
+          <DropdownMenuSeparator />
             <DropdownMenuItem onClick={() => console.log(row.original.name)}>Edit</DropdownMenuItem>
             <DropdownMenuItem onClick={() => console.log(row.original.name)} >Delete</DropdownMenuItem>
           </DropdownMenuContent>
