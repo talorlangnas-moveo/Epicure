@@ -20,10 +20,10 @@ import { TextPopover } from "@/components/ui/text-popover";
 
 export const columns: ColumnDef<DishColumn>[] = [
   {
-    accessorKey: "image",
+    accessorKey: "imgUrl",
     header: "",
     cell: ({ row }) => {
-      const imageUrl = row.getValue<string>("image");
+      const imageUrl = row.getValue<string>("imgUrl");
       const name = row.getValue<string>("name");
 
       return (
