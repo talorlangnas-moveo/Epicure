@@ -1,5 +1,6 @@
 import { StaticImageData } from 'next/image';
 import { SpicyIconCard, VegitarianIcon, VeganIcon } from '@/icons';
+import { DishCategoryType } from '@/types/interfaces/dish';
 
 export const dishCategoryToLogoMap: { [key: string]: StaticImageData } = {
     "spicy": SpicyIconCard,
@@ -7,6 +8,6 @@ export const dishCategoryToLogoMap: { [key: string]: StaticImageData } = {
     "vegan": VeganIcon,
 } as const;
 
-export const getDishCategoryLogo = (dishCategory: string): StaticImageData => {
+export const getDishCategoryLogo = (dishCategory: DishCategoryType): StaticImageData => {
     return dishCategoryToLogoMap[dishCategory] || SpicyIconCard; 
 }; 

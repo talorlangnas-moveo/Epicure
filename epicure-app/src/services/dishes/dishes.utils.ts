@@ -8,7 +8,7 @@ export function convertDishToCard(dish: Dish): CardInfo {
     return {
       id: dish._id,
       type: 'dish' as CardType,
-      title: dish.title,
+      title: dish.name,
       description: dish.description,
       imgUrl: getDishImage(dish.imgUrl),
       price: dish.price,
