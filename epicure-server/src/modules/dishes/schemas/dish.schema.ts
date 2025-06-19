@@ -19,7 +19,7 @@ export class Dish {
   })
   restaurantId: Types.ObjectId;
   @Prop({ required: true })
-  title: string;
+  name: string;
 
   @Prop({ required: true })
   description: string;

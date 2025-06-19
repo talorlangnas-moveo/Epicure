@@ -15,7 +15,7 @@ export class CreateDishDto {
 
   @IsString()
   @IsNotEmpty()
-  title: string;
+  name: string;
 
   @IsString()
   @IsNotEmpty()

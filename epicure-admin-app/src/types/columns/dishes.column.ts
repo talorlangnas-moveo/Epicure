@@ -1,11 +1,6 @@
-export type DishColumn = {
-    _id: string;
-    restaurantId: string;
-    name: string;
-    description: string;
-    image: string;
-    price: number;
-    dishCategory?: string;
+import { Dish } from "@/types/interfaces/dishes";
+
+export type DishColumn = Dish & {
     chefName?: string;
     restaurantName?: string;
 }
