@@ -2,9 +2,9 @@ import { columns } from "./columns";
 import { RestaurantColumn } from "@/types/columns/restaurant.column";
 import { DataTable } from "@/components/ui/data-table";
 import DataDisplay from "@/components/ui/data-display";
+import StatsSection from "@/components/stats";
 
 async function getData(): Promise<RestaurantColumn[]> {
-  // Fetch data from your API here.
   return [
     {
       id: "728ed52f",
@@ -73,8 +73,10 @@ export default async function RestaurantsPage() {
   const data = await getData();
   return (
     <div>
-      <DataDisplay title="Restaurants">
-        <DataTable columns={columns} data={data} />
+      <DataDisplay>
+        <StatsSection title="Restaurants" description="Restaurants in the system">
+          <DataTable columns={columns} data={data} />
+        </StatsSection>
       </DataDisplay>
     </div>
   );
