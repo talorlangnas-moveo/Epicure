@@ -1,15 +1,28 @@
-import { Controller, Get, Post, Body, Param, Query } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Param,
+  Query,
+  Put,
+  Delete,
+} from '@nestjs/common';
 import { RestaurantsService } from './restaurants.service';
 import { CreateRestaurantDto } from './dto/create-restaurant.dto';
 import { ParseMongoIdPipe } from './pipes/parse-mongo-id.pipe';
 import { Types } from 'mongoose';
+import { UpdateRestaurantDto } from './dto/update-restaurant.dto';
+import { Restaurant } from './schemas/restaurant.schema';
 
 @Controller('restaurants')
 export class RestaurantsController {
   constructor(private readonly restaurantsService: RestaurantsService) {}
 
   @Post()
-  create(@Body() createRestaurantDto: CreateRestaurantDto) {
+  create(
+    @Body() createRestaurantDto: CreateRestaurantDto,
+  ): Promise<Restaurant> {
     return this.restaurantsService.create(createRestaurantDto);
   }
 
@@ -18,7 +31,7 @@ export class RestaurantsController {
     @Query('foundedDate') foundedDate?: string,
     @Query('rating') rating?: string,
     @Query('openNow') openNow?: string,
-  ) {
+  ): Promise<Restaurant[]> {
     if (foundedDate === 'new') {
       return this.restaurantsService.getTop3NewestRestaurants();
     }
@@ -32,7 +45,24 @@ export class RestaurantsController {
   }
 
   @Get(':id')
-  findById(@Param('id', ParseMongoIdPipe) id: Types.ObjectId) {
+  findById(
+    @Param('id', ParseMongoIdPipe) id: Types.ObjectId,
+  ): Promise<Restaurant> {
     return this.restaurantsService.findById(id);
+  }
+
+  @Put(':id')
+  update(
+    @Param('id', ParseMongoIdPipe) id: Types.ObjectId,
+    @Body() updateRestaurantDto: UpdateRestaurantDto,
+  ): Promise<Restaurant> {
+    return this.restaurantsService.updateById(id, updateRestaurantDto);
+  }
+
+  @Delete(':id')
+  remove(
+    @Param('id', ParseMongoIdPipe) id: Types.ObjectId,
+  ): Promise<Restaurant> {
+    return this.restaurantsService.removeById(id);
   }
 }

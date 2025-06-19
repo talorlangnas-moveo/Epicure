@@ -5,6 +5,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import mongoose, { Types } from 'mongoose';
 import { Body } from '@nestjs/common';
 import * as moment from 'moment';
+import { UpdateRestaurantDto } from './dto/update-restaurant.dto';
 
 @Injectable()
 export class RestaurantsService {
@@ -31,6 +32,29 @@ export class RestaurantsService {
       throw new NotFoundException('Restaurant not found');
     }
     return restaurant;
+  }
+
+  async updateById(
+    id: Types.ObjectId,
+    updateRestaurantDto: UpdateRestaurantDto,
+  ): Promise<Restaurant> {
+    const updatedRestaurant = await this.restaurantModel.findByIdAndUpdate(
+      id,
+      updateRestaurantDto,
+      { new: true },
+    );
+    if (!updatedRestaurant) {
+      throw new NotFoundException('Restaurant not found');
+    }
+    return updatedRestaurant;
+  }
+
+  async removeById(id: Types.ObjectId): Promise<Restaurant> {
+    const deletedRestaurant = await this.restaurantModel.findByIdAndDelete(id);
+    if (!deletedRestaurant) {
+      throw new NotFoundException('Restaurant not found');
+    }
+    return deletedRestaurant;
   }
 
   async getTop3NewestRestaurants(): Promise<Restaurant[]> {
