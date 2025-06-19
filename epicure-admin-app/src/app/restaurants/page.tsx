@@ -4,7 +4,7 @@ import { DataTable } from "@/components/ui/data-table";
 import DataDisplay from "@/components/ui/data-display";
 import StatsSection from "@/components/stats";
 
-async function getData(): Promise<RestaurantColumn[]> {
+export async function getData(): Promise<RestaurantColumn[]> {
   return [
     {
       id: "728ed52f",
@@ -73,10 +73,8 @@ export default async function RestaurantsPage() {
   const data = await getData();
   return (
     <div>
-      <DataDisplay>
-        <StatsSection title="Restaurants" description="Restaurants in the system">
-          <DataTable columns={columns} data={data} />
-        </StatsSection>
+      <DataDisplay title="Restaurants">
+        <DataTable columns={columns} data={data} />
       </DataDisplay>
     </div>
   );

@@ -1,4 +1,3 @@
-import DataDisplay from "@/components/ui/data-display";
 import Features from "@/components/features-1";
 import { CardItem } from "@/types/interfaces/cardItem";
 import { Store, Soup, ChefHat } from "lucide-react";
@@ -33,6 +32,7 @@ async function getItems(): Promise<CardItem[]> {
 
 export default async function Home() {
   const items = await getItems();
+
   return (
     <main>
       <div>
