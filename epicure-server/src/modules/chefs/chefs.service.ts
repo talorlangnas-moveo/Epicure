@@ -3,6 +3,7 @@ import { CreateChefDto } from './dto/create-chef.dto';
 import { InjectModel } from '@nestjs/mongoose';
 import mongoose, { Types } from 'mongoose';
 import { Chef } from './schemas/chef.schema';
+import { UpdateChefDto } from './dto/update-chef.dto';
 
 @Injectable()
 export class ChefsService {
@@ -27,6 +28,29 @@ export class ChefsService {
       throw new NotFoundException('Chef not found');
     }
     return chef;
+  }
+
+  async updateById(
+    id: Types.ObjectId,
+    updateChefDto: UpdateChefDto,
+  ): Promise<Chef> {
+    const updatedChef = await this.chefModel.findByIdAndUpdate(
+      id,
+      updateChefDto,
+      { new: true },
+    );
+    if (!updatedChef) {
+      throw new NotFoundException('Chef not found');
+    }
+    return updatedChef;
+  }
+
+  async removeById(id: Types.ObjectId): Promise<Chef> {
+    const deletedChef = await this.chefModel.findByIdAndDelete(id);
+    if (!deletedChef) {
+      throw new NotFoundException('Chef not found');
+    }
+    return deletedChef;
   }
 
   async getTop3NewestChefs(): Promise<Chef[]> {

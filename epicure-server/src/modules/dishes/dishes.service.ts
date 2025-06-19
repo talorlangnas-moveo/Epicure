@@ -53,7 +53,7 @@ export class DishesService {
   async removeById(id: Types.ObjectId): Promise<Dish> {
     const deletedDish = await this.dishModel.findByIdAndDelete(id);
     if (!deletedDish) {
-      throw new NotFoundException('Restaurant not found');
+      throw new NotFoundException('Dish not found');
     }
     return deletedDish;
   }
