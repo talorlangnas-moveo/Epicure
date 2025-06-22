@@ -10,7 +10,7 @@ interface FeaturesProps {
   cards?: CardItem[];
 }
 
-export default function Features({
+export default function StatsPanel({
   title,
   description,
   children,

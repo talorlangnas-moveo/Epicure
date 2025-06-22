@@ -26,7 +26,7 @@ export class RestaurantsService {
     return restaurants;
   }
 
-  async findById(id: string | Types.ObjectId): Promise<Restaurant> {
+  async findOne(id: string | Types.ObjectId): Promise<Restaurant> {
     const restaurant = await this.restaurantModel.findById(id);
     if (!restaurant) {
       throw new NotFoundException('Restaurant not found');
@@ -34,7 +34,7 @@ export class RestaurantsService {
     return restaurant;
   }
 
-  async updateById(
+  async update(
     id: Types.ObjectId,
     updateRestaurantDto: UpdateRestaurantDto,
   ): Promise<Restaurant> {
@@ -49,7 +49,7 @@ export class RestaurantsService {
     return updatedRestaurant;
   }
 
-  async removeById(id: Types.ObjectId): Promise<Restaurant> {
+  async remove(id: Types.ObjectId): Promise<Restaurant> {
     const deletedRestaurant = await this.restaurantModel.findByIdAndDelete(id);
     if (!deletedRestaurant) {
       throw new NotFoundException('Restaurant not found');
@@ -71,20 +71,45 @@ export class RestaurantsService {
 
   async getOpenRestaurantsNow(): Promise<Restaurant[]> {
     const now = moment();
+    const currentTime = now.format('HH:mm');
 
-    const allRestaurants = await this.restaurantModel.find().exec();
+    const result = await this.restaurantModel
+      .aggregate<Restaurant>([
+        {
+          $addFields: {
+            currentTime: currentTime,
+            isOvernight: { $lt: ['$closingTime', '$openingTime'] },
+          },
+        },
+        {
+          $match: {
+            $or: [
+              // Case 1: Normal hours (closing time after opening time)
+              {
+                isOvernight: false,
+                openingTime: { $lte: currentTime },
+                closingTime: { $gt: currentTime },
+              },
+              // Case 2: Overnight hours (closing time before opening time)
+              {
+                isOvernight: true,
+                $or: [
+                  { openingTime: { $lte: currentTime } },
+                  { closingTime: { $gt: currentTime } },
+                ],
+              },
+            ],
+          },
+        },
+        {
+          $project: {
+            isOvernight: 0,
+            currentTime: 0,
+          },
+        },
+      ])
+      .exec();
 
-    const openRestaurants = allRestaurants.filter((restaurant) => {
-      const opening = moment(restaurant.openingTime, 'HH:mm');
-      const closing = moment(restaurant.closingTime, 'HH:mm');
-
-      if (closing.isBefore(opening)) {
-        return now.isAfter(opening) || now.isBefore(closing);
-      } else {
-        return now.isBetween(opening, closing);
-      }
-    });
-
-    return openRestaurants;
+    return result;
   }
 }

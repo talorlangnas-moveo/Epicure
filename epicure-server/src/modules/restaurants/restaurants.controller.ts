@@ -46,10 +46,10 @@ export class RestaurantsController {
   }
 
   @Get(':id')
-  findById(
+  findOne(
     @Param('id', ParseMongoIdPipe) id: Types.ObjectId,
   ): Promise<Restaurant> {
-    return this.restaurantsService.findById(id);
+    return this.restaurantsService.findOne(id);
   }
 
   @Put(':id')
@@ -57,13 +57,13 @@ export class RestaurantsController {
     @Param('id', ParseMongoIdPipe) id: Types.ObjectId,
     @Body(ValidateChefPipe) updateRestaurantDto: UpdateRestaurantDto,
   ): Promise<Restaurant> {
-    return this.restaurantsService.updateById(id, updateRestaurantDto);
+    return this.restaurantsService.update(id, updateRestaurantDto);
   }
 
   @Delete(':id')
   remove(
     @Param('id', ParseMongoIdPipe) id: Types.ObjectId,
   ): Promise<Restaurant> {
-    return this.restaurantsService.removeById(id);
+    return this.restaurantsService.remove(id);
   }
 }

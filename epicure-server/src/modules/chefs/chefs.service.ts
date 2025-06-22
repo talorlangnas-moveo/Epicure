@@ -22,7 +22,7 @@ export class ChefsService {
     return chefs;
   }
 
-  async findById(id: Types.ObjectId): Promise<Chef> {
+  async findOne(id: Types.ObjectId): Promise<Chef> {
     const chef = await this.chefModel.findById(id);
     if (!chef) {
       throw new NotFoundException('Chef not found');
@@ -30,7 +30,7 @@ export class ChefsService {
     return chef;
   }
 
-  async updateById(
+  async update(
     id: Types.ObjectId,
     updateChefDto: UpdateChefDto,
   ): Promise<Chef> {
@@ -45,7 +45,7 @@ export class ChefsService {
     return updatedChef;
   }
 
-  async removeById(id: Types.ObjectId): Promise<Chef> {
+  async remove(id: Types.ObjectId): Promise<Chef> {
     const deletedChef = await this.chefModel.findByIdAndDelete(id);
     if (!deletedChef) {
       throw new NotFoundException('Chef not found');

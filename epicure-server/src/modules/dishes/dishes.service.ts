@@ -27,7 +27,7 @@ export class DishesService {
     return dishes;
   }
 
-  async findById(id: Types.ObjectId): Promise<Dish> {
+  async findOne(id: Types.ObjectId): Promise<Dish> {
     const dish = await this.dishModel.findById(id);
     if (!dish) {
       throw new NotFoundException(`Dish not found`);
@@ -35,7 +35,7 @@ export class DishesService {
     return dish;
   }
 
-  async updateById(
+  async update(
     id: Types.ObjectId,
     updateDishDto: UpdateDishDto,
   ): Promise<Dish> {
@@ -50,7 +50,7 @@ export class DishesService {
     return updatedDish;
   }
 
-  async removeById(id: Types.ObjectId): Promise<Dish> {
+  async remove(id: Types.ObjectId): Promise<Dish> {
     const deletedDish = await this.dishModel.findByIdAndDelete(id);
     if (!deletedDish) {
       throw new NotFoundException('Dish not found');
