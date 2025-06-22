@@ -71,20 +71,45 @@ export class RestaurantsService {
 
   async getOpenRestaurantsNow(): Promise<Restaurant[]> {
     const now = moment();
+    const currentTime = now.format('HH:mm');
 
-    const allRestaurants = await this.restaurantModel.find().exec();
+    const result = await this.restaurantModel
+      .aggregate<Restaurant>([
+        {
+          $addFields: {
+            currentTime: currentTime,
+            isOvernight: { $lt: ['$closingTime', '$openingTime'] },
+          },
+        },
+        {
+          $match: {
+            $or: [
+              // Case 1: Normal hours (closing time after opening time)
+              {
+                isOvernight: false,
+                openingTime: { $lte: currentTime },
+                closingTime: { $gt: currentTime },
+              },
+              // Case 2: Overnight hours (closing time before opening time)
+              {
+                isOvernight: true,
+                $or: [
+                  { openingTime: { $lte: currentTime } },
+                  { closingTime: { $gt: currentTime } },
+                ],
+              },
+            ],
+          },
+        },
+        {
+          $project: {
+            isOvernight: 0,
+            currentTime: 0,
+          },
+        },
+      ])
+      .exec();
 
-    const openRestaurants = allRestaurants.filter((restaurant) => {
-      const opening = moment(restaurant.openingTime, 'HH:mm');
-      const closing = moment(restaurant.closingTime, 'HH:mm');
-
-      if (closing.isBefore(opening)) {
-        return now.isAfter(opening) || now.isBefore(closing);
-      } else {
-        return now.isBetween(opening, closing);
-      }
-    });
-
-    return openRestaurants;
+    return result;
   }
 }
