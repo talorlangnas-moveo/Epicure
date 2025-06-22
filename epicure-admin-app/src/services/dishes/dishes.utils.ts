@@ -1,30 +1,32 @@
 import {Dish} from '@/types/interfaces/dish';
-import { DishColumn } from '@/types/columns/dishes.column';
+import { DishColumn } from '@/types/columns/dish.column';
 import { Flame, Leaf, Salad, Utensils } from "lucide-react"
 import { DishCategoryInfo } from '@/types/dishCategoryInfo';
-import { CardInfo } from '@/components/card/card';
-import { CardType } from '@/types/cardType';
-import { getDishImage } from './image.utils';
-import { getDishCategoryLogo } from '@/utils/dishCategoryLogo.utils';
+import { fetchRestaurantById } from '@services/restaurants/restaurants.api';
+import { getChefsNameById } from '../restaurants/restaurants.utils';
 
-export function convertDishToCulomn(dish: Dish): CardInfo {
-    return {
-      id: dish._id,
-      type: 'dish' as CardType,
-      title: dish.name,
+export async function getRestaurantAndChefName(id: string): Promise<{restaurantName: string, chefName: string}> {
+  const restaurant = await fetchRestaurantById(id);
+  const chefName = await getChefsNameById(restaurant.chefId);
+  return {restaurantName: restaurant.name, chefName: chefName};
+}
+
+export async function convertDishToCulomn(dish: Dish): Promise<DishColumn> {
+  const {restaurantName, chefName} = await getRestaurantAndChefName(dish.restaurantId);
+  
+  return {
+      _id: dish._id,
+      restaurantId: dish.restaurantId,
+      name: dish.name,
       description: dish.description,
-      imgUrl: getDishImage(dish.imgUrl),
+      imgUrl: dish.imgUrl,
       price: dish.price,
-      dishCategoryLogo: dish.dishCategory ? getDishCategoryLogo(dish.dishCategory) : undefined,
+      dishCategory: dish.dishCategory,
+      restaurantName: restaurantName,
+      chefName: chefName,
     };
   }
 
-  export async function getDishesAsCards(dishes: Dish[]): Promise<CardInfo[]> {
-    return Promise.all(dishes.map(convertDishToCard));
-  }
-
-
-  
   export function getDishCategoryIcon(category?: string): DishCategoryInfo {
     switch (category) {
       case "spicy":

@@ -1,11 +1,11 @@
 "use client";
 
-import { DishColumn } from "@/types/columns/dishes.column";
+import { DishColumn } from "@/types/columns/dish.column";
 import { ColumnDef } from "@tanstack/react-table";
 import { MoreHorizontal } from "lucide-react";
 import { ArrowUpDown } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { getDishCategoryIcon } from "@/services2/dishes/dishes.utils";
+import { getDishCategoryIcon } from "@/services/dishes/dishes.utils";
 
 import { Button } from "@/components/ui/button"
 import {
