@@ -1,4 +1,4 @@
-import Features from "@/components/features-1";
+import StatsPanel from "@/components/stats-panel";
 import { CardItem } from "@/types/interfaces/cardItem";
 import { Store, Soup, ChefHat } from "lucide-react";
 
@@ -36,7 +36,7 @@ export default async function Home() {
   return (
     <main>
       <div>
-        <Features title="Epicure Admin Home" description="Epicure Admin Home" cards={items}/>
+        <StatsPanel title="Epicure Admin Home" description="Epicure Admin Home" cards={items}/>
       </div>
     </main>
   );
