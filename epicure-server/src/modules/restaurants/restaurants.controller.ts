@@ -14,6 +14,7 @@ import { ParseMongoIdPipe } from './pipes/parse-mongo-id.pipe';
 import { Types } from 'mongoose';
 import { UpdateRestaurantDto } from './dto/update-restaurant.dto';
 import { Restaurant } from './schemas/restaurant.schema';
+import { ValidateChefPipe } from './pipes/validate-chef.pipe';
 
 @Controller('restaurants')
 export class RestaurantsController {
@@ -21,7 +22,7 @@ export class RestaurantsController {
 
   @Post()
   create(
-    @Body() createRestaurantDto: CreateRestaurantDto,
+    @Body(ValidateChefPipe) createRestaurantDto: CreateRestaurantDto,
   ): Promise<Restaurant> {
     return this.restaurantsService.create(createRestaurantDto);
   }
@@ -54,7 +55,7 @@ export class RestaurantsController {
   @Put(':id')
   update(
     @Param('id', ParseMongoIdPipe) id: Types.ObjectId,
-    @Body() updateRestaurantDto: UpdateRestaurantDto,
+    @Body(ValidateChefPipe) updateRestaurantDto: UpdateRestaurantDto,
   ): Promise<Restaurant> {
     return this.restaurantsService.updateById(id, updateRestaurantDto);
   }

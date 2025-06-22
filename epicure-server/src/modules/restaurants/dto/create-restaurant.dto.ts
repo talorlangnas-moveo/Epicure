@@ -5,9 +5,14 @@ import {
   IsNumber,
   IsDate,
   IsOptional,
+  IsMongoId,
 } from 'class-validator';
 
 export class CreateRestaurantDto {
+  @IsMongoId()
+  @IsNotEmpty()
+  chefId: string;
+
   @IsString()
   @IsNotEmpty()
   name: string;

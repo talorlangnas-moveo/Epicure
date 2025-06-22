@@ -25,6 +25,7 @@
       "@styles/*": ["./src/styles/*"],
       "@interfaces/*": ["./src/types/interfaces/*"],
       "@icons": ["./src/icons/index"],
+      "@services/*": ["./src/services/*"],
     }
     
   },
