@@ -26,7 +26,7 @@ export class RestaurantsService {
     return restaurants;
   }
 
-  async findById(id: string | Types.ObjectId): Promise<Restaurant> {
+  async findOne(id: string | Types.ObjectId): Promise<Restaurant> {
     const restaurant = await this.restaurantModel.findById(id);
     if (!restaurant) {
       throw new NotFoundException('Restaurant not found');
@@ -34,7 +34,7 @@ export class RestaurantsService {
     return restaurant;
   }
 
-  async updateById(
+  async update(
     id: Types.ObjectId,
     updateRestaurantDto: UpdateRestaurantDto,
   ): Promise<Restaurant> {
@@ -49,7 +49,7 @@ export class RestaurantsService {
     return updatedRestaurant;
   }
 
-  async removeById(id: Types.ObjectId): Promise<Restaurant> {
+  async remove(id: Types.ObjectId): Promise<Restaurant> {
     const deletedRestaurant = await this.restaurantModel.findByIdAndDelete(id);
     if (!deletedRestaurant) {
       throw new NotFoundException('Restaurant not found');

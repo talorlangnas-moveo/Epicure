@@ -41,8 +41,8 @@ export class DishesController {
   }
 
   @Get(':id')
-  findById(@Param('id', ParseMongoIdPipe) id: Types.ObjectId): Promise<Dish> {
-    return this.dishesService.findById(id);
+  findOne(@Param('id', ParseMongoIdPipe) id: Types.ObjectId): Promise<Dish> {
+    return this.dishesService.findOne(id);
   }
 
   @Put(':id')
@@ -50,11 +50,11 @@ export class DishesController {
     @Param('id', ParseMongoIdPipe) id: Types.ObjectId,
     @Body() updateDishDto: UpdateDishDto,
   ): Promise<Dish> {
-    return this.dishesService.updateById(id, updateDishDto);
+    return this.dishesService.update(id, updateDishDto);
   }
 
   @Delete(':id')
   remove(@Param('id', ParseMongoIdPipe) id: Types.ObjectId): Promise<Dish> {
-    return this.dishesService.removeById(id);
+    return this.dishesService.remove(id);
   }
 }
