@@ -17,7 +17,16 @@ import {
   DropdownMenuSeparator,
 } from "@/components/ui/dropdown-menu"
 
-export const columns: ColumnDef<RestaurantColumn>[] = [
+interface ColumnsProps {
+  onDelete: (value: RestaurantColumn) => void;
+  onEdit: (value: RestaurantColumn) => void;
+}
+
+export function RestaurantColumns({
+  onDelete,
+  onEdit,
+}: ColumnsProps): ColumnDef<RestaurantColumn>[] {
+  return [
   {
     accessorKey: "image",
     header: "",
@@ -118,7 +127,8 @@ export const columns: ColumnDef<RestaurantColumn>[] = [
   {
     id: "actions",
     cell: ({ row }) => {
-
+      const restaurant = row.original
+      
       return (
         <div className="text-center">
         <DropdownMenu>
@@ -131,12 +141,14 @@ export const columns: ColumnDef<RestaurantColumn>[] = [
           <DropdownMenuContent align="end">
           <DropdownMenuLabel className="font-bold">Actions</DropdownMenuLabel>
           <DropdownMenuSeparator />
-            <DropdownMenuItem onClick={() => console.log(row.original.name)}>Edit</DropdownMenuItem>
-            <DropdownMenuItem onClick={() => deleteRestaurant(row.original.id)} >Delete</DropdownMenuItem>
+            <DropdownMenuItem onClick={() => onEdit(restaurant)}>Edit</DropdownMenuItem>
+            <DropdownMenuItem onClick={() => onDelete(restaurant)} >Delete</DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
         </div>
       )
     },
   },
+
 ]
+}

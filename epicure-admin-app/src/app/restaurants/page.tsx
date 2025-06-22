@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
-import { columns } from "./columns";
+// import { columns } from "./columns";
+import RestaurantsTable from "@/components/restaurants-table";
 import { DataTable } from "@/components/ui/data-table";
 import DataDisplay from "@/components/ui/data-display";
 import { fetchRestaurants } from "@/services/restaurants/restaurants.api";
@@ -16,7 +17,8 @@ export default async function RestaurantsPage() {
   return (
     <div>
       <DataDisplay title="Restaurants">
-        <DataTable columns={columns} data={restaurantsAsColumns} />
+        {/* <DataTable columns={columns} data={restaurantsAsColumns} /> */}
+        <RestaurantsTable data={restaurantsAsColumns} />
       </DataDisplay>
     </div>
   );
