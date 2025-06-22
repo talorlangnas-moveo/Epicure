@@ -1,6 +1,6 @@
 "use client";
 
-import { RestaurantColumns } from "@/app/restaurants/columns";
+import { RestaurantColumns } from "@/app/restaurants/restaurant-columns";
 import { toast } from "sonner";
 import { useState } from "react";
 import { RestaurantColumn } from "@/types/columns/restaurant.column";
@@ -28,16 +28,11 @@ export default function RestaurantsTable({
     }
   };
 
-  const handleEdit = (restaurant: RestaurantColumn) => {
-    console.log("Editing:", restaurant);
-  };
-
   return (
     <DataTable
       data={data}
       columns={RestaurantColumns({
         onDelete: handleDelete,
-        onEdit: handleEdit,
       })}
     />
   );

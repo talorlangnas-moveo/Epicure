@@ -15,8 +15,6 @@ export class ValidateChefPipe
   ) {}
 
   async transform(value: CreateRestaurantDto | UpdateRestaurantDto) {
-    // For create operations (CreateRestaurantDto), chefId is required
-    // For update operations (UpdateRestaurantDto), only validate if chefId is present
     if ('chefId' in value && value.chefId) {
       if (!Types.ObjectId.isValid(value.chefId)) {
         throw new NotFoundException('Invalid chef ID');
