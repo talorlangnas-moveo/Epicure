@@ -11,8 +11,7 @@ import { DownArrow } from "@/icons";
 import Link from "next/link";
 import { FilterOption } from "@/types/interfaces/filterOption";
 
-interface DisplayProps<T> {
-  data: T[];
+interface DisplayProps {
   dataAsCards: CardInfo[];
   filterOptions: FilterOption[];
   filterByRangeOptions?: FilterOption[];
@@ -20,27 +19,26 @@ interface DisplayProps<T> {
   className?: string;
 }
 
-export default function DataDisplay<T>({
-  data,
+export default function DataDisplay({
   dataAsCards,
   filterOptions,
   filterByRangeOptions,
   title = "Items",
   className,
-}: DisplayProps<T>) {
+}: DisplayProps) {
   const isDesktopView = useIsDesktopView();
   const [activeItem, setActiveItem] = useState("1");
   const [filteredData, setFilteredData] =
     useState<CardInfo[]>(dataAsCards);
 
-  const handleFilter = (
-    filterFunction?: (data: T[]) => CardInfo[]
+  const handleFilter = async (
+    filterFunction?: () => Promise<CardInfo[]>
   ) => {
     if (!filterFunction) {
       setFilteredData(dataAsCards);
       return;
     }
-    const filtered = filterFunction(data);
+    const filtered = await filterFunction();
     setFilteredData(filtered);
   };
 

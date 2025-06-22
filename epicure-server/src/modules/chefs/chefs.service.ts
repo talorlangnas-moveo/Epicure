@@ -3,6 +3,7 @@ import { CreateChefDto } from './dto/create-chef.dto';
 import { InjectModel } from '@nestjs/mongoose';
 import mongoose, { Types } from 'mongoose';
 import { Chef } from './schemas/chef.schema';
+import { UpdateChefDto } from './dto/update-chef.dto';
 
 @Injectable()
 export class ChefsService {
@@ -21,11 +22,42 @@ export class ChefsService {
     return chefs;
   }
 
-  async findById(id: Types.ObjectId): Promise<Chef> {
+  async findOne(id: Types.ObjectId): Promise<Chef> {
     const chef = await this.chefModel.findById(id);
     if (!chef) {
       throw new NotFoundException('Chef not found');
     }
     return chef;
+  }
+
+  async update(
+    id: Types.ObjectId,
+    updateChefDto: UpdateChefDto,
+  ): Promise<Chef> {
+    const updatedChef = await this.chefModel.findByIdAndUpdate(
+      id,
+      updateChefDto,
+      { new: true },
+    );
+    if (!updatedChef) {
+      throw new NotFoundException('Chef not found');
+    }
+    return updatedChef;
+  }
+
+  async remove(id: Types.ObjectId): Promise<Chef> {
+    const deletedChef = await this.chefModel.findByIdAndDelete(id);
+    if (!deletedChef) {
+      throw new NotFoundException('Chef not found');
+    }
+    return deletedChef;
+  }
+
+  async getTop3NewestChefs(): Promise<Chef[]> {
+    return this.chefModel.find().sort({ foundedDate: -1 }).limit(3).exec();
+  }
+
+  async getTop3MostPopularChefs(): Promise<Chef[]> {
+    return this.chefModel.find().sort({ numberOfViews: -1 }).limit(3).exec();
   }
 }

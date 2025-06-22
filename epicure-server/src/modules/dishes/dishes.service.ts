@@ -3,6 +3,7 @@ import { CreateDishDto } from './dto/create-dish.dto';
 import { Dish } from './schemas/dish.schema';
 import { InjectModel } from '@nestjs/mongoose';
 import mongoose, { Types } from 'mongoose';
+import { UpdateDishDto } from './dto/update-dish.dto';
 
 @Injectable()
 export class DishesService {
@@ -26,11 +27,34 @@ export class DishesService {
     return dishes;
   }
 
-  async findById(id: Types.ObjectId): Promise<Dish> {
+  async findOne(id: Types.ObjectId): Promise<Dish> {
     const dish = await this.dishModel.findById(id);
     if (!dish) {
       throw new NotFoundException(`Dish not found`);
     }
     return dish;
+  }
+
+  async update(
+    id: Types.ObjectId,
+    updateDishDto: UpdateDishDto,
+  ): Promise<Dish> {
+    const updatedDish = await this.dishModel.findByIdAndUpdate(
+      id,
+      updateDishDto,
+      { new: true },
+    );
+    if (!updatedDish) {
+      throw new NotFoundException('Dish not found');
+    }
+    return updatedDish;
+  }
+
+  async remove(id: Types.ObjectId): Promise<Dish> {
+    const deletedDish = await this.dishModel.findByIdAndDelete(id);
+    if (!deletedDish) {
+      throw new NotFoundException('Dish not found');
+    }
+    return deletedDish;
   }
 }

@@ -1,8 +1,8 @@
 import { CardInfo } from '@components/card/card';
 
-export interface FilterOption<T = any> {
+export interface FilterOption {
     id: string;
     label: string;
-    filterFn?: (data: T[]) => CardInfo[];
+    filterFn?: () => Promise<CardInfo[]>;
     desktopOnly?: boolean;
   }

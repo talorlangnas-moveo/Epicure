@@ -1,16 +1,14 @@
 import { fetchRestaurants } from '@/services/restaurants/restaurants.api';
 import { getRestaurantsAsCards } from '@/services/restaurants/restaurants.utils';
 import DataDisplay from "@components/dataDisplay/dataDisplay";
-import { Restaurant } from "@/types/interfaces/restaurant";
-import { restaurantsFilterOptions, filterByRangeOptions } from "@/services/restaurants/restaurantsFilterFunctions";
+import { restaurantsFilterOptions, filterByRangeOptions } from "@/services/restaurants/restaurantsFilterOptions";
 
 async function Restaurants() {
   const restaurants = await fetchRestaurants();
   const restaurantsAsCards = await getRestaurantsAsCards(restaurants);
 
   return (
-    <DataDisplay<Restaurant>
-      data={restaurants}
+    <DataDisplay
       dataAsCards={restaurantsAsCards}
       filterOptions={restaurantsFilterOptions}
       filterByRangeOptions={filterByRangeOptions}

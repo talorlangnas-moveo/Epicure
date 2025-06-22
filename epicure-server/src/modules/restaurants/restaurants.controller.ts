@@ -1,25 +1,68 @@
-import { Controller, Get, Post, Body, Param } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Param,
+  Query,
+  Put,
+  Delete,
+} from '@nestjs/common';
 import { RestaurantsService } from './restaurants.service';
 import { CreateRestaurantDto } from './dto/create-restaurant.dto';
 import { ParseMongoIdPipe } from './pipes/parse-mongo-id.pipe';
 import { Types } from 'mongoose';
+import { UpdateRestaurantDto } from './dto/update-restaurant.dto';
+import { Restaurant } from './schemas/restaurant.schema';
 
 @Controller('restaurants')
 export class RestaurantsController {
   constructor(private readonly restaurantsService: RestaurantsService) {}
 
   @Post()
-  create(@Body() createRestaurantDto: CreateRestaurantDto) {
+  create(
+    @Body() createRestaurantDto: CreateRestaurantDto,
+  ): Promise<Restaurant> {
     return this.restaurantsService.create(createRestaurantDto);
   }
 
   @Get()
-  async findAll() {
+  async findAll(
+    @Query('foundedDate') foundedDate?: string,
+    @Query('rating') rating?: string,
+    @Query('openNow') openNow?: string,
+  ): Promise<Restaurant[]> {
+    if (foundedDate === 'new') {
+      return this.restaurantsService.getTop3NewestRestaurants();
+    }
+    if (rating === 'mostPopular') {
+      return this.restaurantsService.getTop3MostPopularRestaurants();
+    }
+    if (openNow === 'true') {
+      return this.restaurantsService.getOpenRestaurantsNow();
+    }
     return this.restaurantsService.findAll();
   }
 
   @Get(':id')
-  findById(@Param('id', ParseMongoIdPipe) id: Types.ObjectId) {
-    return this.restaurantsService.findById(id);
+  findOne(
+    @Param('id', ParseMongoIdPipe) id: Types.ObjectId,
+  ): Promise<Restaurant> {
+    return this.restaurantsService.findOne(id);
+  }
+
+  @Put(':id')
+  update(
+    @Param('id', ParseMongoIdPipe) id: Types.ObjectId,
+    @Body() updateRestaurantDto: UpdateRestaurantDto,
+  ): Promise<Restaurant> {
+    return this.restaurantsService.update(id, updateRestaurantDto);
+  }
+
+  @Delete(':id')
+  remove(
+    @Param('id', ParseMongoIdPipe) id: Types.ObjectId,
+  ): Promise<Restaurant> {
+    return this.restaurantsService.remove(id);
   }
 }
