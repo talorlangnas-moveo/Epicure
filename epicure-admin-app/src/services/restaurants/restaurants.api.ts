@@ -13,35 +13,7 @@ export async function fetchRestaurantById(id: string): Promise<Restaurant> {
   return res.data;
 }
 
-// export async function getNewestRestaurantsAsCards(): Promise<CardInfo[]> {
-//   const res = await axios.get(`${API_BASE_URL}/restaurants/`, {
-//     params: {
-//       foundedDate: 'new',
-//     },
-//   });
-
-//   const restaurants: Restaurant[] = res.data;
-//   return restaurants.map(convertRestaurantToCard);
-// }
-
-// export async function getMostPopularRestaurantsAsCards(): Promise<CardInfo[]> {
-//   const res = await axios.get(`${API_BASE_URL}/restaurants`, {
-//     params: {
-//       rating: 'mostPopular',
-//     },
-//   });
-
-//   const restaurants: Restaurant[] = res.data;
-//   return restaurants.map(convertRestaurantToCard);
-// }
-
-// export async function getOpenRestaurantsAsCards(): Promise<CardInfo[]> {
-//   const res = await axios.get(`${API_BASE_URL}/restaurants`, {
-//     params: {
-//       openNow: 'true',
-//     },
-//   });
-
-//   const restaurants: Restaurant[] = res.data;
-//   return restaurants.map(convertRestaurantToCard);
-// }
+export async function deleteRestaurant(id: string): Promise<Restaurant> {
+  const res = await axios.delete(`${API_BASE_URL}/restaurants/${id}`);
+  return res.data;
+}

@@ -5,6 +5,7 @@ import { ColumnDef } from "@tanstack/react-table"
 import { MoreHorizontal } from "lucide-react"
 import { ArrowUpDown, Star } from "lucide-react"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { deleteRestaurant } from "@/services/restaurants/restaurants.api"
 
 import { Button } from "@/components/ui/button"
 import {
@@ -131,7 +132,7 @@ export const columns: ColumnDef<RestaurantColumn>[] = [
           <DropdownMenuLabel className="font-bold">Actions</DropdownMenuLabel>
           <DropdownMenuSeparator />
             <DropdownMenuItem onClick={() => console.log(row.original.name)}>Edit</DropdownMenuItem>
-            <DropdownMenuItem onClick={() => console.log(row.original.name)} >Delete</DropdownMenuItem>
+            <DropdownMenuItem onClick={() => deleteRestaurant(row.original.id)} >Delete</DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
         </div>
