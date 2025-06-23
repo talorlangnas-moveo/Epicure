@@ -11,10 +11,12 @@ export async function convertRestaurantToColumn(restaurant: Restaurant): Promise
   const chefName = await getChefsNameById(restaurant.chefId);
   
   return {
-    id: restaurant._id,
+    _id: restaurant._id,
+    chefId: restaurant.chefId,
+    description: restaurant.description,
     name: restaurant.name,
     chefName: chefName,
-    image: restaurant.imgUrl,
+    imgUrl: restaurant.imgUrl,
     rating: restaurant.rating,
     openingTime: restaurant.openingTime,
     closingTime: restaurant.closingTime,

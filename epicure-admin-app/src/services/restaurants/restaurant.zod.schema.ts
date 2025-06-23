@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-export const formSchema = z.object({
+export const strictSchema = z.object({
   chefId: z
     .string()
     .regex(/^[0-9a-fA-F]{24}$/, "Invalid MongoDB ObjectId"),
@@ -16,12 +16,14 @@ export const formSchema = z.object({
     .max(500),
 
   imgUrl: z
-    .string()
-    .url({ message: "Image URL must be a valid URL" }),
+  .string()
+  .regex(/\.png$/, {
+    message: "Image must be a .png file",
+  }),
 
   rating: z
-    .number()
-    .min(0, { message: "Rating must be at least 0" })
+    .string()
+    .min(1, { message: "Rating must be at least 1" })
     .max(5, { message: "Rating must be at most 5" }),
 
   openingTime: z
@@ -38,4 +40,8 @@ export const formSchema = z.object({
       (val) => !val || !isNaN(Date.parse(val)),
       { message: "Founded date must be a valid date string" }
     ),
-}).partial(); 
+});
+
+export const partialSchema = strictSchema.partial();
+
+

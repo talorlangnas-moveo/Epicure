@@ -2,34 +2,27 @@
 
 import { RestaurantColumn } from "@/types/columns/restaurant.column";
 import { ColumnDef } from "@tanstack/react-table";
-import { MoreHorizontal } from "lucide-react";
 import { ArrowUpDown, Star } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-
 import { Button } from "@/components/ui/button";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-} from "@/components/ui/dropdown-menu";
-import Link from "next/link";
+import { RestaurantsForm } from "@/components/restaurant-form";
+import DataTableRowAction from "@/components/data-table-row-action";
 
 interface ColumnsProps {
   onDelete: (value: RestaurantColumn) => void;
+  onEdit?: (entity: RestaurantColumn, updatedData: Partial<RestaurantColumn>) => Promise<RestaurantColumn>;
 }
 
 export function RestaurantColumns({
   onDelete,
+  onEdit,
 }: ColumnsProps): ColumnDef<RestaurantColumn>[] {
   return [
     {
-      accessorKey: "image",
+      accessorKey: "imgUrl",
       header: "",
       cell: ({ row }) => {
-        const imageUrl = row.getValue<string>("image");
+        const imageUrl = row.getValue<string>("imgUrl");
         const name = row.getValue<string>("name");
 
         return (
@@ -109,35 +102,7 @@ export function RestaurantColumns({
     {
       id: "actions",
       cell: ({ row }) => {
-        const restaurant = row.original;
-
-        return (
-          <div className="text-center">
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button
-                  variant="ghost"
-                  className="h-8 w-8 p-0 focus:outline-none focus-visible:ring-0"
-                >
-                  <span className="sr-only">Open menu</span>
-                  <MoreHorizontal className="h-4 w-4" />
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="end">
-                <DropdownMenuLabel className="font-bold">
-                  Actions
-                </DropdownMenuLabel>
-                <DropdownMenuSeparator />
-                <Link href={`/restaurants/${restaurant.id}`}>
-                  <DropdownMenuItem > Edit</DropdownMenuItem>
-                </Link>
-                <DropdownMenuItem onClick={() => onDelete(restaurant)}>
-                  Delete
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
-          </div>
-        );
+        return <DataTableRowAction row={row} onDelete={onDelete} editForm={RestaurantsForm} deleteForm={RestaurantsForm} onEdit={onEdit} />;
       },
     },
   ];

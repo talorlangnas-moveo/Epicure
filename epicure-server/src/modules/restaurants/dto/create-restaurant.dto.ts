@@ -6,6 +6,8 @@ import {
   IsDate,
   IsOptional,
   IsMongoId,
+  Max,
+  Min,
 } from 'class-validator';
 
 export class CreateRestaurantDto {
@@ -25,8 +27,11 @@ export class CreateRestaurantDto {
   @IsNotEmpty()
   imgUrl: string;
 
+  @Type(() => Number)
   @IsNumber()
   @IsNotEmpty()
+  @Min(1)
+  @Max(5)
   rating: number;
 
   @IsString()

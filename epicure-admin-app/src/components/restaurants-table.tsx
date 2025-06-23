@@ -5,8 +5,14 @@ import { toast } from "sonner";
 import { useState } from "react";
 import { RestaurantColumn } from "@/types/columns/restaurant.column";
 import { DataTable } from "@/components/ui/data-table";
-import { deleteRestaurant } from "@services/restaurants/restaurants.api";
-
+import {
+  createRestaurant,
+  deleteRestaurant,
+  updateRestaurant,
+} from "@services/restaurants/restaurants.api";
+import { convertRestaurantToColumn } from "@services/restaurants/restaurants.utils";
+import { RestaurantsForm } from "@/components/restaurant-form";
+import { Restaurant } from "@/types/interfaces/restaurant";
 interface RestaurantsTableProps {
   data: RestaurantColumn[];
 }
@@ -15,16 +21,51 @@ export default function RestaurantsTable({
   data: initialData,
 }: RestaurantsTableProps) {
   const [data, setData] = useState<RestaurantColumn[]>(initialData);
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
 
   const handleDelete = async (restaurant: RestaurantColumn) => {
     console.log("Deleting:", restaurant);
     try {
-      await deleteRestaurant(restaurant.id);
-      setData((prev) => prev.filter((r) => r.id !== restaurant.id));
+      await deleteRestaurant(restaurant._id);
+      setData((prev) => prev.filter((r) => r._id !== restaurant._id));
       toast.success(`${restaurant.name} restaurant deleted successfully`);
     } catch (error) {
       console.error("Error deleting restaurant:", error);
       toast.error(`Failed to delete ${restaurant.name} restaurant`);
+    }
+  };
+
+  const handleEdit = async (
+    restaurant: RestaurantColumn,
+    dataToUpdate: Partial<RestaurantColumn>
+  ) => {
+    try {
+      const updatedRestaurant = await updateRestaurant(
+        restaurant._id,
+        dataToUpdate
+      );
+      const updatedRestaurantAsColumn = await convertRestaurantToColumn(
+        updatedRestaurant
+      );
+      setData((prev) =>
+        prev.map((r) =>
+          r._id === restaurant._id ? updatedRestaurantAsColumn : r
+        )
+      );
+      return updatedRestaurantAsColumn;
+    } catch (error) {
+      throw error;
+    }
+  };
+
+  const handleAdd = async (newRestaurant: Partial<RestaurantColumn>) => {
+    try {
+      const res = await createRestaurant(newRestaurant);
+      const newRestaurantAsColumn = await convertRestaurantToColumn(res);
+      setData((prev) => [...prev, newRestaurantAsColumn]);
+      return newRestaurantAsColumn;
+    } catch (error) {
+      throw error;
     }
   };
 
@@ -33,7 +74,17 @@ export default function RestaurantsTable({
       data={data}
       columns={RestaurantColumns({
         onDelete: handleDelete,
+        onEdit: handleEdit,
       })}
+      formComponent={
+        <RestaurantsForm
+          mode="create"
+          setIsOpen={setIsDialogOpen}
+          onAdd={handleAdd}
+        />
+      }
+      isDialogOpen={isDialogOpen}
+      setIsDialogOpen={setIsDialogOpen}
     />
   );
 }

@@ -32,15 +32,22 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { ResponsiveDialog } from "@/components/responsive-dialog";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
+  formComponent: React.ReactNode;
+  isDialogOpen: boolean;
+  setIsDialogOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export function DataTable<TData, TValue>({
   columns,
   data,
+  formComponent,
+  isDialogOpen,
+  setIsDialogOpen,
 }: DataTableProps<TData, TValue>) {
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
@@ -48,6 +55,7 @@ export function DataTable<TData, TValue>({
   );
   const [columnVisibility, setColumnVisibility] =
     React.useState<VisibilityState>({});
+
   const table = useReactTable({
     data,
     columns,
@@ -80,6 +88,7 @@ export function DataTable<TData, TValue>({
           <Button
             variant="outline"
             className="flex items-center gap-2 px-4 py-2 text-sm"
+            onClick={() => setIsDialogOpen(true)}
           >
             <Plus className="h-4 w-4 stroke-[2.5]" />
             Add
@@ -181,6 +190,15 @@ export function DataTable<TData, TValue>({
           Next
         </Button>
       </div>
+
+      <ResponsiveDialog
+        isOpen={isDialogOpen}
+        setIsOpen={setIsDialogOpen}
+        title="Add New Item"
+        description="Fill in the details to add a new item."
+      >
+        {formComponent}
+      </ResponsiveDialog>
     </div>
   );
 }
