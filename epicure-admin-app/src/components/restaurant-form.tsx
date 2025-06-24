@@ -14,19 +14,14 @@ import { Input } from "@/components/ui/input";
 import Link from "next/link";
 import Image from "next/image";
 import {
-  strictSchema,
-  partialSchema,
+  fullFormSchema,
+  partialFormSchema,
 } from "@/services/restaurants/restaurant.zod.schema";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import {
-  updateRestaurant,
-  createRestaurant,
-} from "@services/restaurants/restaurants.api";
-import { Restaurant } from "@/types/interfaces/restaurant";
 import { RestaurantColumn } from "@/types/columns/restaurant.column";
-import { EntityForm } from "@/types/entityForm";
+import { EntityForm, EntityFormProps } from "@/types/entityForm";
 
 export const RestaurantsForm: EntityForm<RestaurantColumn> = ({
   entity,
@@ -36,17 +31,37 @@ export const RestaurantsForm: EntityForm<RestaurantColumn> = ({
   onAdd,
 }) => {
   const restaurant = entity;
-  const schema = mode === "create" ? strictSchema : partialSchema;
+  const schema = mode === "create" ? fullFormSchema  : partialFormSchema;
   const form = useForm<z.infer<typeof schema>>({
     resolver: zodResolver(schema),
-    defaultValues: {},
+    defaultValues: mode === "create" ? {
+      name: "",
+      chefId: "",
+      imgUrl: "",
+      rating: "",
+      openingTime: "",
+      closingTime: "",
+      foundedDate: "",
+    } : {
+      name: restaurant?.name,
+      chefId: restaurant?.chefId,
+      imgUrl: restaurant?.imgUrl,
+      rating: restaurant?.rating?.toString(),
+      openingTime: restaurant?.openingTime,
+      closingTime: restaurant?.closingTime,
+      foundedDate: restaurant?.foundedDate?.toString().split('T')[0],
+
+    },
   });
 
   async function onSubmit(values: z.infer<typeof schema>) {
-    const restaurantData = values as Partial<Restaurant>;
-    console.log("restaurantData: ",restaurantData);
+    const restaurantData = {
+      ...values,
+      rating: values.rating?.toString() || "1",
+      foundedDate: values.foundedDate ? new Date(values.foundedDate) : new Date()
+    };
+    
     if (mode === "update" && restaurant) {
-      console.log("enter to update: ",restaurantData);
       try {
         if (onEdit) {
           await onEdit(restaurant, restaurantData);
@@ -56,7 +71,6 @@ export const RestaurantsForm: EntityForm<RestaurantColumn> = ({
         console.error(error);
       }
     } else if (mode === "create") {
-      console.log("enter to create: ",restaurantData);
       try {
         if (onAdd) {
           await onAdd(restaurantData);
@@ -103,14 +117,10 @@ export const RestaurantsForm: EntityForm<RestaurantColumn> = ({
                   <FormItem>
                     <FormLabel>Image URL</FormLabel>
                     <FormControl>
-                      {mode === "create" ? (
-                        <Input placeholder="Image URL" {...field} />
-                      ) : (
-                        <Input placeholder={restaurant?.imgUrl} {...field} />
-                      )}
+                      <Input placeholder="Image URL" {...field} />
                     </FormControl>
                     <FormDescription>
-                      Enter the URL of the image you want to use.
+                      Enter the URL of the image you want to use (must end with .png)
                     </FormDescription>
                     <FormMessage />
                   </FormItem>
@@ -123,16 +133,13 @@ export const RestaurantsForm: EntityForm<RestaurantColumn> = ({
                   <FormItem>
                     <FormLabel>Restaurant Name</FormLabel>
                     <FormControl>
-                      {mode === "create" ? (
-                        <Input placeholder="Restaurant Name" {...field} />
-                      ) : (
-                        <Input placeholder={restaurant?.name} {...field} />
-                      )}
+                      <Input placeholder="Restaurant Name" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
                 )}
               />
+              
               <FormField
                 control={form.control}
                 name="chefId"
@@ -140,11 +147,7 @@ export const RestaurantsForm: EntityForm<RestaurantColumn> = ({
                   <FormItem>
                     <FormLabel>Chef ID</FormLabel>
                     <FormControl>
-                      {mode === "create" ? (
-                        <Input placeholder="Chef ID" {...field} />
-                      ) : (
-                        <Input placeholder={restaurant?.chefId} {...field} />
-                      )}
+                      <Input placeholder="Chef ID" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -161,11 +164,7 @@ export const RestaurantsForm: EntityForm<RestaurantColumn> = ({
                         type="number"
                         min={1}
                         max={5}
-                        placeholder={
-                          mode === "create"
-                            ? "Rating"
-                            : restaurant?.rating.toString()
-                        }
+                        placeholder="Rating (1-5)"
                         {...field}
                       />
                     </FormControl>
@@ -184,11 +183,6 @@ export const RestaurantsForm: EntityForm<RestaurantColumn> = ({
                       <FormControl>
                         <Input type="time" {...field} />
                       </FormControl>
-                      {restaurant && (
-                        <FormDescription>
-                          Opening time: {restaurant.openingTime.toString()}
-                        </FormDescription>
-                      )}
                       <FormMessage />
                     </FormItem>
                   )}
@@ -200,17 +194,8 @@ export const RestaurantsForm: EntityForm<RestaurantColumn> = ({
                     <FormItem>
                       <FormLabel>Closing Time</FormLabel>
                       <FormControl>
-                        <Input
-                          type="time"
-                          placeholder="Closing Time"
-                          {...field}
-                        />
+                        <Input type="time" {...field} />
                       </FormControl>
-                      {restaurant && (
-                        <FormDescription>
-                          Closing time: {restaurant.closingTime.toString()}
-                        </FormDescription>
-                      )}
                       <FormMessage />
                     </FormItem>
                   )}
@@ -224,23 +209,13 @@ export const RestaurantsForm: EntityForm<RestaurantColumn> = ({
                   <FormItem>
                     <FormLabel>Founded Date</FormLabel>
                     <FormControl>
-                      <Input
-                        type="date"
-                        placeholder="Founded Date"
-                        {...field}
-                      />
+                      <Input type="date" {...field} />
                     </FormControl>
-                    {restaurant && (
-                      <FormDescription>
-                        Founded Date:{" "}
-                        {restaurant.foundedDate.toString().split("T")[0]}
-                      </FormDescription>
-                    )}
                     <FormMessage />
                   </FormItem>
                 )}
               />
-              <Button className="w-full">
+              <Button type="submit" className="w-full">
                 {mode === "create" ? "Create Restaurant" : "Edit Restaurant"}
               </Button>
             </div>

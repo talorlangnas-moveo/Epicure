@@ -2,7 +2,6 @@ export interface Restaurant {
   _id: string;
   chefId: string;
   name: string;
-  description: string;
   imgUrl: string;
   rating: number;
   ratingImage?: string;

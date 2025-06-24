@@ -35,11 +35,16 @@ export default function DataDisplay({
     filterFunction?: () => Promise<CardInfo[]>
   ) => {
     if (!filterFunction) {
+    console.log("filteredData in !filterFunction before set: ",filteredData);
       setFilteredData(dataAsCards);
+      console.log("filteredData in !filterFunction after set: ",filteredData);
       return;
     }
     const filtered = await filterFunction();
+    console.log("filtered: ",filtered);
+    console.log("filteredData before set: ",filteredData);
     setFilteredData(filtered);
+    console.log("filteredData after set: ",filteredData);
   };
 
   return (

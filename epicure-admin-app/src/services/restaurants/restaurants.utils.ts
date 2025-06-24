@@ -13,7 +13,6 @@ export async function convertRestaurantToColumn(restaurant: Restaurant): Promise
   return {
     _id: restaurant._id,
     chefId: restaurant.chefId,
-    description: restaurant.description,
     name: restaurant.name,
     chefName: chefName,
     imgUrl: restaurant.imgUrl,

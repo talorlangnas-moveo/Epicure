@@ -6,7 +6,7 @@ import { restaurantsFilterOptions, filterByRangeOptions } from "@/services/resta
 async function Restaurants() {
   const restaurants = await fetchRestaurants();
   const restaurantsAsCards = await getRestaurantsAsCards(restaurants);
-
+  console.log(restaurantsAsCards);
   return (
     <DataDisplay
       dataAsCards={restaurantsAsCards}

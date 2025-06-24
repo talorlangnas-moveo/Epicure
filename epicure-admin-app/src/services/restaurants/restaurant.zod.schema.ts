@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-export const strictSchema = z.object({
+export const fullFormSchema = z.object({
   chefId: z
     .string()
     .regex(/^[0-9a-fA-F]{24}$/, "Invalid MongoDB ObjectId"),
@@ -9,11 +9,6 @@ export const strictSchema = z.object({
     .string()
     .min(2, { message: "Name must be at least 2 characters" })
     .max(50),
-
-  description: z
-    .string()
-    .min(2, { message: "Description is required" })
-    .max(500),
 
   imgUrl: z
   .string()
@@ -42,6 +37,8 @@ export const strictSchema = z.object({
     ),
 });
 
-export const partialSchema = strictSchema.partial();
+export const partialFormSchema = fullFormSchema.partial();
+
+
 
 

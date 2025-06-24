@@ -21,10 +21,6 @@ export class CreateRestaurantDto {
 
   @IsString()
   @IsNotEmpty()
-  description: string;
-
-  @IsString()
-  @IsNotEmpty()
   imgUrl: string;
 
   @Type(() => Number)
