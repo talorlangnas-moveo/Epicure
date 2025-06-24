@@ -30,8 +30,9 @@ export class CreateChefDto {
   @IsOptional()
   foundedDate: Date;
 
+  @Type(() => Number)
   @IsNumber()
-  @IsOptional()
   @Min(0)
+  @IsOptional()
   numberOfViews: number;
 }

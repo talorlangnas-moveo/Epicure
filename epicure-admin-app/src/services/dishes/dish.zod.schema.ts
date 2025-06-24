@@ -23,7 +23,7 @@ export const fullFormSchema = z.object({
 
     price: z
         .string()
-        .min(0, { message: "Rating must be at least 0" }),
+        .min(0, { message: "Price must be at least 0" }),
 
     dishCategory: z
         .enum(['spicy', 'vegetarian', 'vegan', 'none'], {

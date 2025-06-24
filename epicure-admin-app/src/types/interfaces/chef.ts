@@ -5,5 +5,5 @@ export interface Chef {
     description: string;
     imgUrl: string;
     foundedDate: Date;
-    numberOfViews: number;
+    numberOfViews: string;
 }

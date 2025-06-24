@@ -42,7 +42,6 @@ export default function DataTableRowAction<TData extends WithId<string>>({
       <ResponsiveDialog
         isOpen={isEditOpen}
         setIsOpen={setIsEditOpen}
-        title="Edit Person"
       >
         {editForm({
           entity: row.original,
@@ -54,7 +53,6 @@ export default function DataTableRowAction<TData extends WithId<string>>({
       <ResponsiveDialog
         isOpen={isDeleteOpen}
         setIsOpen={setIsDeleteOpen}
-        title="Delete Person"
       >
         {deleteForm({ entity: row.original, setIsOpen: setIsDeleteOpen })}
       </ResponsiveDialog>

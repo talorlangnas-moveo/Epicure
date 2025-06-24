@@ -194,8 +194,6 @@ export function DataTable<TData, TValue>({
       <ResponsiveDialog
         isOpen={isDialogOpen}
         setIsOpen={setIsDialogOpen}
-        title="Add New Item"
-        description="Fill in the details to add a new item."
       >
         {formComponent}
       </ResponsiveDialog>
