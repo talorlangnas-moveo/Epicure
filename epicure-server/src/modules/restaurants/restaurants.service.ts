@@ -6,12 +6,15 @@ import mongoose, { Types } from 'mongoose';
 import { Body } from '@nestjs/common';
 import * as moment from 'moment';
 import { UpdateRestaurantDto } from './dto/update-restaurant.dto';
+import { Dish } from '../dishes/schemas/dish.schema';
 
 @Injectable()
 export class RestaurantsService {
   constructor(
     @InjectModel(Restaurant.name)
     private restaurantModel: mongoose.Model<Restaurant>,
+    @InjectModel(Dish.name)
+    private dishModel: mongoose.Model<Dish>,
   ) {}
 
   async create(
@@ -50,10 +53,18 @@ export class RestaurantsService {
   }
 
   async remove(id: Types.ObjectId): Promise<Restaurant> {
+    console.log('Removing restaurant with ID:', id);
     const deletedRestaurant = await this.restaurantModel.findByIdAndDelete(id);
     if (!deletedRestaurant) {
       throw new NotFoundException('Restaurant not found');
     }
+
+    await this.dishModel.updateMany(
+      {
+        restaurantId: { $in: [id, id.toString()] },
+      },
+      { $unset: { restaurantId: '' } },
+    );
     return deletedRestaurant;
   }
 

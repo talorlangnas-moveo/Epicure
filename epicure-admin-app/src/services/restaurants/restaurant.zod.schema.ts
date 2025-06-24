@@ -3,7 +3,7 @@ import { z } from "zod";
 export const fullFormSchema = z.object({
   chefId: z
     .string()
-    .regex(/^[0-9a-fA-F]{24}$/, "Invalid MongoDB ObjectId"),
+    .regex(/^[0-9a-fA-F]{24}$/, "Invalid MongoDB ObjectId").optional(),
 
   name: z
     .string()

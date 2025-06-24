@@ -12,8 +12,8 @@ import {
 
 export class CreateRestaurantDto {
   @IsMongoId()
-  @IsNotEmpty()
-  chefId: string;
+  @IsOptional()
+  chefId?: string;
 
   @IsString()
   @IsNotEmpty()

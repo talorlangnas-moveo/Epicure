@@ -4,6 +4,9 @@ import { fetchChefById } from "@services/chefs/chefs.api";
 
 export async function getChefsNameById(id: string): Promise<string> {
   const chef = await fetchChefById(id);
+  if (!chef) {
+    return "No Chef Assigned";
+  }
   return `${chef.firstName} ${chef.lastName}`;
 }
 

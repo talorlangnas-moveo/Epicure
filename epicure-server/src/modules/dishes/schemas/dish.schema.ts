@@ -15,10 +15,10 @@ export class Dish {
   @Prop({
     type: Types.ObjectId,
     ref: 'Restaurant',
-    required: true,
     index: true,
   })
-  restaurantId: Types.ObjectId;
+  restaurantId?: Types.ObjectId;
+
   @Prop({ required: true })
   name: string;
 

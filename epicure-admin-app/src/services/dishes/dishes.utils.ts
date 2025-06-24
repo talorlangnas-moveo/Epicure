@@ -6,6 +6,9 @@ import { fetchRestaurantById } from '@services/restaurants/restaurants.api';
 
 export async function getRestaurantName(id: string): Promise<string> {
   const restaurant = await fetchRestaurantById(id);
+  if (!restaurant) {
+    return "No Restaurant Assigned";
+  }
   return restaurant.name;
 }
 

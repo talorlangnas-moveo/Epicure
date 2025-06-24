@@ -3,8 +3,8 @@ import { z } from "zod";
 export const fullFormSchema = z.object({
     restaurantId: z
         .string()
-        .regex(/^[0-9a-fA-F]{24}$/, "Invalid MongoDB ObjectId"),
-
+        .regex(/^[0-9a-fA-F]{24}$/, "Invalid MongoDB ObjectId").optional(),
+        
     name: z
         .string()
         .min(2, { message: "Name must be at least 2 characters" })

@@ -9,15 +9,13 @@ export async function fetchRestaurants(): Promise<Restaurant[]> {
   return res.data;
 }
 
-export async function fetchRestaurantById(id: string): Promise<Restaurant> {
+export async function fetchRestaurantById(id: string): Promise<Restaurant | null> {
   try{
     const res = await axios.get(`${API_BASE_URL}/restaurants/${id}`);
     return res.data;
   } catch (error) {
-    console.log("error: ", error);
     console.error("Error fetching restaurant by id: ", error);
-    toast.error("Failed to fetch restaurant");
-    throw error;
+    return null;
   }
 }
 
