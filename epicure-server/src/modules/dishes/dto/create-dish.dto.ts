@@ -1,3 +1,4 @@
+import { Type } from 'class-transformer';
 import {
   IsString,
   IsNumber,
@@ -5,6 +6,7 @@ import {
   IsNotEmpty,
   IsEnum,
   IsMongoId,
+  Min,
 } from 'class-validator';
 import { DishCategory } from '../schemas/dish.schema';
 
@@ -25,8 +27,10 @@ export class CreateDishDto {
   @IsNotEmpty()
   imgUrl: string;
 
+  @Type(() => Number)
   @IsNumber()
   @IsNotEmpty()
+  @Min(0)
   price: number;
 
   @IsEnum(DishCategory)

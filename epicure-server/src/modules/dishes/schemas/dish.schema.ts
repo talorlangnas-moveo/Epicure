@@ -5,6 +5,7 @@ export enum DishCategory {
   SPICY = 'spicy',
   VEGETARIAN = 'vegetarian',
   VEGAN = 'vegan',
+  NONE = 'none',
 }
 
 export type DishDocument = Dish & Document;

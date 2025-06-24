@@ -1,4 +1,4 @@
-export type DishCategoryType = 'spicy' | 'vegetarian' | 'vegan';
+export type DishCategoryType = 'spicy' | 'vegetarian' | 'vegan' | 'none';
 
 export interface Dish {
     _id: string;
@@ -6,6 +6,6 @@ export interface Dish {
     name: string;
     description: string;
     imgUrl: string;
-    price: number;
+    price: string;
     dishCategory?: DishCategoryType;
 }

@@ -21,7 +21,7 @@ import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { RestaurantColumn } from "@/types/columns/restaurant.column";
-import { EntityForm, EntityFormProps } from "@/types/entityForm";
+import { EntityForm } from "@/types/entityForm";
 
 export const RestaurantsForm: EntityForm<RestaurantColumn> = ({
   entity,

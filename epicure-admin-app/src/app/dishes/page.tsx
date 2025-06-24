@@ -1,9 +1,8 @@
 import { notFound } from "next/navigation";
-import { columns } from "./columns";
-import { DataTable } from "@/components/ui/data-table";
 import DataDisplay from "@/components/ui/data-display";
 import { fetchAll } from '@services/dishes/dishes.api';
 import { convertDishToCulomn } from '@services/dishes/dishes.utils';
+import DishesTable from "@/components/dishes-table";
 
   export default async function DishesPage() {
     const dishes = await fetchAll();
@@ -16,7 +15,7 @@ import { convertDishToCulomn } from '@services/dishes/dishes.utils';
     return (
       <div>
         <DataDisplay title="Dishes">
-          <DataTable columns={columns} data={dishesAsColumns} />
+          <DishesTable data={dishesAsColumns} />
         </DataDisplay>
       </div>
     );

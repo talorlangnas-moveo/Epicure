@@ -12,7 +12,6 @@ import {
 } from "@services/restaurants/restaurants.api";
 import { convertRestaurantToColumn } from "@services/restaurants/restaurants.utils";
 import { RestaurantsForm } from "@/components/restaurant-form";
-import { Restaurant } from "@/types/interfaces/restaurant";
 
 interface RestaurantsTableProps {
   data: RestaurantColumn[];

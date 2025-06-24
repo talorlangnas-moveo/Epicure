@@ -3,16 +3,14 @@ import { DishColumn } from '@/types/columns/dish.column';
 import { Flame, Leaf, Salad, Utensils } from "lucide-react"
 import { DishCategoryInfo } from '@/types/dishCategoryInfo';
 import { fetchRestaurantById } from '@services/restaurants/restaurants.api';
-import { getChefsNameById } from '../restaurants/restaurants.utils';
 
-export async function getRestaurantAndChefName(id: string): Promise<{restaurantName: string, chefName: string}> {
+export async function getRestaurantName(id: string): Promise<string> {
   const restaurant = await fetchRestaurantById(id);
-  const chefName = await getChefsNameById(restaurant.chefId);
-  return {restaurantName: restaurant.name, chefName: chefName};
+  return restaurant.name;
 }
 
 export async function convertDishToCulomn(dish: Dish): Promise<DishColumn> {
-  const {restaurantName, chefName} = await getRestaurantAndChefName(dish.restaurantId);
+  const restaurantName = await getRestaurantName(dish.restaurantId);
   
   return {
       _id: dish._id,
@@ -23,7 +21,6 @@ export async function convertDishToCulomn(dish: Dish): Promise<DishColumn> {
       price: dish.price,
       dishCategory: dish.dishCategory,
       restaurantName: restaurantName,
-      chefName: chefName,
     };
   }
 
@@ -35,6 +32,8 @@ export async function convertDishToCulomn(dish: Dish): Promise<DishColumn> {
         return { icon: Leaf, className: "text-green-600" }
       case "vegetarian":
         return { icon: Salad, className: "text-lime-600" }
+      case "none":
+        return { icon: Utensils, className: "text-gray-400" }  
       default:
         return { icon: Utensils, className: "text-gray-400" }
     }

@@ -35,31 +35,6 @@ export async function updateRestaurant(id: string, data: Partial<Restaurant>): P
   }
 }
 
-// export async function createRestaurant(data: {
-//   chefId: string;
-//   name: string;
-//   description: string;
-//   imgUrl: string;
-//   rating: string;
-//   openingTime: string;
-//   closingTime: string;
-//   foundedDate: string;
-// }): Promise<Restaurant> {
-//   try {
-//     const res = await axios.post(`${API_BASE_URL}/restaurants`, data);
-//     toast.success("Restaurant created successfully");
-//     return res.data;
-//   } catch (error: unknown) {
-//     if (error instanceof AxiosError) {
-//       console.error(error.response?.data?.message);
-//       toast.error(error.response?.data?.message);
-//     } else {
-//       console.error("An unknown error occurred");
-//       toast.error("Failed to create restaurant");
-//     }
-//     throw error;
-//   }
-// }
 export async function createRestaurant(data: Partial<Restaurant>): Promise<Restaurant> {
   try {
     const res = await axios.post(`${API_BASE_URL}/restaurants`, data);
