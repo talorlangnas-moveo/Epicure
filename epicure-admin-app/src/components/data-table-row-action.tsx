@@ -14,15 +14,15 @@ import { MoreHorizontal, SquarePen, Trash2 } from "lucide-react";
 import { Row } from "@tanstack/react-table";
 import { ResponsiveDialog } from "@/components/responsive-dialog";
 import { EntityForm } from "@/types/entityForm";
+import DeleteCard from "@/components/delete-card";
 
 interface WithId<T> {
   _id: string;
 }
 interface DataTableRowActionsProps<TData extends WithId<string>> {
   row: Row<TData>;
-  onDelete: (value: TData) => void;
+  onDelete: (value: TData) => Promise<void>;
   editForm: EntityForm<TData>;
-  deleteForm: EntityForm<TData>;
   onEdit?: (entity: TData, updatedData: Partial<TData>) => Promise<TData>;
 }
 
@@ -30,12 +30,10 @@ export default function DataTableRowAction<TData extends WithId<string>>({
   row,
   onDelete,
   editForm,
-  deleteForm,
   onEdit,
 }: DataTableRowActionsProps<TData>) {
   const [isEditOpen, setIsEditOpen] = useState(false);
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
-  const restaurant = row.original;
 
   return (
     <>
@@ -54,7 +52,7 @@ export default function DataTableRowAction<TData extends WithId<string>>({
         isOpen={isDeleteOpen}
         setIsOpen={setIsDeleteOpen}
       >
-        {deleteForm({ entity: row.original, setIsOpen: setIsDeleteOpen })}
+        <DeleteCard<TData> onDelete={onDelete} setIsOpen={setIsDeleteOpen} value={row.original} />
       </ResponsiveDialog>
       <div className="text-center">
         <DropdownMenu>
@@ -78,7 +76,7 @@ export default function DataTableRowAction<TData extends WithId<string>>({
               <SquarePen className="h-4 w-4 text-neutral-600" />
               Edit
             </DropdownMenuItem>
-            <DropdownMenuItem onClick={() => onDelete(restaurant)}>
+            <DropdownMenuItem onClick={() => setIsDeleteOpen(true)}>
               <Trash2 className="h-4 w-4 text-red-600" />
               Delete
             </DropdownMenuItem>

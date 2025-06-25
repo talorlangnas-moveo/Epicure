@@ -2,7 +2,7 @@ import { Dispatch, SetStateAction } from "react";
 
 export type FormMode = "create" | "update";
 
-interface WithId {
+export interface WithId {
   _id: string;
 }
 

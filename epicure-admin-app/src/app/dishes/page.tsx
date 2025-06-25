@@ -6,7 +6,6 @@ import DishesTable from "@/components/dishes-table";
 
   export default async function DishesPage() {
     const dishes = await fetchAll();
-    console.log("dishes: ", dishes);
     const dishesAsColumns = await Promise.all(dishes.map(convertDishToCulomn));
 
     if(!dishes) {

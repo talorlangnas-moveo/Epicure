@@ -9,7 +9,7 @@ import { RestaurantsForm } from "@/components/restaurant-form";
 import DataTableRowAction from "@/components/data-table-row-action";
 
 interface ColumnsProps {
-  onDelete: (value: RestaurantColumn) => void;
+  onDelete: (value: RestaurantColumn) => Promise<void>;
   onEdit?: (entity: RestaurantColumn, updatedData: Partial<RestaurantColumn>) => Promise<RestaurantColumn>;
 }
 
@@ -102,7 +102,7 @@ export function RestaurantColumns({
     {
       id: "actions",
       cell: ({ row }) => {
-        return <DataTableRowAction row={row} onDelete={onDelete} editForm={RestaurantsForm} deleteForm={RestaurantsForm} onEdit={onEdit} />;
+        return <DataTableRowAction row={row} onDelete={onDelete} editForm={RestaurantsForm} onEdit={onEdit} />;
       },
     },
   ];
