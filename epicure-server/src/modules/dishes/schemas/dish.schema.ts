@@ -25,8 +25,8 @@ export class Dish {
   @Prop({ required: true })
   description: string;
 
-  @Prop({ required: true })
-  imgUrl: string;
+  @Prop()
+  imgUrl?: string;
 
   @Prop({ required: true })
   price: number;

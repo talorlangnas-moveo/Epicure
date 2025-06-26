@@ -22,8 +22,8 @@ export class CreateChefDto {
   description: string;
 
   @IsString()
-  @IsNotEmpty()
-  imgUrl: string;
+  @IsOptional()
+  imgUrl?: string;
 
   @Type(() => Date)
   @IsDate()

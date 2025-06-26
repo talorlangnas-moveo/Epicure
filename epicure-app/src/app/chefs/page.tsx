@@ -7,7 +7,7 @@ import { chefsFilterOptions } from "@/services/chefs/chefsFilterOptions";
 
 async function Chefs() {
   const chefs = await fetchChefs();
-  const chefsAsCards = chefs.map(convertChefToCard);
+  const chefsAsCards = await Promise.all(chefs.map(convertChefToCard));
 
   if (!chefs) {
     notFound();

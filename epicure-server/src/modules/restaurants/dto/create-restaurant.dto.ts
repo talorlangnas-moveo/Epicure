@@ -20,8 +20,8 @@ export class CreateRestaurantDto {
   name: string;
 
   @IsString()
-  @IsNotEmpty()
-  imgUrl: string;
+  @IsOptional()
+  imgUrl?: string;
 
   @Type(() => Number)
   @IsNumber()

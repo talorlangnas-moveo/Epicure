@@ -8,6 +8,7 @@ import YaPanImage from '@public/restaurantsDesk/yapan.png';
 import Claro2Image from '@public/restaurantsDesk/claro2.png';
 import KabKem2Image from '@public/restaurantsDesk/kabkem2.png';
 import Messa2Image from '@public/restaurantsDesk/messa2.png';
+import restaurantPlaceholderImage from '@public/restaurantPlaceholder.png';
 
 export const restaurantImagesMap: { [key: string]: StaticImageData } = {
     "/restaurantsDesk/claro.png": ClaroImage,
@@ -22,7 +23,7 @@ export const restaurantImagesMap: { [key: string]: StaticImageData } = {
 }
 
 export const getRestaurantImage = (imgUrl: string): StaticImageData => {
-    return restaurantImagesMap[imgUrl] || ClaroImage;
+    return restaurantImagesMap[imgUrl] || restaurantPlaceholderImage;
 }
 
 

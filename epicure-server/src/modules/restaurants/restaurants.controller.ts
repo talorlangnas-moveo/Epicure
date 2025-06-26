@@ -7,6 +7,8 @@ import {
   Query,
   Put,
   Delete,
+  UseInterceptors,
+  UploadedFile,
 } from '@nestjs/common';
 import { RestaurantsService } from './restaurants.service';
 import { CreateRestaurantDto } from './dto/create-restaurant.dto';
@@ -15,6 +17,7 @@ import { Types } from 'mongoose';
 import { UpdateRestaurantDto } from './dto/update-restaurant.dto';
 import { Restaurant } from './schemas/restaurant.schema';
 import { ValidateChefPipe } from './pipes/validate-chef.pipe';
+import { FileInterceptor } from '@nestjs/platform-express';
 
 @Controller('restaurants')
 export class RestaurantsController {
@@ -25,6 +28,13 @@ export class RestaurantsController {
     @Body(ValidateChefPipe) createRestaurantDto: CreateRestaurantDto,
   ): Promise<Restaurant> {
     return this.restaurantsService.create(createRestaurantDto);
+  }
+
+  @Post('upload')
+  @UseInterceptors(FileInterceptor('file'))
+  uploadFile(@UploadedFile() file: Express.Multer.File) {
+    console.log(file);
+    return 'File uploaded';
   }
 
   @Get()

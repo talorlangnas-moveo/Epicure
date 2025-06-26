@@ -24,8 +24,8 @@ export class CreateDishDto {
   description: string;
 
   @IsString()
-  @IsNotEmpty()
-  imgUrl: string;
+  @IsOptional()
+  imgUrl?: string;
 
   @Type(() => Number)
   @IsNumber()

@@ -5,6 +5,7 @@ import RedFarmImage from '@public/dishPage/redFarm.png';
 import PadKiMaonImage2 from '@public/dishes/padKiMao.png';
 import GarberImage from '@public/dishes/garber.png';
 import Dish3Image from '@public/dishes/dish3.png';
+import dishPlaceholderImage from '@public/dishPlaceholder.png';
 
 export const dishImagesMap: { [key: string]: StaticImageData } = {
     "/dishPage/padkimao.png": PadKiMaoImage,
@@ -16,5 +17,5 @@ export const dishImagesMap: { [key: string]: StaticImageData } = {
 }
 
 export const getDishImage = (imgUrl: string): StaticImageData => {
-    return dishImagesMap[imgUrl] || PadKiMaoImage;
+    return dishImagesMap[imgUrl] || dishPlaceholderImage;
 }

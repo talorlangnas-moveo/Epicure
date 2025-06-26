@@ -15,8 +15,8 @@ export class Restaurant {
   @Prop({ required: true })
   name: string;
 
-  @Prop({ required: true })
-  imgUrl: string;
+  @Prop()
+  imgUrl?: string;
 
   @Prop({ required: true })
   rating: number;

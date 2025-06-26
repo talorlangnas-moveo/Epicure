@@ -14,8 +14,8 @@ export class Chef {
   @Prop()
   description: string;
 
-  @Prop({ required: true })
-  imgUrl: string;
+  @Prop()
+  imgUrl?: string;
 
   @Prop({ required: true, default: Date.now })
   foundedDate: Date;

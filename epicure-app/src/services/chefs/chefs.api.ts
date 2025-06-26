@@ -28,7 +28,8 @@ export async function getNewestChefsAsCards(): Promise<CardInfo[]> {
   });
 
   const chefs: Chef[] = res.data;
-  return chefs.map(convertChefToCard);
+  const chefsAsCards = await Promise.all(chefs.map(convertChefToCard));
+  return chefsAsCards;
 }
 
 export async function getMostViewedChefsAsCards(): Promise<CardInfo[]> {
@@ -39,5 +40,6 @@ export async function getMostViewedChefsAsCards(): Promise<CardInfo[]> {
   });
 
   const chefs: Chef[] = res.data;
-  return chefs.map(convertChefToCard);
+  const chefsAsCards = await Promise.all(chefs.map(convertChefToCard));
+  return chefsAsCards;
 }
