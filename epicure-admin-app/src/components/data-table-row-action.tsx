@@ -15,6 +15,7 @@ import { Row } from "@tanstack/react-table";
 import { ResponsiveDialog } from "@/components/responsive-dialog";
 import { EntityForm } from "@/types/entityForm";
 import DeleteCard from "@/components/delete-card";
+import { SelectItemOptions } from "@/utils/utilsFunctions";
 
 interface WithId<T> {
   _id: string;
@@ -24,6 +25,7 @@ interface DataTableRowActionsProps<TData extends WithId<string>> {
   onDelete: (value: TData) => Promise<void>;
   editForm: EntityForm<TData>;
   onEdit?: (entity: TData, updatedData: Partial<TData>) => Promise<TData>;
+  selectItemsMap?: SelectItemOptions[];
 }
 
 export default function DataTableRowAction<TData extends WithId<string>>({
@@ -31,6 +33,7 @@ export default function DataTableRowAction<TData extends WithId<string>>({
   onDelete,
   editForm,
   onEdit,
+  selectItemsMap,
 }: DataTableRowActionsProps<TData>) {
   const [isEditOpen, setIsEditOpen] = useState(false);
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
@@ -46,6 +49,7 @@ export default function DataTableRowAction<TData extends WithId<string>>({
           setIsOpen: setIsEditOpen,
           mode: "update",
           onEdit: onEdit,
+          selectItemsMap: selectItemsMap,
         })}
       </ResponsiveDialog>
       <ResponsiveDialog

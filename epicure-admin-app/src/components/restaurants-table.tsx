@@ -12,13 +12,16 @@ import {
 } from "@services/restaurants/restaurants.api";
 import { convertRestaurantToColumn } from "@services/restaurants/restaurants.utils";
 import { RestaurantsForm } from "@/components/restaurant-form";
+import { SelectItemOptions } from "@/utils/utilsFunctions";
 
 interface RestaurantsTableProps {
   data: RestaurantColumn[];
+  selectItemsMap: SelectItemOptions[];
 }
 
 export default function RestaurantsTable({
   data: initialData,
+  selectItemsMap,
 }: RestaurantsTableProps) {
   const [data, setData] = useState<RestaurantColumn[]>(initialData);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
@@ -75,12 +78,14 @@ export default function RestaurantsTable({
       columns={RestaurantColumns({
         onDelete: handleDelete,
         onEdit: handleEdit,
+        selectItemsMap: selectItemsMap,
       })}
       formComponent={
         <RestaurantsForm
           mode="create"
           setIsOpen={setIsDialogOpen}
           onAdd={handleAdd}
+          selectItemsMap={selectItemsMap}
         />
       }
       isDialogOpen={isDialogOpen}

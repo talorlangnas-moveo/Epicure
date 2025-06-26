@@ -7,15 +7,18 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { RestaurantsForm } from "@/components/restaurant-form";
 import DataTableRowAction from "@/components/data-table-row-action";
+import { SelectItemOptions } from "@/utils/utilsFunctions";
 
 interface ColumnsProps {
   onDelete: (value: RestaurantColumn) => Promise<void>;
   onEdit?: (entity: RestaurantColumn, updatedData: Partial<RestaurantColumn>) => Promise<RestaurantColumn>;
+  selectItemsMap?: SelectItemOptions[];
 }
 
 export function RestaurantColumns({
   onDelete,
   onEdit,
+  selectItemsMap,
 }: ColumnsProps): ColumnDef<RestaurantColumn>[] {
   return [
     {
@@ -102,7 +105,7 @@ export function RestaurantColumns({
     {
       id: "actions",
       cell: ({ row }) => {
-        return <DataTableRowAction row={row} onDelete={onDelete} editForm={RestaurantsForm} onEdit={onEdit} />;
+        return <DataTableRowAction row={row} onDelete={onDelete} editForm={RestaurantsForm} onEdit={onEdit} selectItemsMap={selectItemsMap} />;
       },
     },
   ];

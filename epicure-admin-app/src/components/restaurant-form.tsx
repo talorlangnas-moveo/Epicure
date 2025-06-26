@@ -10,6 +10,15 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
 import { Input } from "@/components/ui/input";
 import Link from "next/link";
 import Image from "next/image";
@@ -29,6 +38,7 @@ export const RestaurantsForm: EntityForm<RestaurantColumn> = ({
   setIsOpen,
   onEdit,
   onAdd,
+  selectItemsMap,
 }) => {
   const restaurant = entity;
   const schema = mode === "create" ? fullFormSchema  : partialFormSchema;
@@ -139,16 +149,30 @@ export const RestaurantsForm: EntityForm<RestaurantColumn> = ({
                   </FormItem>
                 )}
               />
-              
               <FormField
                 control={form.control}
                 name="chefId"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Chef ID</FormLabel>
-                    <FormControl>
-                      <Input placeholder="Chef ID" {...field} />
-                    </FormControl>
+                    <FormLabel>Chef</FormLabel>
+                    <Select onValueChange={field.onChange} defaultValue={field.value}>
+                      <FormControl>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select Chef" />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent>
+                        <SelectGroup>
+                        <SelectLabel>Chefs List</SelectLabel>
+                          {selectItemsMap?.map(item => (
+                            <SelectItem key={item.value} value={item.value}>{item.label}</SelectItem>
+                          ))}
+                        </SelectGroup>
+                      </SelectContent>
+                    </Select>
+                    <FormDescription>
+                      Choose the dietary category for this dish
+                    </FormDescription>
                     <FormMessage />
                   </FormItem>
                 )}

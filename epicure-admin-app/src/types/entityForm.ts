@@ -1,3 +1,4 @@
+import { SelectItemOptions } from "@/utils/utilsFunctions";
 import { Dispatch, SetStateAction } from "react";
 
 export type FormMode = "create" | "update";
@@ -12,6 +13,7 @@ export interface EntityFormProps<T extends WithId> {
   setIsOpen: Dispatch<SetStateAction<boolean>>;
   onEdit?: (entity: T, updatedData: Partial<T>) => Promise<T>;
   onAdd?: (data: Partial<T>) => Promise<T>;
+  selectItemsMap?: SelectItemOptions[];
 }
 
 export type EntityForm<T extends WithId, TValue = any> = (props: EntityFormProps<T>) => React.ReactNode;
