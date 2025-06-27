@@ -6,7 +6,7 @@ import { toast } from "sonner";
 
 interface EntityState<T extends identifiers, P> {
   data: T[];
-  selectItemMap: identifiers[];
+  selectItemMap?: identifiers[];
 
   onDelete: (
     entity: T,
@@ -33,13 +33,13 @@ const EntityContext = createContext<EntityState<any, any> | undefined>(
 
 interface EntityProviderProps<T extends identifiers, P> {
   data: T[];
-  items: identifiers[];
+  items?: identifiers[];
   children: React.ReactNode;
 }
 
 export function EntityProvider<T extends identifiers, P>({
   children,
-  items,
+  items = [],
   data: initialData,
 }: EntityProviderProps<T, P>) {
   const [selectItemMap, setSelectItemMap] = useState<identifiers[]>(items);

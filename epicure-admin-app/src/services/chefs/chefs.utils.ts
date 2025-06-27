@@ -1,7 +1,7 @@
 import { ChefColumn } from '@/types/columns/chef.column';
 import { Chef } from '@/types/interfaces/chef';
 
-export function convertChefToColumn(chef: Chef): ChefColumn {
+export async function convertChefToColumn(chef: Chef): Promise<ChefColumn> {
   return {
     _id: chef._id,
     imgUrl: chef.imgUrl,

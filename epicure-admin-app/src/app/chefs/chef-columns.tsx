@@ -1,6 +1,7 @@
 "use client";
 
 import { ChefColumn } from "@/types/columns/chef.column";
+import { Chef } from "@/types/interfaces/chef";
 import { ColumnDef } from "@tanstack/react-table";
 import { Eye } from "lucide-react";
 import { ArrowUpDown } from "lucide-react";
@@ -9,19 +10,9 @@ import { Button } from "@/components/ui/button";
 import { TextPopover } from "@/components/ui/text-popover";
 import DataTableRowAction from "@/components/data-table-row-action";
 import { ChefForm } from "@/components/chef-form";
+import { deleteChef } from "@/services/chefs/chefs.api";
 
-interface ColumnsProps {
-  onDelete: (value: ChefColumn) => void;
-  onEdit?: (
-    entity: ChefColumn,
-    updatedData: Partial<ChefColumn>
-  ) => Promise<ChefColumn>;
-}
-
-export function ChefColumns({
-  onDelete,
-  onEdit,
-}: ColumnsProps): ColumnDef<ChefColumn>[] {
+export function ChefColumns(): ColumnDef<ChefColumn>[] {
   return [
     {
       accessorKey: "imgUrl",
@@ -113,7 +104,13 @@ export function ChefColumns({
     {
       id: "actions",
       cell: ({ row }) => {
-        return <DataTableRowAction row={row} onDelete={onDelete} editForm={ChefForm} deleteForm={ChefForm} onEdit={onEdit} />;
+        return (
+          <DataTableRowAction<ChefColumn, Chef>
+            row={row}
+            deleteCallback={deleteChef}
+            editForm={ChefForm}
+          />
+        );
       },
     },
   ];

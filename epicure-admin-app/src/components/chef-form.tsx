@@ -24,15 +24,21 @@ import { ChefColumn } from "@/types/columns/chef.column";
 import { EntityForm } from "@/types/entityForm";
 import { Textarea } from "@/components/ui/textarea"
 import { Slider } from "@/components/ui/slider";
+import { useEntityContext } from "@/components/entityContext";
+import { Chef } from "@/types/interfaces/chef";
+import {
+  createChef,
+  updateChef,
+} from "@services/chefs/chefs.api";
+import { convertChefToColumn } from "@/services/chefs/chefs.utils";
 
 export const ChefForm: EntityForm<ChefColumn> = ({
   entity,
   mode,
   setIsOpen,
-  onEdit,
-  onAdd,
 }) => {
   const chef = entity;
+  const { onEdit, onAdd } = useEntityContext<ChefColumn, Chef>();
   const schema = mode === "create" ? fullFormSchema : partialFormSchema;
   const form = useForm<z.infer<typeof schema>>({
     resolver: zodResolver(schema),
@@ -68,7 +74,7 @@ export const ChefForm: EntityForm<ChefColumn> = ({
     if (mode === "update" && chef) {
       try {
         if (onEdit) {
-          await onEdit(chef, chefData);
+          await onEdit(chef, chefData, updateChef, convertChefToColumn);
         }
         setIsOpen(false);
       } catch (error) {
@@ -77,7 +83,7 @@ export const ChefForm: EntityForm<ChefColumn> = ({
     } else if (mode === "create") {
       try {
         if (onAdd) {
-          await onAdd(chefData);
+          await onAdd(chefData, createChef, convertChefToColumn);
         }
         setIsOpen(false);
       } catch (error) {

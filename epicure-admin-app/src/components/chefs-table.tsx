@@ -1,5 +1,6 @@
 "use client";
 
+import { notFound } from "next/navigation";
 import { ChefColumns } from "@/app/chefs/chef-columns";
 import { toast } from "sonner";
 import { useState } from "react";
@@ -12,74 +13,23 @@ import {
 } from "@services/chefs/chefs.api";
 import { convertChefToColumn } from "@services/chefs/chefs.utils";
 import { ChefForm } from "@/components/chef-form";
+import { useEntityContext } from "@/components/entityContext";
+import { Chef } from "@/types/interfaces/chef";
 
-interface ChefsTableProps {
-  data: ChefColumn[];
-}
-
-export default function ChefsTable({
-  data: initialData,
-}: ChefsTableProps) {
-  const [data, setData] = useState<ChefColumn[]>(initialData);
+export default function ChefsTable() {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const { data } = useEntityContext<ChefColumn, Chef>();
 
-  const handleDelete = async (chef: ChefColumn) => {
-    try {
-      await deleteChef(chef._id);
-      setData((prev) => prev.filter((c) => c._id !== chef._id));
-      toast.success(`${chef.name} Dish deleted successfully`);
-    } catch (error) {
-      toast.error(`Failed to delete ${chef.name} restaurant`);
-    }
-  };
-
-  const handleEdit = async (
-    chef: ChefColumn,
-    dataToUpdate: Partial<ChefColumn>
-  ) => {
-    try {
-      const updatedChef = await updateChef(
-        chef._id,
-        dataToUpdate
-      );
-      const updatedChefColumn = convertChefToColumn(
-        updatedChef
-      );
-      setData((prev) =>
-        prev.map((c) =>
-          c._id === chef._id ? updatedChefColumn : c
-        )
-      );
-      return updatedChefColumn;
-    } catch (error) {
-      throw error;
-    }
-  };
-
-  const handleAdd = async (newChef: Partial<ChefColumn>) => {
-    try {
-      const res = await createChef(newChef);
-      const newChefAsColumn = convertChefToColumn(res);
-      setData((prev) => [...prev, newChefAsColumn]);
-      return newChefAsColumn;
-    } catch (error) {
-      throw error;
-    }
-  };
+  if (!data) {
+    notFound();
+  }
 
   return (
     <DataTable
       data={data}
-      columns={ChefColumns({
-        onDelete: handleDelete,
-        onEdit: handleEdit,
-      })}
+      columns={ChefColumns()}
       formComponent={
-        <ChefForm
-          mode="create"
-          setIsOpen={setIsDialogOpen}
-          onAdd={handleAdd}
-        />
+        <ChefForm mode="create" setIsOpen={setIsDialogOpen} />
       }
       isDialogOpen={isDialogOpen}
       setIsDialogOpen={setIsDialogOpen}
