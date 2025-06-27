@@ -20,7 +20,7 @@ export const fullFormSchema = z.object({
         .string()
         .regex(/\.png$/, {
             message: "Image must be a .png file",
-        }),
+        }).optional(),
 
     foundedDate: z
         .string()

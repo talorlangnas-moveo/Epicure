@@ -15,12 +15,10 @@ export async function fetchRestaurantById(id: string): Promise<Restaurant | null
     const res = await axios.get(`${API_BASE_URL}/restaurants/${id}`);
     return res.data;
   } catch (error) {
-    console.error("Error fetching restaurant by id: ", error);
     return null;
   }
 }
 
-// export async function deleteRestaurant(id: string): Promise<Restaurant> {
 export async function deleteRestaurant(id: string): Promise<RestaurantColumn> {
   const res = await axios.delete(`${API_BASE_URL}/restaurants/${id}`);
   return res.data;

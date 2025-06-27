@@ -23,7 +23,9 @@ export class ValidateChefPipe
       const chefExists = await this.chefModel.findById(value.chefId);
 
       if (!chefExists) {
-        throw new NotFoundException(`Chef with ID ${value.chefId} not found`);
+        throw new NotFoundException(
+          'That chef doesn’t exist. Try choosing another.',
+        );
       }
     }
     return value;

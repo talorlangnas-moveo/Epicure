@@ -48,7 +48,7 @@ export const ChefForm: EntityForm<ChefColumn> = ({
             firstName: "",
             lastName: "",
             description: "",
-            imgUrl: "",
+            imgUrl: undefined,
             foundedDate: "",
             numberOfViews: "",
           }

@@ -49,14 +49,16 @@ export class ChefsService {
   }
 
   async remove(id: Types.ObjectId): Promise<Chef> {
+    // First, check if the chef exists and delete them
     const deletedChef = await this.chefModel.findByIdAndDelete(id);
     if (!deletedChef) {
       throw new NotFoundException('Chef not found');
     }
 
-    // Update all restaurants that reference this chef
     await this.restaurantModel.updateMany(
-      { chefId: id },
+      {
+        chefId: id.toString(),
+      },
       { $unset: { chefId: 1 } },
     );
 

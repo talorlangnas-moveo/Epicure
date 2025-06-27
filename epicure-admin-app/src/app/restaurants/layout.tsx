@@ -20,7 +20,7 @@ export default async function RestaurantsLayout({
     restaurants.map(convertRestaurantToColumn)
   );
   const chefs = await fetchChefs();
-  const chefsColumns = chefs.map(convertChefToColumn);
+  const chefsColumns = await Promise.all(chefs.map(convertChefToColumn));
   const chefsSelectItems = getSelectItemMap(chefsColumns);
 
   return (

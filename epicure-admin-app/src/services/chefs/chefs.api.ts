@@ -28,13 +28,13 @@ export async function deleteChef(id: string): Promise<ChefColumn> {
 export async function updateChef(id: string, data: Partial<Chef>): Promise<Chef> {
   try{
     const res = await axios.put(`${API_BASE_URL}/chefs/${id}`, data);
-    toast.success("Dish updated successfully");
+    toast.success("Chef updated successfully");
     return res.data;
   } catch (error: unknown) {
     if (error instanceof AxiosError) {
       toast.error(error.response?.data?.message);
     } else {
-      toast.error("Failed to update dish");
+      toast.error("Failed to update chef");
     }
    
     throw error;

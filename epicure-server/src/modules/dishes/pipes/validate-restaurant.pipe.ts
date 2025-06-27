@@ -41,7 +41,7 @@ export class ValidateRestaurantPipe implements PipeTransform<CreateDishDto> {
 
       if (!restaurantExists) {
         throw new NotFoundException(
-          `Restaurant with ID ${value.restaurantId} not found`,
+          'That restaurant doesn’t exist. Try choosing another.',
         );
       }
     }
