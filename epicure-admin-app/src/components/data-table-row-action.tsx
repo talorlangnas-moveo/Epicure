@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -15,29 +15,32 @@ import { Row } from "@tanstack/react-table";
 import { ResponsiveDialog } from "@/components/responsive-dialog";
 import { EntityForm } from "@/types/entityForm";
 import DeleteCard from "@/components/delete-card";
-import { SelectItemOptions } from "@/utils/utilsFunctions";
+import { identifiers } from "@/utils/utilsFunctions";
+import { useEntityContext } from "@/components/entityContext";
 
-interface WithId<T> {
-  _id: string;
-}
-interface DataTableRowActionsProps<TData extends WithId<string>> {
+// interface WithId<T> {
+//   _id: string;
+// }
+// interface DataTableRowActionsProps<TData extends WithId<string>> {
+interface DataTableRowActionsProps<TData extends identifiers> {
   row: Row<TData>;
-  onDelete: (value: TData) => Promise<void>;
+  // onDelete: (value: TData) => Promise<void>;
+  deleteCallback: (id: string) => Promise<TData>;
   editForm: EntityForm<TData>;
-  onEdit?: (entity: TData, updatedData: Partial<TData>) => Promise<TData>;
-  selectItemsMap?: SelectItemOptions[];
+  // onEdit?: (entity: TData, updatedData: Partial<TData>) => Promise<TData>;
 }
 
-export default function DataTableRowAction<TData extends WithId<string>>({
+// export default function DataTableRowAction<TData extends WithId<string>>({
+export default function DataTableRowAction<TData extends identifiers>({
   row,
-  onDelete,
+  // onDelete,
   editForm,
-  onEdit,
-  selectItemsMap,
+  deleteCallback,
+  // onEdit,
 }: DataTableRowActionsProps<TData>) {
   const [isEditOpen, setIsEditOpen] = useState(false);
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
-
+  const { onDelete } = useEntityContext<TData, TData>();
   return (
     <>
       <ResponsiveDialog
@@ -48,15 +51,15 @@ export default function DataTableRowAction<TData extends WithId<string>>({
           entity: row.original,
           setIsOpen: setIsEditOpen,
           mode: "update",
-          onEdit: onEdit,
-          selectItemsMap: selectItemsMap,
+          // onEdit: onEdit,
+          // selectItemsMap: selectItemsMap,
         })}
       </ResponsiveDialog>
       <ResponsiveDialog
         isOpen={isDeleteOpen}
         setIsOpen={setIsDeleteOpen}
       >
-        <DeleteCard<TData> onDelete={onDelete} setIsOpen={setIsDeleteOpen} value={row.original} />
+        <DeleteCard<TData> onDelete={onDelete(row.original, deleteCallback)} setIsOpen={setIsDeleteOpen} value={row.original} />
       </ResponsiveDialog>
       <div className="text-center">
         <DropdownMenu>

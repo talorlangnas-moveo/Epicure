@@ -3,6 +3,10 @@ import { convertRestaurantToColumn } from "@/services/restaurants/restaurants.ut
 import { fetchChefs } from "@/services/chefs/chefs.api";
 import { convertChefToColumn } from "@/services/chefs/chefs.utils";
 import { getSelectItemMap } from "@/utils/utilsFunctions";
+import { RestaurantColumn } from "@/types/columns/restaurant.column";
+import { Restaurant } from "@/types/interfaces/restaurant";
+
+import { EntityProvider } from "@/components/entityContext";
 
 interface RestaurantsLayoutProps {
   children: React.ReactNode;
@@ -12,10 +16,23 @@ export default async function RestaurantsLayout({
   children,
 }: RestaurantsLayoutProps) {
   const restaurants = await fetchRestaurants();
-  const restaurantsAsColumns = await Promise.all(restaurants.map(convertRestaurantToColumn));
+  const restaurantsAsColumns = await Promise.all(
+    restaurants.map(convertRestaurantToColumn)
+  );
   const chefs = await fetchChefs();
   const chefsColumns = chefs.map(convertChefToColumn);
   const chefsSelectItems = getSelectItemMap(chefsColumns);
 
-  return <section>{children}</section>;
+  return (
+    <EntityProvider<RestaurantColumn, Restaurant>
+      data={restaurantsAsColumns}
+      items={chefsSelectItems}
+    >
+      <section>{children}</section>
+    </EntityProvider>
+  );
 }
+
+// <RestaurantProvider items={chefsSelectItems}>
+//   <section>{children}</section>
+// </RestaurantProvider>

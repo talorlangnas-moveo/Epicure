@@ -31,16 +31,18 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { RestaurantColumn } from "@/types/columns/restaurant.column";
 import { EntityForm } from "@/types/entityForm";
+import { useRestaurantContext } from "@/app/restaurants/restaurantContext";
 
 export const RestaurantsForm: EntityForm<RestaurantColumn> = ({
   entity,
   mode,
   setIsOpen,
-  onEdit,
+  // onEdit,
   onAdd,
-  selectItemsMap,
+  // selectItemsMap,
 }) => {
   const restaurant = entity;
+  const {selectItemMap} = useRestaurantContext();
   const schema = mode === "create" ? fullFormSchema  : partialFormSchema;
   const form = useForm<z.infer<typeof schema>>({
     resolver: zodResolver(schema),
@@ -164,8 +166,8 @@ export const RestaurantsForm: EntityForm<RestaurantColumn> = ({
                       <SelectContent>
                         <SelectGroup>
                         <SelectLabel>Chefs List</SelectLabel>
-                          {selectItemsMap?.map(item => (
-                            <SelectItem key={item.value} value={item.value}>{item.label}</SelectItem>
+                          {selectItemMap?.map(item => (
+                            <SelectItem key={item._id} value={item._id}>{item.name}</SelectItem>
                           ))}
                         </SelectGroup>
                       </SelectContent>

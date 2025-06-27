@@ -1,6 +1,7 @@
 import axios, { AxiosError } from 'axios';
 import { Restaurant } from '@/types/interfaces/restaurant';
 import { toast } from 'sonner';
+import { RestaurantColumn } from '@/types/columns/restaurant.column';
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 
@@ -19,7 +20,8 @@ export async function fetchRestaurantById(id: string): Promise<Restaurant | null
   }
 }
 
-export async function deleteRestaurant(id: string): Promise<Restaurant> {
+// export async function deleteRestaurant(id: string): Promise<Restaurant> {
+export async function deleteRestaurant(id: string): Promise<RestaurantColumn> {
   const res = await axios.delete(`${API_BASE_URL}/restaurants/${id}`);
   return res.data;
 }

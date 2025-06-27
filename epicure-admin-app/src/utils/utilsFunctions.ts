@@ -1,17 +1,11 @@
-export interface identifier {
+export interface identifiers {
     _id: string;
     name: string;
 }
 
-export interface SelectItemOptions {
-    value: string;
-    label: string;
-}
-
-export function getSelectItemMap<T extends identifier>(items: T[]): SelectItemOptions[] {
+export function getSelectItemMap<T extends identifiers>(items: T[]): identifiers[] {
     return items.map((item) => ({
-        value: item._id,
-        label: item.name,
+        _id: item._id,
+        name: item.name,
     }));
 }
-

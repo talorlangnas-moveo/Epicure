@@ -8,8 +8,9 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Dispatch, SetStateAction } from "react";
+import { identifiers } from "@/utils/utilsFunctions";
 
-export default function DeleteCard<T>({
+export default function DeleteCard<T extends identifiers>({
   onDelete,
   setIsOpen,
   value,

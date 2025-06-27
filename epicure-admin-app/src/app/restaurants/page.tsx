@@ -3,16 +3,10 @@ import RestaurantsTable from "@/components/restaurants-table";
 import DataDisplay from "@/components/ui/data-display";
 import { fetchRestaurants } from "@/services/restaurants/restaurants.api";
 import { convertRestaurantToColumn } from "@/services/restaurants/restaurants.utils";
-import { fetchChefs } from "@/services/chefs/chefs.api";
-import { convertChefToColumn } from "@/services/chefs/chefs.utils";
-import { getSelectItemMap } from "@/utils/utilsFunctions";
 
 export default async function RestaurantsPage() {
   const restaurants = await fetchRestaurants();
   const restaurantsAsColumns = await Promise.all(restaurants.map(convertRestaurantToColumn));
-  const chefs = await fetchChefs();
-  const chefsColumns = chefs.map(convertChefToColumn);
-  const chefsSelectItems = getSelectItemMap(chefsColumns);
 
   if (!restaurants) {
     notFound();
@@ -21,7 +15,8 @@ export default async function RestaurantsPage() {
   return (
     <div>
       <DataDisplay title="Restaurants">
-        <RestaurantsTable data={restaurantsAsColumns} selectItemsMap={chefsSelectItems} />
+        {/* <RestaurantsTable data={restaurantsAsColumns} /> */}
+        <RestaurantsTable />
       </DataDisplay>
     </div>
   );
