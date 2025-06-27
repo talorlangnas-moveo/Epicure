@@ -33,6 +33,3 @@ export default async function RestaurantsLayout({
   );
 }
 
-// <RestaurantProvider items={chefsSelectItems}>
-//   <section>{children}</section>
-// </RestaurantProvider>

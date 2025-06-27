@@ -31,18 +31,18 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { RestaurantColumn } from "@/types/columns/restaurant.column";
 import { EntityForm } from "@/types/entityForm";
-import { useRestaurantContext } from "@/app/restaurants/restaurantContext";
+import { useEntityContext } from "@/components/entityContext";
+import { Restaurant } from "@/types/interfaces/restaurant";
+import { createRestaurant, updateRestaurant } from "@/services/restaurants/restaurants.api";
+import { convertRestaurantToColumn } from "@/services/restaurants/restaurants.utils";
 
 export const RestaurantsForm: EntityForm<RestaurantColumn> = ({
   entity,
   mode,
   setIsOpen,
-  // onEdit,
-  onAdd,
-  // selectItemsMap,
 }) => {
   const restaurant = entity;
-  const {selectItemMap} = useRestaurantContext();
+  const { onEdit, onAdd, selectItemMap } = useEntityContext<RestaurantColumn, Restaurant>();
   const schema = mode === "create" ? fullFormSchema  : partialFormSchema;
   const form = useForm<z.infer<typeof schema>>({
     resolver: zodResolver(schema),
@@ -76,7 +76,7 @@ export const RestaurantsForm: EntityForm<RestaurantColumn> = ({
     if (mode === "update" && restaurant) {
       try {
         if (onEdit) {
-          await onEdit(restaurant, restaurantData);
+          await onEdit(restaurant, restaurantData, updateRestaurant, convertRestaurantToColumn);
         }
         setIsOpen(false);
       } catch (error) {
@@ -85,7 +85,7 @@ export const RestaurantsForm: EntityForm<RestaurantColumn> = ({
     } else if (mode === "create") {
       try {
         if (onAdd) {
-          await onAdd(restaurantData);
+          await onAdd(restaurantData, createRestaurant, convertRestaurantToColumn);
         }
         setIsOpen(false);
       } catch (error) {

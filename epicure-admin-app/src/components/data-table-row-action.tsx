@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useContext } from "react";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -18,26 +18,18 @@ import DeleteCard from "@/components/delete-card";
 import { identifiers } from "@/utils/utilsFunctions";
 import { useEntityContext } from "@/components/entityContext";
 
-// interface WithId<T> {
-//   _id: string;
-// }
-// interface DataTableRowActionsProps<TData extends WithId<string>> {
-interface DataTableRowActionsProps<TData extends identifiers> {
+interface DataTableRowActionsProps<TData extends identifiers, P> {
   row: Row<TData>;
-  // onDelete: (value: TData) => Promise<void>;
   deleteCallback: (id: string) => Promise<TData>;
   editForm: EntityForm<TData>;
-  // onEdit?: (entity: TData, updatedData: Partial<TData>) => Promise<TData>;
 }
 
-// export default function DataTableRowAction<TData extends WithId<string>>({
-export default function DataTableRowAction<TData extends identifiers>({
+export default function DataTableRowAction<TData extends identifiers, P>({
   row,
-  // onDelete,
   editForm,
   deleteCallback,
-  // onEdit,
-}: DataTableRowActionsProps<TData>) {
+}: DataTableRowActionsProps<TData, P>) {
+  
   const [isEditOpen, setIsEditOpen] = useState(false);
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
   const { onDelete } = useEntityContext<TData, TData>();
@@ -51,15 +43,13 @@ export default function DataTableRowAction<TData extends identifiers>({
           entity: row.original,
           setIsOpen: setIsEditOpen,
           mode: "update",
-          // onEdit: onEdit,
-          // selectItemsMap: selectItemsMap,
         })}
       </ResponsiveDialog>
       <ResponsiveDialog
         isOpen={isDeleteOpen}
         setIsOpen={setIsDeleteOpen}
       >
-        <DeleteCard<TData> onDelete={onDelete(row.original, deleteCallback)} setIsOpen={setIsDeleteOpen} value={row.original} />
+        <DeleteCard<TData> onDelete={(value) => onDelete(value, deleteCallback)} setIsOpen={setIsDeleteOpen} value={row.original} />
       </ResponsiveDialog>
       <div className="text-center">
         <DropdownMenu>

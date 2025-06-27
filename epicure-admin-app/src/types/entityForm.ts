@@ -11,9 +11,6 @@ export interface EntityFormProps<T extends identifiers> {
   mode?: FormMode;
   entity?: T;
   setIsOpen: Dispatch<SetStateAction<boolean>>;
-  // onEdit?: (entity: T, updatedData: Partial<T>) => Promise<T>;
-  // onAdd?: (data: Partial<T>) => Promise<T>;
-  // selectItemsMap?: identifiers[];
 }
 
-export type EntityForm<T extends identifiers, TValue = any> = (props: EntityFormProps<T>) => React.ReactNode;
+export type EntityForm<T extends identifiers> = (props: EntityFormProps<T>) => React.ReactNode;
