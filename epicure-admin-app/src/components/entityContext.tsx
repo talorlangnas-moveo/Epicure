@@ -111,7 +111,7 @@ export function EntityProvider<T extends identifiers, P>({
   );
 }
 
-export function useEntityContext<T extends identifiers, P>(): EntityState<
+export function useEntityContext<T extends identifiers, P >(): EntityState<
   T,
   P
 > {

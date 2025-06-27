@@ -1,85 +1,28 @@
 "use client";
 
+import { notFound } from "next/navigation";
 import { DishColumns } from "@/app/dishes/dish-columns";
-import { toast } from "sonner";
 import { useState } from "react";
 import { DishColumn } from "@/types/columns/dish.column";
 import { DataTable } from "@/components/ui/data-table";
-import {
-  createDish,
-  deleteDish,
-  updateDish,
-} from "@services/dishes/dishes.api";
-import { convertDishToCulomn } from "@services/dishes/dishes.utils";
 import { DishForm } from "@/components/dish-form";
+import { useEntityContext } from "@/components/entityContext";
+import { Dish } from "@/types/interfaces/dish";
 
-interface DishesTableProps {
-  data: DishColumn[];
-}
-
-export default function DishesTable({
-  data: initialData,
-}: DishesTableProps) {
-  const [data, setData] = useState<DishColumn[]>(initialData);
+export default function DishesTable() {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const { data } = useEntityContext<DishColumn, Dish>();
 
-  const handleDelete = async (dish: DishColumn) => {
-    try {
-      await deleteDish(dish._id);
-      setData((prev) => prev.filter((d) => d._id !== dish._id));
-      toast.success(`${dish.name} Dish deleted successfully`);
-    } catch (error) {
-      toast.error(`Failed to delete ${dish.name} restaurant`);
-    }
-  };
-
-  const handleEdit = async (
-    dish: DishColumn,
-    dataToUpdate: Partial<DishColumn>
-  ) => {
-    try {
-      const updatedDish = await updateDish(
-        dish._id,
-        dataToUpdate
-      );
-      const updatedDishAsColumn = await convertDishToCulomn(
-        updatedDish
-      );
-      setData((prev) =>
-        prev.map((d) =>
-          d._id === dish._id ? updatedDishAsColumn : d
-        )
-      );
-      return updatedDishAsColumn;
-    } catch (error) {
-      throw error;
-    }
-  };
-
-  const handleAdd = async (newDish: Partial<DishColumn>) => {
-    try {
-      const res = await createDish(newDish);
-      const newDishAsColumn = await convertDishToCulomn(res);
-      setData((prev) => [...prev, newDishAsColumn]);
-      return newDishAsColumn;
-    } catch (error) {
-      throw error;
-    }
-  };
+  if (!data) {
+    notFound();
+  }
 
   return (
     <DataTable
       data={data}
-      columns={DishColumns({
-        onDelete: handleDelete,
-        onEdit: handleEdit,
-      })}
+      columns={DishColumns()}
       formComponent={
-        <DishForm
-          mode="create"
-          setIsOpen={setIsDialogOpen}
-          onAdd={handleAdd}
-        />
+        <DishForm mode="create" setIsOpen={setIsDialogOpen} />
       }
       isDialogOpen={isDialogOpen}
       setIsDialogOpen={setIsDialogOpen}

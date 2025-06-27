@@ -1,6 +1,7 @@
 "use client";
 
 import { DishColumn } from "@/types/columns/dish.column";
+import { Dish } from "@/types/interfaces/dish";
 import { ColumnDef } from "@tanstack/react-table";
 import { ArrowUpDown } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -9,19 +10,9 @@ import { Button } from "@/components/ui/button";
 import { TextPopover } from "@/components/ui/text-popover";
 import DataTableRowAction from "@/components/data-table-row-action";
 import { DishForm } from "@/components/dish-form";
+import { deleteDish } from "@services/dishes/dishes.api";
 
-interface ColumnsProps {
-  onDelete: (value: DishColumn) => void;
-  onEdit?: (
-    entity: DishColumn,
-    updatedData: Partial<DishColumn>
-  ) => Promise<DishColumn>;
-}
-
-export function DishColumns({
-  onDelete,
-  onEdit,
-}: ColumnsProps): ColumnDef<DishColumn>[] {
+export function DishColumns(): ColumnDef<DishColumn>[] {
   return [
     {
       accessorKey: "imgUrl",
@@ -121,7 +112,13 @@ export function DishColumns({
     {
       id: "actions",
       cell: ({ row }) => {
-        return <DataTableRowAction row={row} onDelete={onDelete} editForm={DishForm} deleteForm={DishForm} onEdit={onEdit} />;
+        return (
+          <DataTableRowAction<DishColumn, Dish>
+            row={row}
+            deleteCallback={deleteDish}
+            editForm={DishForm}
+          />
+        );
       },
     },
   ];

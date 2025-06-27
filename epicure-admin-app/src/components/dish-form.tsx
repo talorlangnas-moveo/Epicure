@@ -33,15 +33,18 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 import { Textarea } from "@/components/ui/textarea"
+import { useEntityContext } from "@/components/entityContext";
+import { Dish } from "@/types/interfaces/dish";
+import { createDish, updateDish } from "@/services/dishes/dishes.api";
+import { convertDishToCulomn } from "@/services/dishes/dishes.utils";
 
 export const DishForm: EntityForm<DishColumn> = ({
   entity,
   mode,
   setIsOpen,
-  onEdit,
-  onAdd,
 }) => {
   const dish = entity;
+  const { onEdit, onAdd, selectItemMap } = useEntityContext<DishColumn, Dish>();
   const schema = mode === "create" ? fullFormSchema : partialFormSchema;
   const form = useForm<z.infer<typeof schema>>({
     resolver: zodResolver(schema),
@@ -75,7 +78,7 @@ export const DishForm: EntityForm<DishColumn> = ({
     if (mode === "update" && dish) {
       try {
         if (onEdit) {
-          await onEdit(dish, dishData);
+          await onEdit(dish, dishData, updateDish, convertDishToCulomn);
         }
         setIsOpen(false);
       } catch (error) {
@@ -84,7 +87,7 @@ export const DishForm: EntityForm<DishColumn> = ({
     } else if (mode === "create") {
       try {
         if (onAdd) {
-          await onAdd(dishData);
+          await onAdd(dishData, createDish, convertDishToCulomn);
         }
         setIsOpen(false);
       } catch (error) {
@@ -155,12 +158,27 @@ export const DishForm: EntityForm<DishColumn> = ({
                 name="restaurantId"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Restaurant ID</FormLabel>
+                  <FormLabel>Restaurant</FormLabel>
+                  <Select onValueChange={field.onChange} defaultValue={field.value}>
                     <FormControl>
-                      <Input placeholder="Restaurant ID" {...field} />
+                      <SelectTrigger>
+                        <SelectValue placeholder="Select Restaurant" />
+                      </SelectTrigger>
                     </FormControl>
-                    <FormMessage />
-                  </FormItem>
+                    <SelectContent>
+                      <SelectGroup>
+                      <SelectLabel>Restaurant List</SelectLabel>
+                        {selectItemMap?.map(item => (
+                          <SelectItem key={item._id} value={item._id}>{item.name}</SelectItem>
+                        ))}
+                      </SelectGroup>
+                    </SelectContent>
+                  </Select>
+                  <FormDescription>
+                  Select the restaurant the dish belongs to.
+                  </FormDescription>
+                  <FormMessage />
+                </FormItem>
                 )}
               />
               <FormField

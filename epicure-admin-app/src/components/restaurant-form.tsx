@@ -173,7 +173,7 @@ export const RestaurantsForm: EntityForm<RestaurantColumn> = ({
                       </SelectContent>
                     </Select>
                     <FormDescription>
-                      Choose the dietary category for this dish
+                    Select the restaurant's chef.
                     </FormDescription>
                     <FormMessage />
                   </FormItem>
