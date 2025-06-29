@@ -10,11 +10,10 @@ interface BreadcrumbItem {
 }
 
 interface BreadcrumbsProps {
-  itemsMap: Record<string, string>;
+  itemsMap: Map<string, string>;
 }
 
 export default function Breadcrumbs({ itemsMap }: BreadcrumbsProps) {
-
   const pathname = usePathname();
   const pathSegments = pathname.split("/").filter((segment) => segment !== "");
 
@@ -23,12 +22,8 @@ export default function Breadcrumbs({ itemsMap }: BreadcrumbsProps) {
   pathSegments.forEach((segment, index) => {
     const href = "/" + pathSegments.slice(0, index + 1).join("/");
     const label = decodeURIComponent(segment.replace(/-/g, " "));
-    console.log("label: ", label);
-    if (label.length === 24) {
-      console.log("label.length === 24: ", label);
-    }
-    const restaurantName = itemsMap[label];
-    console.log("restaurantName: ", restaurantName);
+
+    const restaurantName = itemsMap.get(label);
     if (restaurantName) {
       breadcrumbs.push({ label: restaurantName, href });
     } else {
