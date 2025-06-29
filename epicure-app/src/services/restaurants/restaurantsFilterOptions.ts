@@ -19,6 +19,6 @@ export const filterByRangeOptions: FilterOption[] = [
 
 export const filterDishTypesOptions: FilterOption[] = [
   { id: "1", label: "Breakfast" },
-  { id: "2", label: "Lanch" },
+  { id: "2", label: "Lunch" },
   { id: "3", label: "Dinner" },
 ];

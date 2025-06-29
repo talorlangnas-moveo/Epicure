@@ -1,0 +1,35 @@
+.breadcrumbs {
+    padding: 10px 0;
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-wrap: wrap; // מאפשר מעבר שורה לפירורי לחם ארוכים
+      align-items: center;
+  
+      li {
+        display: flex;
+        align-items: center;
+        white-space: nowrap; // מונע שבירת שורה בתוך פריט
+  
+        .breadcrumbLink {
+          text-decoration: none;
+          color: #0070f3; // צבע כחול סטנדרטי לקישורים
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+  
+        .currentBreadcrumb {
+          color: #666; // צבע אפור לפריט הנוכחי
+          font-weight: bold;
+        }
+  
+        .separator {
+          margin: 0 8px;
+          color: #999;
+        }
+      }
+    }
+  }
