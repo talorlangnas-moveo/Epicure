@@ -15,8 +15,20 @@ export class Restaurant {
   @Prop({ required: true })
   name: string;
 
+  @Prop({
+    type: Buffer,
+    validate: {
+      validator: function (v: Buffer) {
+        // 16MB = 16 * 1024 * 1024 bytes
+        return !v || v.length <= 16 * 1024 * 1024;
+      },
+      message: 'Image size must be less than 16MB',
+    },
+  })
+  imgUrl?: Buffer;
+
   @Prop()
-  imgUrl?: string;
+  imgMimeType?: string;
 
   @Prop({ required: true })
   rating: number;
