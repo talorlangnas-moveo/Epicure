@@ -1,23 +1,47 @@
+@use '@styles/utils/variables' as *;
+@use '@styles/utils/mixins' as *;
+
+.breadcrumbsWrapper {
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 46px;
+  left: 0;
+  width: 100%;
+  z-index: 999;
+  background-color: #fff;;
+
+  @media (min-width: $breakpoint-laptop) {
+    top: 64px;
+  }
+}
+
 .breadcrumbs {
-    padding: 10px 0;
+    padding: 20px 0;
     ul {
       list-style: none;
       padding: 0;
       margin: 0;
       display: flex;
-      flex-wrap: wrap; // מאפשר מעבר שורה לפירורי לחם ארוכים
+      flex-wrap: wrap; 
       align-items: center;
   
       li {
         display: flex;
         align-items: center;
-        white-space: nowrap; // מונע שבירת שורה בתוך פריט
+        white-space: nowrap;
   
         .breadcrumbLink {
           text-decoration: none;
-          color: #0070f3; // צבע כחול סטנדרטי לקישורים
+          // color: #0070f3; 
+          color: #666;  
+          font-weight: 400;
           &:hover {
-            text-decoration: underline;
+            // text-decoration: underline;
+            // color: #0070f3;
+            // color: #444;
+            font-weight: 500;
           }
         }
   

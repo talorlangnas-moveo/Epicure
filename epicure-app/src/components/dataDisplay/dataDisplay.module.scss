@@ -1,14 +1,13 @@
 @use '@styles/utils/variables' as *;
 
 .dataDisplayContainer {
-    margin-top: 46px;
+    margin-top: 105px;
     margin-bottom: 56.03px;
     display: flex;
     flex-direction: column;
 
     @media (min-width: $breakpoint-laptop) {
-        margin-top: 64px;
-
+        margin-top: 123px;
     }
 }
 

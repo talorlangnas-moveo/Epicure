@@ -3,11 +3,11 @@
 .dishesDisplayContainer {
     display: flex;
     flex-direction: column;
-    margin-top: 46px;
+    margin-top: 105px;
     margin-bottom: 56.47px;
 
     @media (min-width: $breakpoint-laptop) {
-        margin-top: 64px;
+        margin-top: 123px;
         align-items: center;
         margin-bottom: 48px;
     }

@@ -14,7 +14,7 @@ export async function getChefsNameById(id: string): Promise<string> {
 }
 
 export async function convertRestaurantToCard(restaurant: Restaurant): Promise<CardInfo> {
-  const chefName = await getChefsNameById(restaurant.chefId);
+  const chefName = restaurant.chefId ? await getChefsNameById(restaurant.chefId) : "No Chef Assigned";
   
   return {
     id: restaurant._id,
@@ -25,6 +25,7 @@ export async function convertRestaurantToCard(restaurant: Restaurant): Promise<C
     rating: restaurant.rating,
     ratingImage: getRatingImage(restaurant.rating),
     route: `/restaurants/${restaurant._id}`,
+    slug: restaurant.name.toLowerCase().replace(/ /g, '-'),
   };
 }
 

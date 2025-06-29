@@ -1,6 +1,7 @@
-export interface Restaurant {
-  _id: string;
-  chefId: string;
+import { Identifiers } from "./identifiers";
+
+export interface Restaurant extends Identifiers {
+  chefId?: string;
   name: string;
   imgUrl: string;
   rating: number;
