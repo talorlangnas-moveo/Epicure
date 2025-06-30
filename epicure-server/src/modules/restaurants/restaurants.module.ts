@@ -6,6 +6,8 @@ import { Restaurant, RestaurantSchema } from './schemas/restaurant.schema';
 import { Chef, ChefSchema } from '../chefs/schemas/chef.schema';
 import { ValidateChefPipe } from './pipes/validate-chef.pipe';
 import { Dish, DishSchema } from '../dishes/schemas/dish.schema';
+import { MulterModule } from '@nestjs/platform-express';
+import { diskStorage } from 'multer';
 
 @Module({
   imports: [
@@ -14,6 +16,16 @@ import { Dish, DishSchema } from '../dishes/schemas/dish.schema';
       { name: Chef.name, schema: ChefSchema },
       { name: Dish.name, schema: DishSchema },
     ]),
+    MulterModule.register({
+      storage: diskStorage({
+        destination: '../public/uploads/restaurants',
+        filename: (req, file, cb) => {
+          const uniqueSuffix =
+            Date.now() + '-' + Math.round(Math.random() * 1e9);
+          cb(null, `${uniqueSuffix}-${file.originalname}`);
+        },
+      }),
+    }),
   ],
   controllers: [RestaurantsController],
   providers: [RestaurantsService, ValidateChefPipe],

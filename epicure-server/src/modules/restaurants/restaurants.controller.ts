@@ -24,17 +24,13 @@ export class RestaurantsController {
   constructor(private readonly restaurantsService: RestaurantsService) {}
 
   @Post()
+  @UseInterceptors(FileInterceptor('image'))
   create(
     @Body(ValidateChefPipe) createRestaurantDto: CreateRestaurantDto,
+    @UploadedFile() file?: Express.Multer.File,
   ): Promise<Restaurant> {
-    return this.restaurantsService.create(createRestaurantDto);
-  }
-
-  @Post('upload')
-  @UseInterceptors(FileInterceptor('file'))
-  uploadFile(@UploadedFile() file: Express.Multer.File) {
     console.log(file);
-    return 'File uploaded';
+    return this.restaurantsService.create(createRestaurantDto, file);
   }
 
   @Get()

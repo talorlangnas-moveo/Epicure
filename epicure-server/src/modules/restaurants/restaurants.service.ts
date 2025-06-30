@@ -17,9 +17,22 @@ export class RestaurantsService {
     private dishModel: mongoose.Model<Dish>,
   ) {}
 
+  uploadImage(file: Express.Multer.File): string {
+    if (!file) {
+      throw new Error('No file uploaded');
+    }
+
+    return `./public/uploads/restaurants/${file.filename}`;
+  }
+
   async create(
     @Body() createRestaurantDto: CreateRestaurantDto,
+    file?: Express.Multer.File,
   ): Promise<Restaurant> {
+    if (file) {
+      const imagePath = this.uploadImage(file);
+      createRestaurantDto.imgUrl = imagePath;
+    }
     const restaurant = await this.restaurantModel.create(createRestaurantDto);
     return restaurant;
   }
