@@ -1,9 +1,11 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Body, Injectable, NotFoundException } from '@nestjs/common';
 import { CreateDishDto } from './dto/create-dish.dto';
 import { Dish } from './schemas/dish.schema';
 import { InjectModel } from '@nestjs/mongoose';
 import mongoose, { Types } from 'mongoose';
 import { UpdateDishDto } from './dto/update-dish.dto';
+import * as fs from 'fs';
+import * as path from 'path';
 
 @Injectable()
 export class DishesService {
@@ -12,7 +14,44 @@ export class DishesService {
     private dishModel: mongoose.Model<Dish>,
   ) {}
 
-  async create(createDishDto: CreateDishDto): Promise<Dish> {
+  uploadImage(file: Express.Multer.File): string {
+    if (!file) {
+      throw new Error('No file uploaded');
+    }
+    // Store the relative path in the database
+    return `uploads/dishes/${file.filename}`;
+  }
+
+  private deleteImageFile(imagePath: string) {
+    try {
+      // Remove any './' prefix if it exists
+      const normalizedPath = imagePath.replace(/^\.\//, '');
+
+      // Get the absolute path by going up from the current directory to the project root
+      const projectRoot = path.join(__dirname, '..', '..', '..', '..');
+      const absolutePath = path.join(projectRoot, 'public', normalizedPath);
+
+      console.log('Trying to delete file at:', absolutePath);
+
+      if (fs.existsSync(absolutePath)) {
+        fs.unlinkSync(absolutePath);
+        console.log('Successfully deleted file');
+      } else {
+        console.log('File does not exist');
+      }
+    } catch (error) {
+      console.error('Error deleting image file:', error);
+    }
+  }
+
+  async create(
+    @Body() createDishDto: CreateDishDto,
+    file?: Express.Multer.File,
+  ): Promise<Dish> {
+    if (file) {
+      const imagePath = this.uploadImage(file);
+      createDishDto.imgUrl = imagePath;
+    }
     const dish = await this.dishModel.create(createDishDto);
     return dish;
   }
@@ -38,7 +77,21 @@ export class DishesService {
   async update(
     id: Types.ObjectId,
     updateDishDto: UpdateDishDto,
+    file?: Express.Multer.File,
   ): Promise<Dish> {
+    const currentDish = await this.dishModel.findById(id);
+    if (!currentDish) {
+      throw new NotFoundException('Dish not found');
+    }
+
+    if (file) {
+      if (currentDish.imgUrl) {
+        this.deleteImageFile(currentDish.imgUrl);
+      }
+      const imagePath = this.uploadImage(file);
+      updateDishDto.imgUrl = imagePath;
+    }
+
     const updatedDish = await this.dishModel.findByIdAndUpdate(
       id,
       updateDishDto,
@@ -51,6 +104,14 @@ export class DishesService {
   }
 
   async remove(id: Types.ObjectId): Promise<Dish> {
+    const dish = await this.dishModel.findById(id);
+    if (!dish) {
+      throw new NotFoundException('Dish not found');
+    }
+
+    if (dish.imgUrl) {
+      this.deleteImageFile(dish.imgUrl);
+    }
     const deletedDish = await this.dishModel.findByIdAndDelete(id);
     if (!deletedDish) {
       throw new NotFoundException('Dish not found');
