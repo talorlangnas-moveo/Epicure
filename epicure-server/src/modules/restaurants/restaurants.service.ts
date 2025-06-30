@@ -23,16 +23,12 @@ export class RestaurantsService {
     if (!file) {
       throw new Error('No file uploaded');
     }
-    // Store the relative path in the database
     return `uploads/restaurants/${file.filename}`;
   }
 
   private deleteImageFile(imagePath: string) {
     try {
-      // Remove any './' prefix if it exists
       const normalizedPath = imagePath.replace(/^\.\//, '');
-
-      // Get the absolute path by going up from the current directory to the project root
       const projectRoot = path.join(__dirname, '..', '..', '..', '..');
       const absolutePath = path.join(projectRoot, 'public', normalizedPath);
 
