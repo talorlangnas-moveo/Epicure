@@ -29,7 +29,6 @@ export class RestaurantsController {
     @Body(ValidateChefPipe) createRestaurantDto: CreateRestaurantDto,
     @UploadedFile() file?: Express.Multer.File,
   ): Promise<Restaurant> {
-    console.log(file);
     return this.restaurantsService.create(createRestaurantDto, file);
   }
 
@@ -59,11 +58,13 @@ export class RestaurantsController {
   }
 
   @Put(':id')
+  @UseInterceptors(FileInterceptor('image'))
   update(
     @Param('id', ParseMongoIdPipe) id: Types.ObjectId,
     @Body(ValidateChefPipe) updateRestaurantDto: UpdateRestaurantDto,
+    @UploadedFile() file?: Express.Multer.File,
   ): Promise<Restaurant> {
-    return this.restaurantsService.update(id, updateRestaurantDto);
+    return this.restaurantsService.update(id, updateRestaurantDto, file);
   }
 
   @Delete(':id')

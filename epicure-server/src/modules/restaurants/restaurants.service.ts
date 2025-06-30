@@ -7,6 +7,8 @@ import { Body } from '@nestjs/common';
 import * as moment from 'moment';
 import { UpdateRestaurantDto } from './dto/update-restaurant.dto';
 import { Dish } from '../dishes/schemas/dish.schema';
+import * as fs from 'fs';
+import * as path from 'path';
 
 @Injectable()
 export class RestaurantsService {
@@ -21,8 +23,30 @@ export class RestaurantsService {
     if (!file) {
       throw new Error('No file uploaded');
     }
+    // Store the relative path in the database
+    return `uploads/restaurants/${file.filename}`;
+  }
 
-    return `./public/uploads/restaurants/${file.filename}`;
+  private deleteImageFile(imagePath: string) {
+    try {
+      // Remove any './' prefix if it exists
+      const normalizedPath = imagePath.replace(/^\.\//, '');
+
+      // Get the absolute path by going up from the current directory to the project root
+      const projectRoot = path.join(__dirname, '..', '..', '..', '..');
+      const absolutePath = path.join(projectRoot, 'public', normalizedPath);
+
+      console.log('Trying to delete file at:', absolutePath);
+
+      if (fs.existsSync(absolutePath)) {
+        fs.unlinkSync(absolutePath);
+        console.log('Successfully deleted file');
+      } else {
+        console.log('File does not exist');
+      }
+    } catch (error) {
+      console.error('Error deleting image file:', error);
+    }
   }
 
   async create(
@@ -53,12 +77,30 @@ export class RestaurantsService {
   async update(
     id: Types.ObjectId,
     updateRestaurantDto: UpdateRestaurantDto,
+    file?: Express.Multer.File,
   ): Promise<Restaurant> {
+    // First get the current restaurant to get the old image path
+    const currentRestaurant = await this.restaurantModel.findById(id);
+    if (!currentRestaurant) {
+      throw new NotFoundException('Restaurant not found');
+    }
+
+    if (file) {
+      // Delete the old image if it exists
+      if (currentRestaurant.imgUrl) {
+        this.deleteImageFile(currentRestaurant.imgUrl);
+      }
+      // Set the new image path
+      const imagePath = this.uploadImage(file);
+      updateRestaurantDto.imgUrl = imagePath;
+    }
+
     const updatedRestaurant = await this.restaurantModel.findByIdAndUpdate(
       id,
       updateRestaurantDto,
       { new: true },
     );
+
     if (!updatedRestaurant) {
       throw new NotFoundException('Restaurant not found');
     }
@@ -66,18 +108,31 @@ export class RestaurantsService {
   }
 
   async remove(id: Types.ObjectId): Promise<Restaurant> {
-    console.log('Removing restaurant with ID:', id);
+    // Get the restaurant first to get the image path
+    const restaurant = await this.restaurantModel.findById(id);
+    if (!restaurant) {
+      throw new NotFoundException('Restaurant not found');
+    }
+
+    // Delete the image file if it exists
+    if (restaurant.imgUrl) {
+      this.deleteImageFile(restaurant.imgUrl);
+    }
+
+    // Delete the restaurant from database
     const deletedRestaurant = await this.restaurantModel.findByIdAndDelete(id);
     if (!deletedRestaurant) {
       throw new NotFoundException('Restaurant not found');
     }
 
+    // Update dishes to remove restaurant reference
     await this.dishModel.updateMany(
       {
         restaurantId: { $in: [id, id.toString()] },
       },
       { $unset: { restaurantId: '' } },
     );
+
     return deletedRestaurant;
   }
 
