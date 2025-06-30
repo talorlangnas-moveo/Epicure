@@ -49,7 +49,7 @@ export const RestaurantsForm: EntityForm<RestaurantColumn> = ({
     defaultValues: mode === "create" ? {
       name: "",
       chefId: "",
-      imgUrl: "",
+      imgFile: undefined,
       rating: "",
       openingTime: "",
       closingTime: "",
@@ -57,7 +57,7 @@ export const RestaurantsForm: EntityForm<RestaurantColumn> = ({
     } : {
       name: restaurant?.name,
       chefId: restaurant?.chefId,
-      imgUrl: restaurant?.imgUrl,
+      imgFile: restaurant?.imgFile,
       rating: restaurant?.rating?.toString(),
       openingTime: restaurant?.openingTime,
       closingTime: restaurant?.closingTime,
@@ -70,7 +70,8 @@ export const RestaurantsForm: EntityForm<RestaurantColumn> = ({
     const restaurantData = {
       ...values,
       rating: values.rating?.toString() || "1",
-      foundedDate: values.foundedDate ? new Date(values.foundedDate) : new Date()
+      foundedDate: values.foundedDate ? new Date(values.foundedDate) : new Date(),
+      imgFile: values.imgFile instanceof File ? values.imgFile : undefined
     };
     
     if (mode === "update" && restaurant) {
@@ -124,15 +125,26 @@ export const RestaurantsForm: EntityForm<RestaurantColumn> = ({
             <div className="space-y-5">
               <FormField
                 control={form.control}
-                name="imgUrl"
-                render={({ field }) => (
+                name="imgFile"
+                render={({ field: { value, onChange, ...field } }) => (
                   <FormItem>
-                    <FormLabel>Image URL</FormLabel>
+                    <FormLabel>Restaurant Image</FormLabel>
                     <FormControl>
-                      <Input placeholder="Image URL" {...field} />
+                      <Input
+                        type="file"
+                        accept=".jpg,.jpeg,.png"
+                        onChange={(e) => {
+                          const file = e.target.files?.[0];
+                          if (file) {
+                            onChange(file);
+                          }
+                        }}
+                        className="file:hidden before:content-[''] before:mr-2 before:inline-block pt-1.5"
+                        {...field}
+                      />
                     </FormControl>
                     <FormDescription>
-                      Enter the URL of the image you want to use (must end with .png)
+                      Select an image file (PNG, JPG, or JPEG, max 5MB)
                     </FormDescription>
                     <FormMessage />
                   </FormItem>

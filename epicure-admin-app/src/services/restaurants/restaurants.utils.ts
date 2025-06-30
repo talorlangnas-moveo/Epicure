@@ -1,6 +1,7 @@
 import { RestaurantColumn } from "@/types/columns/restaurant.column";
 import { Restaurant } from "@/types/interfaces/restaurant";
 import { fetchChefById } from "@services/chefs/chefs.api";
+import { getUploadedImage } from "@/utils/uploadedImage.utils";
 
 export async function getChefsNameById(id: string): Promise<string> {
   const chef = await fetchChefById(id);
@@ -12,6 +13,7 @@ export async function getChefsNameById(id: string): Promise<string> {
 
 export async function convertRestaurantToColumn(restaurant: Restaurant): Promise<RestaurantColumn> {
   const chefName = await getChefsNameById(restaurant.chefId);
+  const uploadedImage = await getUploadedImage(restaurant.imgUrl);
   
   return {
     _id: restaurant._id,
@@ -19,6 +21,7 @@ export async function convertRestaurantToColumn(restaurant: Restaurant): Promise
     name: restaurant.name,
     chefName: chefName,
     imgUrl: restaurant.imgUrl,
+    imgFile: uploadedImage,
     rating: restaurant.rating,
     openingTime: restaurant.openingTime,
     closingTime: restaurant.closingTime,
