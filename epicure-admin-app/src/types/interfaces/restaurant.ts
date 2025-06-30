@@ -4,7 +4,8 @@ export interface Restaurant extends identifiers {
     // _id: string;
     // name: string;
     chefId: string;
-    imgUrl: string;
+    imgUrl?: string;
+    imgMimeType?: string;
     rating: string;
     ratingImage?: string;
     openingTime: string;
