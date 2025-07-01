@@ -35,6 +35,8 @@ import { useEntityContext } from "@/components/entityContext";
 import { Restaurant } from "@/types/interfaces/restaurant";
 import { createRestaurant, updateRestaurant } from "@/services/restaurants/restaurants.api";
 import { convertRestaurantToColumn } from "@/services/restaurants/restaurants.utils";
+import { API_BASE_URL } from "@/utils/constants";
+import { useState, useEffect } from "react";
 
 export const RestaurantsForm: EntityForm<RestaurantColumn> = ({
   entity,
@@ -42,6 +44,7 @@ export const RestaurantsForm: EntityForm<RestaurantColumn> = ({
   setIsOpen,
 }) => {
   const restaurant = entity;
+  const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const { onEdit, onAdd, selectItemMap } = useEntityContext<RestaurantColumn, Restaurant>();
   const schema = mode === "create" ? fullFormSchema  : partialFormSchema;
   const form = useForm<z.infer<typeof schema>>({
@@ -65,6 +68,14 @@ export const RestaurantsForm: EntityForm<RestaurantColumn> = ({
 
     },
   });
+
+  useEffect(() => {
+    return () => {
+      if (previewUrl) {
+        URL.revokeObjectURL(previewUrl);
+      }
+    };
+  }, [previewUrl]);
 
   async function onSubmit(values: z.infer<typeof schema>) {
     const restaurantData = {
@@ -129,6 +140,20 @@ export const RestaurantsForm: EntityForm<RestaurantColumn> = ({
                 render={({ field: { value, onChange, ...field } }) => (
                   <FormItem>
                     <FormLabel>Restaurant Image</FormLabel>
+                    {(previewUrl || (mode === "update" && restaurant?.imgUrl)) && (
+                      <>
+                        <p className="text-center text-sm text-muted-foreground">Preview Image:</p>
+                        <div className="mb-4 flex justify-center">
+                          <Image
+                            src={previewUrl || `${API_BASE_URL}/${restaurant?.imgUrl}`}
+                            alt={restaurant?.name || "Preview"}
+                            width={150}
+                            height={150}
+                            className="rounded-md object-cover"
+                          />
+                        </div>
+                      </>
+                    )}
                     <FormControl>
                       <Input
                         type="file"
@@ -136,6 +161,11 @@ export const RestaurantsForm: EntityForm<RestaurantColumn> = ({
                         onChange={(e) => {
                           const file = e.target.files?.[0];
                           if (file) {
+                            if (previewUrl) {
+                              URL.revokeObjectURL(previewUrl);
+                            }
+                            const newPreviewUrl = URL.createObjectURL(file);
+                            setPreviewUrl(newPreviewUrl);
                             onChange(file);
                           }
                         }}

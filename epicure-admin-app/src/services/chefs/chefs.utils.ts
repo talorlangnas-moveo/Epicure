@@ -11,5 +11,6 @@ export async function convertChefToColumn(chef: Chef): Promise<ChefColumn> {
     description: chef.description,
     foundedDate: chef.foundedDate,
     numberOfViews: chef.numberOfViews,   
+    imgFile: new File([], ""),
   };
 }

@@ -19,7 +19,6 @@ export function RestaurantColumns(): ColumnDef<RestaurantColumn>[] {
       header: "",
       cell: ({ row }) => {
         const imageUrl = row.getValue<string>("imgUrl");
-        console.log("imageUrl: ", `${API_BASE_URL}/${imageUrl}`);
         const name = row.getValue<string>("name");
 
         return (

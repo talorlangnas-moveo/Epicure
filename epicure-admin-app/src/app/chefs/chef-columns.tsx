@@ -11,6 +11,7 @@ import { TextPopover } from "@/components/ui/text-popover";
 import DataTableRowAction from "@/components/data-table-row-action";
 import { ChefForm } from "@/components/chef-form";
 import { deleteChef } from "@/services/chefs/chefs.api";
+import { API_BASE_URL } from "@/utils/constants";
 
 export function ChefColumns(): ColumnDef<ChefColumn>[] {
   return [
@@ -23,7 +24,7 @@ export function ChefColumns(): ColumnDef<ChefColumn>[] {
 
         return (
           <Avatar>
-            <AvatarImage src={imageUrl} alt={name} />
+            <AvatarImage src={`${API_BASE_URL}/${imageUrl}`} alt={name} />
             <AvatarFallback>{name?.[0]}</AvatarFallback>
           </Avatar>
         );

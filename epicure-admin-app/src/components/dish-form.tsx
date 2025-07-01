@@ -37,6 +37,8 @@ import { useEntityContext } from "@/components/entityContext";
 import { Dish } from "@/types/interfaces/dish";
 import { createDish, updateDish } from "@/services/dishes/dishes.api";
 import { convertDishToCulomn } from "@/services/dishes/dishes.utils";
+import { useState, useEffect } from "react";
+import { API_BASE_URL } from "@/utils/constants";
 
 export const DishForm: EntityForm<DishColumn> = ({
   entity,
@@ -44,6 +46,7 @@ export const DishForm: EntityForm<DishColumn> = ({
   setIsOpen,
 }) => {
   const dish = entity;
+  const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const { onEdit, onAdd, selectItemMap } = useEntityContext<DishColumn, Dish>();
   const schema = mode === "create" ? fullFormSchema : partialFormSchema;
   const form = useForm<z.infer<typeof schema>>({
@@ -54,7 +57,7 @@ export const DishForm: EntityForm<DishColumn> = ({
             name: "",
             restaurantId: "",
             description: "",
-            imgUrl: "",
+            imgFile: undefined,
             price: "",
             dishCategory: "none",
           }
@@ -62,11 +65,19 @@ export const DishForm: EntityForm<DishColumn> = ({
             name: dish?.name,
             restaurantId: dish?.restaurantId,
             description: dish?.description,
-            imgUrl: dish?.imgUrl,
+            imgFile: dish?.imgFile,
             price: dish?.price?.toString(),
             dishCategory: dish?.dishCategory,
           },
   });
+
+  useEffect(() => {
+    return () => {
+      if (previewUrl) {
+        URL.revokeObjectURL(previewUrl);
+      }
+    };
+  }, [previewUrl]);
 
   async function onSubmit(values: z.infer<typeof schema>) {
     const dishData = {
@@ -125,16 +136,45 @@ export const DishForm: EntityForm<DishColumn> = ({
             <div className="space-y-5">
               <FormField
                 control={form.control}
-                name="imgUrl"
-                render={({ field }) => (
+                name="imgFile"
+                render={({ field: { value, onChange, ...field } }) => (
                   <FormItem>
-                    <FormLabel>Image URL</FormLabel>
+                    <FormLabel>Dish Image</FormLabel>
+                    {(previewUrl || (mode === "update" && dish?.imgUrl)) && (
+                      <>
+                        <p className="text-center text-sm text-muted-foreground">Preview Image:</p>
+                        <div className="mb-4 flex justify-center">
+                          <Image
+                            src={previewUrl || `${API_BASE_URL}/${dish?.imgUrl}`}
+                            alt={dish?.name || "Preview"}
+                            width={150}
+                            height={150}
+                            className="rounded-md object-cover"
+                          />
+                        </div>
+                      </>
+                    )}
                     <FormControl>
-                      <Input placeholder="Image URL" {...field} />
+                      <Input
+                        type="file"
+                        accept=".jpg,.jpeg,.png"
+                        onChange={(e) => {
+                          const file = e.target.files?.[0];
+                          if (file) {
+                            if (previewUrl) {
+                              URL.revokeObjectURL(previewUrl);
+                            }
+                            const newPreviewUrl = URL.createObjectURL(file);
+                            setPreviewUrl(newPreviewUrl);
+                            onChange(file);
+                          }
+                        }}
+                        className="file:hidden before:content-[''] before:mr-2 before:inline-block pt-1.5"
+                        {...field}
+                      />
                     </FormControl>
                     <FormDescription>
-                      Enter the URL of the image you want to use (must end with
-                      .png)
+                      Select an image file (PNG, JPG, or JPEG, max 5MB)
                     </FormDescription>
                     <FormMessage />
                   </FormItem>

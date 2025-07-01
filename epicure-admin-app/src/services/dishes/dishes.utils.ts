@@ -24,6 +24,7 @@ export async function convertDishToCulomn(dish: Dish): Promise<DishColumn> {
       price: dish.price,
       dishCategory: dish.dishCategory,
       restaurantName: restaurantName,
+      imgFile: new File([], ""),
     };
   }
 

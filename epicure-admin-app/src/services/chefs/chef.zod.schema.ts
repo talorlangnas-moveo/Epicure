@@ -16,11 +16,13 @@ export const fullFormSchema = z.object({
         .min(2, { message: "Description must be at least 2 characters" })
         .max(500),
 
-    imgUrl: z
-        .string()
-        .regex(/\.png$/, {
-            message: "Image must be a .png file",
-        }).optional(),
+    imgFile: z
+        .instanceof(File, { message: "Please select an image file" })
+        .refine((file) => file.size <= 5000000, { message: "File size must be less than 5MB" })
+        .refine(
+            (file) => ['image/png', 'image/jpeg', 'image/jpg'].includes(file.type),
+            { message: "Only .jpg, .jpeg, and .png files are accepted" }
+        ),
 
     foundedDate: z
         .string()

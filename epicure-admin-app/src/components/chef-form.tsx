@@ -31,6 +31,8 @@ import {
   updateChef,
 } from "@services/chefs/chefs.api";
 import { convertChefToColumn } from "@/services/chefs/chefs.utils";
+import { API_BASE_URL } from "@/utils/constants";
+import { useState, useEffect } from "react";
 
 export const ChefForm: EntityForm<ChefColumn> = ({
   entity,
@@ -38,6 +40,7 @@ export const ChefForm: EntityForm<ChefColumn> = ({
   setIsOpen,
 }) => {
   const chef = entity;
+  const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const { onEdit, onAdd } = useEntityContext<ChefColumn, Chef>();
   const schema = mode === "create" ? fullFormSchema : partialFormSchema;
   const form = useForm<z.infer<typeof schema>>({
@@ -48,7 +51,7 @@ export const ChefForm: EntityForm<ChefColumn> = ({
             firstName: "",
             lastName: "",
             description: "",
-            imgUrl: undefined,
+            imgFile: undefined,
             foundedDate: "",
             numberOfViews: "",
           }
@@ -56,11 +59,20 @@ export const ChefForm: EntityForm<ChefColumn> = ({
             firstName: chef?.firstName,
             lastName: chef?.lastName,
             description: chef?.description,
-            imgUrl: chef?.imgUrl,
+            imgFile: chef?.imgFile,
             foundedDate: chef?.foundedDate?.toString().split("T")[0],
             numberOfViews: chef?.numberOfViews?.toString(),
           },
   });
+
+  useEffect(() => {
+    // Cleanup function to revoke the object URL when component unmounts or when previewUrl changes
+    return () => {
+      if (previewUrl) {
+        URL.revokeObjectURL(previewUrl);
+      }
+    };
+  }, [previewUrl]);
 
   async function onSubmit(values: z.infer<typeof schema>) {
     const chefData = {
@@ -120,16 +132,45 @@ export const ChefForm: EntityForm<ChefColumn> = ({
             <div className="space-y-5">
               <FormField
                 control={form.control}
-                name="imgUrl"
-                render={({ field }) => (
+                name="imgFile"
+                render={({ field: { value, onChange, ...field } }) => (
                   <FormItem>
-                    <FormLabel>Image URL</FormLabel>
+                    <FormLabel>Chef Image</FormLabel>
+                    {(previewUrl || (mode === "update" && chef?.imgUrl)) && (
+                      <>
+                        <p className="text-center text-sm text-muted-foreground">Preview Image:</p>
+                        <div className="mb-4 flex justify-center">
+                          <Image
+                            src={previewUrl || `${API_BASE_URL}/${chef?.imgUrl}`}
+                            alt={chef?.firstName || "Preview"}
+                            width={150}
+                            height={150}
+                            className="rounded-md object-cover"
+                          />
+                        </div>
+                      </>
+                    )}
                     <FormControl>
-                      <Input placeholder="Image URL" {...field} />
+                      <Input
+                        type="file"
+                        accept=".jpg,.jpeg,.png"
+                        onChange={(e) => {
+                          const file = e.target.files?.[0];
+                          if (file) {
+                            if (previewUrl) {
+                              URL.revokeObjectURL(previewUrl);
+                            }
+                            const newPreviewUrl = URL.createObjectURL(file);
+                            setPreviewUrl(newPreviewUrl);
+                            onChange(file);
+                          }
+                        }}
+                        className="file:hidden before:content-[''] before:mr-2 before:inline-block pt-1.5"
+                        {...field}
+                      />
                     </FormControl>
                     <FormDescription>
-                      Enter the URL of the image you want to use (must end with
-                      .png)
+                      Select an image file (PNG, JPG, or JPEG, max 5MB)
                     </FormDescription>
                     <FormMessage />
                   </FormItem>
