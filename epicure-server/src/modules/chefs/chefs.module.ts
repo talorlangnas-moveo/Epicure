@@ -21,13 +21,7 @@ import * as fs from 'fs';
     MulterModule.register({
       storage: diskStorage({
         destination: (req, file, cb) => {
-          const uploadPath = path.join(
-            process.cwd(),
-            '..',
-            'public',
-            'uploads',
-            'chefs',
-          );
+          const uploadPath = path.join(process.cwd(), 'public', 'chefs');
           fs.mkdirSync(uploadPath, { recursive: true });
           cb(null, uploadPath);
         },

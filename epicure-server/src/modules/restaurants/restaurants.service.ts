@@ -23,14 +23,15 @@ export class RestaurantsService {
     if (!file) {
       throw new Error('No file uploaded');
     }
-    return `uploads/restaurants/${file.filename}`;
+    return `static/restaurants/${file.filename}`;
   }
 
   private deleteImageFile(imagePath: string) {
     try {
-      const normalizedPath = imagePath.replace(/^\.\//, '');
-      const projectRoot = path.join(__dirname, '..', '..', '..', '..');
-      const absolutePath = path.join(projectRoot, 'public', normalizedPath);
+      const normalizedPath = imagePath
+        .replace(/^\.\//, '')
+        .replace(/^static\//, '');
+      const absolutePath = path.join(process.cwd(), 'public', normalizedPath);
 
       console.log('Trying to delete file at:', absolutePath);
 
