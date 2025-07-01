@@ -9,6 +9,8 @@ import { RestaurantsForm } from "@/components/restaurant-form";
 import DataTableRowAction from "@/components/data-table-row-action";
 import { deleteRestaurant } from "@/services/restaurants/restaurants.api";
 import { Restaurant } from "@/types/interfaces/restaurant";
+import { API_BASE_URL } from "@/utils/constants";
+
 
 export function RestaurantColumns(): ColumnDef<RestaurantColumn>[] {
   return [
@@ -17,11 +19,12 @@ export function RestaurantColumns(): ColumnDef<RestaurantColumn>[] {
       header: "",
       cell: ({ row }) => {
         const imageUrl = row.getValue<string>("imgUrl");
+        console.log("imageUrl: ", `${API_BASE_URL}/${imageUrl}`);
         const name = row.getValue<string>("name");
 
         return (
           <Avatar>
-            <AvatarImage src={imageUrl} alt={name} />
+            <AvatarImage src={`${API_BASE_URL}/${imageUrl}`} alt={name} />
             <AvatarFallback>{name?.[0]}</AvatarFallback>
           </Avatar>
         );

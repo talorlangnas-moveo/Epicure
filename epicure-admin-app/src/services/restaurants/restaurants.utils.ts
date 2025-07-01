@@ -13,7 +13,7 @@ export async function getChefsNameById(id: string): Promise<string> {
 
 export async function convertRestaurantToColumn(restaurant: Restaurant): Promise<RestaurantColumn> {
   const chefName = await getChefsNameById(restaurant.chefId);
-  const uploadedImage = await getUploadedImage(restaurant.imgUrl);
+  // const uploadedImage = await getUploadedImage(restaurant.imgUrl);
   
   return {
     _id: restaurant._id,
@@ -21,7 +21,8 @@ export async function convertRestaurantToColumn(restaurant: Restaurant): Promise
     name: restaurant.name,
     chefName: chefName,
     imgUrl: restaurant.imgUrl,
-    imgFile: uploadedImage,
+    // imgFile: uploadedImage,
+    imgFile: new File([], ""),
     rating: restaurant.rating,
     openingTime: restaurant.openingTime,
     closingTime: restaurant.closingTime,
