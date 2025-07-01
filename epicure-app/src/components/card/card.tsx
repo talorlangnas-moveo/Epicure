@@ -6,6 +6,7 @@ import styles from "@components/card/card.module.scss";
 import { ILSIcon } from "@icons";
 import { useIsDesktopView } from "@/hooks/useIsDesktopView";
 import { CardType } from "@/types/cardType";
+import { API_BASE_URL } from "@/utils/constants";
 
 export interface CardInfo {
   id: string;
@@ -13,7 +14,8 @@ export interface CardInfo {
   title?: string;
   slug?: string;
   description?: string;
-  imgUrl: StaticImageData;
+  // imgUrl: StaticImageData;
+  imgUrl: string;
   rating?: number;
   ratingImage?: StaticImageData;
   price?: number;
@@ -42,40 +44,38 @@ export default function Card({
         className && (styles[className] || className)
       )}
     >
-      <Image
-        src={imgUrl}
-        placeholder="blur"
-        alt={`${title} image`}
-        sizes="100vw"
-        className={styles.cardImage}
-      />
-      {(title ||
-        description ||
-        price ||
-        ratingImage) && (
-          <div className={styles.cardContent}>
-            {title && <h3 className={styles.cardTitle}>{title}</h3>}
-            {description && (
-              <h2 className={styles.cardDescription}>{description}</h2>
-            )}
-            {ratingImage && isDesktop && (
+      <div className={styles.cardImageContainer}>
+        <Image
+          src={`${API_BASE_URL}/${imgUrl}`}
+          alt={`${title} image`}
+          fill
+          className={styles.cardImage}
+        />
+      </div>
+      {(title || description || price || ratingImage) && (
+        <div className={styles.cardContent}>
+          {title && <h3 className={styles.cardTitle}>{title}</h3>}
+          {description && (
+            <h2 className={styles.cardDescription}>{description}</h2>
+          )}
+          {ratingImage && isDesktop && (
+            <Image
+              src={ratingImage}
+              alt="rating image"
+              className={styles.ratingImage}
+            />
+          )}
+          {dishCategoryLogo && showDishCategoryLogo && (
+            <div className={styles.spicyIconWrapper}>
               <Image
-                src={ratingImage}
-                alt="rating image"
-                className={styles.ratingImage}
+                src={dishCategoryLogo}
+                alt="Dish Icon"
+                className={styles.spicyIcon}
               />
-            )}
-            {dishCategoryLogo && showDishCategoryLogo && (
-              <div className={styles.spicyIconWrapper}>
-                <Image
-                  src={dishCategoryLogo}
-                  alt="Dish Icon"
-                  className={styles.spicyIcon}
-                />
-              </div>
-            )}
-          </div>
-        )}
+            </div>
+          )}
+        </div>
+      )}
       {price &&
         (isDesktop ? (
           <div className={styles.cardFooter}>

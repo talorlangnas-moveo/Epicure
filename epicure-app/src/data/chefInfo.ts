@@ -1,28 +1,28 @@
 import { ChefInfo } from '@/types/interfaces/chefInfo';
 import { CardInfo } from '@/components/card/card';
 import YossiShitritImage from "@public/chefs/Yossi_Shitrit.png";
-import Mashya from '@public/restaurants/mashya.png';
-import Onza from '@public/restaurants/onza.png';
-import KitchenMarket from '@public/restaurants/kitchenMarketYossi.png';
+// import Mashya from '@public/restaurants/mashya.png';
+// import Onza from '@public/restaurants/onza.png';
+// import KitchenMarket from '@public/restaurants/kitchenMarketYossi.png';
 
 export const chefRestaurantsCards: CardInfo[] = [
   {
     id: '1',
     type: 'chef',
     title: 'Onza',
-    imgUrl: Onza,
+    imgUrl: `static/restaurants/1751359516632-361837913-claro.png`,
   },
   {
     id: '2',
     type: 'chef',
     title: 'Kitchen Market',
-    imgUrl: KitchenMarket,
+    imgUrl: `static/restaurants/1751359516632-361837913-claro.png`,
   },
   {
     id: '3',
     type: 'chef',
     title: 'Mashya',
-    imgUrl: Mashya,
+    imgUrl: `static/restaurants/1751359516632-361837913-claro.png`,
   },
 ];
 

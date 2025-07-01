@@ -1,7 +1,7 @@
 import {Dish} from '@interfaces/dish';
 import { CardInfo } from '@/components/card/card';
 import { CardType } from '@/types/cardType';
-import { getDishImage } from './image.utils';
+// import { getDishImage } from './image.utils';
 import { getDishCategoryLogo } from '@/utils/dishCategoryLogo.utils';
 
 export function convertDishToCard(dish: Dish): CardInfo {
@@ -10,7 +10,8 @@ export function convertDishToCard(dish: Dish): CardInfo {
       type: 'dish' as CardType,
       title: dish.name,
       description: dish.description,
-      imgUrl: getDishImage(dish.imgUrl),
+      // imgUrl: getDishImage(dish.imgUrl),
+      imgUrl: dish.imgUrl,
       price: dish.price,
       dishCategoryLogo: dish.dishCategory ? getDishCategoryLogo(dish.dishCategory) : undefined,
     };
