@@ -59,12 +59,14 @@ export class RestaurantsService {
   }
 
   async findAll(): Promise<Restaurant[]> {
-    const restaurants = await this.restaurantModel.find();
+    const restaurants = await this.restaurantModel.find().populate('chefId');
     return restaurants;
   }
 
   async findOne(id: string | Types.ObjectId): Promise<Restaurant> {
-    const restaurant = await this.restaurantModel.findById(id);
+    const restaurant = await this.restaurantModel
+      .findById(id)
+      .populate('chefId');
     if (!restaurant) {
       throw new NotFoundException('Restaurant not found');
     }
@@ -131,11 +133,17 @@ export class RestaurantsService {
       .find()
       .sort({ foundedDate: -1 })
       .limit(3)
+      .populate('chefId')
       .exec();
   }
 
   async getTop3MostPopularRestaurants(): Promise<Restaurant[]> {
-    return this.restaurantModel.find().sort({ rating: -1 }).limit(3).exec();
+    return this.restaurantModel
+      .find()
+      .sort({ rating: -1 })
+      .limit(3)
+      .populate('chefId')
+      .exec();
   }
 
   async getOpenRestaurantsNow(): Promise<Restaurant[]> {
@@ -168,6 +176,20 @@ export class RestaurantsService {
                 ],
               },
             ],
+          },
+        },
+        {
+          $lookup: {
+            from: 'chefs',
+            localField: 'chefId',
+            foreignField: '_id',
+            as: 'chef',
+          },
+        },
+        {
+          $unwind: {
+            path: '$chef',
+            preserveNullAndEmptyArrays: true,
           },
         },
         {
