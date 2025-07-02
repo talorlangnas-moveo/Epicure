@@ -8,7 +8,6 @@ import OmerMillerImg from '@public/chefs/omer_miller.png';
 import ShahafShabatyImg from '@public/chefs/shahaf_shabaty.png';
 import NitzanRazImg from '@public/chefs/nitzan_raz.png';
 import YuvalBenNeriahImg from '@public/chefs/yuval_ben_neriah.png';
-// import chefPlaceholderImage from '@public/chefPlaceholder.png';
 
 export const chefImagesMap: { [key: string]: StaticImageData } = {
     "/chefs/Asaf_Granit.png": AsafGranitImg,

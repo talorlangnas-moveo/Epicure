@@ -12,23 +12,6 @@ export class ValidateRestaurantPipe implements PipeTransform<CreateDishDto> {
     private readonly restaurantModel: mongoose.Model<Restaurant>,
   ) {}
 
-  // async transform(value: CreateDishDto | UpdateDishDto) {
-  //   if (!value.restaurantId || !Types.ObjectId.isValid(value.restaurantId)) {
-  //     throw new NotFoundException('Invalid restaurant ID');
-  //   }
-
-  //   const restaurantExists = await this.restaurantModel.findById(
-  //     value.restaurantId,
-  //   );
-
-  //   if (!restaurantExists) {
-  //     throw new NotFoundException(
-  //       `Restaurant with ID ${value.restaurantId} not found`,
-  //     );
-  //   }
-
-  //   return value;
-  // }
   async transform(value: CreateDishDto | UpdateDishDto) {
     if ('restaurantId' in value && value.restaurantId) {
       if (!Types.ObjectId.isValid(value.restaurantId)) {
