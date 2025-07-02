@@ -1,24 +1,27 @@
 import Hero from "@/components/hero/hero";
 import IconLegend from "@/components/iconLegend/iconLegend";
-import { chefInfo } from "@/data/chefInfo";
 import ChefCard from "@/components/chefCard/chefCard";
 import InfoPanel from "@/components/infoPanel/infoPanel";
 import Carousel from "@components/carousel/carousel";
 import Card from "@/components/card/card";
 import CardsDisplay from "@components/cardsDisplay/cardsDisplay";
 import AboutUs from "@components/aboutUs/aboutUs";
-import { fetchChefRestCards } from "@/utils/fetchCards";
 import { fetchAll } from "@/services/dishes/dishes.api";
 import { getDishesAsCards } from "@/services/dishes/dishes.utils";
-import { fetchRestaurants } from "@/services/restaurants/restaurants.api";
+import { fetchRestaurants, fetchRestaurantsByChefId } from "@/services/restaurants/restaurants.api";
 import { getRestaurantsAsCards } from "@/services/restaurants/restaurants.utils";
+import { CHEF_OF_THE_WEEK_ID } from "@/utils/constants";
+import { fetchChefById } from "@/services/chefs/chefs.api";
 
 export default async function Home() {
   const restaurants = await fetchRestaurants();
   const restaurantsCards = await getRestaurantsAsCards(restaurants);
   const dishes = await fetchAll();
   const dishCards = await getDishesAsCards(dishes);
-  const chefRestaurantsCards = await fetchChefRestCards();
+
+  const chefOfTheWeek = await fetchChefById(CHEF_OF_THE_WEEK_ID);
+  const chefRestaurants = await fetchRestaurantsByChefId(CHEF_OF_THE_WEEK_ID);
+  const chefRestaurantsAsCards = await getRestaurantsAsCards(chefRestaurants);
 
   return (
     <div>
@@ -50,17 +53,17 @@ export default async function Home() {
       </InfoPanel>
 
       <IconLegend />
-      <ChefCard chef={chefInfo}>
+      <ChefCard chef={chefOfTheWeek}>
         <InfoPanel
           title="Yossi’s Restaurants"
           type="chef"
           displayButtonDesktop={false}
           childrenDesk={
-            <CardsDisplay cards={chefRestaurantsCards} type="chef" />
+            <CardsDisplay cards={chefRestaurantsAsCards} type="chef" />
           }
         >
           <Carousel>
-            {chefRestaurantsCards.map((c) => (
+            {chefRestaurantsAsCards.map((c) => (
               <Card key={c.id} {...c} className="chef" />
             ))}
           </Carousel>

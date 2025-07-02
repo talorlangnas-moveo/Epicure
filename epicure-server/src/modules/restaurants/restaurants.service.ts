@@ -67,6 +67,13 @@ export class RestaurantsService {
     return restaurants;
   }
 
+  async findByChefId(chefId: string): Promise<Restaurant[]> {
+    const restaurants = await this.restaurantModel
+      .find({ chef: chefId })
+      .populate('chef');
+    return restaurants;
+  }
+
   async findOne(id: string | Types.ObjectId): Promise<Restaurant> {
     const restaurant = await this.restaurantModel.findById(id).populate('chef');
     if (!restaurant) {

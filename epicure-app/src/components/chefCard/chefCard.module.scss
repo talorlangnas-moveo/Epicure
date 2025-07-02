@@ -47,21 +47,26 @@
     }
   }
 
-  .chefImage {
+  .chefImageContainer {
+    position: relative;
     width: 100%;
-    height: auto;
-    padding-right: 5%;
+    height: 262px;
+    margin-right: 5%;
 
-    @media (min-width: $breakpoint-tablet) and (max-width: #{($breakpoint-laptop - 1px)}) {
-      padding-left: 20%;
-      padding-right: 20%;
+    @media (min-width: 480px) {
+      height: 372px;
+  }
+
+      @media (min-width: $breakpoint-tablet) and (max-width: #{($breakpoint-laptop - 1px)}) {
+        margin-left: 20%;
+        margin-right: 20%;
     }
 
     @media (min-width: $breakpoint-laptop) {
       max-width: 478px;
       max-height: 372px;
     }
-  }
+}
 
   .chefInfo {
     padding-top: 24px;

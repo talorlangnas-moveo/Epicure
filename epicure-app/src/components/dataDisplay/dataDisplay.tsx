@@ -18,6 +18,7 @@ interface DisplayProps {
   title?: string;
   className?: string;
   imageContainerStyle?: 'default' | 'large';
+  cardsStyle?: 'chef' | 'chefCard' | 'restaurant' | 'dish';
 }
 
 export default function DataDisplay({
@@ -27,6 +28,7 @@ export default function DataDisplay({
   title = "Items",
   className,
   imageContainerStyle = 'default',
+  cardsStyle = 'restaurant',
 }: DisplayProps) {
   const isDesktopView = useIsDesktopView();
   const [activeItem, setActiveItem] = useState("1");
@@ -86,7 +88,7 @@ export default function DataDisplay({
           >
             <Card
               {...item}
-              className={clsx(cardsStyles.restaurant, styles.restaurantCard)}
+              className={clsx(cardsStyles[cardsStyle], styles.restaurantCard)}
               imageContainerStyle={imageContainerStyle}
             />
           </Link>
@@ -94,7 +96,7 @@ export default function DataDisplay({
             <Card
               key={item.id}
               {...item}
-              className={clsx(cardsStyles.restaurant, styles.restaurantCard)}
+              className={clsx(cardsStyles[cardsStyle], styles.restaurantCard)}
               imageContainerStyle={imageContainerStyle}
             />
           )
