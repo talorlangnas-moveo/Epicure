@@ -59,14 +59,12 @@ export class RestaurantsService {
   }
 
   async findAll(): Promise<Restaurant[]> {
-    const restaurants = await this.restaurantModel.find().populate('chefId');
+    const restaurants = await this.restaurantModel.find().populate('chef');
     return restaurants;
   }
 
   async findOne(id: string | Types.ObjectId): Promise<Restaurant> {
-    const restaurant = await this.restaurantModel
-      .findById(id)
-      .populate('chefId');
+    const restaurant = await this.restaurantModel.findById(id).populate('chef');
     if (!restaurant) {
       throw new NotFoundException('Restaurant not found');
     }
@@ -120,9 +118,9 @@ export class RestaurantsService {
 
     await this.dishModel.updateMany(
       {
-        restaurantId: { $in: [id, id.toString()] },
+        restaurant: { $in: [id, id.toString()] },
       },
-      { $unset: { restaurantId: '' } },
+      { $unset: { restaurant: '' } },
     );
 
     return deletedRestaurant;
@@ -133,7 +131,7 @@ export class RestaurantsService {
       .find()
       .sort({ foundedDate: -1 })
       .limit(3)
-      .populate('chefId')
+      .populate('chef')
       .exec();
   }
 
@@ -142,7 +140,7 @@ export class RestaurantsService {
       .find()
       .sort({ rating: -1 })
       .limit(3)
-      .populate('chefId')
+      .populate('chef')
       .exec();
   }
 
@@ -181,7 +179,7 @@ export class RestaurantsService {
         {
           $lookup: {
             from: 'chefs',
-            localField: 'chefId',
+            localField: 'chef',
             foreignField: '_id',
             as: 'chef',
           },

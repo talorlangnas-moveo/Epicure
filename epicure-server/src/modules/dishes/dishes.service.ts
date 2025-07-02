@@ -54,17 +54,37 @@ export class DishesService {
   }
 
   async findAll(): Promise<Dish[]> {
-    const dishes = await this.dishModel.find();
+    const dishes = await this.dishModel.find().populate({
+      path: 'restaurant',
+      populate: {
+        path: 'chef',
+        model: 'Chef',
+      },
+    });
     return dishes;
   }
 
   async findByRestaurantId(restaurantId: string): Promise<Dish[]> {
-    const dishes = await this.dishModel.find({ restaurantId });
+    const dishes = await this.dishModel
+      .find({ restaurant: restaurantId })
+      .populate({
+        path: 'restaurant',
+        populate: {
+          path: 'chef',
+          model: 'Chef',
+        },
+      });
     return dishes;
   }
 
   async findOne(id: Types.ObjectId): Promise<Dish> {
-    const dish = await this.dishModel.findById(id);
+    const dish = await this.dishModel.findById(id).populate({
+      path: 'restaurant',
+      populate: {
+        path: 'chef',
+        model: 'Chef',
+      },
+    });
     if (!dish) {
       throw new NotFoundException(`Dish not found`);
     }

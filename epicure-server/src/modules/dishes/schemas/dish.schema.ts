@@ -17,7 +17,7 @@ export class Dish {
     ref: 'Restaurant',
     index: true,
   })
-  restaurantId?: Types.ObjectId;
+  restaurant?: Types.ObjectId;
 
   @Prop({ required: true })
   name: string;

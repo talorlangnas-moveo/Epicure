@@ -116,9 +116,9 @@ export class ChefsService {
 
     await this.restaurantModel.updateMany(
       {
-        chefId: id.toString(),
+        chef: id.toString(),
       },
-      { $unset: { chefId: 1 } },
+      { $unset: { chef: 1 } },
     );
 
     return deletedChef;

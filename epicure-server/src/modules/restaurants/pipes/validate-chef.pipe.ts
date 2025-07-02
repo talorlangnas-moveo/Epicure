@@ -15,12 +15,12 @@ export class ValidateChefPipe
   ) {}
 
   async transform(value: CreateRestaurantDto | UpdateRestaurantDto) {
-    if ('chefId' in value && value.chefId) {
-      if (!Types.ObjectId.isValid(value.chefId)) {
+    if ('chef' in value && value.chef) {
+      if (!Types.ObjectId.isValid(value.chef)) {
         throw new NotFoundException('Invalid chef ID');
       }
 
-      const chefExists = await this.chefModel.findById(value.chefId);
+      const chefExists = await this.chefModel.findById(value.chef);
 
       if (!chefExists) {
         throw new NotFoundException(
