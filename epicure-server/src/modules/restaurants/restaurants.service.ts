@@ -53,9 +53,13 @@ export class RestaurantsService {
     if (file) {
       const imagePath = this.uploadImage(file);
       createRestaurantDto.imgUrl = imagePath;
+    } else {
+      createRestaurantDto.imgUrl = `static/restaurants/restaurantPlaceholder.png`;
     }
+
     const restaurant = await this.restaurantModel.create(createRestaurantDto);
-    return restaurant;
+    const newRestaurant = await restaurant.populate('chef');
+    return newRestaurant;
   }
 
   async findAll(): Promise<Restaurant[]> {
@@ -82,7 +86,11 @@ export class RestaurantsService {
     }
 
     if (file) {
-      if (currentRestaurant.imgUrl) {
+      if (
+        currentRestaurant.imgUrl &&
+        currentRestaurant.imgUrl !==
+          `static/restaurants/restaurantPlaceholder.png`
+      ) {
         this.deleteImageFile(currentRestaurant.imgUrl);
       }
       const imagePath = this.uploadImage(file);
@@ -105,7 +113,10 @@ export class RestaurantsService {
       throw new NotFoundException('Restaurant not found');
     }
 
-    if (restaurant.imgUrl) {
+    if (
+      restaurant.imgUrl &&
+      restaurant.imgUrl !== `static/restaurants/restaurantPlaceholder.png`
+    ) {
       this.deleteImageFile(restaurant.imgUrl);
     }
 

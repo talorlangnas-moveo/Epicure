@@ -59,7 +59,7 @@ export const ChefForm: EntityForm<ChefColumn> = ({
             firstName: chef?.firstName,
             lastName: chef?.lastName,
             description: chef?.description,
-            imgFile: chef?.imgFile,
+            imgFile: undefined,
             foundedDate: chef?.foundedDate?.toString().split("T")[0],
             numberOfViews: chef?.numberOfViews?.toString(),
           },

@@ -48,9 +48,19 @@ export class DishesService {
     if (file) {
       const imagePath = this.uploadImage(file);
       createDishDto.imgUrl = imagePath;
+    } else {
+      createDishDto.imgUrl = `static/dishes/dishPlaceholder.png`;
     }
+
     const dish = await this.dishModel.create(createDishDto);
-    return dish;
+    const newDish = await dish.populate({
+      path: 'restaurant',
+      populate: {
+        path: 'chef',
+        model: 'Chef',
+      },
+    });
+    return newDish;
   }
 
   async findAll(): Promise<Dish[]> {
@@ -102,7 +112,10 @@ export class DishesService {
     }
 
     if (file) {
-      if (currentDish.imgUrl) {
+      if (
+        currentDish.imgUrl &&
+        currentDish.imgUrl !== `static/dishes/dishPlaceholder.png`
+      ) {
         this.deleteImageFile(currentDish.imgUrl);
       }
       const imagePath = this.uploadImage(file);
@@ -130,7 +143,7 @@ export class DishesService {
       throw new NotFoundException('Dish not found');
     }
 
-    if (dish.imgUrl) {
+    if (dish.imgUrl && dish.imgUrl !== `static/dishes/dishPlaceholder.png`) {
       this.deleteImageFile(dish.imgUrl);
     }
     const deletedDish = await this.dishModel.findByIdAndDelete(id);
