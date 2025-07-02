@@ -22,7 +22,7 @@ export const fullFormSchema = z.object({
         .refine(
             (file) => ['image/png', 'image/jpeg', 'image/jpg'].includes(file.type),
             { message: "Only .jpg, .jpeg, and .png files are accepted" }
-        ),
+        ).optional(),
 
     foundedDate: z
         .string()

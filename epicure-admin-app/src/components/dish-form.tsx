@@ -55,7 +55,7 @@ export const DishForm: EntityForm<DishColumn> = ({
       mode === "create"
         ? {
             name: "",
-            restaurantId: "",
+            restaurant: "",
             description: "",
             imgFile: undefined,
             price: "",
@@ -63,9 +63,9 @@ export const DishForm: EntityForm<DishColumn> = ({
           }
         : {
             name: dish?.name,
-            restaurantId: dish?.restaurantId,
+            restaurant: dish?.restaurant?._id,
             description: dish?.description,
-            imgFile: dish?.imgFile,
+            imgFile: undefined,
             price: dish?.price?.toString(),
             dishCategory: dish?.dishCategory,
           },
@@ -89,7 +89,7 @@ export const DishForm: EntityForm<DishColumn> = ({
     if (mode === "update" && dish) {
       try {
         if (onEdit) {
-          await onEdit(dish, dishData, updateDish, convertDishToCulomn);
+          await onEdit(dish, dishData as Partial<DishColumn>, updateDish, convertDishToCulomn);
         }
         setIsOpen(false);
       } catch (error) {
@@ -98,7 +98,7 @@ export const DishForm: EntityForm<DishColumn> = ({
     } else if (mode === "create") {
       try {
         if (onAdd) {
-          await onAdd(dishData, createDish, convertDishToCulomn);
+          await onAdd(dishData as Partial<DishColumn>, createDish, convertDishToCulomn);
         }
         setIsOpen(false);
       } catch (error) {
@@ -142,7 +142,7 @@ export const DishForm: EntityForm<DishColumn> = ({
                     <FormLabel>Dish Image</FormLabel>
                     {(previewUrl || (mode === "update" && dish?.imgUrl)) && (
                       <>
-                        <p className="text-center text-sm text-muted-foreground">Preview Image:</p>
+                        <p className="text-center text-sm text-muted-foreground">{mode === "update" ? "Current Image:" : "Preview Image:"}</p>
                         <div className="mb-4 flex justify-center">
                           <Image
                             src={previewUrl || `${API_BASE_URL}/${dish?.imgUrl}`}
@@ -195,7 +195,7 @@ export const DishForm: EntityForm<DishColumn> = ({
               />
               <FormField
                 control={form.control}
-                name="restaurantId"
+                name="restaurant"
                 render={({ field }) => (
                   <FormItem>
                   <FormLabel>Restaurant</FormLabel>

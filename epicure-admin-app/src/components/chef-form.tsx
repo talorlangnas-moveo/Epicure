@@ -138,7 +138,7 @@ export const ChefForm: EntityForm<ChefColumn> = ({
                     <FormLabel>Chef Image</FormLabel>
                     {(previewUrl || (mode === "update" && chef?.imgUrl)) && (
                       <>
-                        <p className="text-center text-sm text-muted-foreground">Preview Image:</p>
+                        <p className="text-center text-sm text-muted-foreground">{mode === "update" ? "Current Image:" : "Preview Image:"}</p>
                         <div className="mb-4 flex justify-center">
                           <Image
                             src={previewUrl || `${API_BASE_URL}/${chef?.imgUrl}`}

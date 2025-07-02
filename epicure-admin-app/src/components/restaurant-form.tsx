@@ -51,7 +51,7 @@ export const RestaurantsForm: EntityForm<RestaurantColumn> = ({
     resolver: zodResolver(schema),
     defaultValues: mode === "create" ? {
       name: "",
-      chefId: "",
+      chef: "",
       imgFile: undefined,
       rating: "",
       openingTime: "",
@@ -59,8 +59,8 @@ export const RestaurantsForm: EntityForm<RestaurantColumn> = ({
       foundedDate: "",
     } : {
       name: restaurant?.name,
-      chefId: restaurant?.chefId,
-      imgFile: restaurant?.imgFile,
+      chef: restaurant?.chef?._id,
+      imgFile: undefined,
       rating: restaurant?.rating?.toString(),
       openingTime: restaurant?.openingTime,
       closingTime: restaurant?.closingTime,
@@ -88,7 +88,7 @@ export const RestaurantsForm: EntityForm<RestaurantColumn> = ({
     if (mode === "update" && restaurant) {
       try {
         if (onEdit) {
-          await onEdit(restaurant, restaurantData, updateRestaurant, convertRestaurantToColumn);
+          await onEdit(restaurant, restaurantData as Partial<RestaurantColumn>, updateRestaurant, convertRestaurantToColumn);
         }
         setIsOpen(false);
       } catch (error) {
@@ -97,7 +97,7 @@ export const RestaurantsForm: EntityForm<RestaurantColumn> = ({
     } else if (mode === "create") {
       try {
         if (onAdd) {
-          await onAdd(restaurantData, createRestaurant, convertRestaurantToColumn);
+          await onAdd(restaurantData as Partial<RestaurantColumn>, createRestaurant, convertRestaurantToColumn);
         }
         setIsOpen(false);
       } catch (error) {
@@ -142,7 +142,7 @@ export const RestaurantsForm: EntityForm<RestaurantColumn> = ({
                     <FormLabel>Restaurant Image</FormLabel>
                     {(previewUrl || (mode === "update" && restaurant?.imgUrl)) && (
                       <>
-                        <p className="text-center text-sm text-muted-foreground">Preview Image:</p>
+                        <p className="text-center text-sm text-muted-foreground">{mode === "update" ? "Current Image:" : "Preview Image:"}</p>
                         <div className="mb-4 flex justify-center">
                           <Image
                             src={previewUrl || `${API_BASE_URL}/${restaurant?.imgUrl}`}
@@ -195,7 +195,7 @@ export const RestaurantsForm: EntityForm<RestaurantColumn> = ({
               />
               <FormField
                 control={form.control}
-                name="chefId"
+                name="chef"
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>Chef</FormLabel>

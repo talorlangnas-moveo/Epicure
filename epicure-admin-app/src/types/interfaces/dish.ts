@@ -1,8 +1,10 @@
+import { Restaurant } from "./restaurant";
+
 export type DishCategoryType = 'spicy' | 'vegetarian' | 'vegan' | 'none';
 
 export interface Dish {
     _id: string;
-    restaurantId: string;
+    restaurant?: Restaurant;
     name: string;
     description: string;
     imgUrl: string;

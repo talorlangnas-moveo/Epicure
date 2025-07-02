@@ -89,11 +89,9 @@ export class RestaurantsService {
       updateRestaurantDto.imgUrl = imagePath;
     }
 
-    const updatedRestaurant = await this.restaurantModel.findByIdAndUpdate(
-      id,
-      updateRestaurantDto,
-      { new: true },
-    );
+    const updatedRestaurant = await this.restaurantModel
+      .findByIdAndUpdate(id, updateRestaurantDto, { new: true })
+      .populate('chef');
 
     if (!updatedRestaurant) {
       throw new NotFoundException('Restaurant not found');

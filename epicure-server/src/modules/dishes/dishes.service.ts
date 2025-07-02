@@ -109,11 +109,15 @@ export class DishesService {
       updateDishDto.imgUrl = imagePath;
     }
 
-    const updatedDish = await this.dishModel.findByIdAndUpdate(
-      id,
-      updateDishDto,
-      { new: true },
-    );
+    const updatedDish = await this.dishModel
+      .findByIdAndUpdate(id, updateDishDto, { new: true })
+      .populate({
+        path: 'restaurant',
+        populate: {
+          path: 'chef',
+          model: 'Chef',
+        },
+      });
     if (!updatedDish) {
       throw new NotFoundException('Dish not found');
     }
