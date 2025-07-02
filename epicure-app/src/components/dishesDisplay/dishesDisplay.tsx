@@ -14,16 +14,18 @@ import cardsStyles from "@components/card/card.module.scss";
 import DishOrderCard from "@/components/orderCard/orderCard";
 import Modal from "@components/modal/modal";
 import MobileViewWrapper from "@components/mobileViewWrapper/mobileViewWrapper";
-import { getRestaurantImage } from "@/services/restaurants/image.utils";
+import { API_BASE_URL } from "@/utils/constants";
 
 interface DishesDisplayProps {
   restaurant: Restaurant;
   dishCards: CardInfo[];
+  imageContainerStyle?: 'default' | 'large';
 }
 
 export default function DishesDisplay({
   restaurant,
   dishCards,
+  imageContainerStyle = 'default',
 }: DishesDisplayProps) {
   const isDesktopView = useIsDesktopView();
   const isOpen = useIsOpen(restaurant.openingTime, restaurant.closingTime);
@@ -49,19 +51,24 @@ export default function DishesDisplay({
     <div>
       {!isDesktopView && selectedDish ? (
         <MobileViewWrapper onClose={handleCloseOrderCard}>
-        <DishOrderCard dishCard={selectedDish} isDesktop={isDesktopView}/>
+          <DishOrderCard dishCard={selectedDish} isDesktop={isDesktopView} />
         </MobileViewWrapper>
-        
       ) : (
         <div className={styles.dishesDisplayContainer}>
-          <Image
-            src={getRestaurantImage(restaurant.imgUrl)}
-            alt={restaurant.name}
-            className={styles.restaurantImage}
-          />
+          <div className={styles.restaurantImageContainer}>
+            <Image
+              src={`${API_BASE_URL}/${restaurant.imgUrl}`}
+              alt={`${restaurant.name} image`}
+              fill
+            />
+          </div>
           <div className={styles.textContainer}>
             <h1 className={styles.heading}>{restaurant.name}</h1>
-            <p className={styles.description}>{restaurant.description}</p>
+            <p className={styles.description}>
+              {restaurant.chef
+                ? `${restaurant.chef.firstName} ${restaurant.chef.lastName}`
+                : "No Chef Assigned"}
+            </p>
             <div className={styles.openingHours}>
               <Image
                 src={ClockIcon}
@@ -100,15 +107,20 @@ export default function DishesDisplay({
                     className={styles.dishCardContainer}
                   >
                     <Card
-                      {...dishCard} showDishCategoryLogo={false}
+                      {...dishCard}
+                      showDishCategoryLogo={false}
                       className={clsx(cardsStyles.dishMenu, styles.dishCard)}
+                      imageContainerStyle={imageContainerStyle}
                     />
                   </div>
                 ))}
               </div>
               <Modal isOpen={isModalOpen} onClose={handleCloseOrderCard}>
                 {selectedDish && (
-                  <DishOrderCard dishCard={selectedDish} isDesktop={isDesktopView} />
+                  <DishOrderCard
+                    dishCard={selectedDish}
+                    isDesktop={isDesktopView}
+                  />
                 )}
               </Modal>
             </>

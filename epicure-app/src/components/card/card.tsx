@@ -14,7 +14,6 @@ export interface CardInfo {
   title?: string;
   slug?: string;
   description?: string;
-  // imgUrl: StaticImageData;
   imgUrl: string;
   rating?: number;
   ratingImage?: StaticImageData;
@@ -23,6 +22,7 @@ export interface CardInfo {
   showDishCategoryLogo?: boolean;
   className?: string;
   route?: string;
+  imageContainerStyle?: 'default' | 'large';
 }
 
 export default function Card({
@@ -34,6 +34,7 @@ export default function Card({
   dishCategoryLogo,
   showDishCategoryLogo = true,
   className,
+  imageContainerStyle = 'default',
 }: CardInfo) {
   const isDesktop = useIsDesktopView();
 
@@ -44,7 +45,9 @@ export default function Card({
         className && (styles[className] || className)
       )}
     >
-      <div className={styles.cardImageContainer}>
+      <div className={clsx(
+        imageContainerStyle === 'default' ? styles.cardImageContainer : styles.cardImageContainerLarge
+      )}>
         <Image
           src={`${API_BASE_URL}/${imgUrl}`}
           alt={`${title} image`}

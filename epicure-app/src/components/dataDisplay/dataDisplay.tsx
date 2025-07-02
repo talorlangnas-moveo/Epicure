@@ -17,6 +17,7 @@ interface DisplayProps {
   filterByRangeOptions?: FilterOption[];
   title?: string;
   className?: string;
+  imageContainerStyle?: 'default' | 'large';
 }
 
 export default function DataDisplay({
@@ -25,6 +26,7 @@ export default function DataDisplay({
   filterByRangeOptions,
   title = "Items",
   className,
+  imageContainerStyle = 'default',
 }: DisplayProps) {
   const isDesktopView = useIsDesktopView();
   const [activeItem, setActiveItem] = useState("1");
@@ -85,6 +87,7 @@ export default function DataDisplay({
             <Card
               {...item}
               className={clsx(cardsStyles.restaurant, styles.restaurantCard)}
+              imageContainerStyle={imageContainerStyle}
             />
           </Link>
             ) : (
@@ -92,6 +95,7 @@ export default function DataDisplay({
               key={item.id}
               {...item}
               className={clsx(cardsStyles.restaurant, styles.restaurantCard)}
+              imageContainerStyle={imageContainerStyle}
             />
           )
         ))}

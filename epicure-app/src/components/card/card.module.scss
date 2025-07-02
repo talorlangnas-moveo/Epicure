@@ -31,6 +31,16 @@
         }
     }
 
+    .cardImageContainerLarge {
+        position: relative;
+        width: 100%;
+        height: 207px;
+
+        @media (min-width: $breakpoint-tablet) {
+            height: 236px;
+        }
+    }
+
     .cardContent {
         display: flex;
         flex-direction: column;
@@ -82,10 +92,29 @@
         align-items: center;
     }
 
+    .cardImageContainer {
+        position: relative;
+        width: 100%;
+        height: 151px;
+
+        @media (min-width: $breakpoint-tablet) {
+            height: 236px;
+        }
+    }
+
+    .cardImageContainerLarge {
+        position: relative;
+        width: 100%;
+        height: 207px;
+
+        @media (min-width: $breakpoint-tablet) {
+            height: 172px;
+        }
+    }
+
     .cardImage {
         width: 100%;
         height: auto;
-
     }
 
     .cardContent {
