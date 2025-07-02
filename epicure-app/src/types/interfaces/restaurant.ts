@@ -1,7 +1,8 @@
 import { Identifiers } from "./identifiers";
+import { Chef } from "./chef";
 
 export interface Restaurant extends Identifiers {
-  chefId?: string;
+  chef?: Chef;
   name: string;
   imgUrl: string;
   rating: number;
