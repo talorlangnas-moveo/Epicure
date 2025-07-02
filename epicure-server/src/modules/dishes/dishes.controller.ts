@@ -48,7 +48,7 @@ export class DishesController {
   @Put(':id')
   update(
     @Param('id', ParseMongoIdPipe) id: Types.ObjectId,
-    @Body() updateDishDto: UpdateDishDto,
+    @Body(ValidateRestaurantPipe) updateDishDto: UpdateDishDto,
   ): Promise<Dish> {
     return this.dishesService.update(id, updateDishDto);
   }

@@ -1,10 +1,4 @@
-export type RestaurantColumn = {
-    id: string;
-    image: string;
-    name: string;
+import { Restaurant } from "@/types/interfaces/restaurant";
+export type RestaurantColumn = Restaurant & {
     chefName: string;
-    rating: number;
-    openingTime: string;
-    closingTime: string;
-    foundedDate: Date;
 }

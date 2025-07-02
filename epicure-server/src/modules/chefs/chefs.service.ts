@@ -4,12 +4,15 @@ import { InjectModel } from '@nestjs/mongoose';
 import mongoose, { Types } from 'mongoose';
 import { Chef } from './schemas/chef.schema';
 import { UpdateChefDto } from './dto/update-chef.dto';
+import { Restaurant } from '../restaurants/schemas/restaurant.schema';
 
 @Injectable()
 export class ChefsService {
   constructor(
     @InjectModel(Chef.name)
     private chefModel: mongoose.Model<Chef>,
+    @InjectModel(Restaurant.name)
+    private restaurantModel: mongoose.Model<Restaurant>,
   ) {}
 
   async create(createChefDto: CreateChefDto): Promise<Chef> {
@@ -46,10 +49,19 @@ export class ChefsService {
   }
 
   async remove(id: Types.ObjectId): Promise<Chef> {
+    // First, check if the chef exists and delete them
     const deletedChef = await this.chefModel.findByIdAndDelete(id);
     if (!deletedChef) {
       throw new NotFoundException('Chef not found');
     }
+
+    await this.restaurantModel.updateMany(
+      {
+        chefId: id.toString(),
+      },
+      { $unset: { chefId: 1 } },
+    );
+
     return deletedChef;
   }
 

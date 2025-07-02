@@ -7,6 +7,8 @@ import {
   Query,
   Put,
   Delete,
+  UseInterceptors,
+  UploadedFile,
 } from '@nestjs/common';
 import { RestaurantsService } from './restaurants.service';
 import { CreateRestaurantDto } from './dto/create-restaurant.dto';
@@ -14,6 +16,8 @@ import { ParseMongoIdPipe } from './pipes/parse-mongo-id.pipe';
 import { Types } from 'mongoose';
 import { UpdateRestaurantDto } from './dto/update-restaurant.dto';
 import { Restaurant } from './schemas/restaurant.schema';
+import { ValidateChefPipe } from './pipes/validate-chef.pipe';
+import { FileInterceptor } from '@nestjs/platform-express';
 
 @Controller('restaurants')
 export class RestaurantsController {
@@ -21,9 +25,16 @@ export class RestaurantsController {
 
   @Post()
   create(
-    @Body() createRestaurantDto: CreateRestaurantDto,
+    @Body(ValidateChefPipe) createRestaurantDto: CreateRestaurantDto,
   ): Promise<Restaurant> {
     return this.restaurantsService.create(createRestaurantDto);
+  }
+
+  @Post('upload')
+  @UseInterceptors(FileInterceptor('file'))
+  uploadFile(@UploadedFile() file: Express.Multer.File) {
+    console.log(file);
+    return 'File uploaded';
   }
 
   @Get()
@@ -54,7 +65,7 @@ export class RestaurantsController {
   @Put(':id')
   update(
     @Param('id', ParseMongoIdPipe) id: Types.ObjectId,
-    @Body() updateRestaurantDto: UpdateRestaurantDto,
+    @Body(ValidateChefPipe) updateRestaurantDto: UpdateRestaurantDto,
   ): Promise<Restaurant> {
     return this.restaurantsService.update(id, updateRestaurantDto);
   }

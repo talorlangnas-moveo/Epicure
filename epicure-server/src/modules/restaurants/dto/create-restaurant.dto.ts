@@ -5,23 +5,29 @@ import {
   IsNumber,
   IsDate,
   IsOptional,
+  IsMongoId,
+  Max,
+  Min,
 } from 'class-validator';
 
 export class CreateRestaurantDto {
+  @IsMongoId()
+  @IsOptional()
+  chefId?: string;
+
   @IsString()
   @IsNotEmpty()
   name: string;
 
   @IsString()
-  @IsNotEmpty()
-  description: string;
+  @IsOptional()
+  imgUrl?: string;
 
-  @IsString()
-  @IsNotEmpty()
-  imgUrl: string;
-
+  @Type(() => Number)
   @IsNumber()
   @IsNotEmpty()
+  @Min(1)
+  @Max(5)
   rating: number;
 
   @IsString()

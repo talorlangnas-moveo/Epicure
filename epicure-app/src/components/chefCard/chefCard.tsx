@@ -1,6 +1,6 @@
 import Image from "next/image";
 import styles from "./chefCard.module.scss";
-import { ChefInfo } from "@/types/interfaces/chefInfo_tmp";
+import { ChefInfo } from "@/types/interfaces/chefInfo";
 
 interface ChefProps {
   children?: React.ReactNode;

@@ -1,18 +1,22 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Document } from 'mongoose';
+import { Document, Types } from 'mongoose';
 
 export type RestaurantDocument = Restaurant & Document;
 
 @Schema()
 export class Restaurant {
+  @Prop({
+    type: Types.ObjectId,
+    ref: 'Chef',
+    index: true,
+  })
+  chefId?: Types.ObjectId;
+
   @Prop({ required: true })
   name: string;
 
-  @Prop({ required: true })
-  description: string;
-
-  @Prop({ required: true })
-  imgUrl: string;
+  @Prop()
+  imgUrl?: string;
 
   @Prop({ required: true })
   rating: number;

@@ -5,6 +5,7 @@ export enum DishCategory {
   SPICY = 'spicy',
   VEGETARIAN = 'vegetarian',
   VEGAN = 'vegan',
+  NONE = 'none',
 }
 
 export type DishDocument = Dish & Document;
@@ -14,18 +15,18 @@ export class Dish {
   @Prop({
     type: Types.ObjectId,
     ref: 'Restaurant',
-    required: true,
     index: true,
   })
-  restaurantId: Types.ObjectId;
+  restaurantId?: Types.ObjectId;
+
   @Prop({ required: true })
   name: string;
 
   @Prop({ required: true })
   description: string;
 
-  @Prop({ required: true })
-  imgUrl: string;
+  @Prop()
+  imgUrl?: string;
 
   @Prop({ required: true })
   price: number;

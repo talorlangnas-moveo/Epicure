@@ -22,5 +22,5 @@ export const chefImagesMap: { [key: string]: StaticImageData } = {
 }
 
 export const getChefImage = (imgUrl: string): StaticImageData => {
-    return chefImagesMap[imgUrl] || AsafGranitImg;
+    return chefImagesMap[imgUrl] || YuvalBenNeriahImg;
 }

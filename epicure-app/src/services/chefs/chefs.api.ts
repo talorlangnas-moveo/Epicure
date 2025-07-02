@@ -10,9 +10,14 @@ export async function fetchChefs(): Promise<Chef[]> {
   return res.data;
 }
 
-export async function fetchChefById(id: string): Promise<Chef> {
-  const res = await axios.get(`${API_BASE_URL}/chefs/${id}`);
-  return res.data;
+export async function fetchChefById(id: string): Promise<Chef | null> {
+  try {
+    const res = await axios.get(`${API_BASE_URL}/chefs/${id}`);
+    return res.data;
+  } catch (error) {
+    console.error("Error fetching chef by id: ", error);
+    return null;
+  }
 }
 
 export async function getNewestChefsAsCards(): Promise<CardInfo[]> {
@@ -23,7 +28,8 @@ export async function getNewestChefsAsCards(): Promise<CardInfo[]> {
   });
 
   const chefs: Chef[] = res.data;
-  return chefs.map(convertChefToCard);
+  const chefsAsCards = await Promise.all(chefs.map(convertChefToCard));
+  return chefsAsCards;
 }
 
 export async function getMostViewedChefsAsCards(): Promise<CardInfo[]> {
@@ -34,5 +40,6 @@ export async function getMostViewedChefsAsCards(): Promise<CardInfo[]> {
   });
 
   const chefs: Chef[] = res.data;
-  return chefs.map(convertChefToCard);
+  const chefsAsCards = await Promise.all(chefs.map(convertChefToCard));
+  return chefsAsCards;
 }

@@ -1,42 +1,17 @@
 import StatsPanel from "@/components/stats-panel";
-import { CardItem } from "@/types/interfaces/cardItem";
-import { Store, Soup, ChefHat } from "lucide-react";
-
-async function getItems(): Promise<CardItem[]> {
-  const cards: CardItem[] = [
-    {
-      title: "Restaurants",
-      content: "Extensive customization options, allowing you to tailor every aspect to meet your specific needs.",
-      href: "/restaurants",
-      count: 10,
-      icon: Store,
-    },
-    {
-      title: "Dishes",
-      content: "From design elements to functionality, you have complete control to create a unique and personalized experience.",
-      href: "/dishes",
-      count: 15,
-      icon: Soup,
-    },
-    {
-      title: "Chefs",
-      content: "Elements to functionality, you have complete control to create a unique experience.",
-      href: "/chefs",
-      count: 9,
-      icon: ChefHat,
-    },
-  ]
-  return cards;
-}
-
+import { cards, getCollectionsCount } from "@services/adminStats/adminStats.utils";
 
 export default async function Home() {
-  const items = await getItems();
+  const [restaurantsCount, dishesCount, chefsCount] = await getCollectionsCount();
+  const updatedCards = cards.map((card, index) => ({
+    ...card,
+    count: [restaurantsCount, dishesCount, chefsCount][index],
+  }));
 
   return (
     <main>
       <div>
-        <StatsPanel title="Epicure Admin Home" description="Epicure Admin Home" cards={items}/>
+        <StatsPanel title="Epicure Admin Home" description="Epicure Admin Home" cards={updatedCards}/>
       </div>
     </main>
   );

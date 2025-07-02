@@ -23,7 +23,8 @@ export async function getNewestRestaurantsAsCards(): Promise<CardInfo[]> {
   });
 
   const restaurants: Restaurant[] = res.data;
-  return restaurants.map(convertRestaurantToCard);
+  const restaurantsAsCards = await Promise.all(restaurants.map(convertRestaurantToCard));
+  return restaurantsAsCards;
 }
 
 export async function getMostPopularRestaurantsAsCards(): Promise<CardInfo[]> {
@@ -34,7 +35,8 @@ export async function getMostPopularRestaurantsAsCards(): Promise<CardInfo[]> {
   });
 
   const restaurants: Restaurant[] = res.data;
-  return restaurants.map(convertRestaurantToCard);
+  const restaurantsAsCards = await Promise.all(restaurants.map(convertRestaurantToCard));
+  return restaurantsAsCards;
 }
 
 export async function getOpenRestaurantsAsCards(): Promise<CardInfo[]> {
@@ -45,5 +47,6 @@ export async function getOpenRestaurantsAsCards(): Promise<CardInfo[]> {
   });
 
   const restaurants: Restaurant[] = res.data;
-  return restaurants.map(convertRestaurantToCard);
+  const restaurantsAsCards = await Promise.all(restaurants.map(convertRestaurantToCard));
+  return restaurantsAsCards;
 }

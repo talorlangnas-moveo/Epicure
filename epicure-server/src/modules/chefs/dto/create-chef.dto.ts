@@ -22,16 +22,17 @@ export class CreateChefDto {
   description: string;
 
   @IsString()
-  @IsNotEmpty()
-  imgUrl: string;
+  @IsOptional()
+  imgUrl?: string;
 
   @Type(() => Date)
   @IsDate()
   @IsOptional()
   foundedDate: Date;
 
+  @Type(() => Number)
   @IsNumber()
-  @IsOptional()
   @Min(0)
+  @IsOptional()
   numberOfViews: number;
 }
