@@ -8,7 +8,7 @@ import CardsDisplay from "@components/cardsDisplay/cardsDisplay";
 import AboutUs from "@components/aboutUs/aboutUs";
 import { fetchAll } from "@/services/dishes/dishes.api";
 import { getDishesAsCards } from "@/services/dishes/dishes.utils";
-import { fetchRestaurants, fetchRestaurantsByChefId } from "@/services/restaurants/restaurants.api";
+import { fetchRestaurants, fetchRestaurantsByChefId, getMostPopularRestaurantsAsCards } from "@/services/restaurants/restaurants.api";
 import { getRestaurantsAsCards } from "@/services/restaurants/restaurants.utils";
 import { CHEF_OF_THE_WEEK_ID } from "@/utils/constants";
 import { fetchChefById } from "@/services/chefs/chefs.api";
@@ -16,6 +16,8 @@ import { fetchChefById } from "@/services/chefs/chefs.api";
 export default async function Home() {
   const restaurants = await fetchRestaurants();
   const restaurantsCards = await getRestaurantsAsCards(restaurants);
+  const mostPopularRestaurantsCards = await getMostPopularRestaurantsAsCards();
+
   const dishes = await fetchAll();
   const dishCards = await getDishesAsCards(dishes);
 
@@ -30,7 +32,7 @@ export default async function Home() {
         title="Popular restaurant in Epicure:"
         type="restaurant"
         childrenDesk={
-          <CardsDisplay cards={restaurantsCards} type="restaurant" />
+          <CardsDisplay cards={mostPopularRestaurantsCards} type="restaurant" />
         }
       >
         <Carousel>
@@ -55,7 +57,7 @@ export default async function Home() {
       <IconLegend />
       <ChefCard chef={chefOfTheWeek}>
         <InfoPanel
-          title="Yossi’s Restaurants"
+          title={`${chefOfTheWeek?.firstName}’s Restaurants`}
           type="chef"
           displayButtonDesktop={false}
           childrenDesk={

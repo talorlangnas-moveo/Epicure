@@ -4,12 +4,12 @@ export const fullFormSchema = z.object({
     firstName: z
         .string()
         .min(2, { message: "First Name must be at least 2 characters" })
-        .max(50),
+        .max(20, { message: "First Name must be less than 20 characters" }),
 
     lastName: z
         .string()
         .min(2, { message: "Last Name must be at least 2 characters" })
-        .max(50),
+        .max(20, { message: "Last Name must be less than 20 characters" }),
 
     description: z
         .string()
