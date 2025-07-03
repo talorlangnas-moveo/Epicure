@@ -26,6 +26,7 @@ export const fullFormSchema = z.object({
 
     foundedDate: z
         .string()
+        .nonempty({ message: "Founded date is required" })
         .refine(
             (val) => !val || !isNaN(Date.parse(val)),
             { message: "Founded date must be a valid date string" }
@@ -33,7 +34,10 @@ export const fullFormSchema = z.object({
 
     numberOfViews: z
         .string()
-        .min(0, { message: "Number of views must be at least 0" }),
+        .nonempty({ message: "Number of views is required" })
+        .refine((val) => !isNaN(Number(val)) && Number(val) >= 0, {
+            message: "Number of views must be a non-negative number"
+        }),
 
 });
 

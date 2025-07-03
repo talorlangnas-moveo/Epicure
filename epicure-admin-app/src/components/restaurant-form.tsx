@@ -1,5 +1,6 @@
 "use client";
 
+import { Asterisk } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -51,7 +52,7 @@ export const RestaurantsForm: EntityForm<RestaurantColumn> = ({
     resolver: zodResolver(schema),
     defaultValues: mode === "create" ? {
       name: "",
-      chef: "",
+      chef: undefined,
       imgFile: undefined,
       rating: "",
       openingTime: "",
@@ -65,9 +66,11 @@ export const RestaurantsForm: EntityForm<RestaurantColumn> = ({
       openingTime: restaurant?.openingTime,
       closingTime: restaurant?.closingTime,
       foundedDate: restaurant?.foundedDate?.toString().split('T')[0],
-
     },
+    mode: "onChange",
   });
+
+  const { formState: { isValid, isDirty } } = form;
 
   useEffect(() => {
     return () => {
@@ -185,7 +188,12 @@ export const RestaurantsForm: EntityForm<RestaurantColumn> = ({
                 name="name"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Restaurant Name</FormLabel>
+                    <FormLabel>
+                      <div className="flex items-center gap-0.5">
+                        Restaurant Name
+                        <Asterisk className="w-3 h-3 text-red-500" />
+                      </div>
+                    </FormLabel>
                     <FormControl>
                       <Input placeholder="Restaurant Name" {...field} />
                     </FormControl>
@@ -226,7 +234,12 @@ export const RestaurantsForm: EntityForm<RestaurantColumn> = ({
                 name="rating"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Rating</FormLabel>
+                    <FormLabel>
+                      <div className="flex items-center gap-0.5">
+                        Rating
+                        <Asterisk className="w-3 h-3 text-red-500" />
+                      </div>
+                    </FormLabel>
                     <FormControl>
                       <Input
                         type="number"
@@ -247,7 +260,9 @@ export const RestaurantsForm: EntityForm<RestaurantColumn> = ({
                   name="openingTime"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Opening Time</FormLabel>
+                      <FormLabel>Opening Time
+                        <Asterisk className="w-3 h-3 text-red-500" />
+                      </FormLabel>
                       <FormControl>
                         <Input type="time" {...field} />
                       </FormControl>
@@ -260,7 +275,9 @@ export const RestaurantsForm: EntityForm<RestaurantColumn> = ({
                   name="closingTime"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Closing Time</FormLabel>
+                      <FormLabel>Closing Time
+                        <Asterisk className="w-3 h-3 text-red-500" />
+                      </FormLabel>
                       <FormControl>
                         <Input type="time" {...field} />
                       </FormControl>
@@ -275,7 +292,12 @@ export const RestaurantsForm: EntityForm<RestaurantColumn> = ({
                 name="foundedDate"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Founded Date</FormLabel>
+                    <FormLabel>
+                      <div className="flex items-center gap-0.5">
+                        Founded Date
+                        <Asterisk className="w-3 h-3 text-red-500" />
+                      </div>
+                    </FormLabel>
                     <FormControl>
                       <Input type="date" {...field} />
                     </FormControl>
@@ -283,7 +305,11 @@ export const RestaurantsForm: EntityForm<RestaurantColumn> = ({
                   </FormItem>
                 )}
               />
-              <Button type="submit" className="w-full">
+              <Button 
+                type="submit" 
+                className="w-full"
+                disabled={!isValid || (!isDirty && mode === "create")}
+              >
                 {mode === "create" ? "Create Restaurant" : "Edit Restaurant"}
               </Button>
             </div>

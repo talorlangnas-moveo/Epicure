@@ -1,5 +1,6 @@
 "use client";
 
+import { Asterisk } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -22,14 +23,10 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ChefColumn } from "@/types/columns/chef.column";
 import { EntityForm } from "@/types/entityForm";
-import { Textarea } from "@/components/ui/textarea"
-import { Slider } from "@/components/ui/slider";
+import { Textarea } from "@/components/ui/textarea";
 import { useEntityContext } from "@/components/entityContext";
 import { Chef } from "@/types/interfaces/chef";
-import {
-  createChef,
-  updateChef,
-} from "@services/chefs/chefs.api";
+import { createChef, updateChef } from "@services/chefs/chefs.api";
 import { convertChefToColumn } from "@/services/chefs/chefs.utils";
 import { API_BASE_URL } from "@/utils/constants";
 import { useState, useEffect } from "react";
@@ -63,10 +60,12 @@ export const ChefForm: EntityForm<ChefColumn> = ({
             foundedDate: chef?.foundedDate?.toString().split("T")[0],
             numberOfViews: chef?.numberOfViews?.toString(),
           },
+    mode: "onChange",
   });
 
+  const { formState: { isValid, isDirty } } = form;
+
   useEffect(() => {
-    // Cleanup function to revoke the object URL when component unmounts or when previewUrl changes
     return () => {
       if (previewUrl) {
         URL.revokeObjectURL(previewUrl);
@@ -138,10 +137,16 @@ export const ChefForm: EntityForm<ChefColumn> = ({
                     <FormLabel>Chef Image</FormLabel>
                     {(previewUrl || (mode === "update" && chef?.imgUrl)) && (
                       <>
-                        <p className="text-center text-sm text-muted-foreground">{mode === "update" ? "Current Image:" : "Preview Image:"}</p>
+                        <p className="text-center text-sm text-muted-foreground">
+                          {mode === "update"
+                            ? "Current Image:"
+                            : "Preview Image:"}
+                        </p>
                         <div className="mb-4 flex justify-center">
                           <Image
-                            src={previewUrl || `${API_BASE_URL}/${chef?.imgUrl}`}
+                            src={
+                              previewUrl || `${API_BASE_URL}/${chef?.imgUrl}`
+                            }
                             alt={chef?.firstName || "Preview"}
                             width={150}
                             height={150}
@@ -181,7 +186,12 @@ export const ChefForm: EntityForm<ChefColumn> = ({
                 name="firstName"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>First Name</FormLabel>
+                    <FormLabel>
+                      <div className="flex items-center gap-0.5">
+                        First Name
+                        <Asterisk className="w-3 h-3 text-red-500" />
+                      </div>
+                    </FormLabel>
                     <FormControl>
                       <Input placeholder="First Name" {...field} />
                     </FormControl>
@@ -194,7 +204,12 @@ export const ChefForm: EntityForm<ChefColumn> = ({
                 name="lastName"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Last Name</FormLabel>
+                    <FormLabel>
+                      <div className="flex items-center gap-0.5">
+                        Last Name
+                        <Asterisk className="w-3 h-3 text-red-500" />
+                      </div>
+                    </FormLabel>
                     <FormControl>
                       <Input placeholder="Last Name" {...field} />
                     </FormControl>
@@ -208,7 +223,12 @@ export const ChefForm: EntityForm<ChefColumn> = ({
                 name="description"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Description</FormLabel>
+                    <FormLabel>
+                      <div className="flex items-center gap-0.5">
+                        Description
+                        <Asterisk className="w-3 h-3 text-red-500" />
+                      </div>
+                    </FormLabel>
                     <FormControl>
                       <Textarea placeholder="Chef Description" {...field} />
                     </FormControl>
@@ -224,29 +244,39 @@ export const ChefForm: EntityForm<ChefColumn> = ({
                 name="numberOfViews"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Number of Views</FormLabel>
-                      <FormControl>
-                        <Input
-                          type="number"
-                          min={0}
-                          placeholder="Number of Views"
-                          {...field}
-                          onChange={(e) => {
-                            const value = e.target.value;
-                            field.onChange(value);
-                          }}
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
+                    <FormLabel>
+                      <div className="flex items-center gap-0.5">
+                        Number of Views
+                        <Asterisk className="w-3 h-3 text-red-500" />
+                      </div>
+                    </FormLabel>
+                    <FormControl>
+                      <Input
+                        type="number"
+                        min={0}
+                        placeholder="Number of Views"
+                        {...field}
+                        onChange={(e) => {
+                          const value = e.target.value;
+                          field.onChange(value);
+                        }}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
               <FormField
                 control={form.control}
                 name="foundedDate"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Founded Date</FormLabel>
+                    <FormLabel>
+                      <div className="flex items-center gap-1">
+                        Founded Date
+                        <Asterisk className="w-3 h-3 text-red-500" />
+                      </div>
+                    </FormLabel>
                     <FormControl>
                       <Input type="date" {...field} />
                     </FormControl>
@@ -254,7 +284,11 @@ export const ChefForm: EntityForm<ChefColumn> = ({
                   </FormItem>
                 )}
               />
-              <Button type="submit" className="w-full">
+              <Button 
+                type="submit" 
+                className="w-full"
+                disabled={!isValid || (!isDirty && mode === "create")}
+              >
                 {mode === "create" ? "Create Chef" : "Edit Chef"}
               </Button>
             </div>

@@ -1,5 +1,6 @@
 "use client";
 
+import { Asterisk } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -55,7 +56,7 @@ export const DishForm: EntityForm<DishColumn> = ({
       mode === "create"
         ? {
             name: "",
-            restaurant: "",
+            restaurant: undefined,
             description: "",
             imgFile: undefined,
             price: "",
@@ -69,7 +70,10 @@ export const DishForm: EntityForm<DishColumn> = ({
             price: dish?.price?.toString(),
             dishCategory: dish?.dishCategory,
           },
+    mode: "onChange",
   });
+
+  const { formState: { isValid, isDirty } } = form;
 
   useEffect(() => {
     return () => {
@@ -185,7 +189,12 @@ export const DishForm: EntityForm<DishColumn> = ({
                 name="name"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Dish Name</FormLabel>
+                    <FormLabel>
+                      <div className="flex items-center gap-0.5">
+                        Dish Name
+                        <Asterisk className="w-3 h-3 text-red-500" />
+                      </div>
+                    </FormLabel>
                     <FormControl>
                       <Input placeholder="Dish Name" {...field} />
                     </FormControl>
@@ -226,7 +235,12 @@ export const DishForm: EntityForm<DishColumn> = ({
                 name="description"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Description</FormLabel>
+                    <FormLabel>
+                      <div className="flex items-center gap-0.5">
+                        Description
+                        <Asterisk className="w-3 h-3 text-red-500" />
+                      </div>
+                    </FormLabel>
                     <FormControl>
                       <Textarea placeholder="Dish Description" {...field} />
                     </FormControl>
@@ -242,7 +256,12 @@ export const DishForm: EntityForm<DishColumn> = ({
                 name="price"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Price</FormLabel>
+                    <FormLabel>
+                      <div className="flex items-center gap-0.5">
+                        Price
+                        <Asterisk className="w-3 h-3 text-red-500" />
+                      </div>
+                    </FormLabel>
                     <div className="space-y-4">
                       <FormControl>
                         <Input
@@ -302,7 +321,11 @@ export const DishForm: EntityForm<DishColumn> = ({
                   </FormItem>
                 )}
               />
-              <Button type="submit" className="w-full">
+              <Button 
+                type="submit" 
+                className="w-full"
+                disabled={!isValid || (!isDirty && mode === "create")}
+              >
                 {mode === "create" ? "Create Dish" : "Edit Dish"}
               </Button>
             </div>

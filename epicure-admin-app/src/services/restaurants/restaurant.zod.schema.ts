@@ -33,6 +33,7 @@ export const fullFormSchema = z.object({
 
   foundedDate: z
     .string()
+    .nonempty({ message: "Founded date is required" })
     .refine(
       (val) => !val || !isNaN(Date.parse(val)),
       { message: "Founded date must be a valid date string" }

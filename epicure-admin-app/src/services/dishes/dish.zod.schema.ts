@@ -25,6 +25,7 @@ export const fullFormSchema = z.object({
 
     price: z
         .string()
+        .nonempty({ message: "Price is required" })
         .min(0, { message: "Price must be at least 0" }),
 
     dishCategory: z
