@@ -15,6 +15,7 @@ interface RestaurantsLayoutProps {
 export default async function RestaurantsLayout({
   children,
 }: RestaurantsLayoutProps) {
+  
   const restaurants = await fetchRestaurants();
   const restaurantsAsColumns = await Promise.all(
     restaurants.map(convertRestaurantToColumn)
