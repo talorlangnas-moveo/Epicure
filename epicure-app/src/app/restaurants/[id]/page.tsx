@@ -20,6 +20,6 @@ export default async function RestaurantPage({ params }: RestaurantPageProps) {
   }
 
   return (
-    <DishesDisplay restaurant={restaurant} dishCards={dishAsCards} />
+    <DishesDisplay restaurant={restaurant} dishCards={dishAsCards} imageContainerStyle="large" />
   );
 }

@@ -2,6 +2,7 @@ import Image from "next/image";
 import { CardInfo } from "@components/card/card";
 import styles from "./orderCard.module.scss";
 import { ILSIcon } from "@/icons";
+import { API_BASE_URL } from "@/utils/constants";
 
 interface DishOrderCardProps {
   dishCard: CardInfo;
@@ -11,11 +12,13 @@ interface DishOrderCardProps {
 export default function DishOrderCard({ dishCard, isDesktop }: DishOrderCardProps) {
   return (
     <div className={styles.dishOrderCard}>
+      <div className={styles.dishImageContainer}>
       <Image
-        src={dishCard.imgUrl}
-        alt={dishCard.title}
-        className={styles.dishImage}
+        src={`${API_BASE_URL}/${dishCard.imgUrl}`}
+        alt={`${dishCard.title} image`}
+        fill
       />
+      </div>
       <div className={styles.container}>
         <div className={styles.dishInfo}>
           <h1 className={styles.dishTitle}>{dishCard.title}</h1>

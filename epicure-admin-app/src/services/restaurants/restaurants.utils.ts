@@ -1,24 +1,19 @@
 import { RestaurantColumn } from "@/types/columns/restaurant.column";
 import { Restaurant } from "@/types/interfaces/restaurant";
-import { fetchChefById } from "@services/chefs/chefs.api";
-
-export async function getChefsNameById(id: string): Promise<string> {
-  const chef = await fetchChefById(id);
-  if (!chef) {
-    return "No Chef Assigned";
-  }
-  return `${chef.firstName} ${chef.lastName}`;
-}
 
 export async function convertRestaurantToColumn(restaurant: Restaurant): Promise<RestaurantColumn> {
-  const chefName = await getChefsNameById(restaurant.chefId);
+  const chefName = restaurant.chef
+    ? `${restaurant.chef.firstName} ${restaurant.chef.lastName}`
+    : "No Chef Assigned";
   
   return {
     _id: restaurant._id,
-    chefId: restaurant.chefId,
+    chef: restaurant.chef,
     name: restaurant.name,
+    // chefName: chefName,
     chefName: chefName,
     imgUrl: restaurant.imgUrl,
+    imgFile: new File([], ""),
     rating: restaurant.rating,
     openingTime: restaurant.openingTime,
     closingTime: restaurant.closingTime,

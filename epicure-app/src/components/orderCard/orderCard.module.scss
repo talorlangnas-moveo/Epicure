@@ -6,6 +6,17 @@
     flex-direction: column;
 }
 
+.dishImageContainer {
+    position: relative;
+        width: 100%;
+        height: 271px;
+
+        @media (min-width: $breakpoint-tablet) {
+            height: 292px;
+            margin: 0 auto;
+        }
+}
+
 .dishImage {
     width: 100%;
     height: auto;

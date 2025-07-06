@@ -13,13 +13,13 @@ export class ValidateRestaurantPipe implements PipeTransform<CreateDishDto> {
   ) {}
 
   async transform(value: CreateDishDto | UpdateDishDto) {
-    if ('restaurantId' in value && value.restaurantId) {
-      if (!Types.ObjectId.isValid(value.restaurantId)) {
+    if ('restaurant' in value && value.restaurant) {
+      if (!Types.ObjectId.isValid(value.restaurant)) {
         throw new NotFoundException('Invalid restaurant ID');
       }
 
       const restaurantExists = await this.restaurantModel.findById(
-        value.restaurantId,
+        value.restaurant,
       );
 
       if (!restaurantExists) {

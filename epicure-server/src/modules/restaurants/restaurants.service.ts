@@ -7,6 +7,8 @@ import { Body } from '@nestjs/common';
 import * as moment from 'moment';
 import { UpdateRestaurantDto } from './dto/update-restaurant.dto';
 import { Dish } from '../dishes/schemas/dish.schema';
+import * as fs from 'fs';
+import * as path from 'path';
 
 @Injectable()
 export class RestaurantsService {
@@ -17,20 +19,63 @@ export class RestaurantsService {
     private dishModel: mongoose.Model<Dish>,
   ) {}
 
+  uploadImage(file: Express.Multer.File): string {
+    if (!file) {
+      throw new Error('No file uploaded');
+    }
+    return `static/restaurants/${file.filename}`;
+  }
+
+  private deleteImageFile(imagePath: string) {
+    try {
+      const normalizedPath = imagePath
+        .replace(/^\.\//, '')
+        .replace(/^static\//, '');
+      const absolutePath = path.join(process.cwd(), 'public', normalizedPath);
+
+      console.log('Trying to delete file at:', absolutePath);
+
+      if (fs.existsSync(absolutePath)) {
+        fs.unlinkSync(absolutePath);
+        console.log('Successfully deleted file');
+      } else {
+        console.log('File does not exist');
+      }
+    } catch (error) {
+      console.error('Error deleting image file:', error);
+    }
+  }
+
   async create(
     @Body() createRestaurantDto: CreateRestaurantDto,
+    file?: Express.Multer.File,
   ): Promise<Restaurant> {
+    if (file) {
+      const imagePath = this.uploadImage(file);
+      createRestaurantDto.imgUrl = imagePath;
+    } else {
+      createRestaurantDto.imgUrl = `static/restaurants/restaurantPlaceholder.png`;
+    }
+
     const restaurant = await this.restaurantModel.create(createRestaurantDto);
-    return restaurant;
+    const newRestaurant = await restaurant.populate('chef');
+    return newRestaurant;
   }
 
   async findAll(): Promise<Restaurant[]> {
-    const restaurants = await this.restaurantModel.find();
+    const restaurants = await this.restaurantModel.find().populate('chef');
+    return restaurants;
+  }
+
+  async findByChefId(chefId: string): Promise<Restaurant[]> {
+    const restaurants = await this.restaurantModel
+      .find({ chef: chefId })
+      .populate('chef');
     return restaurants;
   }
 
   async findOne(id: string | Types.ObjectId): Promise<Restaurant> {
-    const restaurant = await this.restaurantModel.findById(id);
+    const restaurant = await this.restaurantModel.findById(id).populate('chef');
     if (!restaurant) {
       throw new NotFoundException('Restaurant not found');
     }
@@ -40,12 +85,29 @@ export class RestaurantsService {
   async update(
     id: Types.ObjectId,
     updateRestaurantDto: UpdateRestaurantDto,
+    file?: Express.Multer.File,
   ): Promise<Restaurant> {
-    const updatedRestaurant = await this.restaurantModel.findByIdAndUpdate(
-      id,
-      updateRestaurantDto,
-      { new: true },
-    );
+    const currentRestaurant = await this.restaurantModel.findById(id);
+    if (!currentRestaurant) {
+      throw new NotFoundException('Restaurant not found');
+    }
+
+    if (file) {
+      if (
+        currentRestaurant.imgUrl &&
+        currentRestaurant.imgUrl !==
+          `static/restaurants/restaurantPlaceholder.png`
+      ) {
+        this.deleteImageFile(currentRestaurant.imgUrl);
+      }
+      const imagePath = this.uploadImage(file);
+      updateRestaurantDto.imgUrl = imagePath;
+    }
+
+    const updatedRestaurant = await this.restaurantModel
+      .findByIdAndUpdate(id, updateRestaurantDto, { new: true })
+      .populate('chef');
+
     if (!updatedRestaurant) {
       throw new NotFoundException('Restaurant not found');
     }
@@ -53,7 +115,18 @@ export class RestaurantsService {
   }
 
   async remove(id: Types.ObjectId): Promise<Restaurant> {
-    console.log('Removing restaurant with ID:', id);
+    const restaurant = await this.restaurantModel.findById(id);
+    if (!restaurant) {
+      throw new NotFoundException('Restaurant not found');
+    }
+
+    if (
+      restaurant.imgUrl &&
+      restaurant.imgUrl !== `static/restaurants/restaurantPlaceholder.png`
+    ) {
+      this.deleteImageFile(restaurant.imgUrl);
+    }
+
     const deletedRestaurant = await this.restaurantModel.findByIdAndDelete(id);
     if (!deletedRestaurant) {
       throw new NotFoundException('Restaurant not found');
@@ -61,10 +134,11 @@ export class RestaurantsService {
 
     await this.dishModel.updateMany(
       {
-        restaurantId: { $in: [id, id.toString()] },
+        restaurant: { $in: [id, id.toString()] },
       },
-      { $unset: { restaurantId: '' } },
+      { $unset: { restaurant: '' } },
     );
+
     return deletedRestaurant;
   }
 
@@ -73,11 +147,17 @@ export class RestaurantsService {
       .find()
       .sort({ foundedDate: -1 })
       .limit(3)
+      .populate('chef')
       .exec();
   }
 
   async getTop3MostPopularRestaurants(): Promise<Restaurant[]> {
-    return this.restaurantModel.find().sort({ rating: -1 }).limit(3).exec();
+    return this.restaurantModel
+      .find()
+      .sort({ rating: -1 })
+      .limit(3)
+      .populate('chef')
+      .exec();
   }
 
   async getOpenRestaurantsNow(): Promise<Restaurant[]> {
@@ -110,6 +190,20 @@ export class RestaurantsService {
                 ],
               },
             ],
+          },
+        },
+        {
+          $lookup: {
+            from: 'chefs',
+            localField: 'chef',
+            foreignField: '_id',
+            as: 'chef',
+          },
+        },
+        {
+          $unwind: {
+            path: '$chef',
+            preserveNullAndEmptyArrays: true,
           },
         },
         {

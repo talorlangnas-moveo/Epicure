@@ -15,6 +15,13 @@ export async function fetchRestaurantById(id: string): Promise<Restaurant> {
   return res.data;
 }
 
+export async function fetchRestaurantsByChefId(chefId: string): Promise<Restaurant[]> {
+  const res = await axios.get(`${API_BASE_URL}/restaurants/by-chefId`, {
+    params: { chefId },
+  });
+  return res.data;
+}
+
 export async function getNewestRestaurantsAsCards(): Promise<CardInfo[]> {
   const res = await axios.get(`${API_BASE_URL}/restaurants/`, {
     params: {

@@ -1,6 +1,7 @@
 import axios, { AxiosError } from 'axios';
 import { Dish } from '@/types/interfaces/dish';
 import { toast } from 'sonner';
+import { DishColumn } from '@/types/columns/dish.column';
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 
@@ -23,9 +24,26 @@ export async function deleteDish(id: string): Promise<Dish> {
   return res.data;
 }
 
-export async function updateDish(id: string, data: Partial<Dish>): Promise<Dish> {
+export async function updateDish(id: string, data: Partial<DishColumn>): Promise<Dish> {
   try{
-    const res = await axios.put(`${API_BASE_URL}/dishes/${id}`, data);
+    const formData = new FormData();
+    
+    if (data.imgFile instanceof File) {
+      formData.append('image', data.imgFile);
+    }
+    
+    Object.entries(data).forEach(([key, value]) => {
+      if (key !== 'imgFile' && key !== 'imgUrl' && value !== undefined) {
+        formData.append(key, value.toString());
+      }
+    });
+
+    const res = await axios.put(`${API_BASE_URL}/dishes/${id}`, formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
+
     toast.success("Dish updated successfully");
     return res.data;
   } catch (error: unknown) {
@@ -39,9 +57,26 @@ export async function updateDish(id: string, data: Partial<Dish>): Promise<Dish>
   }
 }
 
-export async function createDish(data: Partial<Dish>): Promise<Dish> {
+export async function createDish(data: Partial<DishColumn>): Promise<Dish> {
   try {
-    const res = await axios.post(`${API_BASE_URL}/dishes`, data);
+    const formData = new FormData();
+    
+    if (data.imgFile instanceof File) {
+      formData.append('image', data.imgFile);
+    }
+    
+    Object.entries(data).forEach(([key, value]) => {
+      if (key !== 'imgFile' && key !== 'imgUrl' && value !== undefined) {
+        formData.append(key, value.toString());
+      }
+    });
+
+    const res = await axios.post(`${API_BASE_URL}/dishes`, formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
+
     toast.success("Dish created successfully");
     return res.data;
   } catch (error: unknown) {

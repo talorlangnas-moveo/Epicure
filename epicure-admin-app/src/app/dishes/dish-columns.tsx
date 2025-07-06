@@ -11,6 +11,7 @@ import { TextPopover } from "@/components/ui/text-popover";
 import DataTableRowAction from "@/components/data-table-row-action";
 import { DishForm } from "@/components/dish-form";
 import { deleteDish } from "@services/dishes/dishes.api";
+import { API_BASE_URL } from "@/utils/constants";
 
 export function DishColumns(): ColumnDef<DishColumn>[] {
   return [
@@ -23,7 +24,7 @@ export function DishColumns(): ColumnDef<DishColumn>[] {
 
         return (
           <Avatar>
-            <AvatarImage src={imageUrl} alt={name} />
+            <AvatarImage src={`${API_BASE_URL}/${imageUrl}`} alt={name} />
             <AvatarFallback>{name?.[0]}</AvatarFallback>
           </Avatar>
         );

@@ -19,6 +19,8 @@ async function Chefs() {
       filterOptions={chefsFilterOptions}
       title="Chefs"
       className="chefsBarContainer"
+      imageContainerStyle="large"
+      cardsStyle="chefCard"
     />
   );
 }

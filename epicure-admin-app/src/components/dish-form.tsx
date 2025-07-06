@@ -1,5 +1,6 @@
 "use client";
 
+import { Asterisk } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -37,6 +38,8 @@ import { useEntityContext } from "@/components/entityContext";
 import { Dish } from "@/types/interfaces/dish";
 import { createDish, updateDish } from "@/services/dishes/dishes.api";
 import { convertDishToCulomn } from "@/services/dishes/dishes.utils";
+import { useState, useEffect } from "react";
+import { API_BASE_URL } from "@/utils/constants";
 
 export const DishForm: EntityForm<DishColumn> = ({
   entity,
@@ -44,6 +47,7 @@ export const DishForm: EntityForm<DishColumn> = ({
   setIsOpen,
 }) => {
   const dish = entity;
+  const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const { onEdit, onAdd, selectItemMap } = useEntityContext<DishColumn, Dish>();
   const schema = mode === "create" ? fullFormSchema : partialFormSchema;
   const form = useForm<z.infer<typeof schema>>({
@@ -52,21 +56,32 @@ export const DishForm: EntityForm<DishColumn> = ({
       mode === "create"
         ? {
             name: "",
-            restaurantId: "",
+            restaurant: undefined,
             description: "",
-            imgUrl: "",
+            imgFile: undefined,
             price: "",
             dishCategory: "none",
           }
         : {
             name: dish?.name,
-            restaurantId: dish?.restaurantId,
+            restaurant: dish?.restaurant?._id,
             description: dish?.description,
-            imgUrl: dish?.imgUrl,
+            imgFile: undefined,
             price: dish?.price?.toString(),
             dishCategory: dish?.dishCategory,
           },
+    mode: "onChange",
   });
+
+  const { formState: { isValid, isDirty } } = form;
+
+  useEffect(() => {
+    return () => {
+      if (previewUrl) {
+        URL.revokeObjectURL(previewUrl);
+      }
+    };
+  }, [previewUrl]);
 
   async function onSubmit(values: z.infer<typeof schema>) {
     const dishData = {
@@ -78,7 +93,7 @@ export const DishForm: EntityForm<DishColumn> = ({
     if (mode === "update" && dish) {
       try {
         if (onEdit) {
-          await onEdit(dish, dishData, updateDish, convertDishToCulomn);
+          await onEdit(dish, dishData as Partial<DishColumn>, updateDish, convertDishToCulomn);
         }
         setIsOpen(false);
       } catch (error) {
@@ -87,7 +102,7 @@ export const DishForm: EntityForm<DishColumn> = ({
     } else if (mode === "create") {
       try {
         if (onAdd) {
-          await onAdd(dishData, createDish, convertDishToCulomn);
+          await onAdd(dishData as Partial<DishColumn>, createDish, convertDishToCulomn);
         }
         setIsOpen(false);
       } catch (error) {
@@ -125,16 +140,45 @@ export const DishForm: EntityForm<DishColumn> = ({
             <div className="space-y-5">
               <FormField
                 control={form.control}
-                name="imgUrl"
-                render={({ field }) => (
+                name="imgFile"
+                render={({ field: { value, onChange, ...field } }) => (
                   <FormItem>
-                    <FormLabel>Image URL</FormLabel>
+                    <FormLabel>Dish Image</FormLabel>
+                    {(previewUrl || (mode === "update" && dish?.imgUrl)) && (
+                      <>
+                        <p className="text-center text-sm text-muted-foreground">{mode === "update" ? "Current Image:" : "Preview Image:"}</p>
+                        <div className="mb-4 flex justify-center">
+                          <Image
+                            src={previewUrl || `${API_BASE_URL}/${dish?.imgUrl}`}
+                            alt={dish?.name || "Preview"}
+                            width={150}
+                            height={150}
+                            className="rounded-md object-cover"
+                          />
+                        </div>
+                      </>
+                    )}
                     <FormControl>
-                      <Input placeholder="Image URL" {...field} />
+                      <Input
+                        type="file"
+                        accept=".jpg,.jpeg,.png"
+                        onChange={(e) => {
+                          const file = e.target.files?.[0];
+                          if (file) {
+                            if (previewUrl) {
+                              URL.revokeObjectURL(previewUrl);
+                            }
+                            const newPreviewUrl = URL.createObjectURL(file);
+                            setPreviewUrl(newPreviewUrl);
+                            onChange(file);
+                          }
+                        }}
+                        className="file:hidden before:content-[''] before:mr-2 before:inline-block pt-1.5"
+                        {...field}
+                      />
                     </FormControl>
                     <FormDescription>
-                      Enter the URL of the image you want to use (must end with
-                      .png)
+                      Select an image file (PNG, JPG, or JPEG, max 5MB)
                     </FormDescription>
                     <FormMessage />
                   </FormItem>
@@ -145,7 +189,12 @@ export const DishForm: EntityForm<DishColumn> = ({
                 name="name"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Dish Name</FormLabel>
+                    <FormLabel>
+                      <div className="flex items-center gap-0.5">
+                        Dish Name
+                        <Asterisk className="w-3 h-3 text-red-500" />
+                      </div>
+                    </FormLabel>
                     <FormControl>
                       <Input placeholder="Dish Name" {...field} />
                     </FormControl>
@@ -155,7 +204,7 @@ export const DishForm: EntityForm<DishColumn> = ({
               />
               <FormField
                 control={form.control}
-                name="restaurantId"
+                name="restaurant"
                 render={({ field }) => (
                   <FormItem>
                   <FormLabel>Restaurant</FormLabel>
@@ -186,7 +235,12 @@ export const DishForm: EntityForm<DishColumn> = ({
                 name="description"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Description</FormLabel>
+                    <FormLabel>
+                      <div className="flex items-center gap-0.5">
+                        Description
+                        <Asterisk className="w-3 h-3 text-red-500" />
+                      </div>
+                    </FormLabel>
                     <FormControl>
                       <Textarea placeholder="Dish Description" {...field} />
                     </FormControl>
@@ -202,7 +256,12 @@ export const DishForm: EntityForm<DishColumn> = ({
                 name="price"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Price</FormLabel>
+                    <FormLabel>
+                      <div className="flex items-center gap-0.5">
+                        Price
+                        <Asterisk className="w-3 h-3 text-red-500" />
+                      </div>
+                    </FormLabel>
                     <div className="space-y-4">
                       <FormControl>
                         <Input
@@ -262,7 +321,11 @@ export const DishForm: EntityForm<DishColumn> = ({
                   </FormItem>
                 )}
               />
-              <Button type="submit" className="w-full">
+              <Button 
+                type="submit" 
+                className="w-full"
+                disabled={!isValid || (!isDirty && mode === "create")}
+              >
                 {mode === "create" ? "Create Dish" : "Edit Dish"}
               </Button>
             </div>
