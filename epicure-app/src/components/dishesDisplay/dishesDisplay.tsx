@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Restaurant } from "@/types/interfaces/restaurant";
 import { filterDishTypesOptions } from "@/services/restaurants/restaurantsFilterOptions";
 import styles from "./dishesDisplay.module.scss";
@@ -15,6 +15,7 @@ import DishOrderCard from "@/components/orderCard/orderCard";
 import Modal from "@components/modal/modal";
 import MobileViewWrapper from "@components/mobileViewWrapper/mobileViewWrapper";
 import { API_BASE_URL } from "@/utils/constants";
+import { useBreadcrumbsContext } from "@components/breadcrumbs/breadcrumbsContext";
 
 interface DishesDisplayProps {
   restaurant: Restaurant;
@@ -32,6 +33,11 @@ export default function DishesDisplay({
   const [activeItem, setActiveItem] = useState("1");
   const [selectedDish, setSelectedDish] = useState<CardInfo | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const { setRestaurantName } = useBreadcrumbsContext();
+
+  useEffect(() => {
+    setRestaurantName(restaurant.name);
+  }, [restaurant.name, setRestaurantName]);
 
   const handleDishClick = (dishCard: CardInfo) => {
     setSelectedDish(dishCard);

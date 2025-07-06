@@ -1,6 +1,7 @@
 import '@styles/main.scss';
 import Header from "@components/header/header";
 import Footer from "@components/footer/footer";
+import { BreadcrumbsProvider } from "@components/breadcrumbs/breadcrumbsContext";
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -12,8 +13,10 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   return (
     <html lang="en">
       <body >
-        <Header />
-          {children}
+        <BreadcrumbsProvider>
+          <Header />
+            {children}
+        </BreadcrumbsProvider>
         <Footer />
       </body>
     </html>
