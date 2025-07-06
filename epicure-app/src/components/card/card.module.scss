@@ -577,7 +577,6 @@
 
 .chefCard {
     height: auto;
-    background-color: white;
 
     .cardImageContainer {
         position: relative;
@@ -595,41 +594,35 @@
         height: 337px;
     }
 
-    .cardImage {
-        width: 100%;
-        height: auto;
-        padding-bottom: 16px;
-
-        @media (min-width: $breakpoint-laptop) {
-            width: 100%;
-            height: auto;
-            padding-bottom: 20px;
-        }
-    }
-
-    .cardContent {
+    .titleContainer {
+        position: absolute;
         display: flex;
-        flex-direction: column;
-        padding-bottom: 44px;
-
-        @media (min-width: $breakpoint-laptop) {
-            align-items: center;
-            padding-bottom: 19px;
-        }
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        bottom: 39px;
     }
 
     .cardTitle {
-        font-weight: 400;
-        font-size: 18px;
-        line-height: 100%;
-        letter-spacing: 2.67px;
-        padding-left: 16px;
+        position: absolute;
+        text-align: center;
+        width: 90%;
 
-        @media (min-width: $breakpoint-desktop) {
-            font-size: 30px;
-            line-height: 47px;
-            letter-spacing: 2.67px;
-            text-align: center;
-        }
+        font-weight: 400;
+        font-size: 40px;
+        line-height: 47px;
+        letter-spacing: 2.67px;
+
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 1;
+        line-clamp: 1;
+        -webkit-box-orient: vertical;
+        box-orient: vertical;
+    }
+
+    .cardContent {
+        display: none;
     }
 }

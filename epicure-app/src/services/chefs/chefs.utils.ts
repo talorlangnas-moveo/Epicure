@@ -5,5 +5,6 @@ export async function convertChefToCard(chef: Chef): Promise<CardInfo> {
   return {
     id: chef._id,
     imgUrl: chef.imgUrl,
+    title: `${chef.firstName} ${chef.lastName}`,
   };
 }
