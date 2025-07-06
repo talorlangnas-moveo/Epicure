@@ -12,12 +12,13 @@ interface RestaurantPageProps {
 
 export default async function RestaurantPage({ params }: RestaurantPageProps) {
   const restaurant = await fetchRestaurantById(params.id);
-  const dishes = await fetchDishesByRestaurantId(params.id);
-  const dishAsCards = dishes.map(convertDishToCard);
   
   if (!restaurant) {
     notFound();
   }
+  
+  const dishes = await fetchDishesByRestaurantId(params.id);
+  const dishAsCards = dishes.map(convertDishToCard);
 
   return (
     <DishesDisplay restaurant={restaurant} dishCards={dishAsCards} imageContainerStyle="large" />

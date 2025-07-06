@@ -74,10 +74,10 @@ export class RestaurantsService {
     return restaurants;
   }
 
-  async findOne(id: string | Types.ObjectId): Promise<Restaurant> {
+  async findOne(id: string | Types.ObjectId): Promise<Restaurant | null> {
     const restaurant = await this.restaurantModel.findById(id).populate('chef');
     if (!restaurant) {
-      throw new NotFoundException('Restaurant not found');
+      return null;
     }
     return restaurant;
   }

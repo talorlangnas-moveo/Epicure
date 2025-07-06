@@ -61,7 +61,7 @@ export class RestaurantsController {
   @Get(':id')
   findOne(
     @Param('id', ParseMongoIdPipe) id: Types.ObjectId,
-  ): Promise<Restaurant> {
+  ): Promise<Restaurant | null> {
     return this.restaurantsService.findOne(id);
   }
 
