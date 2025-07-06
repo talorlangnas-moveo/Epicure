@@ -5,6 +5,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { Restaurant, RestaurantSchema } from './schemas/restaurant.schema';
 import { Chef, ChefSchema } from '../chefs/schemas/chef.schema';
 import { ValidateChefPipe } from './pipes/validate-chef.pipe';
+import { ValidateChefParamPipe } from './pipes/validate-chef-param.pipe';
 import { Dish, DishSchema } from '../dishes/schemas/dish.schema';
 import { MulterModule } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
@@ -34,6 +35,6 @@ import * as fs from 'fs';
     }),
   ],
   controllers: [RestaurantsController],
-  providers: [RestaurantsService, ValidateChefPipe],
+  providers: [RestaurantsService, ValidateChefPipe, ValidateChefParamPipe],
 })
 export class RestaurantsModule {}

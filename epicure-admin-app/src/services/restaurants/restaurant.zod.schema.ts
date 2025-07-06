@@ -1,7 +1,7 @@
 import { z } from "zod";
 
 export const fullFormSchema = z.object({
-  chefId: z
+  chef: z
     .string()
     .regex(/^[0-9a-fA-F]{24}$/, "Please select a chef.").optional(),
 
@@ -16,7 +16,7 @@ export const fullFormSchema = z.object({
     .refine(
       (file) => ['image/png', 'image/jpeg', 'image/jpg'].includes(file.type),
       { message: "Only .jpg, .jpeg, and .png files are accepted" }
-    ),
+    ).optional(),
 
   rating: z
     .string()
@@ -33,6 +33,7 @@ export const fullFormSchema = z.object({
 
   foundedDate: z
     .string()
+    .nonempty({ message: "Founded date is required" })
     .refine(
       (val) => !val || !isNaN(Date.parse(val)),
       { message: "Founded date must be a valid date string" }

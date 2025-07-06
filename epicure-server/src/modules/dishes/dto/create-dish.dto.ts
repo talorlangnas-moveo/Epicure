@@ -13,7 +13,7 @@ import { DishCategory } from '../schemas/dish.schema';
 export class CreateDishDto {
   @IsMongoId()
   @IsOptional()
-  restaurantId?: string;
+  restaurant?: string;
 
   @IsString()
   @IsNotEmpty()

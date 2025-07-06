@@ -1,7 +1,7 @@
 import { z } from "zod";
 
 export const fullFormSchema = z.object({
-    restaurantId: z
+    restaurant: z
         .string()
         .regex(/^[0-9a-fA-F]{24}$/, "Please select a restaurant.").optional(),
 
@@ -21,10 +21,11 @@ export const fullFormSchema = z.object({
         .refine(
             (file) => ['image/png', 'image/jpeg', 'image/jpg'].includes(file.type),
             { message: "Only .jpg, .jpeg, and .png files are accepted" }
-        ),
+        ).optional(),
 
     price: z
         .string()
+        .nonempty({ message: "Price is required" })
         .min(0, { message: "Price must be at least 0" }),
 
     dishCategory: z

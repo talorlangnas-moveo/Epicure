@@ -13,7 +13,8 @@
     }
 
     @media (min-width: $breakpoint-tablet) {
-        width: 75%;
+        // width: 75%;
+        width: 82.3%;
         margin: 0 auto;
     }
 
@@ -21,7 +22,10 @@
         align-items: center;
         gap: 40px;
         width: 82.3%;
+        // width: 100%;
         padding-bottom: 80px;
+
+        padding-left: 0;
     }
 
 

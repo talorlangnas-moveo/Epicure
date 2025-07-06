@@ -7,11 +7,12 @@ import { chefsFilterOptions } from "@/services/chefs/chefsFilterOptions";
 
 async function Chefs() {
   const chefs = await fetchChefs();
-  const chefsAsCards = await Promise.all(chefs.map(convertChefToCard));
-
+  
   if (!chefs) {
     notFound();
   }
+
+  const chefsAsCards = await Promise.all(chefs.map(convertChefToCard));
   
   return (
     <DataDisplay
@@ -19,6 +20,8 @@ async function Chefs() {
       filterOptions={chefsFilterOptions}
       title="Chefs"
       className="chefsBarContainer"
+      imageContainerStyle="large"
+      cardsStyle="chefCard"
     />
   );
 }

@@ -17,6 +17,7 @@ import { Types } from 'mongoose';
 import { UpdateRestaurantDto } from './dto/update-restaurant.dto';
 import { Restaurant } from './schemas/restaurant.schema';
 import { ValidateChefPipe } from './pipes/validate-chef.pipe';
+import { ValidateChefParamPipe } from './pipes/validate-chef-param.pipe';
 import { FileInterceptor } from '@nestjs/platform-express';
 
 @Controller('restaurants')
@@ -50,10 +51,17 @@ export class RestaurantsController {
     return this.restaurantsService.findAll();
   }
 
+  @Get('by-chefId')
+  findByChefId(
+    @Query('chefId', ValidateChefParamPipe) chefId: string,
+  ): Promise<Restaurant[]> {
+    return this.restaurantsService.findByChefId(chefId);
+  }
+
   @Get(':id')
   findOne(
     @Param('id', ParseMongoIdPipe) id: Types.ObjectId,
-  ): Promise<Restaurant> {
+  ): Promise<Restaurant | null> {
     return this.restaurantsService.findOne(id);
   }
 

@@ -51,7 +51,10 @@ export class ChefsService {
     if (file) {
       const imagePath = this.uploadImage(file);
       createChefDto.imgUrl = imagePath;
+    } else {
+      createChefDto.imgUrl = `static/chefs/chefPlaceholder.png`;
     }
+
     const chef = await this.chefModel.create(createChefDto);
     return chef;
   }
@@ -80,7 +83,10 @@ export class ChefsService {
     }
 
     if (file) {
-      if (currentChef.imgUrl) {
+      if (
+        currentChef.imgUrl &&
+        currentChef.imgUrl !== `static/chefs/chefPlaceholder.png`
+      ) {
         this.deleteImageFile(currentChef.imgUrl);
       }
       const imagePath = this.uploadImage(file);
@@ -105,7 +111,7 @@ export class ChefsService {
       throw new NotFoundException('Chef not found');
     }
 
-    if (chef.imgUrl) {
+    if (chef.imgUrl && chef.imgUrl !== `static/chefs/chefPlaceholder.png`) {
       this.deleteImageFile(chef.imgUrl);
     }
 
@@ -116,9 +122,9 @@ export class ChefsService {
 
     await this.restaurantModel.updateMany(
       {
-        chefId: id.toString(),
+        chef: id.toString(),
       },
-      { $unset: { chefId: 1 } },
+      { $unset: { chef: 1 } },
     );
 
     return deletedChef;

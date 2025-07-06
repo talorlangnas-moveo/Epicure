@@ -53,20 +53,31 @@ export class RestaurantsService {
     if (file) {
       const imagePath = this.uploadImage(file);
       createRestaurantDto.imgUrl = imagePath;
+    } else {
+      createRestaurantDto.imgUrl = `static/restaurants/restaurantPlaceholder.png`;
     }
+
     const restaurant = await this.restaurantModel.create(createRestaurantDto);
-    return restaurant;
+    const newRestaurant = await restaurant.populate('chef');
+    return newRestaurant;
   }
 
   async findAll(): Promise<Restaurant[]> {
-    const restaurants = await this.restaurantModel.find();
+    const restaurants = await this.restaurantModel.find().populate('chef');
     return restaurants;
   }
 
-  async findOne(id: string | Types.ObjectId): Promise<Restaurant> {
-    const restaurant = await this.restaurantModel.findById(id);
+  async findByChefId(chefId: string): Promise<Restaurant[]> {
+    const restaurants = await this.restaurantModel
+      .find({ chef: chefId })
+      .populate('chef');
+    return restaurants;
+  }
+
+  async findOne(id: string | Types.ObjectId): Promise<Restaurant | null> {
+    const restaurant = await this.restaurantModel.findById(id).populate('chef');
     if (!restaurant) {
-      throw new NotFoundException('Restaurant not found');
+      return null;
     }
     return restaurant;
   }
@@ -82,18 +93,20 @@ export class RestaurantsService {
     }
 
     if (file) {
-      if (currentRestaurant.imgUrl) {
+      if (
+        currentRestaurant.imgUrl &&
+        currentRestaurant.imgUrl !==
+          `static/restaurants/restaurantPlaceholder.png`
+      ) {
         this.deleteImageFile(currentRestaurant.imgUrl);
       }
       const imagePath = this.uploadImage(file);
       updateRestaurantDto.imgUrl = imagePath;
     }
 
-    const updatedRestaurant = await this.restaurantModel.findByIdAndUpdate(
-      id,
-      updateRestaurantDto,
-      { new: true },
-    );
+    const updatedRestaurant = await this.restaurantModel
+      .findByIdAndUpdate(id, updateRestaurantDto, { new: true })
+      .populate('chef');
 
     if (!updatedRestaurant) {
       throw new NotFoundException('Restaurant not found');
@@ -107,7 +120,10 @@ export class RestaurantsService {
       throw new NotFoundException('Restaurant not found');
     }
 
-    if (restaurant.imgUrl) {
+    if (
+      restaurant.imgUrl &&
+      restaurant.imgUrl !== `static/restaurants/restaurantPlaceholder.png`
+    ) {
       this.deleteImageFile(restaurant.imgUrl);
     }
 
@@ -118,9 +134,9 @@ export class RestaurantsService {
 
     await this.dishModel.updateMany(
       {
-        restaurantId: { $in: [id, id.toString()] },
+        restaurant: { $in: [id, id.toString()] },
       },
-      { $unset: { restaurantId: '' } },
+      { $unset: { restaurant: '' } },
     );
 
     return deletedRestaurant;
@@ -131,11 +147,17 @@ export class RestaurantsService {
       .find()
       .sort({ foundedDate: -1 })
       .limit(3)
+      .populate('chef')
       .exec();
   }
 
   async getTop3MostPopularRestaurants(): Promise<Restaurant[]> {
-    return this.restaurantModel.find().sort({ rating: -1 }).limit(3).exec();
+    return this.restaurantModel
+      .find()
+      .sort({ rating: -1 })
+      .limit(3)
+      .populate('chef')
+      .exec();
   }
 
   async getOpenRestaurantsNow(): Promise<Restaurant[]> {
@@ -168,6 +190,20 @@ export class RestaurantsService {
                 ],
               },
             ],
+          },
+        },
+        {
+          $lookup: {
+            from: 'chefs',
+            localField: 'chef',
+            foreignField: '_id',
+            as: 'chef',
+          },
+        },
+        {
+          $unwind: {
+            path: '$chef',
+            preserveNullAndEmptyArrays: true,
           },
         },
         {

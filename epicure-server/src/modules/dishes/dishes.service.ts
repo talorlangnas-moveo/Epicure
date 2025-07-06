@@ -48,23 +48,53 @@ export class DishesService {
     if (file) {
       const imagePath = this.uploadImage(file);
       createDishDto.imgUrl = imagePath;
+    } else {
+      createDishDto.imgUrl = `static/dishes/dishPlaceholder.png`;
     }
+
     const dish = await this.dishModel.create(createDishDto);
-    return dish;
+    const newDish = await dish.populate({
+      path: 'restaurant',
+      populate: {
+        path: 'chef',
+        model: 'Chef',
+      },
+    });
+    return newDish;
   }
 
   async findAll(): Promise<Dish[]> {
-    const dishes = await this.dishModel.find();
+    const dishes = await this.dishModel.find().populate({
+      path: 'restaurant',
+      populate: {
+        path: 'chef',
+        model: 'Chef',
+      },
+    });
     return dishes;
   }
 
   async findByRestaurantId(restaurantId: string): Promise<Dish[]> {
-    const dishes = await this.dishModel.find({ restaurantId });
+    const dishes = await this.dishModel
+      .find({ restaurant: restaurantId })
+      .populate({
+        path: 'restaurant',
+        populate: {
+          path: 'chef',
+          model: 'Chef',
+        },
+      });
     return dishes;
   }
 
   async findOne(id: Types.ObjectId): Promise<Dish> {
-    const dish = await this.dishModel.findById(id);
+    const dish = await this.dishModel.findById(id).populate({
+      path: 'restaurant',
+      populate: {
+        path: 'chef',
+        model: 'Chef',
+      },
+    });
     if (!dish) {
       throw new NotFoundException(`Dish not found`);
     }
@@ -82,18 +112,25 @@ export class DishesService {
     }
 
     if (file) {
-      if (currentDish.imgUrl) {
+      if (
+        currentDish.imgUrl &&
+        currentDish.imgUrl !== `static/dishes/dishPlaceholder.png`
+      ) {
         this.deleteImageFile(currentDish.imgUrl);
       }
       const imagePath = this.uploadImage(file);
       updateDishDto.imgUrl = imagePath;
     }
 
-    const updatedDish = await this.dishModel.findByIdAndUpdate(
-      id,
-      updateDishDto,
-      { new: true },
-    );
+    const updatedDish = await this.dishModel
+      .findByIdAndUpdate(id, updateDishDto, { new: true })
+      .populate({
+        path: 'restaurant',
+        populate: {
+          path: 'chef',
+          model: 'Chef',
+        },
+      });
     if (!updatedDish) {
       throw new NotFoundException('Dish not found');
     }
@@ -106,7 +143,7 @@ export class DishesService {
       throw new NotFoundException('Dish not found');
     }
 
-    if (dish.imgUrl) {
+    if (dish.imgUrl && dish.imgUrl !== `static/dishes/dishPlaceholder.png`) {
       this.deleteImageFile(dish.imgUrl);
     }
     const deletedDish = await this.dishModel.findByIdAndDelete(id);
