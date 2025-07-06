@@ -29,6 +29,10 @@
         height: 151px;
 
         @media (min-width: $breakpoint-tablet) {
+            height: 190px;
+        }
+
+        @media (min-width: $breakpoint-desktop-lg) {
             height: 236px;
         }
     }
@@ -305,6 +309,10 @@
         height: 152px;
 
         @media (min-width: $breakpoint-laptop) {
+            height: 236px;
+        }
+
+        @media (min-width: $breakpoint-desktop-lg) {
             height: 306px;
         }
     }
