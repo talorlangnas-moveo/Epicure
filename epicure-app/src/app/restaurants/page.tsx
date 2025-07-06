@@ -12,6 +12,7 @@ async function Restaurants() {
       filterOptions={restaurantsFilterOptions}
       filterByRangeOptions={filterByRangeOptions}
       title="Restaurants"
+      imageContainerStyle="large"
     />
   );
 }

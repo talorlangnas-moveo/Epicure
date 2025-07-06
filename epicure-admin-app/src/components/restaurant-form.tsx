@@ -1,5 +1,6 @@
 "use client";
 
+import { Asterisk } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -35,6 +36,8 @@ import { useEntityContext } from "@/components/entityContext";
 import { Restaurant } from "@/types/interfaces/restaurant";
 import { createRestaurant, updateRestaurant } from "@/services/restaurants/restaurants.api";
 import { convertRestaurantToColumn } from "@/services/restaurants/restaurants.utils";
+import { API_BASE_URL } from "@/utils/constants";
+import { useState, useEffect } from "react";
 
 export const RestaurantsForm: EntityForm<RestaurantColumn> = ({
   entity,
@@ -42,41 +45,53 @@ export const RestaurantsForm: EntityForm<RestaurantColumn> = ({
   setIsOpen,
 }) => {
   const restaurant = entity;
+  const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const { onEdit, onAdd, selectItemMap } = useEntityContext<RestaurantColumn, Restaurant>();
   const schema = mode === "create" ? fullFormSchema  : partialFormSchema;
   const form = useForm<z.infer<typeof schema>>({
     resolver: zodResolver(schema),
     defaultValues: mode === "create" ? {
       name: "",
-      chefId: "",
-      imgUrl: "",
+      chef: undefined,
+      imgFile: undefined,
       rating: "",
       openingTime: "",
       closingTime: "",
       foundedDate: "",
     } : {
       name: restaurant?.name,
-      chefId: restaurant?.chefId,
-      imgUrl: restaurant?.imgUrl,
+      chef: restaurant?.chef?._id,
+      imgFile: undefined,
       rating: restaurant?.rating?.toString(),
       openingTime: restaurant?.openingTime,
       closingTime: restaurant?.closingTime,
       foundedDate: restaurant?.foundedDate?.toString().split('T')[0],
-
     },
+    mode: "onChange",
   });
+
+  const { formState: { isValid, isDirty } } = form;
+
+  useEffect(() => {
+    return () => {
+      if (previewUrl) {
+        URL.revokeObjectURL(previewUrl);
+      }
+    };
+  }, [previewUrl]);
 
   async function onSubmit(values: z.infer<typeof schema>) {
     const restaurantData = {
       ...values,
       rating: values.rating?.toString() || "1",
-      foundedDate: values.foundedDate ? new Date(values.foundedDate) : new Date()
+      foundedDate: values.foundedDate ? new Date(values.foundedDate) : new Date(),
+      imgFile: values.imgFile instanceof File ? values.imgFile : undefined
     };
     
     if (mode === "update" && restaurant) {
       try {
         if (onEdit) {
-          await onEdit(restaurant, restaurantData, updateRestaurant, convertRestaurantToColumn);
+          await onEdit(restaurant, restaurantData as Partial<RestaurantColumn>, updateRestaurant, convertRestaurantToColumn);
         }
         setIsOpen(false);
       } catch (error) {
@@ -85,7 +100,7 @@ export const RestaurantsForm: EntityForm<RestaurantColumn> = ({
     } else if (mode === "create") {
       try {
         if (onAdd) {
-          await onAdd(restaurantData, createRestaurant, convertRestaurantToColumn);
+          await onAdd(restaurantData as Partial<RestaurantColumn>, createRestaurant, convertRestaurantToColumn);
         }
         setIsOpen(false);
       } catch (error) {
@@ -124,15 +139,45 @@ export const RestaurantsForm: EntityForm<RestaurantColumn> = ({
             <div className="space-y-5">
               <FormField
                 control={form.control}
-                name="imgUrl"
-                render={({ field }) => (
+                name="imgFile"
+                render={({ field: { value, onChange, ...field } }) => (
                   <FormItem>
-                    <FormLabel>Image URL</FormLabel>
+                    <FormLabel>Restaurant Image</FormLabel>
+                    {(previewUrl || (mode === "update" && restaurant?.imgUrl)) && (
+                      <>
+                        <p className="text-center text-sm text-muted-foreground">{mode === "update" ? "Current Image:" : "Preview Image:"}</p>
+                        <div className="mb-4 flex justify-center">
+                          <Image
+                            src={previewUrl || `${API_BASE_URL}/${restaurant?.imgUrl}`}
+                            alt={restaurant?.name || "Preview"}
+                            width={150}
+                            height={150}
+                            className="rounded-md object-cover"
+                          />
+                        </div>
+                      </>
+                    )}
                     <FormControl>
-                      <Input placeholder="Image URL" {...field} />
+                      <Input
+                        type="file"
+                        accept=".jpg,.jpeg,.png"
+                        onChange={(e) => {
+                          const file = e.target.files?.[0];
+                          if (file) {
+                            if (previewUrl) {
+                              URL.revokeObjectURL(previewUrl);
+                            }
+                            const newPreviewUrl = URL.createObjectURL(file);
+                            setPreviewUrl(newPreviewUrl);
+                            onChange(file);
+                          }
+                        }}
+                        className="file:hidden before:content-[''] before:mr-2 before:inline-block pt-1.5"
+                        {...field}
+                      />
                     </FormControl>
                     <FormDescription>
-                      Enter the URL of the image you want to use (must end with .png)
+                      Select an image file (PNG, JPG, or JPEG, max 5MB)
                     </FormDescription>
                     <FormMessage />
                   </FormItem>
@@ -143,7 +188,12 @@ export const RestaurantsForm: EntityForm<RestaurantColumn> = ({
                 name="name"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Restaurant Name</FormLabel>
+                    <FormLabel>
+                      <div className="flex items-center gap-0.5">
+                        Restaurant Name
+                        <Asterisk className="w-3 h-3 text-red-500" />
+                      </div>
+                    </FormLabel>
                     <FormControl>
                       <Input placeholder="Restaurant Name" {...field} />
                     </FormControl>
@@ -153,7 +203,7 @@ export const RestaurantsForm: EntityForm<RestaurantColumn> = ({
               />
               <FormField
                 control={form.control}
-                name="chefId"
+                name="chef"
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>Chef</FormLabel>
@@ -184,7 +234,12 @@ export const RestaurantsForm: EntityForm<RestaurantColumn> = ({
                 name="rating"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Rating</FormLabel>
+                    <FormLabel>
+                      <div className="flex items-center gap-0.5">
+                        Rating
+                        <Asterisk className="w-3 h-3 text-red-500" />
+                      </div>
+                    </FormLabel>
                     <FormControl>
                       <Input
                         type="number"
@@ -205,7 +260,9 @@ export const RestaurantsForm: EntityForm<RestaurantColumn> = ({
                   name="openingTime"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Opening Time</FormLabel>
+                      <FormLabel>Opening Time
+                        <Asterisk className="w-3 h-3 text-red-500" />
+                      </FormLabel>
                       <FormControl>
                         <Input type="time" {...field} />
                       </FormControl>
@@ -218,7 +275,9 @@ export const RestaurantsForm: EntityForm<RestaurantColumn> = ({
                   name="closingTime"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Closing Time</FormLabel>
+                      <FormLabel>Closing Time
+                        <Asterisk className="w-3 h-3 text-red-500" />
+                      </FormLabel>
                       <FormControl>
                         <Input type="time" {...field} />
                       </FormControl>
@@ -233,7 +292,12 @@ export const RestaurantsForm: EntityForm<RestaurantColumn> = ({
                 name="foundedDate"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Founded Date</FormLabel>
+                    <FormLabel>
+                      <div className="flex items-center gap-0.5">
+                        Founded Date
+                        <Asterisk className="w-3 h-3 text-red-500" />
+                      </div>
+                    </FormLabel>
                     <FormControl>
                       <Input type="date" {...field} />
                     </FormControl>
@@ -241,7 +305,11 @@ export const RestaurantsForm: EntityForm<RestaurantColumn> = ({
                   </FormItem>
                 )}
               />
-              <Button type="submit" className="w-full">
+              <Button 
+                type="submit" 
+                className="w-full"
+                disabled={!isValid || (!isDirty && mode === "create")}
+              >
                 {mode === "create" ? "Create Restaurant" : "Edit Restaurant"}
               </Button>
             </div>

@@ -13,7 +13,7 @@ import {
 export class CreateRestaurantDto {
   @IsMongoId()
   @IsOptional()
-  chefId?: string;
+  chef?: string;
 
   @IsString()
   @IsNotEmpty()

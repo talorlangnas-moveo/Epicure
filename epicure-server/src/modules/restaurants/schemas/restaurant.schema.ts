@@ -10,7 +10,7 @@ export class Restaurant {
     ref: 'Chef',
     index: true,
   })
-  chefId?: Types.ObjectId;
+  chef?: Types.ObjectId;
 
   @Prop({ required: true })
   name: string;

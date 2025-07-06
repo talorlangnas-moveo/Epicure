@@ -3,10 +3,11 @@
 .cardDisplay {
     display: flex;
     justify-content: space-between;
+    width: 100%;
 
     &.chef {
         @media (min-width: $breakpoint-laptop) {
-            width: 59%;
+            width: 60%;
         }
     }
 }

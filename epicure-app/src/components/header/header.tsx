@@ -14,7 +14,6 @@ export default function Header() {
     <div className={styles.headerwWrapper}>
     <header className={styles.header}>
       {isDesktop ? <NavbarDesktop /> : <NavbarMobile />}
-
       <RightGroupIcons />
     </header>
     </div>

@@ -1,9 +1,8 @@
 import { identifiers } from "@/utils/utilsFunctions";
+import { Chef } from "./chef";
 
 export interface Restaurant extends identifiers {
-    // _id: string;
-    // name: string;
-    chefId: string;
+    chef?: Chef;
     imgUrl: string;
     rating: string;
     ratingImage?: string;

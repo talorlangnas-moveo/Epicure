@@ -10,8 +10,15 @@ export async function fetchRestaurants(): Promise<Restaurant[]> {
   return res.data;
 }
 
-export async function fetchRestaurantById(id: string): Promise<Restaurant> {
+export async function fetchRestaurantById(id: string): Promise<Restaurant | null> {
   const res = await axios.get(`${API_BASE_URL}/restaurants/${id}`);
+  return res.data;
+}
+
+export async function fetchRestaurantsByChefId(chefId: string): Promise<Restaurant[]> {
+  const res = await axios.get(`${API_BASE_URL}/restaurants/by-chefId`, {
+    params: { chefId },
+  });
   return res.data;
 }
 

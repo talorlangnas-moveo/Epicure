@@ -2,28 +2,22 @@ import {Dish} from '@/types/interfaces/dish';
 import { DishColumn } from '@/types/columns/dish.column';
 import { Flame, Leaf, Salad, Utensils } from "lucide-react"
 import { DishCategoryInfo } from '@/types/dishCategoryInfo';
-import { fetchRestaurantById } from '@services/restaurants/restaurants.api';
-
-export async function getRestaurantName(id: string): Promise<string> {
-  const restaurant = await fetchRestaurantById(id);
-  if (!restaurant) {
-    return "No Restaurant Assigned";
-  }
-  return restaurant.name;
-}
 
 export async function convertDishToCulomn(dish: Dish): Promise<DishColumn> {
-  const restaurantName = await getRestaurantName(dish.restaurantId);
+  const restaurantName = dish.restaurant
+    ? `${dish.restaurant.name}`
+    : "No Restaurant Assigned";
   
   return {
       _id: dish._id,
-      restaurantId: dish.restaurantId,
+      restaurant: dish?.restaurant,
       name: dish.name,
       description: dish.description,
       imgUrl: dish.imgUrl,
       price: dish.price,
       dishCategory: dish.dishCategory,
       restaurantName: restaurantName,
+      imgFile: new File([], ""),
     };
   }
 

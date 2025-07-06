@@ -25,9 +25,26 @@ export async function deleteChef(id: string): Promise<ChefColumn> {
   return res.data;
 }
 
-export async function updateChef(id: string, data: Partial<Chef>): Promise<Chef> {
+export async function updateChef(id: string, data: Partial<ChefColumn>): Promise<Chef> {
   try{
-    const res = await axios.put(`${API_BASE_URL}/chefs/${id}`, data);
+    const formData = new FormData();
+    
+    if (data.imgFile instanceof File) {
+      formData.append('image', data.imgFile);
+    }
+    
+    Object.entries(data).forEach(([key, value]) => {
+      if (key !== 'imgFile' && key !== 'imgUrl' && value !== undefined) {
+        formData.append(key, value.toString());
+      }
+    });
+
+    const res = await axios.put(`${API_BASE_URL}/chefs/${id}`, formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
+    
     toast.success("Chef updated successfully");
     return res.data;
   } catch (error: unknown) {
@@ -41,9 +58,28 @@ export async function updateChef(id: string, data: Partial<Chef>): Promise<Chef>
   }
 }
 
-export async function createChef(data: Partial<Chef>): Promise<Chef> {
+export async function createChef(data: Partial<ChefColumn>): Promise<Chef> {
   try {
-    const res = await axios.post(`${API_BASE_URL}/chefs`, data);
+    const formData = new FormData();
+    
+    if (data.imgFile instanceof File) {
+      formData.append('image', data.imgFile);
+    }
+    
+    Object.entries(data).forEach(([key, value]) => {
+      if (key !== 'imgFile' && key !== 'imgUrl' && value !== undefined) {
+        formData.append(key, value.toString());
+      }
+    });
+
+    console.log("formData: ", formData);
+
+    const res = await axios.post(`${API_BASE_URL}/chefs`, formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
+    
     toast.success("Chef created successfully");
     return res.data;
   } catch (error: unknown) {

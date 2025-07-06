@@ -7,6 +7,8 @@ import {
   Query,
   Put,
   Delete,
+  UseInterceptors,
+  UploadedFile,
 } from '@nestjs/common';
 import { ChefsService } from './chefs.service';
 import { CreateChefDto } from './dto/create-chef.dto';
@@ -14,14 +16,19 @@ import { ParseMongoIdPipe } from '../restaurants/pipes/parse-mongo-id.pipe';
 import { Types } from 'mongoose';
 import { UpdateChefDto } from './dto/update-chef.dto';
 import { Chef } from './schemas/chef.schema';
+import { FileInterceptor } from '@nestjs/platform-express';
 
 @Controller('chefs')
 export class ChefsController {
   constructor(private readonly chefsService: ChefsService) {}
 
   @Post()
-  create(@Body() createChefDto: CreateChefDto): Promise<Chef> {
-    return this.chefsService.create(createChefDto);
+  @UseInterceptors(FileInterceptor('image'))
+  create(
+    @Body() createChefDto: CreateChefDto,
+    @UploadedFile() file?: Express.Multer.File,
+  ): Promise<Chef> {
+    return this.chefsService.create(createChefDto, file);
   }
 
   @Get()
@@ -44,11 +51,13 @@ export class ChefsController {
   }
 
   @Put(':id')
+  @UseInterceptors(FileInterceptor('image'))
   update(
     @Param('id', ParseMongoIdPipe) id: Types.ObjectId,
     @Body() updateChefDto: UpdateChefDto,
+    @UploadedFile() file?: Express.Multer.File,
   ): Promise<Chef> {
-    return this.chefsService.update(id, updateChefDto);
+    return this.chefsService.update(id, updateChefDto, file);
   }
 
   @Delete(':id')

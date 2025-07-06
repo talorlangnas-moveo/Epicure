@@ -1,26 +1,28 @@
 import Image from "next/image";
 import styles from "./chefCard.module.scss";
-import { ChefInfo } from "@/types/interfaces/chefInfo";
+import { Chef } from "@/types/interfaces/chef";
+import { API_BASE_URL } from "@/utils/constants";
 
 interface ChefProps {
   children?: React.ReactNode;
   childrenDesk?: React.ReactNode;
-  chef: ChefInfo;
+  chef?: Chef | null;
 }
 
 export default function ChefCard({ chef, children }: ChefProps) {
-  return (
+  return ( chef && 
     <div className={styles.chefContainer}>
-      <h4 className={styles.heading}>chef of the week:</h4>
+    <h4 className={styles.heading}>chef of the week:</h4>
+    <div className={styles.chefImageContainer}>
       <Image
-        src={chef.imgUrl}
-        alt="Yossi Shitrit Image"
-        sizes="100vw"
-        className={styles.chefImage}
+        src={`${API_BASE_URL}/${chef.imgUrl}`}
+        alt={`${chef.firstName} ${chef.lastName} image`}
+        fill
       />
-      <div className={styles.chefInfo}>
-        <p>{chef.description}</p>
-      </div>
+    </div>
+    <div className={styles.chefInfo}>
+      <p>{chef.description}</p>
+    </div>
       {children}
     </div>
   );

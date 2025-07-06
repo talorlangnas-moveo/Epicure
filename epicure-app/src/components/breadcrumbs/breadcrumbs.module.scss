@@ -1,0 +1,60 @@
+@use '@styles/utils/variables' as *;
+@use '@styles/utils/mixins' as *;
+
+.breadcrumbsWrapper {
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 46px;
+  left: 0;
+  width: 100%;
+  z-index: 999;
+  background-color: #fff;;
+
+  @media (min-width: $breakpoint-laptop) {
+    top: 64px;
+  }
+}
+
+.breadcrumbs {
+    padding: 20px 0;
+    // width: 90%;
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-wrap: wrap; 
+      align-items: center;
+  
+      li {
+        display: flex;
+        align-items: center;
+        white-space: nowrap;
+  
+        .breadcrumbLink {
+          text-decoration: none;
+          // color: #0070f3; 
+          color: #666;  
+          font-weight: 400;
+          &:hover {
+            // text-decoration: underline;
+            // color: #0070f3;
+            // color: #444;
+            font-weight: 500;
+          }
+        }
+  
+        .currentBreadcrumb {
+          color: #666; // צבע אפור לפריט הנוכחי
+          font-weight: bold;
+        }
+  
+        .separator {
+          margin: 0 8px;
+          color: #999;
+        }
+      }
+    }
+  }
