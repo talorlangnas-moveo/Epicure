@@ -11,10 +11,39 @@
   outline: none;
   gap: 18px;
 
-  @media (min-width: $breakpoint-laptop) {
-    width: 505px;
-    height: 48px;
-    gap: 26px;
+  &.inputSearchDefault {
+    @media (min-width: $breakpoint-laptop) {
+      width: 84%;
+    }
+
+    .inputContainer {
+      @media (min-width: $breakpoint-laptop) {
+        font-size: 14px;
+      }
+    }
+  }
+
+  &.inputSearchHero {
+    @media (min-width: $breakpoint-laptop) {
+      width: 505px;
+      height: 48px;
+      gap: 26px;
+    }
+
+    .inputContainer {
+      @media (min-width: $breakpoint-laptop) {
+        font-size: 24px;
+        width: 433px;
+      }
+    }
+
+    .searchIcon {
+      @media (min-width: $breakpoint-laptop) {
+        width: 32px;
+        height: 32px;
+        margin: 8px 0 8px 12px;
+      }
+    }
   }
 
   .inputContainer {
@@ -28,23 +57,12 @@
     color: $color-primary-black;
     line-height: 100%;
     letter-spacing: 1.29px;
-
-    @media (min-width: $breakpoint-laptop) {
-      font-size: 24px;
-      width: 433px;
     }
-  }
 
   .searchIcon {
     position: relative;
     width: 20px;
     height: 20px;
     margin: 5px 0 5px 12px;
-
-    @media (min-width: $breakpoint-laptop) {
-      width: 32px;
-      height: 32px;
-      margin: 8px 0 8px 12px;
-    }
   }
 }

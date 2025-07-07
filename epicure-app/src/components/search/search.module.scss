@@ -1,0 +1,80 @@
+@use '@styles/utils/variables' as *;
+@use '@styles/utils/mixins' as *;
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.searchMenu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100vw;
+    background-color: white;
+    z-index: 1000;
+    box-shadow: 2px 4px 10px 0px #AFAFAF40;
+
+    height: 413px;
+
+    @media (min-width: $breakpoint-laptop) {
+        width: 34.5138%;
+        height: 586px;
+        left: auto;
+        right: 0;
+    }
+}
+
+.xButton {
+    background-color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+.searchButton {
+    background-color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+.hamburgerIcon {
+    width: 24px;
+    height: 24px;
+}
+
+.searchHeader {
+    display: flex;
+    width: 58.1333%;
+    justify-content: space-between;
+    padding: 11px 0 35px 20px;
+}
+
+.titleContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    // padding: 20px 0;
+}
+
+.searchTitle {
+    font-weight: 200;
+    font-size: 18px;
+    line-height: 20px;
+    letter-spacing: 1.92px;
+
+    @media (min-width: $breakpoint-laptop) {
+        font-size: 24px;
+        letter-spacing: 1.97px;
+    }
+}
+
+
+
+.searchInputContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    // height: 100%;
+}
