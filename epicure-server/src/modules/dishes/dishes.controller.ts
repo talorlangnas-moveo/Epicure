@@ -34,7 +34,10 @@ export class DishesController {
   }
 
   @Get()
-  findAll(): Promise<Dish[]> {
+  findAll(@Query('name') name?: string): Promise<Dish[]> {
+    if (name) {
+      return this.dishesService.getByName(name);
+    }
     return this.dishesService.findAll();
   }
 

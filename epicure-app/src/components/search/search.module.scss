@@ -18,11 +18,19 @@
 
     height: 413px;
 
-    @media (min-width: $breakpoint-laptop) {
-        width: 34.5138%;
+    @media (min-width: $breakpoint-tablet) {
+        width: 45%;
         height: 586px;
         left: auto;
         right: 0;
+    }
+
+    @media (min-width: $breakpoint-laptop) {
+        width: 40%;
+    }
+
+    @media (min-width: $breakpoint-desktop-md) {
+        width: 34.5138%;
     }
 }
 

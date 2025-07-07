@@ -38,6 +38,7 @@ export class RestaurantsController {
     @Query('foundedDate') foundedDate?: string,
     @Query('rating') rating?: string,
     @Query('openNow') openNow?: string,
+    @Query('name') name?: string,
   ): Promise<Restaurant[]> {
     if (foundedDate === 'new') {
       return this.restaurantsService.getTop3NewestRestaurants();
@@ -47,6 +48,9 @@ export class RestaurantsController {
     }
     if (openNow === 'true') {
       return this.restaurantsService.getOpenRestaurantsNow();
+    }
+    if (name) {
+      return this.restaurantsService.getByName(name);
     }
     return this.restaurantsService.findAll();
   }

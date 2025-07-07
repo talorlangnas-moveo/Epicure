@@ -137,4 +137,15 @@ export class ChefsService {
   async getTop3MostPopularChefs(): Promise<Chef[]> {
     return this.chefModel.find().sort({ numberOfViews: -1 }).limit(3).exec();
   }
+
+  async getByName(name: string): Promise<Chef[]> {
+    return this.chefModel
+      .find({
+        $or: [
+          { firstName: { $regex: name, $options: 'i' } },
+          { lastName: { $regex: name, $options: 'i' } },
+        ],
+      })
+      .exec();
+  }
 }

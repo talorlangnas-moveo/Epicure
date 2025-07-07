@@ -217,4 +217,13 @@ export class RestaurantsService {
 
     return result;
   }
+
+  async getByName(name: string): Promise<Restaurant[]> {
+    return this.restaurantModel
+      .find({
+        name: { $regex: name, $options: 'i' },
+      })
+      .populate('chef')
+      .exec();
+  }
 }
