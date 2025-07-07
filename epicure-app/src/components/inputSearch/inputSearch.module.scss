@@ -1,5 +1,14 @@
 @use '@styles/utils/variables' as *;
 
+.inputSearchContainer{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
 .inputSearch {
   display: flex;
   flex-direction: row;
@@ -74,4 +83,17 @@
       }
     }
   }
+}
+
+.cardsContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px 0;
+  
+  gap: 10px;
+  width: 100%;
+  height: 100%;
+  
 }
