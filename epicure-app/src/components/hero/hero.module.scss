@@ -35,6 +35,8 @@
 }
 
 .heroContainer {
+  padding-top: 16px;
+  margin-bottom: 16px;
   position: absolute;
   height: 144px;
   gap: 18px;
@@ -59,6 +61,7 @@
   @media (min-width: $breakpoint-laptop) {
     width: 776px;
     height: 221px;
+    padding: 37.5px 0;
   }
 
 }

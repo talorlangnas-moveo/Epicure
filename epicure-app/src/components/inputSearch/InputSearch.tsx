@@ -87,12 +87,18 @@ export default function InputSearch({ variant = "default" }: InputSearchProps) {
           onChange={handleChange}
         />
       </div>
-      <div className={styles.cardsContainer}>
-      {results &&
-        results.map((result) => (
+      
+      {results.length > 0 && (
+      <div className={clsx(styles.cardsContainer,
+        variant === "hero"
+        ? styles.cardsContainerHero
+        : styles.cardsContainerDefault
+      )}>
+        {results.map((result) => (
           <Card key={result.id} {...result} className="searchCard" />
         ))}
       </div>
+      )}
     </div>
   );
 }
