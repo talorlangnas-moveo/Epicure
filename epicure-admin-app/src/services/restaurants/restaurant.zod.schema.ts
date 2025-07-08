@@ -8,7 +8,7 @@ export const fullFormSchema = z.object({
   name: z
     .string()
     .min(2, { message: "Name must be at least 2 characters" })
-    .max(50),
+    .max(20),
 
   imgFile: z
     .instanceof(File, { message: "Please select an image file" })

@@ -1,6 +1,6 @@
 import Image from "next/image";
 import styles from "./hero.module.scss";
-import HeroContainer from "./heroContainer_tmp";
+import HeroContainer from "./heroContainer";
 import heroImageUrl from "@public/hero-picture1.png";
 
 export default function Hero() {

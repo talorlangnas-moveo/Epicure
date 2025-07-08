@@ -4,7 +4,7 @@ import Image from "next/image";
 import styles from "./search.module.scss";
 import { SearchIcon, xIcon } from "@icons";
 import { useState } from "react";
-import InputSearch from "@/components/inputSearch/inputSearch_tmp";
+import InputSearch from "@/components/inputSearch/inputSearch";
 
 export default function Search() {
   const [isOpen, setIsOpen] = useState(false);
