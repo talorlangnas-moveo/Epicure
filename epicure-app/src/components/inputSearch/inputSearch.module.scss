@@ -1,13 +1,13 @@
 @use '@styles/utils/variables' as *;
 
 .inputSearchContainer {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   width: 100%;
   height: 100%;
-  position: relative;
   padding-bottom: 16px;
 }
 
@@ -21,8 +21,6 @@
   border: 0.5px solid $color-primary-gray;
   border-radius: 4px;
   outline: none;
-  // gap: 18px;
-  
 
   .inputContainer {
     border-style: none;
@@ -31,7 +29,7 @@
     background-color: inherit;
     font-family: $font-primary;
     font-weight: 200;
-    font-size: 12px;
+    font-size: 14px;
     color: $color-primary-black;
     line-height: 100%;
     letter-spacing: 1.29px;
@@ -67,7 +65,6 @@
 
   &.inputSearchHero {
     gap: 18px;
-
     @media (min-width: $breakpoint-laptop) {
       width: 505px;
       height: 48px;
@@ -91,32 +88,79 @@
   }
 }
 
-.cardsContainer {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  right: 0;
+.resultsContainer {
+  width: 315px;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 10px;
   background-color: white;
   max-height: 307px;
   overflow-y: auto;
-  z-index: 1001;
-
-  >* {
-    flex-shrink: 0;
-  }
+  overflow-x: hidden;
+  z-index: 9999;
 
   @media (min-width: $breakpoint-tablet) {
-    max-height: 480px;
+    width: 84%;
+  }
+}
 
+.listContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-left: 62px;
+
+  @media (min-width: $breakpoint-tablet) {
+    padding-left: 77px;
   }
 
-  &.cardsContainerHero {
-    // background-color: blue;
-    background-color: #ffffffE0;
+  @media (min-width: $breakpoint-desktop-md) {
+    padding-left: 92px;
   }
+}
 
+.section {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.listTitle {
+  font-weight: 200;
+  font-size: 14px;
+  color: $color-primary-black;
+  line-height: 100%;
+  letter-spacing: 1.29px;
+
+  padding-top: 16px;
+}
+
+.dropdownItem {
+  margin-bottom: 10px;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 100%;
+  letter-spacing: 1.92px;
+}
+
+.linkDropdownItem {
+  margin-bottom: 10px;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 100%;
+  letter-spacing: 1.92px;
+
+  cursor: pointer;
+}
+
+.dropdownLink {
+  color: $color-primary-black;
+  text-decoration: none;
+}
+
+.separator {
+  border: none;
+  border-top: 1px solid #F2F2F2;
+  margin-top: 6px;
+  width: 100vw;
+  position: relative;
 }

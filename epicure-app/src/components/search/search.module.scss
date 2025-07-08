@@ -14,15 +14,10 @@
     width: 100vw;
     background-color: white;
     z-index: 1000;
-    box-shadow: 2px 4px 10px 0px #AFAFAF40;
-
-    height: 413px;
-    // max-height: 413px;
-    // overflow-y: auto; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); 
 
     @media (min-width: $breakpoint-tablet) {
         width: 45%;
-        height: 586px;
         left: auto;
         right: 0;
     }
@@ -64,7 +59,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    // padding: 20px 0;
 }
 
 .searchTitle {
@@ -86,5 +80,4 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    // height: 100%;
 }

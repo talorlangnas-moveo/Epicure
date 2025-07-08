@@ -32,7 +32,7 @@ export default function Search() {
             </div>
           </div>
           <div className={styles.searchInputContainer}>
-            <InputSearch variant="default" />
+            <InputSearch variant="default" setIsOpen={toggleSearch} />
           </div>
         </div>
       )}
