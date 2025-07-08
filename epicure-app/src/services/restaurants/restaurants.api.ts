@@ -57,3 +57,12 @@ export async function getOpenRestaurantsAsCards(): Promise<CardInfo[]> {
   const restaurantsAsCards = await Promise.all(restaurants.map(convertRestaurantToCard));
   return restaurantsAsCards;
 }
+
+export async function getRestaurantsByName(name: string): Promise<Restaurant[]> {
+  const res = await axios.get(`${API_BASE_URL}/restaurants`, {
+    params: {
+      name,
+    },
+  });
+  return res.data;
+}
