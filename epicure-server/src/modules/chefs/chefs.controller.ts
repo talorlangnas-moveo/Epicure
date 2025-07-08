@@ -35,12 +35,16 @@ export class ChefsController {
   findAll(
     @Query('foundedDate') foundedDate?: string,
     @Query('numberOfViews') numberOfViews?: string,
+    @Query('name') name?: string,
   ): Promise<Chef[]> {
     if (foundedDate === 'new') {
       return this.chefsService.getTop3NewestChefs();
     }
     if (numberOfViews === 'mostPopular') {
       return this.chefsService.getTop3MostPopularChefs();
+    }
+    if (name) {
+      return this.chefsService.getByName(name);
     }
     return this.chefsService.findAll();
   }

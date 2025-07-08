@@ -43,3 +43,12 @@ export async function getMostViewedChefsAsCards(): Promise<CardInfo[]> {
   const chefsAsCards = await Promise.all(chefs.map(convertChefToCard));
   return chefsAsCards;
 }
+
+export async function getChefsByName(name: string): Promise<Chef[]> {
+  const res = await axios.get(`${API_BASE_URL}/chefs`, {
+    params: {
+      name,
+    },
+  });
+  return res.data;
+}

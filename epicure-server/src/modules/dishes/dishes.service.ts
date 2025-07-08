@@ -152,4 +152,19 @@ export class DishesService {
     }
     return deletedDish;
   }
+
+  async getByName(name: string): Promise<Dish[]> {
+    return this.dishModel
+      .find({
+        name: { $regex: name, $options: 'i' },
+      })
+      .populate({
+        path: 'restaurant',
+        populate: {
+          path: 'chef',
+          model: 'Chef',
+        },
+      })
+      .exec();
+  }
 }
