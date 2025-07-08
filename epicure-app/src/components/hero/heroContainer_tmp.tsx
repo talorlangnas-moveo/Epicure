@@ -1,5 +1,5 @@
 import styles from './hero.module.scss';
-import InputSearch from '@/components/inputSearch/inputSearch'
+import InputSearch from '@/components/inputSearch/inputSearch_tmp'
 
 export default function HeroContainer() {
   return (
