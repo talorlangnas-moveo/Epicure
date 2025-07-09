@@ -4,7 +4,7 @@ import ChefsTable from "@/components/chefs-table";
 export default async function ChefsPage() {
   return (
     <div>
-      <DataDisplay title="Chefs">
+      <DataDisplay title="Chefs" >
         <ChefsTable />
       </DataDisplay>
     </div>

@@ -58,7 +58,7 @@ export async function getChefOfTheWeek(): Promise<ChefOfTheWeek | null> {
   try {
     const res = await fetch(`${API_BASE_URL}/app-settings/chef-of-the-week`, {
       cache: process.env.NODE_ENV === 'development' ? 'no-store' : 'default',
-      next: { revalidate: 3600 },
+      next: { revalidate: 3600, tags: ['chef-of-the-week'] },
     });
 
     if (!res.ok) {
