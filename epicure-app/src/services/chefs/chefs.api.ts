@@ -67,7 +67,6 @@ export async function getChefOfTheWeek(): Promise<ChefOfTheWeek | null> {
     }
 
     const chefOfTheWeek: ChefOfTheWeek = await res.json();
-    console.log('chefOfTheWeek: ', chefOfTheWeek);
     return chefOfTheWeek;    
   } catch (error) {
     console.error('Fetch operation failed:', error);
