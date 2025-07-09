@@ -40,4 +40,8 @@ export class AppSettingsService {
 
     return chefOfTheWeek;
   }
+
+  async delete(): Promise<void> {
+    await this.chefOfTheWeekModel.deleteMany({});
+  }
 }
