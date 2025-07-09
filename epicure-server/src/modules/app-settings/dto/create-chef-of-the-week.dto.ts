@@ -1,7 +1,7 @@
 import { IsMongoId, IsNotEmpty } from 'class-validator';
 
-export class CreateAppSettingDto {
+export class CreateChefOfTheWeekDto {
   @IsMongoId()
   @IsNotEmpty()
-  chefOfTheWeek: string;
+  chef: string;
 }

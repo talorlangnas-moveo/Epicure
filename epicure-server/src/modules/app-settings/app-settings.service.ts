@@ -1,36 +1,43 @@
 import { Body, Injectable } from '@nestjs/common';
-import { CreateAppSettingDto } from './dto/create-app-setting.dto';
-import { UpdateAppSettingDto } from './dto/update-app-setting.dto';
-import { AppSetting } from './schemas/app-setting.schema';
-import mongoose, { Types } from 'mongoose';
+import { UpdateChefOfTheWeekDto } from './dto/update-chef-of-the-week.dto';
+import { ChefOfTheWeek } from './schemas/chef-of-the-week.schema';
+import mongoose from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
 
 @Injectable()
 export class AppSettingsService {
   constructor(
-    @InjectModel(AppSetting.name)
-    private readonly appSettingModel: mongoose.Model<AppSetting>,
+    @InjectModel(ChefOfTheWeek.name)
+    private readonly chefOfTheWeekModel: mongoose.Model<ChefOfTheWeek>,
   ) {}
 
-  async create(@Body() createAppSettingDto: CreateAppSettingDto) {
-    const appSetting = await this.appSettingModel.create(createAppSettingDto);
-    const newAppSetting = await appSetting.populate('chefOfTheWeek');
-    return newAppSetting;
+  async findAll(): Promise<ChefOfTheWeek> {
+    const chefOfTheWeek = await this.chefOfTheWeekModel.find().populate('chef');
+    console.log('chefOfTheWeek: ', chefOfTheWeek[0]);
+    return chefOfTheWeek[0];
   }
 
-  findAll() {
-    return `This action returns all appSettings`;
-  }
+  async update(
+    @Body() updateChefOfTheWeekDto: UpdateChefOfTheWeekDto,
+  ): Promise<ChefOfTheWeek> {
+    const currentChefOfTheWeek = await this.findAll();
+    if (
+      currentChefOfTheWeek &&
+      currentChefOfTheWeek.chef._id.toString() === updateChefOfTheWeekDto.chef
+    ) {
+      return currentChefOfTheWeek;
+    }
+    const chefOfTheWeek = await this.chefOfTheWeekModel
+      .findOneAndUpdate(
+        {}, // empty filter to match any document
+        { chef: updateChefOfTheWeekDto.chef },
+        {
+          new: true, // return the updated document
+          upsert: true, // create if doesn't exist
+        },
+      )
+      .populate('chef');
 
-  findOne(id: number) {
-    return `This action returns a #${id} appSetting`;
-  }
-
-  update(id: number, updateAppSettingDto: UpdateAppSettingDto) {
-    return `This action updates a #${id} appSetting`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} appSetting`;
+    return chefOfTheWeek;
   }
 }
