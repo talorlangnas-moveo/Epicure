@@ -25,6 +25,7 @@ export async function fetchChefById(id: string): Promise<Chef | null> {
 
 export async function deleteChef(id: string): Promise<ChefColumn> {
   const res = await axios.delete(`${API_BASE_URL}/chefs/${id}`);
+  revalidateTag('chef-of-the-week');
   return res.data;
 }
 

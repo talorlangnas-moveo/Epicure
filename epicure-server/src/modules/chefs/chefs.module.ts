@@ -7,16 +7,22 @@ import {
   Restaurant,
   RestaurantSchema,
 } from '../restaurants/schemas/restaurant.schema';
+import {
+  ChefOfTheWeek,
+  ChefOfTheWeekSchema,
+} from '../app-settings/schemas/chef-of-the-week.schema';
 import { MulterModule } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
 import * as path from 'path';
 import * as fs from 'fs';
+import { AppSettingsService } from '../app-settings/app-settings.service';
 
 @Module({
   imports: [
     MongooseModule.forFeature([
       { name: Chef.name, schema: ChefSchema },
       { name: Restaurant.name, schema: RestaurantSchema },
+      { name: ChefOfTheWeek.name, schema: ChefOfTheWeekSchema },
     ]),
     MulterModule.register({
       storage: diskStorage({
@@ -34,6 +40,6 @@ import * as fs from 'fs';
     }),
   ],
   controllers: [ChefsController],
-  providers: [ChefsService],
+  providers: [ChefsService, AppSettingsService],
 })
 export class ChefsModule {}

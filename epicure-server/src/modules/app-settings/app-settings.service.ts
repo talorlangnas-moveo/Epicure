@@ -23,6 +23,7 @@ export class AppSettingsService {
     const currentChefOfTheWeek = await this.findAll();
     if (
       currentChefOfTheWeek &&
+      currentChefOfTheWeek.chef &&
       currentChefOfTheWeek.chef._id.toString() === updateChefOfTheWeekDto.chef
     ) {
       return currentChefOfTheWeek;
@@ -32,8 +33,8 @@ export class AppSettingsService {
         {}, // empty filter to match any document
         { chef: updateChefOfTheWeekDto.chef },
         {
-          new: true, // return the updated document
-          upsert: true, // create if doesn't exist
+          new: true,
+          upsert: true,
         },
       )
       .populate('chef');

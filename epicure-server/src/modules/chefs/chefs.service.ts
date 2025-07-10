@@ -5,6 +5,8 @@ import mongoose, { Types } from 'mongoose';
 import { Chef } from './schemas/chef.schema';
 import { UpdateChefDto } from './dto/update-chef.dto';
 import { Restaurant } from '../restaurants/schemas/restaurant.schema';
+import { ChefOfTheWeek } from '../app-settings/schemas/chef-of-the-week.schema';
+import { AppSettingsService } from '../app-settings/app-settings.service';
 import * as fs from 'fs';
 import * as path from 'path';
 
@@ -15,6 +17,9 @@ export class ChefsService {
     private chefModel: mongoose.Model<Chef>,
     @InjectModel(Restaurant.name)
     private restaurantModel: mongoose.Model<Restaurant>,
+    @InjectModel(ChefOfTheWeek.name)
+    private chefOfTheWeekModel: mongoose.Model<ChefOfTheWeek>,
+    private appSettingsService: AppSettingsService,
   ) {}
 
   uploadImage(file: Express.Multer.File): string {
@@ -113,6 +118,15 @@ export class ChefsService {
 
     if (chef.imgUrl && chef.imgUrl !== `static/chefs/chefPlaceholder.png`) {
       this.deleteImageFile(chef.imgUrl);
+    }
+
+    const chefOfTheWeek = await this.appSettingsService.findAll();
+    if (
+      chefOfTheWeek &&
+      chefOfTheWeek.chef &&
+      chefOfTheWeek.chef._id.toString() === id.toString()
+    ) {
+      await this.appSettingsService.delete();
     }
 
     const deletedChef = await this.chefModel.findByIdAndDelete(id);
