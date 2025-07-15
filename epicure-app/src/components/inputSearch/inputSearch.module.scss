@@ -1,21 +1,26 @@
 @use '@styles/utils/variables' as *;
 
+.inputSearchContainer {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  padding-bottom: 16px;
+}
+
 .inputSearch {
   display: flex;
   flex-direction: row;
   align-items: center;
+
   width: 315px;
   height: 30px;
   border: 0.5px solid $color-primary-gray;
   border-radius: 4px;
   outline: none;
-  gap: 18px;
-
-  @media (min-width: $breakpoint-laptop) {
-    width: 505px;
-    height: 48px;
-    gap: 26px;
-  }
 
   .inputContainer {
     border-style: none;
@@ -24,15 +29,10 @@
     background-color: inherit;
     font-family: $font-primary;
     font-weight: 200;
-    font-size: 12px;
+    font-size: 14px;
     color: $color-primary-black;
     line-height: 100%;
     letter-spacing: 1.29px;
-
-    @media (min-width: $breakpoint-laptop) {
-      font-size: 24px;
-      width: 433px;
-    }
   }
 
   .searchIcon {
@@ -40,11 +40,127 @@
     width: 20px;
     height: 20px;
     margin: 5px 0 5px 12px;
+  }
 
-    @media (min-width: $breakpoint-laptop) {
-      width: 32px;
-      height: 32px;
-      margin: 8px 0 8px 12px;
+  &.inputSearchDefault {
+    gap: 30px;
+
+    @media (min-width: $breakpoint-tablet) {
+      gap: 45px;
+      width: 84%;
+    }
+
+    @media (min-width: $breakpoint-desktop-md) {
+      gap: 60px;
+    }
+
+    .inputContainer {
+      width: 92.3809%;
+
+      @media (min-width: $breakpoint-laptop) {
+        font-size: 14px;
+      }
     }
   }
+
+  &.inputSearchHero {
+    gap: 18px;
+    @media (min-width: $breakpoint-laptop) {
+      width: 505px;
+      height: 48px;
+      gap: 26px;
+    }
+
+    .inputContainer {
+      @media (min-width: $breakpoint-laptop) {
+        font-size: 24px;
+        width: 433px;
+      }
+    }
+
+    .searchIcon {
+      @media (min-width: $breakpoint-laptop) {
+        width: 32px;
+        height: 32px;
+        margin: 8px 0 8px 12px;
+      }
+    }
+  }
+}
+
+.resultsContainer {
+  width: 315px;
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  max-height: 307px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  z-index: 9999;
+
+  @media (min-width: $breakpoint-tablet) {
+    width: 84%;
+  }
+}
+
+.listContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-left: 62px;
+
+  @media (min-width: $breakpoint-tablet) {
+    padding-left: 77px;
+  }
+
+  @media (min-width: $breakpoint-desktop-md) {
+    padding-left: 92px;
+  }
+}
+
+.section {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.listTitle {
+  font-weight: 200;
+  font-size: 14px;
+  color: $color-primary-black;
+  line-height: 100%;
+  letter-spacing: 1.29px;
+
+  padding-top: 16px;
+}
+
+.dropdownItem {
+  margin-bottom: 10px;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 100%;
+  letter-spacing: 1.92px;
+}
+
+.linkDropdownItem {
+  margin-bottom: 10px;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 100%;
+  letter-spacing: 1.92px;
+
+  cursor: pointer;
+}
+
+.dropdownLink {
+  color: $color-primary-black;
+  text-decoration: none;
+}
+
+.separator {
+  border: none;
+  border-top: 1px solid #F2F2F2;
+  margin-top: 6px;
+  width: 100vw;
+  position: relative;
 }

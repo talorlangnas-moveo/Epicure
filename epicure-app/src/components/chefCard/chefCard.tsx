@@ -19,6 +19,11 @@ export default function ChefCard({ chef, children }: ChefProps) {
         alt={`${chef.firstName} ${chef.lastName} image`}
         fill
       />
+      {chef.imgUrl === "static/chefs/chefPlaceholder.png" && (
+          <div className={styles.titleContainer}>
+            <h1 className={styles.cardTitle}>{chef.firstName} {chef.lastName}</h1>
+          </div>
+        )}
     </div>
     <div className={styles.chefInfo}>
       <p>{chef.description}</p>

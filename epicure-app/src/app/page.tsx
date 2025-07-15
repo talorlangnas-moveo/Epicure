@@ -10,8 +10,7 @@ import { fetchAll } from "@/services/dishes/dishes.api";
 import { getDishesAsCards } from "@/services/dishes/dishes.utils";
 import { fetchRestaurants, fetchRestaurantsByChefId, getMostPopularRestaurantsAsCards } from "@/services/restaurants/restaurants.api";
 import { getRestaurantsAsCards } from "@/services/restaurants/restaurants.utils";
-import { CHEF_OF_THE_WEEK_ID } from "@/utils/constants";
-import { fetchChefById } from "@/services/chefs/chefs.api";
+import { getChefOfTheWeek } from "@/services/chefs/chefs.api";
 
 export default async function Home() {
   const restaurants = await fetchRestaurants();
@@ -20,10 +19,14 @@ export default async function Home() {
 
   const dishes = await fetchAll();
   const dishCards = await getDishesAsCards(dishes);
-
-  const chefOfTheWeek = await fetchChefById(CHEF_OF_THE_WEEK_ID);
-  const chefRestaurants = await fetchRestaurantsByChefId(CHEF_OF_THE_WEEK_ID);
-  const chefRestaurantsAsCards = await getRestaurantsAsCards(chefRestaurants);
+  const chefOfTheWeek = await getChefOfTheWeek();
+  let chefRestaurantsAsCards = mostPopularRestaurantsCards;
+  if (chefOfTheWeek?.chef) {
+    const chefRestaurants = await fetchRestaurantsByChefId(chefOfTheWeek.chef._id);
+    chefRestaurantsAsCards = await getRestaurantsAsCards(chefRestaurants);
+    console.log("chefRestaurantsAsCards", chefRestaurantsAsCards);
+  }
+  
 
   return (
     <div>
@@ -55,9 +58,9 @@ export default async function Home() {
       </InfoPanel>
 
       <IconLegend />
-      <ChefCard chef={chefOfTheWeek}>
+      {chefOfTheWeek?.chef && <ChefCard chef={chefOfTheWeek.chef}>
         <InfoPanel
-          title={`${chefOfTheWeek?.firstName}’s Restaurants`}
+          title={chefRestaurantsAsCards.length > 0 ? `${chefOfTheWeek.chef.firstName}'s Restaurants` : ""}
           type="chef"
           displayButtonDesktop={false}
           childrenDesk={
@@ -70,7 +73,7 @@ export default async function Home() {
             ))}
           </Carousel>
         </InfoPanel>
-      </ChefCard>
+      </ChefCard>}
       <AboutUs />
     </div>
   );

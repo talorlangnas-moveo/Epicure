@@ -10,7 +10,7 @@ import { Button } from "@/components/ui/button";
 import { TextPopover } from "@/components/ui/text-popover";
 import DataTableRowAction from "@/components/data-table-row-action";
 import { ChefForm } from "@/components/chef-form";
-import { deleteChef } from "@/services/chefs/chefs.api";
+import { deleteChef, setChefOfTheWeek } from "@/services/chefs/chefs.api";
 import { API_BASE_URL } from "@/utils/constants";
 
 export function ChefColumns(): ColumnDef<ChefColumn>[] {
@@ -110,6 +110,8 @@ export function ChefColumns(): ColumnDef<ChefColumn>[] {
             row={row}
             deleteCallback={deleteChef}
             editForm={ChefForm}
+            setChefOfTheWeekCallback={setChefOfTheWeek}
+            variant="chef"
           />
         );
       },

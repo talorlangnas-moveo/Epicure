@@ -30,6 +30,7 @@ import { createChef, updateChef } from "@services/chefs/chefs.api";
 import { convertChefToColumn } from "@/services/chefs/chefs.utils";
 import { API_BASE_URL } from "@/utils/constants";
 import { useState, useEffect } from "react";
+import { toast } from "sonner";
 
 export const ChefForm: EntityForm<ChefColumn> = ({
   entity,
@@ -85,7 +86,13 @@ export const ChefForm: EntityForm<ChefColumn> = ({
     if (mode === "update" && chef) {
       try {
         if (onEdit) {
-          await onEdit(chef, chefData, updateChef, convertChefToColumn);
+          const updatedChef = await onEdit(chef, chefData, updateChef, convertChefToColumn);
+          console.log('updatedChef: ', updatedChef);
+          if (updatedChef) {
+            toast.success("Chef updated successfully");
+          } else {
+            toast.error("Failed to update chef");
+          }
         }
         setIsOpen(false);
       } catch (error) {
@@ -94,7 +101,12 @@ export const ChefForm: EntityForm<ChefColumn> = ({
     } else if (mode === "create") {
       try {
         if (onAdd) {
-          await onAdd(chefData, createChef, convertChefToColumn);
+          const createdChef = await onAdd(chefData, createChef, convertChefToColumn);
+          if (createdChef) {
+            toast.success("Chef created successfully");
+          } else {
+            toast.error("Failed to create chef");
+          }
         }
         setIsOpen(false);
       } catch (error) {

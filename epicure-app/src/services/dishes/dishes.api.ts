@@ -16,3 +16,12 @@ export async function fetchDishesByRestaurantId(restaurantId: string): Promise<D
   });
   return res.data;
 }
+
+export async function getDishesByName(name: string): Promise<Dish[]> {
+  const res = await axios.get(`${API_BASE_URL}/dishes`, {
+    params: {
+      name,
+    },
+  });
+  return res.data;
+}

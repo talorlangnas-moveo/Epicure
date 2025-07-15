@@ -8,7 +8,7 @@ export default function HeroContainer() {
         Epicure works with the top<br />
         chef restaurants in Tel Aviv
       </p>
-      <InputSearch />
+      <InputSearch variant="hero" disableSearch={true} />
     </div>
   );
 }

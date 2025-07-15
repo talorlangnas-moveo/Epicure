@@ -17,6 +17,7 @@ export { default as Stars4Image } from './4starts.svg';
 export { default as Stars3Image } from './3starts.svg';
 export { default as Stars1Image } from './1stars.svg';
 export { default as Stars2Image } from './2stars.svg';
+export { default as Stars5Image } from './5stars.svg';
 export { default as xIcon } from './xIcon.svg';
 export { default as DownArrow } from './downArrow.svg';
 export { default as ClockIcon } from './clockIcon.svg';
